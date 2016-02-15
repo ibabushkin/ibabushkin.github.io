@@ -19,15 +19,6 @@ do
 
 	# add links to index
 	echo "<a href=\"$a\">$a</a><br/>" >> index.html
-
-	# add plaintext links for markdown fans
-	if [ -c $a ]
-	then
-		ln -s $file $a
-	fi
-
-	# add generated symbolic link to git
-	git add $a
 done
 
 # finalize index
