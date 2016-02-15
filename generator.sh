@@ -8,10 +8,30 @@ cat banner >> index.html
 # process every file
 for file in *.md
 do
+	# useless output
 	echo "processing $file..."
+
+	# get basename
 	a=`basename $file .md`
+
+	# generate article HTML
 	pandoc -o "$a.html" -B header -A footer $file
-	echo "<a href=\"$a.html\">$a</a><br/>" >> index.html
+
+	# add links to index
+	echo "<a href=\"$a.html\">$a</a><a href=\"$a\">[markdown]</a><br/>" >> index.html
+
+	# add plaintext links for markdown fans
+	if [ -c $a ]
+	then
+		ln -s $file $a
+	fi
+
+	# add generated symbolic link to git
+	git add $a
 done
 
+# finalize index
 printf "</body>\n</html>\n" >> index.html
+
+# add all other files to git
+git add *.html
