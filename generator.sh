@@ -18,7 +18,7 @@ do
 	pandoc -o "$a.html" -B header -A footer $file
 
 	# add links to index
-	echo "<a href=\"$a.html\">$a</a><a href=\"$a\">[markdown]</a><br/>" >> index.html
+	echo "<a href=\"$a.html\">$a</a><br/>" >> index.html
 
 	# add plaintext links for markdown fans
 	if [ -c $a ]
