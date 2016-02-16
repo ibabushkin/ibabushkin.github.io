@@ -12,7 +12,7 @@ do
 	echo "processing $file..."
 
 	# get basename
-	a=`basename $file .md`
+	a=`basename "$file" .md`
 
 	# generate article HTML
 	pandoc -o "$a.html" -B header -A footer $file
