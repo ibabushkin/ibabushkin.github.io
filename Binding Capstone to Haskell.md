@@ -16,7 +16,7 @@ a pretty big set of bindings to different languages, like Python, OCaml, ...
 Just not Haskell. I don't know why, but that's how it is. And, coincidentially,
 I need a proper disassembly library in Haskell, as I want to
 
-1. rewrite [Iridium](http://github.com/ibabushkin/Irdium) in a more
+1. rewrite [Iridium](http://github.com/ibabushkin/Iridium) in a more
    sophisticated manner
 2. get something more sophisitcated than the `disassembler`
    package into the Haskell ecosystem
