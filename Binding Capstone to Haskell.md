@@ -50,5 +50,5 @@ At the moment, I am leaning towards the second solution, as I am certain that th
 poses no real value (as a C implementation of all your code dealing with disassembly would
 likely be equally fast and even easier to interface to). However, the performance drawbacks
 and other problems of that approach need to be carefully evaluated. Maybe I'll find a compromise
-to combine the two approaches in a sane manner. Ideas in that direction would be a use of `Stata`,
+to combine the two approaches in a sane manner. Ideas in that direction would be a use of `State`,
 both API's for different usecases, and so on.
