@@ -15,7 +15,7 @@ do
 	a=`basename "$file" .md`
 
 	# generate article HTML
-	pandoc -o "$a.html" -B header -A footer $file
+	pandoc -o "$a.html" -B header -A footer "$file"
 
 	# add links to index
 	echo "<a href=\"$a\">$a</a><br/>" >> index.html
