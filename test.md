@@ -1,2 +1,2 @@
 # header
-$\int_0^\infty e^{-x} = 1$
+$\int_{0}^\infty e^{-x} = 1$
