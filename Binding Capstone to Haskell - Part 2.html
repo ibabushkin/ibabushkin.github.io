@@ -1,0 +1,181 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+</head>
+<body>
+<a href="index">back home</a>
+<h1>/dev/thoughtbin</h1>
+<h1 id="binding-capstone-to-haskell---part-2">Binding Capstone to Haskell - Part 2</h1>
+<p>Welcome to part two of my series on the development of Haskell bindings for the capstone disassembly framework. Today I will mainly focus on some technical details as well as the decisions made regarding the questions that arose in <a href="Binding%20Capstone%20to%20Haskell%20-%20Part%201">part 1</a>. But first, a small recap of the work already done.</p>
+<h2 id="current-progress">Current progress</h2>
+<p>So far, I have started the project and wrote a good deal of code to do the actual work needed. This involved setting up <code>stack</code> in a proper fashion, which turned out to be a breeze, as it runs preprocessors as needed out of the box. This especially means that using <code>c2hs</code>, which after short inspection revealed itself as the most suited tool for the job is pretty easy and well-integrated as well.</p>
+<p>So I started porting the headers that capstone puts into <code>/usr/include</code> on my arch installation, and which are available on their <a href="https://github.com/aquynh/capstone/tree/master/include">github presence</a>. This is fairly easy, but at some point I started to hit weird errors in <code>GHCI</code> regarding compilation to bytecode. Some further analysis showed that this was due to the usage of user-defined in-marshallers in <code>fun</code>-hooks. Hm. I don't really know what is causing this issue, and so far there are only two candidates: <code>c2hs</code> and <code>GHCI</code> itself. This needs a more through look.</p>
+<p>Most of the headers are pretty straightforward: porting enumerations is pretty easy if you can reduce the typing necessary to one line:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="st">{#</span><span class="kw">enum</span><span class="st"> arm64_shifter as </span><span class="dt">Arm64Shifter</span><span class="st"> {underscore</span><span class="dt">ToCase</span><span class="st">} deriving (</span><span class="dt">Show</span><span class="st">)#}</span></code></pre></div>
+<p>And most of the architecture-specific headers consist to 90-95% of such enumerations. Much more intriguing is the marshalling of structures, as <code>c2hs</code> provides no mechanism to automate that task. Moreover, anonymous unions don't seem to be supported <em>at all</em>, so I had to work around that somehow. To make this post less boring, I'll include my first (and so far only) attempt to marshal such a complex structure from C to Haskell. It involves some offset-oriented hacks that might break, but I need some digging into disassembly and/or relevant standard specs to say anything specific.</p>
+<p>And here, in all it's glory, a snippet that represents an instruction operand of the ARM64 aka ARMv8 architecture (boring parts omitted, code taken from <code>arm64.h</code>):</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="co">// Instruction operand</span>
+<span class="kw">typedef</span> <span class="kw">struct</span> cs_arm64_op {
+  <span class="dt">int</span> vector_index; <span class="co">// Vector Index for some vector operands (or -1 if irrelevant)</span>
+  arm64_vas vas;    <span class="co">// Vector Arrangement Specifier</span>
+  arm64_vess vess;  <span class="co">// Vector Element Size Specifier</span>
+  <span class="kw">struct</span> {
+    arm64_shifter type; <span class="co">// shifter type of this operand</span>
+    <span class="dt">unsigned</span> <span class="dt">int</span> value; <span class="co">// shifter value of this operand</span>
+  } shift;
+  arm64_extender ext;   <span class="co">// extender type of this operand</span>
+  arm64_op_type type; <span class="co">// operand type</span>
+  <span class="kw">union</span> {
+    <span class="dt">unsigned</span> <span class="dt">int</span> reg; <span class="co">// register value for REG operand</span>
+    <span class="dt">int64_t</span> imm;    <span class="co">// immediate value, or index for C-IMM or IMM operand</span>
+    <span class="dt">double</span> fp;      <span class="co">// floating point value for FP operand</span>
+    arm64_op_mem mem;   <span class="co">// base/index/scale/disp value for MEM operand</span>
+    arm64_pstate pstate;    <span class="co">// PState field of MSR instruction.</span>
+    <span class="dt">unsigned</span> <span class="dt">int</span> sys;  <span class="co">// IC/DC/AT/TLBI operation (see arm64_ic_op, arm64_dc_op, arm64_at_op, arm64_tlbi_op)</span>
+    arm64_prefetch_op prefetch;  <span class="co">// PRFM operation.</span>
+    arm64_barrier_op barrier;  <span class="co">// Memory barrier operation (ISB/DMB/DSB instructions).</span>
+  };
+} cs_arm64_op;</code></pre></div>
+<p>and the corresponding Haskell datatype and it's <code>Storable</code> instance</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">instance</span> <span class="dt">Storable</span> <span class="dt">CsArm64Op</span> <span class="kw">where</span>
+    sizeOf _ <span class="fu">=</span> <span class="st">{#</span><span class="kw">sizeof</span><span class="st"> cs_arm64_op#}</span>
+    alignment _ <span class="fu">=</span> <span class="st">{#</span><span class="kw">alignof</span><span class="st"> cs_arm64_op#}</span>
+    peek p <span class="fu">=</span> <span class="dt">CsArm64Op</span>
+        <span class="fu">&lt;$&gt;</span> (fromIntegral <span class="fu">&lt;$&gt;</span> <span class="st">{#get cs_arm64_op-&gt;vector_index#}</span> p)
+        <span class="fu">&lt;*&gt;</span> ((toEnum <span class="fu">.</span> fromIntegral) <span class="fu">&lt;$&gt;</span> <span class="st">{#get cs_arm64_op-&gt;vas#}</span> p)
+        <span class="fu">&lt;*&gt;</span> ((toEnum <span class="fu">.</span> fromIntegral) <span class="fu">&lt;$&gt;</span> <span class="st">{#get cs_arm64_op-&gt;vess#}</span> p)
+        <span class="fu">&lt;*&gt;</span> ((,) <span class="fu">&lt;$&gt;</span>
+            ((toEnum <span class="fu">.</span> fromIntegral) <span class="fu">&lt;$&gt;</span> <span class="st">{#get cs_arm64_op-&gt;shift.type#}</span> p) <span class="fu">&lt;*&gt;</span>
+            (fromIntegral <span class="fu">&lt;$&gt;</span> <span class="st">{#get cs_arm64_op-&gt;shift.value#}</span> p))
+        <span class="fu">&lt;*&gt;</span> ((toEnum <span class="fu">.</span> fromIntegral) <span class="fu">&lt;$&gt;</span> <span class="st">{#get cs_arm64_op-&gt;ext#}</span> p)
+        <span class="fu">&lt;*&gt;</span> <span class="kw">do</span>
+            t <span class="ot">&lt;-</span> fromIntegral <span class="fu">&lt;$&gt;</span> <span class="st">{#get cs_arm64_op-&gt;type#}</span><span class="ot"> p ::</span> <span class="dt">IO</span> <span class="dt">Int</span>
+            <span class="kw">let</span> bP <span class="fu">=</span> plusPtr p <span class="co">-- FIXME: maybe alignment will bite us!</span>
+                   (<span class="st">{#offsetof cs_arm64_op.type#}</span> <span class="fu">+</span> <span class="st">{#</span><span class="kw">sizeof</span><span class="st"> arm64_op_type#}</span>)
+            <span class="kw">case</span> toEnum<span class="ot"> t ::</span> <span class="dt">Arm64OpType</span> <span class="kw">of</span>
+              <span class="dt">Arm64OpReg</span> <span class="ot">-&gt;</span> (<span class="dt">Reg</span> <span class="fu">.</span> fromIntegral) <span class="fu">&lt;$&gt;</span> (peek<span class="ot"> bP ::</span> <span class="dt">IO</span> <span class="dt">CUInt</span>)
+              <span class="dt">Arm64OpImm</span> <span class="ot">-&gt;</span> (<span class="dt">Imm</span> <span class="fu">.</span> fromIntegral) <span class="fu">&lt;$&gt;</span> (peek<span class="ot"> bP ::</span> <span class="dt">IO</span> <span class="dt">Int64</span>)
+              <span class="dt">Arm64OpCimm</span> <span class="ot">-&gt;</span> (<span class="dt">CImm</span> <span class="fu">.</span> fromIntegral) <span class="fu">&lt;$&gt;</span> (peek<span class="ot"> bP ::</span> <span class="dt">IO</span> <span class="dt">Int64</span>)
+              <span class="dt">Arm64OpFp</span> <span class="ot">-&gt;</span> (<span class="dt">Fp</span> <span class="fu">.</span> realToFrac) <span class="fu">&lt;$&gt;</span> (peek<span class="ot"> bP ::</span> <span class="dt">IO</span> <span class="dt">CDouble</span>)
+              <span class="dt">Arm64OpMem</span> <span class="ot">-&gt;</span> <span class="dt">Mem</span> <span class="fu">&lt;$&gt;</span> (peek<span class="ot"> bP ::</span> <span class="dt">IO</span> <span class="dt">Arm64OpMemStruct</span>)
+              <span class="dt">Arm64OpRegMsr</span> <span class="ot">-&gt;</span> (<span class="dt">Pstate</span> <span class="fu">.</span> toEnum <span class="fu">.</span> fromIntegral) <span class="fu">&lt;$&gt;</span>
+                 (peek<span class="ot"> bP ::</span> <span class="dt">IO</span> <span class="dt">CInt</span>)
+              <span class="dt">Arm64OpSys</span> <span class="ot">-&gt;</span> (<span class="dt">Sys</span> <span class="fu">.</span> fromIntegral) <span class="fu">&lt;$&gt;</span> (peek<span class="ot"> bP ::</span> <span class="dt">IO</span> <span class="dt">CUInt</span>)
+              <span class="dt">Arm64OpPrefetch</span> <span class="ot">-&gt;</span> (<span class="dt">Prefetch</span> <span class="fu">.</span> toEnum <span class="fu">.</span> fromIntegral) <span class="fu">&lt;$&gt;</span>
+                 (peek<span class="ot"> bP ::</span> <span class="dt">IO</span> <span class="dt">CInt</span>)
+              <span class="dt">Arm64OpBarrier</span> <span class="ot">-&gt;</span> (<span class="dt">Barrier</span> <span class="fu">.</span> toEnum <span class="fu">.</span> fromIntegral) <span class="fu">&lt;$&gt;</span>
+                 (peek<span class="ot"> bP ::</span> <span class="dt">IO</span> <span class="dt">CInt</span>)
+              _ <span class="ot">-&gt;</span> return <span class="dt">Undefined</span>
+    poke p (<span class="dt">CsArm64Op</span> vI va ve (sh, shV) ext val) <span class="fu">=</span> <span class="kw">do</span>
+        <span class="st">{#set cs_arm64_op-&gt;vector_index#}</span> p (fromIntegral vI)
+        <span class="st">{#set cs_arm64_op-&gt;vas#}</span> p (fromIntegral <span class="fu">$</span> fromEnum va)
+        <span class="st">{#set cs_arm64_op-&gt;vess#}</span> p (fromIntegral <span class="fu">$</span> fromEnum ve)
+        <span class="st">{#set cs_arm64_op-&gt;shift.type#}</span> p (fromIntegral <span class="fu">$</span> fromEnum sh)
+        <span class="st">{#set cs_arm64_op-&gt;shift.value#}</span> p (fromIntegral shV)
+        <span class="st">{#set cs_arm64_op-&gt;ext#}</span> p (fromIntegral <span class="fu">$</span> fromEnum ext)
+        <span class="kw">let</span> bP <span class="fu">=</span> plusPtr p <span class="co">-- FIXME: maybe alignment will bite us!</span>
+               (<span class="st">{#offsetof cs_arm64_op.type#}</span> <span class="fu">+</span> <span class="st">{#</span><span class="kw">sizeof</span><span class="st"> arm64_op_type#}</span>)
+            setType <span class="fu">=</span> <span class="st">{#set cs_arm64_op-&gt;type#}</span> p
+        <span class="kw">case</span> val <span class="kw">of</span>
+          <span class="dt">Reg</span> r <span class="ot">-&gt;</span> <span class="kw">do</span>
+              poke bP (fromIntegral<span class="ot"> r ::</span> <span class="dt">CUInt</span>)
+              setType (fromIntegral <span class="fu">$</span> fromEnum <span class="dt">Arm64OpReg</span>)
+          <span class="dt">Imm</span> i <span class="ot">-&gt;</span> <span class="kw">do</span>
+              poke bP (fromIntegral<span class="ot"> i ::</span> <span class="dt">Int64</span>)
+              setType (fromIntegral <span class="fu">$</span> fromEnum <span class="dt">Arm64OpImm</span>)
+          <span class="dt">CImm</span> i <span class="ot">-&gt;</span> <span class="kw">do</span>
+              poke bP (fromIntegral<span class="ot"> i ::</span> <span class="dt">Int64</span>)
+              setType (fromIntegral <span class="fu">$</span> fromEnum <span class="dt">Arm64OpCimm</span>)
+          <span class="dt">Fp</span> f <span class="ot">-&gt;</span> <span class="kw">do</span>
+              poke bP (realToFrac<span class="ot"> f ::</span> <span class="dt">CDouble</span>)
+              setType (fromIntegral <span class="fu">$</span> fromEnum <span class="dt">Arm64OpFp</span>)
+          <span class="dt">Mem</span> m <span class="ot">-&gt;</span> <span class="kw">do</span>
+              poke bP m
+              setType (fromIntegral <span class="fu">$</span> fromEnum <span class="dt">Arm64OpMem</span>)
+          <span class="dt">Pstate</span> p <span class="ot">-&gt;</span> <span class="kw">do</span>
+              poke bP (fromIntegral <span class="fu">$</span> fromEnum<span class="ot"> p ::</span> <span class="dt">CInt</span>)
+              setType (fromIntegral <span class="fu">$</span> fromEnum <span class="dt">Arm64OpRegMsr</span>)
+          <span class="dt">Sys</span> s <span class="ot">-&gt;</span> <span class="kw">do</span>
+              poke bP (fromIntegral<span class="ot"> s ::</span> <span class="dt">CUInt</span>)
+              setType (fromIntegral <span class="fu">$</span> fromEnum <span class="dt">Arm64OpSys</span>)
+          <span class="dt">Prefetch</span> p <span class="ot">-&gt;</span> <span class="kw">do</span>
+              poke bP (fromIntegral <span class="fu">$</span> fromEnum<span class="ot"> p ::</span> <span class="dt">CInt</span>)
+              setType (fromIntegral <span class="fu">$</span> fromEnum <span class="dt">Arm64OpPrefetch</span>)
+          <span class="dt">Barrier</span> b <span class="ot">-&gt;</span> <span class="kw">do</span>
+              poke bP (fromIntegral <span class="fu">$</span> fromEnum<span class="ot"> b ::</span> <span class="dt">CInt</span>)
+              setType (fromIntegral <span class="fu">$</span> fromEnum <span class="dt">Arm64OpBarrier</span>)
+          _ <span class="ot">-&gt;</span> setType (fromIntegral <span class="fu">$</span> fromEnum <span class="dt">Arm64OpInvalid</span>)</code></pre></div>
+<p>Most of the code is self-explanatory after a lecture of the <code>c2hs</code> docs and the basic idea behind the <code>Storable</code> typeclass. Some interesting bits are the large case-expression near the end. This is my take on porting C-style tagged unions to sum datatypes in Haskell. This could be much more pleasant if anonymous unions were supported by <code>c2hs</code>, but instead I had to rely on ugly pointer juggling to get to the memory location of interest. This might need fixing. Most of the other structures should be similar (I haven't done them yet). Another bit worth showing off before I get the code on GitHub is the heart of capstone's API: <code>cs_disasm</code>. Because of the issues with <code>GHCI</code> mentioned earlier, I resorted to writing the marshalling by hand (see <code>capstone.h</code> for the C source):</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">size_t cs_disasm(csh handle,
+    <span class="dt">const</span> <span class="dt">uint8_t</span> *code, size_t code_size,
+    <span class="dt">uint64_t</span> address,
+    size_t count,
+    cs_insn **insn);</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">foreign <span class="kw">import </span>ccall &quot;capstone/capstone.h cs_disasm&quot;
+<span class="ot">    csDisasm&#39; ::</span> <span class="dt">Csh</span> <span class="co">-- handle</span>
+              <span class="ot">-&gt;</span> <span class="dt">Ptr</span> <span class="dt">CUChar</span> <span class="ot">-&gt;</span> <span class="dt">CSize</span> <span class="co">-- buffer to disassemble</span>
+              <span class="ot">-&gt;</span> <span class="dt">CULong</span> <span class="co">-- address to start at</span>
+              <span class="ot">-&gt;</span> <span class="dt">CSize</span> <span class="co">-- number of instructins to disassemble</span>
+              <span class="ot">-&gt;</span> <span class="dt">Ptr</span> (<span class="dt">Ptr</span> <span class="dt">CsInsn</span>) <span class="co">-- where to put the instructions</span>
+              <span class="ot">-&gt;</span> <span class="dt">IO</span> <span class="dt">CSize</span> <span class="co">-- number of succesfully disassembled instructions</span>
+
+<span class="ot">csDisasm ::</span> <span class="dt">Csh</span> <span class="ot">-&gt;</span> [<span class="dt">Word8</span>] <span class="ot">-&gt;</span> <span class="dt">Word64</span> <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> [<span class="dt">CsInsn</span>]
+csDisasm handle bytes addr num <span class="fu">=</span> <span class="kw">do</span>
+    array <span class="ot">&lt;-</span> newArray <span class="fu">$</span> map fromIntegral bytes
+    passedPtr <span class="ot">&lt;- malloc ::</span> <span class="dt">IO</span> (<span class="dt">Ptr</span> (<span class="dt">Ptr</span> <span class="dt">CsInsn</span>))
+    resNum <span class="ot">&lt;-</span> fromIntegral <span class="fu">&lt;$&gt;</span> csDisasm&#39; handle array
+        (fromIntegral <span class="fu">$</span> length bytes) (fromIntegral addr)
+        (fromIntegral num) passedPtr
+    resPtr <span class="ot">&lt;-</span> peek passedPtr
+    free passedPtr
+    res <span class="ot">&lt;-</span> mapM (peek <span class="fu">.</span> plusPtr resPtr <span class="fu">.</span> (<span class="st">{#</span><span class="kw">sizeof</span><span class="st"> cs_insn#}</span> <span class="fu">*</span>)) [<span class="dv">0</span><span class="fu">..</span>resNum]
+    csFree resPtr resNum
+    return res</code></pre></div>
+<p>The code should be pretty simple to understand as well, but I thought it is equally fun to read as it was to write (especially the memory handling).</p>
+<p>Another bit worth mentioning is the handling of overflows in the marshalling code. In general, we have two choices: either cut off the superfluous data, or raise errors. I've resorted to the latter, but I might have to rethink that decision one day.</p>
+<p>That's it for now, I'll add subsequent articles when some progress has been made.</p>
+<a href="index">back home</a>
+</body>
+</html>

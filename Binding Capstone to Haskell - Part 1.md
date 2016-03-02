@@ -1,4 +1,4 @@
-# Binding Capstone to Haskell
+# Binding Capstone to Haskell - Part 1
 
 This blogpost is a few different things at the same time:
 
@@ -13,12 +13,12 @@ regarding the subject. Sounds unclear and pointless? That's by design :)
 ## Motivation (or how you want to call it)
 Essentially, capstone is *the* disassembler library. It also gives you
 a pretty big set of bindings to different languages, like Python, OCaml, ...
-Just not Haskell. I don't know why, but that's how it is. And, coincidentially,
+Just not Haskell. I don't know why, but that's how it is. And, coincidentally,
 I need a proper disassembly library in Haskell, as I want to
 
 1. rewrite [Iridium](http://github.com/ibabushkin/Iridium) in a more
    sophisticated manner
-2. get something more sophisitcated than the `disassembler`
+2. get something more sophisticated than the `disassembler`
    package into the Haskell ecosystem
 3. get to know the FFI better (that's a nice side-effect)
 
@@ -27,7 +27,7 @@ I won't line out how the FFI in Haskell is supposed to work or how you have
 to set up cabal and/or stack to work with it, instead I will focus
 on design decisions needed when building the abstractions necessary to
 wrap an API as complex as capstone's. This is mostly due to the fact that
-capstone has an API based on a strucure allocated for usage in subsequence calls.
+capstone has an API based on a structure allocated for usage in subsequence calls.
 This doesn't map well to Haskell's immutable data and pure functions. We essentially
 have two options: either wrap all of capstone's API in functions running in
 the `IO` monad, or allocate a new structure for each API call and wrap it in a high-
