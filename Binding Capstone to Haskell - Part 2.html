@@ -117,42 +117,43 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         <span class="st">{#set cs_arm64_op-&gt;ext#}</span> p (fromIntegral <span class="fu">$</span> fromEnum ext)
         <span class="kw">let</span> bP <span class="fu">=</span> plusPtr p <span class="co">-- FIXME: maybe alignment will bite us!</span>
                (<span class="st">{#offsetof cs_arm64_op.type#}</span> <span class="fu">+</span> <span class="st">{#</span><span class="kw">sizeof</span><span class="st"> arm64_op_type#}</span>)
-            setType <span class="fu">=</span> <span class="st">{#set cs_arm64_op-&gt;type#}</span> p
+            setType <span class="fu">=</span> <span class="st">{#set cs_arm64_op-&gt;type#}</span> p <span class="fu">.</span> fromIntegral <span class="fu">.</span> fromEnum
         <span class="kw">case</span> val <span class="kw">of</span>
           <span class="dt">Reg</span> r <span class="ot">-&gt;</span> <span class="kw">do</span>
               poke bP (fromIntegral<span class="ot"> r ::</span> <span class="dt">CUInt</span>)
-              setType (fromIntegral <span class="fu">$</span> fromEnum <span class="dt">Arm64OpReg</span>)
+              setType <span class="dt">Arm64OpReg</span>
           <span class="dt">Imm</span> i <span class="ot">-&gt;</span> <span class="kw">do</span>
               poke bP (fromIntegral<span class="ot"> i ::</span> <span class="dt">Int64</span>)
-              setType (fromIntegral <span class="fu">$</span> fromEnum <span class="dt">Arm64OpImm</span>)
+              setType <span class="dt">Arm64OpImm</span>
           <span class="dt">CImm</span> i <span class="ot">-&gt;</span> <span class="kw">do</span>
               poke bP (fromIntegral<span class="ot"> i ::</span> <span class="dt">Int64</span>)
-              setType (fromIntegral <span class="fu">$</span> fromEnum <span class="dt">Arm64OpCimm</span>)
+              setType <span class="dt">Arm64OpCimm</span>
           <span class="dt">Fp</span> f <span class="ot">-&gt;</span> <span class="kw">do</span>
               poke bP (realToFrac<span class="ot"> f ::</span> <span class="dt">CDouble</span>)
-              setType (fromIntegral <span class="fu">$</span> fromEnum <span class="dt">Arm64OpFp</span>)
+              setType <span class="dt">Arm64OpFp</span>
           <span class="dt">Mem</span> m <span class="ot">-&gt;</span> <span class="kw">do</span>
               poke bP m
-              setType (fromIntegral <span class="fu">$</span> fromEnum <span class="dt">Arm64OpMem</span>)
+              setType <span class="dt">Arm64OpMem</span>
           <span class="dt">Pstate</span> p <span class="ot">-&gt;</span> <span class="kw">do</span>
               poke bP (fromIntegral <span class="fu">$</span> fromEnum<span class="ot"> p ::</span> <span class="dt">CInt</span>)
-              setType (fromIntegral <span class="fu">$</span> fromEnum <span class="dt">Arm64OpRegMsr</span>)
+              setType <span class="dt">Arm64OpRegMsr</span>
           <span class="dt">Sys</span> s <span class="ot">-&gt;</span> <span class="kw">do</span>
               poke bP (fromIntegral<span class="ot"> s ::</span> <span class="dt">CUInt</span>)
-              setType (fromIntegral <span class="fu">$</span> fromEnum <span class="dt">Arm64OpSys</span>)
+              setType <span class="dt">Arm64OpSys</span>
           <span class="dt">Prefetch</span> p <span class="ot">-&gt;</span> <span class="kw">do</span>
               poke bP (fromIntegral <span class="fu">$</span> fromEnum<span class="ot"> p ::</span> <span class="dt">CInt</span>)
-              setType (fromIntegral <span class="fu">$</span> fromEnum <span class="dt">Arm64OpPrefetch</span>)
+              setType <span class="dt">Arm64OpPrefetch</span>
           <span class="dt">Barrier</span> b <span class="ot">-&gt;</span> <span class="kw">do</span>
               poke bP (fromIntegral <span class="fu">$</span> fromEnum<span class="ot"> b ::</span> <span class="dt">CInt</span>)
-              setType (fromIntegral <span class="fu">$</span> fromEnum <span class="dt">Arm64OpBarrier</span>)
-          _ <span class="ot">-&gt;</span> setType (fromIntegral <span class="fu">$</span> fromEnum <span class="dt">Arm64OpInvalid</span>)</code></pre></div>
+              setType <span class="dt">Arm64OpBarrier</span>
+          _ <span class="ot">-&gt;</span> setType <span class="dt">Arm64OpInvalid</span></code></pre></div>
 <p>Most of the code is self-explanatory after a lecture of the <code>c2hs</code> docs and the basic idea behind the <code>Storable</code> typeclass. Some interesting bits are the large case-expression near the end. This is my take on porting C-style tagged unions to sum datatypes in Haskell. This could be much more pleasant if anonymous unions were supported by <code>c2hs</code>, but instead I had to rely on ugly pointer juggling to get to the memory location of interest. This might need fixing. Most of the other structures should be similar (I haven't done them yet). Another bit worth showing off before I get the code on GitHub is the heart of capstone's API: <code>cs_disasm</code>. Because of the issues with <code>GHCI</code> mentioned earlier, I resorted to writing the marshalling by hand (see <code>capstone.h</code> for the C source):</p>
 <div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">size_t cs_disasm(csh handle,
     <span class="dt">const</span> <span class="dt">uint8_t</span> *code, size_t code_size,
     <span class="dt">uint64_t</span> address,
     size_t count,
     cs_insn **insn);</code></pre></div>
+<p>The corresponding Haskell code:</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">foreign <span class="kw">import </span>ccall &quot;capstone/capstone.h cs_disasm&quot;
 <span class="ot">    csDisasm&#39; ::</span> <span class="dt">Csh</span> <span class="co">-- handle</span>
               <span class="ot">-&gt;</span> <span class="dt">Ptr</span> <span class="dt">CUChar</span> <span class="ot">-&gt;</span> <span class="dt">CSize</span> <span class="co">-- buffer to disassemble</span>

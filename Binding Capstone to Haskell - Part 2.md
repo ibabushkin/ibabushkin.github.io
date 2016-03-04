@@ -108,36 +108,36 @@ instance Storable CsArm64Op where
         {#set cs_arm64_op->ext#} p (fromIntegral $ fromEnum ext)
         let bP = plusPtr p -- FIXME: maybe alignment will bite us!
                ({#offsetof cs_arm64_op.type#} + {#sizeof arm64_op_type#})
-            setType = {#set cs_arm64_op->type#} p
+            setType = {#set cs_arm64_op->type#} p . fromIntegral . fromEnum
         case val of
           Reg r -> do
               poke bP (fromIntegral r :: CUInt)
-              setType (fromIntegral $ fromEnum Arm64OpReg)
+              setType Arm64OpReg
           Imm i -> do
               poke bP (fromIntegral i :: Int64)
-              setType (fromIntegral $ fromEnum Arm64OpImm)
+              setType Arm64OpImm
           CImm i -> do
               poke bP (fromIntegral i :: Int64)
-              setType (fromIntegral $ fromEnum Arm64OpCimm)
+              setType Arm64OpCimm
           Fp f -> do
               poke bP (realToFrac f :: CDouble)
-              setType (fromIntegral $ fromEnum Arm64OpFp)
+              setType Arm64OpFp
           Mem m -> do
               poke bP m
-              setType (fromIntegral $ fromEnum Arm64OpMem)
+              setType Arm64OpMem
           Pstate p -> do
               poke bP (fromIntegral $ fromEnum p :: CInt)
-              setType (fromIntegral $ fromEnum Arm64OpRegMsr)
+              setType Arm64OpRegMsr
           Sys s -> do
               poke bP (fromIntegral s :: CUInt)
-              setType (fromIntegral $ fromEnum Arm64OpSys)
+              setType Arm64OpSys
           Prefetch p -> do
               poke bP (fromIntegral $ fromEnum p :: CInt)
-              setType (fromIntegral $ fromEnum Arm64OpPrefetch)
+              setType Arm64OpPrefetch
           Barrier b -> do
               poke bP (fromIntegral $ fromEnum b :: CInt)
-              setType (fromIntegral $ fromEnum Arm64OpBarrier)
-          _ -> setType (fromIntegral $ fromEnum Arm64OpInvalid)
+              setType Arm64OpBarrier
+          _ -> setType Arm64OpInvalid
 ```
 
 Most of the code is self-explanatory after a lecture of the `c2hs` docs
@@ -160,6 +160,7 @@ size_t cs_disasm(csh handle,
     cs_insn **insn);
 ```
 
+The corresponding Haskell code:
 ```Haskell
 foreign import ccall "capstone/capstone.h cs_disasm"
     csDisasm' :: Csh -- handle
