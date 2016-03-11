@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+</head>
+<body>
+<a href="index">back home</a>
+<h1>/dev/thoughtbin</h1>
+<h1 id="binding-capstone-to-haskell---part-3">Binding Capstone to Haskell - Part 3</h1>
+<p>In my last post, I described the steps taken to bring capstone to the Haskell ecosystem. Today I will add a quick update on the progress I made.</p>
+<p>First off, let's look at our roadmap:</p>
+<ul>
+<li>[x] port the data structures from the architecture headers</li>
+<li>[ ] port the data structures used by the disassembly API (<code>cs_detail</code> etc.)</li>
+<li>[x] port the disassembly API</li>
+<li>[ ] write tests for the numerous <code>Storable</code> instances we wrote</li>
+<li>[ ] verify the type-safety of the marshalling code</li>
+<li>[ ] write high-level wrappers around the 1:1 bindings</li>
+</ul>
+<p>We have done the majority of the hard work already, even if it doesn't look like that. The code written needs to be verified still, but that's an ongoing process. A special case is the second point:</p>
+<blockquote>
+<p>port the data structures used by the disassembly API (<code>cs_detail</code> etc.)</p>
+</blockquote>
+<p>The main problem (actually the only thing left to do) is the presence of an untagged union in <code>cs_detail</code> that contains architecture-specific data (which, one might argue is the single most important bit). The original C API has no need to tag said union because it is accessed from a context where the caller (apparently) knows what architecture is being worked with, because the given structures are obtained from APIs that got the arch as a parameter. In our case, however, this poses a problem. I still have to figure this one out, but the most &quot;clean&quot; (mind the quotes) solution is to write separate functions for each possible case and encapsulate them in the higher-level API wrapper.</p>
+<p>The code, for illustration purposes:</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="kw">typedef</span> <span class="kw">struct</span> cs_detail {
+  <span class="dt">uint8_t</span> regs_read[<span class="dv">12</span>]; <span class="co">// list of implicit registers read by this insn</span>
+  <span class="dt">uint8_t</span> regs_read_count; <span class="co">// number of implicit registers read by this insn</span>
+
+  <span class="dt">uint8_t</span> regs_write[<span class="dv">20</span>]; <span class="co">// list of implicit registers modified by this insn</span>
+  <span class="dt">uint8_t</span> regs_write_count; <span class="co">// number of implicit registers modified by this insn</span>
+
+  <span class="dt">uint8_t</span> groups[<span class="dv">8</span>]; <span class="co">// list of group this instruction belong to</span>
+  <span class="dt">uint8_t</span> groups_count; <span class="co">// number of groups this insn belongs to</span>
+
+  <span class="co">// Architecture-specific instruction info</span>
+  <span class="kw">union</span> {
+    cs_x86 x86; <span class="co">// X86 architecture, including 16-bit, 32-bit &amp; 64-bit mode</span>
+    cs_arm64 arm64; <span class="co">// ARM64 architecture (aka AArch64)</span>
+    cs_arm arm;   <span class="co">// ARM architecture (including Thumb/Thumb2)</span>
+    cs_mips mips; <span class="co">// MIPS architecture</span>
+    cs_ppc ppc; <span class="co">// PowerPC architecture</span>
+    cs_sparc sparc; <span class="co">// Sparc architecture</span>
+    cs_sysz sysz; <span class="co">// SystemZ architecture</span>
+    cs_xcore xcore; <span class="co">// XCore architecture</span>
+  };
+} cs_detail;</code></pre></div>
+<p>That's it for now. Also, you can check out the code (evolving, so not working yet) on <a href="https://github.com/ibabushkin/hapston://github.com/ibabushkin/hapstone">github</a>.</p>
+<a href="index">back home</a>
+</body>
+</html>
