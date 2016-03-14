@@ -6,7 +6,7 @@ echo "<h1>/dev/thoughtbin</h1>" >> index.html
 cat banner >> index.html
 
 # process every file
-for file in *.md
+for file in sources/*.md
 do
 	# useless output
 	echo "processing $file..."
