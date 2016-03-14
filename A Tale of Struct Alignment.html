@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+</head>
+<body>
+<a href="index">back home</a>
+<h1>/dev/thoughtbin</h1>
+<h1 id="a-tale-of-structure-alignment">A Tale of Structure Alignment</h1>
+<p>This is another article on the ongoing process of providing bindings for Capstone in Haskell, but this time it is (kinda) in disguise. The main idea here is that the topic covered is <em>not</em> specific to this project and affect much more.</p>
+<p>Said topic is structure alignment, regarding C code. A quick recap why I even care about it when writing bindings in Haskell: There is no way of porting structs without a preprocessor like <code>c2hs</code> or <code>hsc2hs</code> and without resorting to offset-based manipulations of the data. That's a bummer for portability, as well as the maintenance needed for your code. Thus, working without one of the mentioned preprocessors (or <code>GreenCard</code>, which I haven't looked at) is not really viable for everything but the most basic projects. Given these circumstances, I resorted to using <code>c2hs</code>, because it offers some facilities to port enumerations, which capstone uses almost everywhere. However, it has some drawbacks that annoy me:</p>
+<ul>
+<li>no support for C11 (seems to be a <code>language-c</code> issue, which <code>c2hs</code> uses)</li>
+<li>weird assumptions about some things (more on that later)</li>
+<li>bad integration with tools like <code>hlint</code>, because those fail to parse the syntax of the preprocessor. There isn't much I (or the <code>c2hs</code> devs) can do here, but it is a drawback nonetheless)</li>
+</ul>
+<h2 id="problem-description">Problem Description</h2>
+<p>Before we dive into the issues described above, let's look at the actual issue with structure alignment (it's not even an issue, really). The key lesson to take away is that many hardware platforms either force you to or work more efficiently if machine words are read from and written to addresses that are divisible by the size of the word in question. That is, a four byte wide integer would be placed at an address divisible by four and so on. This leads to some rules for structures and unions. Imagine the following struct:</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="kw">typedef</span> <span class="kw">struct</span> some_type_name_t {
+    <span class="dt">int32_t</span> member_a; <span class="co">// 4-byte aligned</span>
+    <span class="dt">double</span> member_b;  <span class="co">// 8-byte aligned</span>
+    <span class="dt">uint8_t</span> member_c; <span class="co">// 1-byte aligned</span>
+    <span class="dt">int16_t</span> member_d; <span class="co">// 2-byte aligned</span>
+} some_type_name_t;</code></pre></div>
+<p>We are being conservative here, so we need to align the struct by the largest boundary amongst it's members. In this case, 8 byte. So we go from that and imagine the memory layout (the entirety of the diagram is one struct instance):</p>
+<pre><code>   +-0123-+
+0  | xxxx | &lt;- member_a starts here
+4  |      |
+8  | xxxx | &lt;- member_b starts here
+12 | xxxx |
+16 | x xx | &lt;- members c and d are here.
+20 |      |
+   +------+</code></pre>
+<p>The above diagram shows offsets and occupied space, the layout is much like a hex editor. But why is the layout like that? Given our alignment requirements, we pack our members into memory in the order they are in the source code. All we know is that the starting address is divisible by 8, and the <em>size</em> has to be as well. Why? Because we might want to put our structures in an array or a dynamically allocated chunk of memory, and a common way to achieve that is:</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">some_type_name_t* ptr = malloc(n * <span class="kw">sizeof</span>(some_type_name_t));</code></pre></div>
+<p>Now if the size isn't padded to fit this requirement, we can't fit n elements into our array while honouring alignment.</p>
+<p>This leaves us with the following simple algorithm to determine the memory layout of an arbitrary structure:</p>
+<pre><code>1. determine the alignment of all members
+2. set the alignment of the struct to the maximum of the list determined in 1.
+3. place all members consecutively into memory, padding with unused bytes to
+   fit the alignment requirements. 
+4. pad the entire struct to make the size of it divisible by it&#39;s alignment.</code></pre>
+<p>A similar approach is needed when dealing with unions. Their size is simply the size of their largest element, and their alignment is the maximal alignment of their elements.</p>
+<h3 id="example">Example</h3>
+<p>As an example, let's consider some structs from capstone:</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="co">// Instruction operand</span>
+<span class="kw">typedef</span> <span class="kw">struct</span> cs_arm_op {
+  <span class="dt">int</span> vector_index; <span class="co">// Vector Index for some vector operands (or -1 if irrelevant)</span>
+  <span class="kw">struct</span> {
+    arm_shifter type;
+    <span class="dt">unsigned</span> <span class="dt">int</span> value;
+  } shift;
+  arm_op_type type; <span class="co">// operand type</span>
+  <span class="kw">union</span> {
+    <span class="dt">unsigned</span> <span class="dt">int</span> reg; <span class="co">// register value for REG/SYSREG operand</span>
+    <span class="dt">int32_t</span> imm;      <span class="co">// immediate value for C-IMM, P-IMM or IMM operand</span>
+    <span class="dt">double</span> fp;      <span class="co">// floating point value for FP operand</span>
+    arm_op_mem mem;   <span class="co">// base/index/scale/disp value for MEM operand</span>
+    arm_setend_type setend; <span class="co">// SETEND instruction&#39;s operand type</span>
+  };
+  <span class="co">// in some instructions, an operand can be subtracted or added to</span>
+  <span class="co">// the base register,</span>
+  bool subtracted; <span class="co">// if TRUE, this operand is subtracted. otherwise, it is added.</span>
+} cs_arm_op;</code></pre></div>
+<p>And some code to check the sizes and offsets:</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="co">/* An attempt to map all struct sizes to account for the shitty C11 support</span>
+<span class="co"> * C2HS exposes. We just print them in a structured fashion to account for</span>
+<span class="co"> *  * the anonymous unions present in most of the code. That way, currently</span>
+<span class="co"> *   * broken Storable instances can be fixed. - This is what happens when you</span>
+<span class="co"> *    * start writing proper property-based tests ;)</span>
+
+<span class="co">#include &lt;stdio.h&gt;</span>
+
+<span class="co">#include &lt;capstone/arm.h&gt;</span>
+
+<span class="co">// print all struct sizes</span>
+<span class="co">void print_sizes(void){</span>
+<span class="co">    puts(&quot;arm.h&quot;);</span>
+<span class="co">    printf(&quot;[*] arm_op_mem: %d\n&quot;, sizeof(arm_op_mem));</span>
+<span class="co">    printf(&quot;[*] cs_arm_op: %d\n&quot;, sizeof(cs_arm_op));</span>
+<span class="co">    printf(&quot;[*] cs_arm: %d\n&quot;, sizeof(cs_arm));</span>
+<span class="co">}</span>
+
+<span class="co">// print all offsets and member sizes</span>
+<span class="co">void print_alignment(void){</span>
+<span class="co">    cs_arm_op test = {0, {1, 2}, 3, 4};</span>
+<span class="co">    void *base = &amp;test;</span>
+
+<span class="co">    printf(&quot;cs_arm_op: %d\n&quot;, sizeof(cs_arm_op));</span>
+<span class="co">    puts(&quot;cs_arm_op\toffset\tsize&quot;);</span>
+<span class="co">    printf(&quot;vector_index:\t%d\t%d\n&quot;, (void *)&amp;test.vector_index - base,</span>
+<span class="co">            sizeof(int));</span>
+<span class="co">    printf(&quot;shift.type:\t%d\t%d\n&quot;, (void *)&amp;test.shift.type - base,</span>
+<span class="co">            sizeof(arm_shifter));</span>
+<span class="co">    printf(&quot;shift.value:\t%d\t%d\n&quot;, (void *)&amp;test.shift.value - base,</span>
+<span class="co">            sizeof(unsigned int));</span>
+<span class="co">    printf(&quot;type:\t\t%d\t%d\n&quot;, (void *)&amp;test.type - base,</span>
+<span class="co">            sizeof(arm_op_type));</span>
+<span class="co">    printf(&quot;union.reg:\t%d\t%d\n&quot;, (void *)&amp;test.reg - base,</span>
+<span class="co">            sizeof(unsigned int));</span>
+<span class="co">    printf(&quot;union.imm:\t%d\t%d\n&quot;, (void *)&amp;test.imm - base,</span>
+<span class="co">            sizeof(int32_t));</span>
+<span class="co">    printf(&quot;union.fp:\t%d\t%d\n&quot;, (void *)&amp;test.fp - base,</span>
+<span class="co">            sizeof(double));</span>
+<span class="co">    printf(&quot;union.mem:\t%d\t%d\n&quot;, (void *)&amp;test.mem - base,</span>
+<span class="co">            sizeof(arm_op_mem));</span>
+<span class="co">    printf(&quot;union.setend:\t%d\t%d\n&quot;, (void *)&amp;test.setend - base,</span>
+<span class="co">            sizeof(arm_setend_type));</span>
+<span class="co">    printf(&quot;subtracted:\t%d\t%d\n&quot;, (void *)&amp;test.subtracted - base,</span>
+<span class="co">            sizeof(bool));</span>
+<span class="co">}</span>
+
+<span class="co">int main(void){</span>
+<span class="co">    print_sizes();</span>
+<span class="co">    print_alignment();</span>
+
+<span class="co">    return 0;</span>
+<span class="co">}</span></code></pre></div>
+<p>Compile with <code>gcc arm_test.c -lcapstone -o arm_test</code> and observe. I still need to verify this approach on other architectures and with different compilers, but I am confident that it will work out and make it possible to write cross-platform bindings that work and circumvent the limitations of <code>c2hs</code>.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Given these rules and guidelines, it should be possible to do two things:</p>
+<ol style="list-style-type: decimal">
+<li>write structures in a way that takes up less memory (Eric S. Raymonds wrote a great article on that topic <a href="http://www.catb.org/esr/structure-packing/">here</a>.</li>
+<li>determine the offsets of all members in a struct in more or less cross-platform fashion, which is our usecase as we need those values when writing <code>Storable</code> instances for Haskell datatypes that match C structures.</li>
+</ol>
+<h2 id="why-we-need-this-here">Why we need this <em>here</em></h2>
+<blockquote>
+<p>But wait, doesn't <code>c2hs</code> handle this for us?</p>
+</blockquote>
+<p>Sadly, that's the culprit. If you need to handle C11-specific things like anonymous unions, you can't rely on <code>c2hs</code>. Instead, you need to do what it does behind the scenes: write calls like this, because the header parsing gets hickups:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">peekByteOff p <span class="dv">8</span></code></pre></div>
+<p>Also, for some reason, <code>c2hs</code> assumes that a <code>bool</code> from <code>stdbool.h</code> gets stored in a 4-byte word. Very interesting. In this case it proved useful to have good property-based tests (provided by QuickCheck) that check the <code>peek</code> and <code>poke</code> implementations of my types.</p>
+<p>That's it for now.</p>
+<a href="index">back home</a>
+</body>
+</html>
