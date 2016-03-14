@@ -103,9 +103,10 @@ And some code to check the sizes and offsets:
 ```C
 /* An attempt to map all struct sizes to account for the shitty C11 support
  * C2HS exposes. We just print them in a structured fashion to account for
- *  * the anonymous unions present in most of the code. That way, currently
- *   * broken Storable instances can be fixed. - This is what happens when you
- *    * start writing proper property-based tests ;)
+ * the anonymous unions present in most of the code. That way, currently
+ * broken Storable instances can be fixed. - This is what happens when you
+ * start writing proper property-based tests ;)
+ */
 
 #include <stdio.h>
 
