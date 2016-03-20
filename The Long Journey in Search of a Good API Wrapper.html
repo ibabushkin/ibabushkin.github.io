@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+</head>
+<body>
+<a href="index">back home</a>
+<h1>/dev/thoughtbin</h1>
+<h1 id="the-long-journey-in-search-of-a-good-api-wrapper">The Long Journey in Search of a Good API Wrapper</h1>
+<p>Today I will return to talking about my project to provide Haskell bindings for Capstone. What a surprise. However, I regard the technical realization of the low-level bindings as done or mostly done, so instead I'll focus on the stuff mentioned in the heading.</p>
+<p>First off, let's look at the motivation to provide anything beyond what's done already. As things are now you can essentially write C-style Haskell that calls back into Capstone (even callbacks should be possible). That's great and all, but not exactly <em>idiomatic</em>. An idiomatic way to accomplish the same things would be to have a non-stateful, preferably pure API.</p>
+<p>However, this isn't a straightforward task, as a significant percentage of Capstone's API (see <a href="https://github.com/aquynh/capstone/blob/master/include/capstone.h">include/capstone.h</a>) relies on the presence of an opaque handle that is internally used as a pointer to an internal structure that holds function pointers and other data.</p>
+<p>Indeed, functions like</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">bool cs_reg_write(csh handle, <span class="dt">const</span> cs_insn *insn, <span class="dt">unsigned</span> <span class="dt">int</span> reg_id);</code></pre></div>
+<p>are implemented as a lookup and call of a function pointer, as different architectures can plug in their own implementations in a seamless manner using that approach. In Haskell, such a function would remain entirely pure, but in this context, this is rendered impossible.</p>
+<p>Currently, two approaches seem feasible to tackle this:</p>
+<ol style="list-style-type: decimal">
+<li>Make each pure function an <code>unsafePerformIO</code> call on an action that allocates a suitable handle and cleans up afterwards - smells of bad style and wastes resources left and right.</li>
+<li>Develop some framework to perform all handle-dependent computations first and make that information available on-demand. This should be a good approach, and is probably versatile enough. That way something like <code>Haskell    disasmWithAction :: CsArch   -- ^ architecture (needed for handle)                 -&gt; [CsMode] -- ^ modes (needed for handle)                 -&gt; [Word8]  -- ^ buffer to disassemble                 -&gt; Word64   -- ^ address of first byte in buffer                 -&gt; Int      -- ^ number of instructions to disassemble                 -&gt; (Csh -&gt; CsInsn -&gt; IO a) -- ^ user-supplied action                 -&gt; IO (Either CsErr [(CsInsn, a)])</code> would fit almost all needs. Moreover, it should be safe to wrap in <code>unsafePerformIO</code>. However, this would require some restrictions on the user-action. More on this in another blogpost.</li>
+</ol>
+<p>These approaches, combined with some typesystem magic for additional safety, should be pretty effective for what I need right now. When they are actually implemented, I will elaborate on that as well.</p>
+<a href="index">back home</a>
+</body>
+</html>
