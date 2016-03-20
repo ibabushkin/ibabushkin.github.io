@@ -33,15 +33,16 @@ Currently, two approaches seem feasible to tackle this:
 2. Develop some framework to perform all handle-dependent computations first
    and make that information available on-demand. This should be a good approach,
    and is probably versatile enough. That way something like
-   ```Haskell
-   disasmWithAction :: CsArch   -- ^ architecture (needed for handle)
-                    -> [CsMode] -- ^ modes (needed for handle)
-                    -> [Word8]  -- ^ buffer to disassemble
-                    -> Word64   -- ^ address of first byte in buffer
-                    -> Int      -- ^ number of instructions to disassemble
-                    -> (Csh -> CsInsn -> IO a) -- ^ user-supplied action
-                    -> IO (Either CsErr [(CsInsn, a)])
-   ```
+
+```Haskell
+disasmWithAction :: CsArch   -- ^ architecture (needed for handle)
+                 -> [CsMode] -- ^ modes (needed for handle)
+                 -> [Word8]  -- ^ buffer to disassemble
+                 -> Word64   -- ^ address of first byte in buffer
+                 -> Int      -- ^ number of instructions to disassemble
+                 -> (Csh -> CsInsn -> IO a) -- ^ user-supplied action
+                 -> IO (Either CsErr [(CsInsn, a)])
+```
    would fit almost all needs. Moreover, it should be safe to wrap in `unsafePerformIO`.
    However, this would require some restrictions on the user-action. More on this in
    another blogpost.

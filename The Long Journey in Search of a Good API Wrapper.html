@@ -57,8 +57,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Currently, two approaches seem feasible to tackle this:</p>
 <ol style="list-style-type: decimal">
 <li>Make each pure function an <code>unsafePerformIO</code> call on an action that allocates a suitable handle and cleans up afterwards - smells of bad style and wastes resources left and right.</li>
-<li>Develop some framework to perform all handle-dependent computations first and make that information available on-demand. This should be a good approach, and is probably versatile enough. That way something like <code>Haskell    disasmWithAction :: CsArch   -- ^ architecture (needed for handle)                 -&gt; [CsMode] -- ^ modes (needed for handle)                 -&gt; [Word8]  -- ^ buffer to disassemble                 -&gt; Word64   -- ^ address of first byte in buffer                 -&gt; Int      -- ^ number of instructions to disassemble                 -&gt; (Csh -&gt; CsInsn -&gt; IO a) -- ^ user-supplied action                 -&gt; IO (Either CsErr [(CsInsn, a)])</code> would fit almost all needs. Moreover, it should be safe to wrap in <code>unsafePerformIO</code>. However, this would require some restrictions on the user-action. More on this in another blogpost.</li>
+<li>Develop some framework to perform all handle-dependent computations first and make that information available on-demand. This should be a good approach, and is probably versatile enough. That way something like</li>
 </ol>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">disasmWithAction ::</span> <span class="dt">CsArch</span>   <span class="co">-- ^ architecture (needed for handle)</span>
+                 <span class="ot">-&gt;</span> [<span class="dt">CsMode</span>] <span class="co">-- ^ modes (needed for handle)</span>
+                 <span class="ot">-&gt;</span> [<span class="dt">Word8</span>]  <span class="co">-- ^ buffer to disassemble</span>
+                 <span class="ot">-&gt;</span> <span class="dt">Word64</span>   <span class="co">-- ^ address of first byte in buffer</span>
+                 <span class="ot">-&gt;</span> <span class="dt">Int</span>      <span class="co">-- ^ number of instructions to disassemble</span>
+                 <span class="ot">-&gt;</span> (<span class="dt">Csh</span> <span class="ot">-&gt;</span> <span class="dt">CsInsn</span> <span class="ot">-&gt;</span> <span class="dt">IO</span> a) <span class="co">-- ^ user-supplied action</span>
+                 <span class="ot">-&gt;</span> <span class="dt">IO</span> (<span class="dt">Either</span> <span class="dt">CsErr</span> [(<span class="dt">CsInsn</span>, a)])</code></pre></div>
+<p>would fit almost all needs. Moreover, it should be safe to wrap in <code>unsafePerformIO</code>. However, this would require some restrictions on the user-action. More on this in another blogpost.</p>
 <p>These approaches, combined with some typesystem magic for additional safety, should be pretty effective for what I need right now. When they are actually implemented, I will elaborate on that as well.</p>
 <a href="index">back home</a>
 </body>
