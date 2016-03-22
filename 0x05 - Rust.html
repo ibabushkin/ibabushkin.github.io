@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+</head>
+<body>
+<a href="index">back home</a>
+<h1>/dev/thoughtbin</h1>
+<h1 id="my-encounter-with-rust">My encounter with Rust</h1>
+<p>I heard a lot about the Rust language. That's nothing unexpected given the publicity the language gets on Reddit, HN and the likes, but I felt intrigued by the ideas and concepts behind it. I won't reiterate now on the details of it's memory handling etc., but rather give a quick recap of my first practical impression (I already tried to learn it ~4 months back, but gave up due to lack of time and other projects). Essentially, I discovered the <a href="https://github.com/uutils/coreutils">uutils</a> project, which is a great opportunity to learn the language by doing something with it.</p>
+<p>Maybe I should explain why this is such a big deal for me: I prefer it if my work, even while learning a new technology, is of use (to anyone, including myself). Given that requirement my psyche doesn't let me lift, I am often stuck in a dilemma where I think I should use a lower-level language such as C or Rust for a particular project I decided to work on, but don't see a need/benefit in it (because it lends itself very well to Haskell, for example). This called for the need of a project, where a systems programming language is beneficial.</p>
+<p>Given that, I picked up a few resources and started my most recent run with Rust. So far it has been very entertaining and a pretty good experience. The only <em>real</em> annoyance is the weird versioning system that restricts people using Rust stable, which makes me wonder why it is even available in parallel to the nightlies. Other things that made me go &quot;hm?&quot; included the special way Rust treats iterators. They are indeed a very powerful tool for a more low-level approach to functional programming, but their vast amount is a bit overwhelming, especially if you are new to the language (and libraries) and every iterator has it's own corner-cases.</p>
+<p>Example: I want to iterate over the substrings of a <code>String</code> that are the result of a call to split, but I want to do that in a separate function, so I'd like to do the following</p>
+<div class="sourceCode"><pre class="sourceCode rust"><code class="sourceCode rust"><span class="co">// define our function</span>
+<span class="kw">fn</span> do_something(arg: <span class="dt">Vec</span>&lt;<span class="dt">String</span>&gt;) -&gt; SomeResultType {
+    <span class="co">// do stuff with the vector</span>
+}
+<span class="co">// and call it like this:</span>
+<span class="co">// do_something(some_string.split(&quot;bla&quot;).collect());</span></code></pre></div>
+<p>But I can't, because the corresponding Trait needed for the call to <code>collect()</code> isn't implemented for <code>Vec&lt;a&gt;</code>. Okay. I'd love to know why. I probably miss some important bit here, but this is a bit frustrating. I probably could just pass the <code>Split</code>-iterator to my function, but this requires more interaction with lifetimes, and I don't see a reason for that here, as the usecase should be fairly simple.</p>
+<p>Apart from such small issues, my experience with language and tooling has been great, and I look forward to doing more with it.</p>
+<a href="index">back home</a>
+</body>
+</html>
