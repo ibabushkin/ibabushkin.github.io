@@ -47,3 +47,13 @@ a reason for that here, as the usecase should be fairly simple.
 
 Apart from such small issues, my experience with language and tooling has been great,
 and I look forward to doing more with it.
+
+## Update: a few weeks later
+I got more practise with the language (more on my projects in that realm later).
+Now it also makes sense that iterators of different types are structs - they are lazy.
+This was unexpected given my Haskell background, where such things are included in the
+type system itself, but it is good to know. I also feel that I am getting close to
+understanding the more complex/involved concepts in the language (lifetimes for instance).
+(So I am fighting the borrow checker less and less, instead I fight tooling and library
+infrastructure - as I said, I will elaborate on that later). Other things like generics
+didn't hold much surprises after Haskell and C.
