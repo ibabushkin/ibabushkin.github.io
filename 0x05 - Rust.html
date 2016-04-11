@@ -6,6 +6,7 @@
   <meta name="generator" content="pandoc" />
   <title></title>
   <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">body{margin:40px auto;max-width:650px;line-height:1.6;font-size:18px;color:#444;padding:0 10px}h1,h2,h3{line-height:1.2}</style>
   <style type="text/css">
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
@@ -61,7 +62,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>But I can't, because the corresponding Trait needed for the call to <code>collect()</code> isn't implemented for <code>Vec&lt;a&gt;</code>. Okay. I'd love to know why. I probably miss some important bit here, but this is a bit frustrating. I probably could just pass the <code>Split</code>-iterator to my function, but this requires more interaction with lifetimes, and I don't see a reason for that here, as the usecase should be fairly simple.</p>
 <p>Apart from such small issues, my experience with language and tooling has been great, and I look forward to doing more with it.</p>
 <h2 id="update-a-few-weeks-later">Update: a few weeks later</h2>
-<p>I got more practise with the language (more on my projects in that realm later). Now it also makes sense that iterators of different types are structs - they are lazy. This was unexpected given my Haskell background, where such things are included in the type system itself, but it is good to know. I also feel that I am getting close to understanding the more complex/involved concepts in the language (lifetimes for instance). (So I am fighting the borrow checker less and less, instead I fight tooling and library infrastructure - as I said, I will elaborate on that later). Other things like generics didn't hold much surprises after Haskell and C.</p>
+<p>I got more practise with the language (more on my projects in that realm later). Now it also makes sense that iterators of different types are structs - they are lazy. This was unexpected given my Haskell background, where such things are included in the type system itself, but it is good to know. I also feel that I am getting closer to understanding the more complex/involved concepts in the language (lifetimes for instance). (So I am fighting the borrow checker less and less, instead I fight tooling and library infrastructure - as I said, I will elaborate on that later). Other things like generics didn't hold much surprises after Haskell and C.</p>
 <a href="index">back home</a>
 </body>
 </html>
