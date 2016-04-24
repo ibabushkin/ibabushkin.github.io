@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">body{margin:40px auto;max-width:850px;line-height:1.6;font-size:18px;color:#444;padding:0 10px}h1,h2,h3{line-height:1.2}</style>
+</head>
+<body>
+<a href="index">back home</a>
+<h1>/dev/thoughtbin</h1>
+<h1 id="progress-on-gabelstaplerwm">Progress on gabelstaplerwm</h1>
+<p>As mentioned in the last post, I've begun working on my very own window manager written in Rust. And it has been a success so far, even though most of the problems with X itself are still present and keep me up at night.</p>
+<p>However, some progress has been made, on which I will reiterate now.</p>
+<p>First of all, the core of the window manager is working and reasonably performant, and the necessary interfaces and data structures have been implemented. Among the things that work are:</p>
+<ul>
+<li>window focus</li>
+<li>layouts and tags</li>
+<li>redrawing on demand</li>
+<li>keybindings</li>
+<li>user config in a seperate Rust file</li>
+</ul>
+<p>However, some things still need to be implemented:</p>
+<ul>
+<li>properly working window borders (ATM colors behave weirdly)</li>
+<li>launching things and other additional functionality</li>
+<li>more config features</li>
+</ul>
+<p>So much for today, the code is at the same place: <a href="https://github.com/ibabushkin/gabelstaplerwm">gabelstaplerwm</a>.</p>
+<a href="index">back home</a>
+</body>
+</html>
