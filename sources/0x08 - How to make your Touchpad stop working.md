@@ -37,3 +37,16 @@ So I commented out the section used to match on my touchpad. Let's hope this
 works as planned.
 
 Be right back, restarting X.
+
+*after Restart*: No, it does not. However, some sources suggest to modify the
+section like this:
+```
+Section "InputClass"
+        Identifier "evdev touchpad catchall"
+        MatchIsTouchpad "on"
+        MatchDevicePath "/dev/input/event*"
+        Option "Ignore" "on"
+EndSection
+```
+And - oh wonder - it works. It works not. You know what I mean, right?
+That's it for now - useless article on trivial stuff over.

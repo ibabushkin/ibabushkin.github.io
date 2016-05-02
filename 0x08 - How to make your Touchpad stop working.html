@@ -26,6 +26,14 @@
 # EndSection</code></pre>
 <p>So I commented out the section used to match on my touchpad. Let's hope this works as planned.</p>
 <p>Be right back, restarting X.</p>
+<p><em>after Restart</em>: No, it does not. However, some sources suggest to modify the section like this:</p>
+<pre><code>Section &quot;InputClass&quot;
+        Identifier &quot;evdev touchpad catchall&quot;
+        MatchIsTouchpad &quot;on&quot;
+        MatchDevicePath &quot;/dev/input/event*&quot;
+        Option &quot;Ignore&quot; &quot;on&quot;
+EndSection</code></pre>
+<p>And - oh wonder - it works. It works not. You know what I mean, right? That's it for now - useless article on trivial stuff over.</p>
 <a href="index">back home</a>
 </body>
 </html>
