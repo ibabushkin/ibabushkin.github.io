@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">body{margin:40px auto;max-width:850px;line-height:1.6;font-size:18px;color:#444;padding:0 10px}h1,h2,h3{line-height:1.2}</style>
+</head>
+<body>
+<a href="index">back home</a>
+<h1>/dev/thoughtbin</h1>
+<h1 id="how-to-make-your-touchpad-stop-working">How to make your Touchpad stop working</h1>
+<p>Yesterday, a very unpleasant thing struck me. My touchpad has started to work after I installed a batch of updates on my Arch Linux system. This proved particularly annoying because it now behaves in an extremely obnoxious fashion: the entire area of the touchpad gets mapped to the screen space, making it very hard to control in a proper way. Heck, you could call it &quot;The devil of pointer devices&quot; if my laptop didn't allow me to disable it using a hardware switch, which in turn is weird, because most other functionality provided by the F-keys had to be provided by my own scripts and bindings in my window manager (not my own - yet).</p>
+<p>This situation calls for a fix - ladies and gentlemen, I present to you:</p>
+<h2 id="disabling-breaking-your-touchpad-completely"><del>Disabling</del> Breaking your touchpad completely</h2>
+<p>Well, not breaking. But making it dysfunctional would be a proper term.</p>
+<p>The problem: I don't have a <code>synaptics</code> driver installed, so I don't know where I have to search for configuration files to disable this &quot;feature&quot; we are talking about.</p>
+<p>Now, according to the <a href="https://wiki.archlinux.org/index.php/Xorg#Input_devices">arch wiki</a>, the offending component in the absence of <code>synaptics</code> is <code>evdev</code>, which has a configuration file over at <code>/usr/share/X11/xorg.conf.d/10-evdev.conf</code>. There are a few sections in that file, which follow a rather strange syntax (vim tells me that it's a special syntax called <code>xf86conf</code>. I also found out that we can comment stuff using <code>#</code>. Thanks, vim):</p>
+<pre><code># Section &quot;InputClass&quot;
+#         Identifier &quot;evdev touchpad catchall&quot;
+#         MatchIsTouchpad &quot;on&quot;
+#         MatchDevicePath &quot;/dev/input/event*&quot;
+#         Driver &quot;evdev&quot;
+# EndSection</code></pre>
+<p>So I commented out the section used to match on my touchpad. Let's hope this works as planned.</p>
+<p>Be right back, restarting X.</p>
+<a href="index">back home</a>
+</body>
+</html>
