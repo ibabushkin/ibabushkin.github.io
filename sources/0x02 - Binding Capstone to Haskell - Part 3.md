@@ -5,11 +5,12 @@ ecosystem. Today I will add a quick update on the progress I made.
 First off, let's look at our roadmap:
 
 * [x] port the data structures from the architecture headers
-* [ ] port the data structures used by the disassembly API (`cs_detail` etc.) 
+* [x] port the data structures used by the disassembly API (`cs_detail` etc.) 
 * [x] port the disassembly API
-* [ ] write tests for the numerous `Storable` instances we wrote
-* [ ] verify the type-safety of the marshalling code
-* [ ] write high-level wrappers around the 1:1 bindings
+* [x] write tests for the numerous `Storable` instances we wrote
+* [x] verify the type-safety of the marshalling code
+* [x] write high-level wrappers around the 1:1 bindings
+* UPDATE: all done, version bump to `next` branch soon
 
 We have done the majority of the hard work already, even if it doesn't look
 like that. The code written needs to be verified still, but that's an ongoing
