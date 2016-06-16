@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">body{margin:40px auto;max-width:850px;line-height:1.6;font-size:18px;color:#444;padding:0 10px}h1,h2,h3{line-height:1.2}</style>
+</head>
+<body>
+<a href="index">back home</a>
+<h1>/dev/thoughtbin</h1>
+<h1 id="more-progress-and-boring-titles">More Progress and Boring Titles</h1>
+<p>The last few weeks (days? When did I write my last entry again?) have been pretty interesting in terms of things being done. Let's reiterate on them and ponder on some existential… whatever, let's get to business.</p>
+<h2 id="gabelstaplerwm---the-good">gabelstaplerwm - The Good …</h2>
+<p>I finally reworked the entire client and tag handling. The new structures are much cleaner, work more reliably, efficiently, and are more correct in terms of general behaviour. Now, the <code>ClientSet</code>, which is a successor to <code>ClientList</code> manages order of clients on sets of tags as well, allowing for far greater control over how windows are displayed. Other features known from <code>awesomeWM</code> have been implemented as well - i.e. you can now actually use most of the code written over the course of the last few months. A lot of cleanup has been done as well, a default config is underway and other nice things.</p>
+<h2 id="the-bad">… The Bad …</h2>
+<p>However, a lot of things have yet to be done - tagset based ordering of clients depends on the order of the tags (sets, I know, this will be fixed), some old bugs still haven't been resolved, some code is plain bad (looking up window properties from Rust with no idiomatic binding to XCB is a pain), and lots of things are half-baked and in the making.</p>
+<h2 id="and-the-ugly">… And The Ugly</h2>
+<p>Now, I want to reiterate the debugging story associated with a particularly nasty bug I triggered while implementing unmanaged windows. These are windows we don't want to force in our tiled layout - notifications, bars, popups… These are stored in a vector in our <code>WindowManager</code> structure, and elements are pushed upon arrival and removed if a destroyed window is in the vector. This process is also quite fast, because pushing has an amortized cost of <span class="math inline"><em>O</em>(1)</span>, and <code>Vec::swap_remove()</code> has as well, which we can use because we don't care about the order of windows in our vector (since we don't manage them anyway).</p>
+<p>Now, when we get a notification from the X server that a window has been destroyed, we need to remove the associated client structure we might have created. However, due to a weird trait my terminal emulator of choice has, checking whether the removal of the client structure succeeded and basing redrawing and refocusing decisions on that led to a strange race condition which broke redrawing.</p>
+<p>Now you rightfully wonder: what kind of feature of a client can break things this way? The answer: <a href="https://github.com/thestinger/termite"><code>termite</code></a> creates multiple children of the root window. Why? Because... GTK tells it to. I don't really know, to be honest. However, I assume the reason are the overlays that <code>termite</code> creates to implement URL hinting and other things. Their number matches the number of window-creation messages <code>gabelstaplerwm</code> receives, and it seems to make sense in general - i.e. I don't see a different explanation.</p>
+<p>This bug has been fixed in the last commit at the time of writing. I am not sure about it's nature and I didn't have the time and energy to find out what <em>exactly</em> is causing it, research on race conditions in the context of X didn't turn up anything valuable either.</p>
+<h2 id="how-jsmn-fucked-me-over">How JSMN Fucked Me Over</h2>
+<p>Currently, the development of <code>swtb</code> has come to a halt. There is one specific reason to this: the JSON parser I decided to use for it's minimalism and simplicity seems to be either buggy or not intended to be used how I do it. The last token from a batch of JSON data simply isn't parsed correctly, although there is no doubt about the well-formedness of the inputs. This will likely see a fix soon, but for some time, I halted development for reasons of frustration.</p>
+<h2 id="other-interesting-things">Other Interesting Things</h2>
+<p>More like one thing, really. I started reverse-engineering a DVD with a digital library on it. This is purely for fun, as the material isn't subject to copyright anymore, but I am interested in the internal workings of the weird binary file format used by the application. For reasons unknown, whitespace is encoded, while regular textual data is not. Also, file offsets, cross-references, and data are intermixed in one huge binary file. However, this post is growing into a collection of incoherent threads of narrative, so I will write another post when I have enough findings to present.</p>
+<p>That's it, what did you expect?</p>
+<a href="index">back home</a>
+</body>
+</html>
