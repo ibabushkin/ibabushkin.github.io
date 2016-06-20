@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">body{margin:40px auto;max-width:850px;line-height:1.6;font-size:18px;color:#444;padding:0 10px}h1,h2,h3{line-height:1.2}</style>
+</head>
+<body>
+<a href="index">back home</a>
+<h1>/dev/thoughtbin</h1>
+<h1 id="a-new-way-to-manage-tagsets-in-gabelstaplerwm">A New Way to Manage Tagsets in gabelstaplerwm</h1>
+<p>So lately I have been talking about implementing a new system to manage tagsets. Oh, I just checked - I have not. Well, what a coincidence that I currently have a <code>vim</code> open, eh? Not funny? Okay.</p>
+<p>I quickly came to the conclusion that a simple stack is a datastructure way too inflexible to store all data needed to handle tagsets in an efficient and generally nice manner. It is fine to store a history of references though.</p>
+<p>As such, it sticked around for the last revision of <code>gabelstaplerwm</code>, but got significantly transformed to fit the requirements. Specifically, I am talking of the <code>TagStack</code> structure here, for anyone who is reading the sources. The main change is simple: <code>TagSet</code>s are persistent now and are addressed by arbitrary values of type <code>u8</code>. A small stack stores the keys of the last four shown <code>TagSet</code>s. The structure permits modifying the <code>TagSet</code>s in place or add new ones. At the moment, the user can - running the default config - edit the tagsets in a special keyboard mode - modal interfaces are already implemented. This moves away from the concepts already familiar from the fathers of this project: <code>awesome</code> and <code>dwm</code>. For two reasons:</p>
+<ul>
+<li>now, each tagset shown, no matter how many tags it encompasses, is first-class</li>
+<li>tagsets are associated with keybindings and change with time</li>
+</ul>
+<p>However, this is not a complete break of compatibility - you can still use the same paradigms as before, but they have evolved. And this is just the beginning: A better default config file, which I currently work on, would allow even more sensible dynamism in the ways it handles tagsets. This would involve adding copy-on-write functionality to the <code>TagStack</code> and allow for a different way to bind keys on the keyboard to keys in the struct.</p>
+<p>So far, however, the situation has already improved quite a bit. If we now add a way to display information on tag sets etc, the window manager would become fully usable. For now, I should reiterate what needs to be done at this point:</p>
+<ul>
+<li>add a output interface for a bar or something similar</li>
+<li>add full support for notifications</li>
+<li>add other features previously discussed</li>
+<li>add more layouts</li>
+<li>add proper color handling, the current one sucks massively</li>
+</ul>
+<p>However, with a lot of will, it is already possible to use this. Have fun.</p>
+<a href="index">back home</a>
+</body>
+</html>
