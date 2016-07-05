@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">body{margin:40px auto;max-width:850px;line-height:1.6;font-size:18px;color:#444;padding:0 10px}h1,h2,h3{line-height:1.2}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+</head>
+<body>
+<a href="index">back home</a>
+<h1>/dev/thoughtbin</h1>
+<h1 id="more-gabelstaplerwm-news">More gabelstaplerwm News</h1>
+<p>Let's get straight to the point. A few nifty features have been added:</p>
+<h2 id="handling-of-already-present-clients">Handling of already-present clients</h2>
+<p>...which is still useless because <code>gabelstaplerwm</code> still doesn't disown it's children. And probably the most buggy part of the whole system.</p>
+<h2 id="logging">Logging</h2>
+<p>All output has been moved to <code>log</code> and <code>env_logger</code>, which are pretty simple to use, and flexible. No more ugly pythonesque logging that clutters everything it gets in touch with.</p>
+<h2 id="output-capabilities">Output capabilities</h2>
+<p>When I said all output in the last section, I lied. Because a new feature has been added to allow for simple, extensible, and user-centric communication with external components, such as bars, notification systems...</p>
+<p>Now, every config macro can be passed any number of additional objects that get printed out using the <code>Display</code> trait on stdout, after all the actions have been performed, but before the WM redraws the screen or does whatever else the closure returned by the macro commands it to do. This allows for demand-driven output to a bar or any other component. For clarity, and to remove any possible ambiguous cases for the compiler, the objects to be printed are separated by semicolons, not commas:</p>
+<div class="sourceCode"><pre class="sourceCode rust"><code class="sourceCode rust"><span class="co">/// View a tagset by pushing it by index on the history stack.</span>
+<span class="co">///</span>
+<span class="co">/// Returns a closure for use with `bind!`.</span>
+<span class="pp">macro_rules!</span> push_tagset {
+    ($index:expr $(; $print:expr)*) =&gt; {
+        |_, s| {
+            s.push($index);
+            $( <span class="pp">println!</span>(<span class="st">&quot;{}&quot;</span>, $print); )*
+            WmCommand::Redraw
+        }
+    }
+}</code></pre></div>
+<p>This is simple, convenient to use, and produces no overhead when inactive. It is also extensible to the maximum and adds only a minimal amount of code (16 lines) to the sources.</p>
+<p>I'd say this is a win.</p>
+<h2 id="new-layouts-and-some-rearrangements">New layouts and some rearrangements</h2>
+<p>Ha! Got the joke? Rearrangements? Layouts? Not funny? Okay.</p>
+<p>Two new not-so impressing layouts: a <code>Grid</code> and a <code>Spiral</code>. Both are straightforward to use and easy to explain. The grid specifies a fixed number of columns and creates as many lines of windows as needed, leaving empty slots on them if necessary. The spiral layout is a right-biased spiral with a fixed ratio of 0.5.</p>
+<p>Nothing exciting, but useful on occasion.</p>
+<p>Other than that, the stack layouts have been moved to one single module <code>wm::layouts::stack</code>, since they are very similar in implementation and don't clash. In the future, there might be some room for code deduplication there.</p>
+<a href="index">back home</a>
+</body>
+</html>
