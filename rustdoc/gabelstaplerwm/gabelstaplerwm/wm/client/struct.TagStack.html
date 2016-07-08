@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `TagStack` struct in crate `gabelstaplerwm`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, TagStack">
+
+    <title>gabelstaplerwm::wm::client::TagStack - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>client</a></p><script>window.sidebarCurrent = {name: 'TagStack', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>client</a>::<wbr><a class='struct' href=''>TagStack</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-321' class='srclink' href='../../../src/gabelstaplerwm/src/wm/client.rs.html#513-518' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct TagStack {
+    // some fields omitted
+}</pre><div class='docblock'><p>An organized set of known tagsets.</p>
+
+<p>Allows for simple addressing of tagstes (and their layouts)
+Tagsets are added and removed using API calls and are adressed using 8-bit
+unsigned integers. Thus, 256 different tagsets can be managed at any point
+in time. A small history of capped size is kept, determining the tagset
+currently displayed by the window manager.</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../../../gabelstaplerwm/wm/client/struct.TagStack.html' title='gabelstaplerwm::wm::client::TagStack'>TagStack</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-324' class='srclink' href='../../../src/gabelstaplerwm/src/wm/client.rs.html#520-618' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../../../gabelstaplerwm/wm/client/struct.TagStack.html' title='gabelstaplerwm::wm::client::TagStack'>TagStack</a></code></h4>
+<div class='docblock'><p>Setup an empty tag stack.</p>
+</div><h4 id='method.from_presets' class='method'><code>fn <a href='#method.from_presets' class='fnname'>from_presets</a>(vec: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../../gabelstaplerwm/wm/client/struct.TagSet.html' title='gabelstaplerwm::wm::client::TagSet'>TagSet</a>&gt;, viewed: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>) -&gt; <a class='struct' href='../../../gabelstaplerwm/wm/client/struct.TagStack.html' title='gabelstaplerwm::wm::client::TagStack'>TagStack</a></code></h4>
+<div class='docblock'><p>Setup a tag stack from a vector of tag sets and the index of the
+initially viewed tagset in the vector.</p>
+</div><h4 id='method.current_index' class='method'><code>fn <a href='#method.current_index' class='fnname'>current_index</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></h4>
+<div class='docblock'><p>Get the current tag set&#39;s index</p>
+
+<p>Returns <code>None</code> if the history stack is empty</p>
+</div><h4 id='method.current' class='method'><code>fn <a href='#method.current' class='fnname'>current</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='struct' href='../../../gabelstaplerwm/wm/client/struct.TagSet.html' title='gabelstaplerwm::wm::client::TagSet'>TagSet</a>&gt;</code></h4>
+<div class='docblock'><p>Get the current tag set by reference.</p>
+
+<p>Returns <code>None</code> if the history stack is empty</p>
+</div><h4 id='method.current_mut' class='method'><code>fn <a href='#method.current_mut' class='fnname'>current_mut</a>(&amp;mut self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;mut <a class='struct' href='../../../gabelstaplerwm/wm/client/struct.TagSet.html' title='gabelstaplerwm::wm::client::TagSet'>TagSet</a>&gt;</code></h4>
+<div class='docblock'><p>Get the current tag set by mutable reference.</p>
+
+<p>Returns <code>None</code> if the history stack is empty</p>
+</div><h4 id='method.push' class='method'><code>fn <a href='#method.push' class='fnname'>push</a>(&amp;mut self, new_index: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>)</code></h4>
+<div class='docblock'><p>Set the currently viewed tagset by index.</p>
+</div><h4 id='method.add' class='method'><code>fn <a href='#method.add' class='fnname'>add</a>(&amp;mut self, index: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>, value: <a class='struct' href='../../../gabelstaplerwm/wm/client/struct.TagSet.html' title='gabelstaplerwm::wm::client::TagSet'>TagSet</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>Add a new tagset to the set.</p>
+</div><h4 id='method.remove' class='method'><code>fn <a href='#method.remove' class='fnname'>remove</a>(&amp;mut self, index: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>Remove a tagset from the set.</p>
+</div><h4 id='method.view_prev' class='method'><code>fn <a href='#method.view_prev' class='fnname'>view_prev</a>(&amp;mut self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>Switch to previously shown tagset, using the history stack.</p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../../";
+        window.currentCrate = "gabelstaplerwm";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../../jquery.js"></script>
+    <script src="../../../main.js"></script>
+    
+    <script defer src="../../../search-index.js"></script>
+</body>
+</html>

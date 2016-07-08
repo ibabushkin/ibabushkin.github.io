@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["LayoutMessage","A message type being sent to layout objects."]],"mod":[["grid",""],["monocle",""],["spiral",""],["stack",""]],"struct":[["Geometry","A window's geometry."],["ScreenSize","A screen size to be accounted for when arranging windows."]],"trait":[["Layout","Types that compute geometries for arbitrary amounts of windows."]]});

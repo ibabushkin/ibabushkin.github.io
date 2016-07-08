@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Monocle","Monocle layout with offset."]]});

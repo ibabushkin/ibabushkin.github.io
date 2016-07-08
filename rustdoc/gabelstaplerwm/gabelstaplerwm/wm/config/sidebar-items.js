@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Mode","All keyboard modes used by `gabelstaplerwm`-"],["Tag","All tags used by `gabelstaplerwm`"]],"fn":[["generate_config","Generate a window manager config - colors, border width..."],["setup_wm","Setup datastructures for the window manager."]]});
