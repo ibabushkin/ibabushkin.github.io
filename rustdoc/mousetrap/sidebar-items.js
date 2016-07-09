@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["mousetrap","This module contains utilities to perform systematic mouse warping based on subsequent reduction of the target area. This allows for a logarithmic compexity to move the mouse to a specific point."]]});
