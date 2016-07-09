@@ -6,10 +6,12 @@ have a github account <a href="https://www.github.com/ibabushkin">here</a>.
 
 <p>
 Self-hosted docs:
+</p>
 <ul>
   <li><a href="https://ibabushkin.github.io/rustdoc/gabelstaplerwm/gabelstaplerwm">gabelstaplerwm</a></li>
   <li><a href="https://ibabushkin.github.io/rustdoc/mousetrap/mousetrap">gabelstaplerwm-mousetrap</a></li>
 </ul>
+<p>
 They are rebuild on every push of the repository, so they can be assumed to be
 up-to-date, as long as I update this repo.
 </p>
