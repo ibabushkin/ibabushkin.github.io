@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-321' class='srclink' href='../../../src/gabelstaplerwm/src/wm/client.rs.html#513-518' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-318' class='srclink' href='../../../src/gabelstaplerwm/src/wm/client.rs.html#513-518' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct TagStack {
     // some fields omitted
 }</pre><div class='docblock'><p>An organized set of known tagsets.</p>
@@ -57,7 +57,7 @@ Tagsets are added and removed using API calls and are adressed using 8-bit
 unsigned integers. Thus, 256 different tagsets can be managed at any point
 in time. A small history of capped size is kept, determining the tagset
 currently displayed by the window manager.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../../../gabelstaplerwm/wm/client/struct.TagStack.html' title='gabelstaplerwm::wm::client::TagStack'>TagStack</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-324' class='srclink' href='../../../src/gabelstaplerwm/src/wm/client.rs.html#520-618' title='goto source code'>[src]</a></span></h3>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../../../gabelstaplerwm/wm/client/struct.TagStack.html' title='gabelstaplerwm::wm::client::TagStack'>TagStack</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-321' class='srclink' href='../../../src/gabelstaplerwm/src/wm/client.rs.html#520-618' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='struct' href='../../../gabelstaplerwm/wm/client/struct.TagStack.html' title='gabelstaplerwm::wm::client::TagStack'>TagStack</a></code></h4>
 <div class='docblock'><p>Setup an empty tag stack.</p>
 </div><h4 id='method.from_presets' class='method'><code>fn <a href='#method.from_presets' class='fnname'>from_presets</a>(vec: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../../../gabelstaplerwm/wm/client/struct.TagSet.html' title='gabelstaplerwm::wm::client::TagSet'>TagSet</a>&gt;, viewed: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>) -&gt; <a class='struct' href='../../../gabelstaplerwm/wm/client/struct.TagStack.html' title='gabelstaplerwm::wm::client::TagStack'>TagStack</a></code></h4>

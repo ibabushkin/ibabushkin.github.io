@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["TrapDirection","A direction to halve the target area into."]],"struct":[["MouseArena","A `MouseArena` is the area where the mouse can still be moved to."]]});
+initSidebarItems({"mod":[["mousetrap","This module contains utilities to perform systematic mouse warping based on subsequent reduction of the target area. This allows for a logarithmic compexity to move the mouse to a specific point."]]});
