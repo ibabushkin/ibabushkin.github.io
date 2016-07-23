@@ -702,7 +702,6 @@
 <span id="658">658</span>
 <span id="659">659</span>
 <span id="660">660</span>
-<span id="661">661</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>c_char</span>;
 
@@ -1031,10 +1030,9 @@
     <span class='doccomment'>/// Send a client message and kill the client the hard and merciless way</span>
     <span class='doccomment'>/// if that fails, for instance if the client ignores such messages.</span>
     <span class='kw'>fn</span> <span class='ident'>destroy_window</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>window</span>: <span class='ident'>xproto</span>::<span class='ident'>Window</span>) {
-        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>send_event</span>(<span class='ident'>window</span>, <span class='string'>&quot;WM_DELETE_WINDOW&quot;</span>) {
-            <span class='kw'>if</span> <span class='ident'>xproto</span>::<span class='ident'>kill_client</span>(<span class='self'>self</span>.<span class='ident'>con</span>, <span class='ident'>window</span>).<span class='ident'>request_check</span>().<span class='ident'>is_err</span>() {
-                <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;could not kill client&quot;</span>);
-            }
+        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>send_event</span>(<span class='ident'>window</span>, <span class='string'>&quot;WM_DELETE_WINDOW&quot;</span>) <span class='op'>&amp;&amp;</span>
+            <span class='ident'>xproto</span>::<span class='ident'>kill_client</span>(<span class='self'>self</span>.<span class='ident'>con</span>, <span class='ident'>window</span>).<span class='ident'>request_check</span>().<span class='ident'>is_err</span>() {
+            <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;could not kill client&quot;</span>);
         }
     }
 
@@ -1125,7 +1123,7 @@
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>func</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>bindings</span>.<span class='ident'>get</span>(<span class='kw-2'>&amp;</span><span class='ident'>key</span>) {
             <span class='ident'>command</span> <span class='op'>=</span> <span class='ident'>func</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>clients</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>tag_stack</span>);
         } <span class='kw'>else</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>func</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>plugins</span>.<span class='ident'>get</span>(<span class='kw-2'>&amp;</span><span class='ident'>key</span>) {
-            <span class='ident'>func</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>con</span>);
+            <span class='ident'>func</span>(<span class='self'>self</span>.<span class='ident'>con</span>);
         }
         <span class='kw'>match</span> <span class='ident'>command</span> {
             <span class='ident'>WmCommand</span>::<span class='ident'>Redraw</span> <span class='op'>=&gt;</span> {
@@ -1245,7 +1243,7 @@
         <span class='self'>self</span>.<span class='ident'>clients</span>.<span class='ident'>add</span>(<span class='ident'>client</span>);
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>tagset</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>tag_stack</span>.<span class='ident'>current</span>() {
             <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>new_window_as_master</span>() {
-                <span class='self'>self</span>.<span class='ident'>clients</span>.<span class='ident'>swap_master</span>(<span class='kw-2'>&amp;</span><span class='ident'>tagset</span>);
+                <span class='self'>self</span>.<span class='ident'>clients</span>.<span class='ident'>swap_master</span>(<span class='ident'>tagset</span>);
             }
         }
     }
@@ -1341,7 +1339,7 @@
 
                 <span class='comment'>// return the properties obtained</span>
                 <span class='prelude-val'>Some</span>(<span class='ident'>ClientProps</span> {
-                    <span class='ident'>window_type</span>: <span class='ident'>type_atoms</span>[<span class='number'>0</span>].<span class='ident'>clone</span>(),
+                    <span class='ident'>window_type</span>: <span class='ident'>type_atoms</span>[<span class='number'>0</span>],
                     <span class='ident'>name</span>: <span class='ident'>name</span>.<span class='ident'>into_owned</span>(),
                     <span class='ident'>class</span>: <span class='ident'>class</span>,
                 })
