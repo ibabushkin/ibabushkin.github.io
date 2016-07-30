@@ -529,14 +529,15 @@
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>toggle_show_tag</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tag</span>:<span class='ident'>expr</span>;; <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>print</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {
-        <span class='op'>|</span><span class='ident'>c</span>, <span class='ident'>s</span><span class='op'>|</span> <span class='ident'>s</span>
-            .<span class='ident'>current_mut</span>()
-            .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>tagset</span><span class='op'>|</span> {
-                <span class='ident'>tagset</span>.<span class='ident'>toggle_tag</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tag</span>);
+        <span class='op'>|</span><span class='ident'>c</span>, <span class='ident'>s</span><span class='op'>|</span>
+            <span class='kw'>if</span> <span class='ident'>s</span>.<span class='ident'>current_mut</span>()
+                .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>tagset</span><span class='op'>|</span> <span class='ident'>tagset</span>.<span class='ident'>toggle_tag</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tag</span>))
+                .<span class='ident'>is_some</span>() {
                 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>print</span>(<span class='ident'>c</span>, <span class='ident'>s</span>));
                 <span class='ident'>WmCommand</span>::<span class='ident'>Redraw</span>
-            })
-            .<span class='ident'>unwrap_or</span>(<span class='ident'>WmCommand</span>::<span class='ident'>NoCommand</span>)
+            } <span class='kw'>else</span> {
+                <span class='ident'>WmCommand</span>::<span class='ident'>NoCommand</span>
+            }
     };
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tag</span>:<span class='ident'>expr</span> $(; <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>print</span>:<span class='ident'>expr</span>)<span class='op'>*</span>) <span class='op'>=&gt;</span> {
         <span class='op'>|</span>_, <span class='ident'>s</span><span class='op'>|</span> <span class='ident'>s</span>
@@ -569,7 +570,7 @@
             .<span class='ident'>and_then</span>(<span class='op'>|</span><span class='ident'>w</span><span class='op'>|</span> <span class='ident'>c</span>.<span class='ident'>update_client</span>(<span class='ident'>w</span>, <span class='op'>|</span><span class='kw-2'>mut</span> <span class='ident'>cl</span><span class='op'>|</span> {
                 <span class='ident'>cl</span>.<span class='ident'>set_tags</span>(<span class='kw-2'>&amp;</span>[$(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>tag</span>),<span class='op'>*</span>]);
                 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>print</span>(<span class='ident'>c</span>, <span class='ident'>s</span>));
-                <span class='comment'>// TODO: optimize for cases, where current tags are present</span>
+                <span class='comment'>// TODO: optimize for cases where current tags are present</span>
                 <span class='ident'>WmCommand</span>::<span class='ident'>Redraw</span>
             }))
             .<span class='ident'>unwrap_or</span>(<span class='ident'>WmCommand</span>::<span class='ident'>NoCommand</span>)
@@ -681,16 +682,15 @@
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>edit_layout</span> {
     ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>cmd</span>:<span class='ident'>expr</span>),<span class='op'>*</span>;; <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>print</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {
-        <span class='op'>|</span>_, <span class='ident'>s</span><span class='op'>|</span> <span class='ident'>s</span>
-            .<span class='ident'>current_mut</span>()
-            .<span class='ident'>map_or</span>(<span class='ident'>WmCommand</span>::<span class='ident'>NoCommand</span>, <span class='op'>|</span><span class='ident'>t</span><span class='op'>|</span> {
-                <span class='kw'>if</span> <span class='ident'>t</span>.<span class='ident'>layout</span>.<span class='ident'>edit_layout_retry</span>(<span class='macro'>vec</span><span class='macro'>!</span>[$(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>cmd</span>,)<span class='op'>*</span>]) {
-                    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>print</span>(<span class='ident'>c</span>, <span class='ident'>s</span>));
-                    <span class='ident'>WmCommand</span>::<span class='ident'>Redraw</span>
-                } <span class='kw'>else</span> {
-                    <span class='ident'>WmCommand</span>::<span class='ident'>NoCommand</span>
-                }
-            })
+        <span class='op'>|</span><span class='ident'>c</span>, <span class='ident'>s</span><span class='op'>|</span>
+            <span class='kw'>if</span> <span class='ident'>s</span>.<span class='ident'>current_mut</span>()
+                .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>t</span><span class='op'>|</span> <span class='ident'>t</span>.<span class='ident'>layout</span>.<span class='ident'>edit_layout_retry</span>(<span class='macro'>vec</span><span class='macro'>!</span>[$(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>cmd</span>,)<span class='op'>*</span>]))
+                <span class='op'>==</span> <span class='prelude-val'>Some</span>(<span class='bool-val'>true</span>) {
+                <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>print</span>(<span class='ident'>c</span>, <span class='ident'>s</span>));
+                <span class='ident'>WmCommand</span>::<span class='ident'>Redraw</span>
+            } <span class='kw'>else</span> {
+                <span class='ident'>WmCommand</span>::<span class='ident'>NoCommand</span>
+            }
     };
     ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>cmd</span>:<span class='ident'>expr</span>),<span class='op'>*</span> $(; <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>print</span>:<span class='ident'>expr</span>)<span class='op'>*</span>) <span class='op'>=&gt;</span> {
         <span class='op'>|</span>_, <span class='ident'>s</span><span class='op'>|</span> <span class='ident'>s</span>

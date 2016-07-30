@@ -267,6 +267,36 @@
 <span id="223">223</span>
 <span id="224">224</span>
 <span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
+<span id="230">230</span>
+<span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
+<span id="240">240</span>
+<span id="241">241</span>
+<span id="242">242</span>
+<span id="243">243</span>
+<span id="244">244</span>
+<span id="245">245</span>
+<span id="246">246</span>
+<span id="247">247</span>
+<span id="248">248</span>
+<span id="249">249</span>
+<span id="250">250</span>
+<span id="251">251</span>
+<span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! # Configuration module for gabelstaplerwm</span>
 <span class='doccomment'>//! This module is intended to be edited by the user in order to customize</span>
@@ -278,12 +308,14 @@
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! * don&#39;t need them to customize your wm.</span>
 <span class='doccomment'>//! * should consider contributing your changes back instead, as it seems to be</span>
-<span class='doccomment'>//!   a more involved and complex feature.</span>
+<span class='doccomment'>//!   a more involved and complex feature that you are working on.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! But feel free to do otherwise if you wish.</span>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
+
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>process</span>::<span class='ident'>Command</span>;
 
-<span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>client</span>::{<span class='ident'>TagSet</span>, <span class='ident'>TagStack</span>, <span class='ident'>ClientSet</span>};
+<span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>client</span>::{<span class='ident'>TagSet</span>, <span class='ident'>TagStack</span>, <span class='ident'>ClientSet</span>, <span class='ident'>current_tagset</span>};
 <span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>kbd</span>::<span class='op'>*</span>;
 
 <span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>layout</span>::{<span class='ident'>ScreenSize</span>,<span class='ident'>LayoutMessage</span>};
@@ -328,6 +360,22 @@
     }
 }
 
+<span class='kw'>impl</span> <span class='ident'>fmt</span>::<span class='ident'>Display</span> <span class='kw'>for</span> <span class='ident'>Tag</span> {
+    <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
+        <span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;{}&quot;</span>, <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
+            <span class='ident'>Tag</span>::<span class='ident'>Web</span> <span class='op'>=&gt;</span> <span class='string'>&quot;web&quot;</span>,
+            <span class='ident'>Tag</span>::<span class='ident'>Work2</span> <span class='op'>=&gt;</span> <span class='string'>&quot;work2&quot;</span>,
+            <span class='ident'>Tag</span>::<span class='ident'>Work3</span> <span class='op'>=&gt;</span> <span class='string'>&quot;work3&quot;</span>,
+            <span class='ident'>Tag</span>::<span class='ident'>Work4</span> <span class='op'>=&gt;</span> <span class='string'>&quot;work4&quot;</span>,
+            <span class='ident'>Tag</span>::<span class='ident'>Work5</span> <span class='op'>=&gt;</span> <span class='string'>&quot;work5&quot;</span>,
+            <span class='ident'>Tag</span>::<span class='ident'>Media</span> <span class='op'>=&gt;</span> <span class='string'>&quot;media&quot;</span>,
+            <span class='ident'>Tag</span>::<span class='ident'>Chat</span> <span class='op'>=&gt;</span> <span class='string'>&quot;chat&quot;</span>,
+            <span class='ident'>Tag</span>::<span class='ident'>Logs</span> <span class='op'>=&gt;</span> <span class='string'>&quot;logs&quot;</span>,
+            <span class='ident'>Tag</span>::<span class='ident'>Mon</span> <span class='op'>=&gt;</span> <span class='string'>&quot;mon&quot;</span>,
+        })
+    }
+}
+
 <span class='doccomment'>/// All keyboard modes used by `gabelstaplerwm`-</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// A mode represents the active set of keybindings and/or their functionality.</span>
@@ -338,7 +386,9 @@
 <span class='doccomment'>/// Be aware that currently, `gabelstaplerwm` grabs the key combinations</span>
 <span class='doccomment'>/// globally during setup. This allows for overlapping keybindings in different</span>
 <span class='doccomment'>/// modes, but passing a key combination once grabbed to apps depending on mode</span>
-<span class='doccomment'>/// is currently impossible.</span>
+<span class='doccomment'>/// is currently impossible. This can be lifted in the future, if we decide to</span>
+<span class='doccomment'>/// regrab on every mode change, but that&#39;s a rather expensive operation, given</span>
+<span class='doccomment'>/// the currrent, `HashMap`-based design.</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Hash</span>, <span class='ident'>Eq</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>, <span class='ident'>Copy</span>, <span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>Mode</span> {
     <span class='doccomment'>/// normal mode doing normal stuff</span>
@@ -359,14 +409,14 @@
 <span class='doccomment'>/// See the docs for `ScreenSize` for more information.</span>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>generate_config</span>() <span class='op'>-&gt;</span> <span class='ident'>WmConfig</span> {
     <span class='ident'>WmConfig</span> {
-        <span class='ident'>f_color</span>: (<span class='number'>0x5353</span>, <span class='number'>0x5d5d</span>, <span class='number'>0x6c6c</span>),
-        <span class='ident'>u_color</span>: (<span class='number'>0x0000</span>, <span class='number'>0x0000</span>, <span class='number'>0x0000</span>),
+        <span class='ident'>f_color</span>: (<span class='number'>0x5353</span>, <span class='number'>0x5d5d</span>, <span class='number'>0x6c6c</span>), <span class='comment'>// this is #535d6c</span>
+        <span class='ident'>u_color</span>: (<span class='number'>0x0000</span>, <span class='number'>0x0000</span>, <span class='number'>0x0000</span>), <span class='comment'>// and this is #000000</span>
         <span class='ident'>border_width</span>: <span class='number'>1</span>,
         <span class='ident'>screen</span>: <span class='ident'>ScreenSize</span> {
             <span class='ident'>offset_x</span>: <span class='number'>0</span>,
             <span class='ident'>offset_y</span>: <span class='number'>20</span>,
-            <span class='ident'>width</span>: <span class='number'>800</span>,
-            <span class='ident'>height</span>: <span class='number'>600</span>,
+            <span class='ident'>width</span>: <span class='number'>800</span>,  <span class='comment'>// defaults reasonable for Xephyr,</span>
+            <span class='ident'>height</span>: <span class='number'>600</span>, <span class='comment'>// change to adjust to a real screen</span>
         },
     }
 }
@@ -379,15 +429,15 @@
     <span class='kw'>let</span> <span class='ident'>modkey</span> <span class='op'>=</span> <span class='ident'>ALTGR</span>;
     <span class='ident'>wm</span>.<span class='ident'>setup_bindings</span>(<span class='macro'>vec</span><span class='macro'>!</span>[
         <span class='comment'>// focus single-digit-tagset</span>
-        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>10</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>push_tagset</span><span class='macro'>!</span>(<span class='number'>0</span>)),
-        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>11</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>push_tagset</span><span class='macro'>!</span>(<span class='number'>1</span>)),
-        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>12</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>push_tagset</span><span class='macro'>!</span>(<span class='number'>2</span>)),
-        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>13</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>push_tagset</span><span class='macro'>!</span>(<span class='number'>3</span>)),
-        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>14</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>push_tagset</span><span class='macro'>!</span>(<span class='number'>4</span>)),
-        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>15</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>push_tagset</span><span class='macro'>!</span>(<span class='number'>5</span>)),
-        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>16</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>push_tagset</span><span class='macro'>!</span>(<span class='number'>6</span>)),
-        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>17</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>push_tagset</span><span class='macro'>!</span>(<span class='number'>7</span>)),
-        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>18</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>push_tagset</span><span class='macro'>!</span>(<span class='number'>8</span>)),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>10</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>push_tagset</span><span class='macro'>!</span>(<span class='number'>0</span>;; <span class='ident'>current_tagset</span>)),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>11</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>push_tagset</span><span class='macro'>!</span>(<span class='number'>1</span>;; <span class='ident'>current_tagset</span>)),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>12</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>push_tagset</span><span class='macro'>!</span>(<span class='number'>2</span>;; <span class='ident'>current_tagset</span>)),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>13</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>push_tagset</span><span class='macro'>!</span>(<span class='number'>3</span>;; <span class='ident'>current_tagset</span>)),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>14</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>push_tagset</span><span class='macro'>!</span>(<span class='number'>4</span>;; <span class='ident'>current_tagset</span>)),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>15</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>push_tagset</span><span class='macro'>!</span>(<span class='number'>5</span>;; <span class='ident'>current_tagset</span>)),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>16</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>push_tagset</span><span class='macro'>!</span>(<span class='number'>6</span>;; <span class='ident'>current_tagset</span>)),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>17</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>push_tagset</span><span class='macro'>!</span>(<span class='number'>7</span>;; <span class='ident'>current_tagset</span>)),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>18</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>push_tagset</span><span class='macro'>!</span>(<span class='number'>8</span>;; <span class='ident'>current_tagset</span>)),
         <span class='comment'>// toggle tags on current client</span>
         <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>10</span>, <span class='ident'>modkey</span><span class='op'>+</span><span class='ident'>CTRL</span><span class='op'>+</span><span class='ident'>SHIFT</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>toggle_tag</span><span class='macro'>!</span>(<span class='ident'>Tag</span>::<span class='ident'>Web</span>)),
         <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>11</span>, <span class='ident'>modkey</span><span class='op'>+</span><span class='ident'>CTRL</span><span class='op'>+</span><span class='ident'>SHIFT</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>toggle_tag</span><span class='macro'>!</span>(<span class='ident'>Tag</span>::<span class='ident'>Work2</span>)),
@@ -432,8 +482,9 @@
         <span class='comment'>// quit the window manager</span>
         <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>24</span>, <span class='ident'>modkey</span><span class='op'>+</span><span class='ident'>CTRL</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='op'>|</span>_, _<span class='op'>|</span> <span class='ident'>WmCommand</span>::<span class='ident'>Quit</span>),
         <span class='comment'>// go back in tagset history</span>
-        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>42</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='op'>|</span>_, <span class='ident'>s</span><span class='op'>|</span> {
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>42</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='op'>|</span><span class='ident'>c</span>, <span class='ident'>s</span><span class='op'>|</span> {
             <span class='kw'>if</span> <span class='ident'>s</span>.<span class='ident'>view_prev</span>() {
+                <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>current_tagset</span>(<span class='ident'>c</span>, <span class='ident'>s</span>));
                 <span class='ident'>WmCommand</span>::<span class='ident'>Redraw</span>
             } <span class='kw'>else</span> {
                 <span class='ident'>WmCommand</span>::<span class='ident'>NoCommand</span>
@@ -458,15 +509,24 @@
         <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>36</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Setup</span>, <span class='op'>|</span>_, _<span class='op'>|</span>
               <span class='ident'>WmCommand</span>::<span class='ident'>ModeSwitch</span>(<span class='ident'>Mode</span>::<span class='ident'>Normal</span>)),
         <span class='comment'>// toggle tags on current tagset</span>
-        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>10</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Setup</span>, <span class='macro'>toggle_show_tag</span><span class='macro'>!</span>(<span class='ident'>Tag</span>::<span class='ident'>Web</span>)),
-        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>11</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Setup</span>, <span class='macro'>toggle_show_tag</span><span class='macro'>!</span>(<span class='ident'>Tag</span>::<span class='ident'>Work2</span>)),
-        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>12</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Setup</span>, <span class='macro'>toggle_show_tag</span><span class='macro'>!</span>(<span class='ident'>Tag</span>::<span class='ident'>Work3</span>)),
-        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>13</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Setup</span>, <span class='macro'>toggle_show_tag</span><span class='macro'>!</span>(<span class='ident'>Tag</span>::<span class='ident'>Work4</span>)),
-        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>14</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Setup</span>, <span class='macro'>toggle_show_tag</span><span class='macro'>!</span>(<span class='ident'>Tag</span>::<span class='ident'>Work5</span>)),
-        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>15</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Setup</span>, <span class='macro'>toggle_show_tag</span><span class='macro'>!</span>(<span class='ident'>Tag</span>::<span class='ident'>Media</span>)),
-        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>16</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Setup</span>, <span class='macro'>toggle_show_tag</span><span class='macro'>!</span>(<span class='ident'>Tag</span>::<span class='ident'>Chat</span>)),
-        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>17</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Setup</span>, <span class='macro'>toggle_show_tag</span><span class='macro'>!</span>(<span class='ident'>Tag</span>::<span class='ident'>Logs</span>)),
-        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>18</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Setup</span>, <span class='macro'>toggle_show_tag</span><span class='macro'>!</span>(<span class='ident'>Tag</span>::<span class='ident'>Mon</span>)),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>10</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Setup</span>,
+              <span class='macro'>toggle_show_tag</span><span class='macro'>!</span>(<span class='ident'>Tag</span>::<span class='ident'>Web</span>;; <span class='ident'>current_tagset</span>)),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>11</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Setup</span>,
+              <span class='macro'>toggle_show_tag</span><span class='macro'>!</span>(<span class='ident'>Tag</span>::<span class='ident'>Work2</span>;; <span class='ident'>current_tagset</span>)),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>12</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Setup</span>,
+              <span class='macro'>toggle_show_tag</span><span class='macro'>!</span>(<span class='ident'>Tag</span>::<span class='ident'>Work3</span>;; <span class='ident'>current_tagset</span>)),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>13</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Setup</span>,
+              <span class='macro'>toggle_show_tag</span><span class='macro'>!</span>(<span class='ident'>Tag</span>::<span class='ident'>Work4</span>;; <span class='ident'>current_tagset</span>)),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>14</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Setup</span>,
+              <span class='macro'>toggle_show_tag</span><span class='macro'>!</span>(<span class='ident'>Tag</span>::<span class='ident'>Work5</span>;; <span class='ident'>current_tagset</span>)),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>15</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Setup</span>,
+              <span class='macro'>toggle_show_tag</span><span class='macro'>!</span>(<span class='ident'>Tag</span>::<span class='ident'>Media</span>;; <span class='ident'>current_tagset</span>)),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>16</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Setup</span>,
+              <span class='macro'>toggle_show_tag</span><span class='macro'>!</span>(<span class='ident'>Tag</span>::<span class='ident'>Chat</span>;; <span class='ident'>current_tagset</span>)),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>17</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Setup</span>,
+              <span class='macro'>toggle_show_tag</span><span class='macro'>!</span>(<span class='ident'>Tag</span>::<span class='ident'>Logs</span>;; <span class='ident'>current_tagset</span>)),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>18</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Setup</span>,
+              <span class='macro'>toggle_show_tag</span><span class='macro'>!</span>(<span class='ident'>Tag</span>::<span class='ident'>Mon</span>;; <span class='ident'>current_tagset</span>)),
     ]);
     <span class='comment'>// default tag stack</span>
     <span class='ident'>wm</span>.<span class='ident'>setup_tags</span>(
