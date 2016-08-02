@@ -702,6 +702,7 @@
 <span id="658">658</span>
 <span id="659">659</span>
 <span id="660">660</span>
+<span id="661">661</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>c_char</span>;
 
@@ -816,7 +817,8 @@
             <span class='kw'>let</span> <span class='ident'>width</span> <span class='op'>=</span> <span class='ident'>screen</span>.<span class='ident'>width_in_pixels</span>();
             <span class='kw'>let</span> <span class='ident'>height</span> <span class='op'>=</span> <span class='ident'>screen</span>.<span class='ident'>height_in_pixels</span>();
             <span class='kw'>let</span> <span class='ident'>colormap</span> <span class='op'>=</span> <span class='ident'>screen</span>.<span class='ident'>default_colormap</span>();
-            <span class='kw'>let</span> <span class='ident'>new_screen</span> <span class='op'>=</span> <span class='ident'>ScreenSize</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='ident'>config</span>.<span class='ident'>screen</span>, <span class='ident'>width</span>, <span class='ident'>height</span>);
+            <span class='kw'>let</span> <span class='ident'>new_screen</span> <span class='op'>=</span>
+                <span class='ident'>ScreenSize</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='ident'>config</span>.<span class='ident'>screen</span>, <span class='ident'>width</span> <span class='kw'>as</span> <span class='ident'>u32</span>, <span class='ident'>height</span> <span class='kw'>as</span> <span class='ident'>u32</span>);
             <span class='kw'>match</span> <span class='ident'>Wm</span>::<span class='ident'>get_atoms</span>(<span class='ident'>con</span>, <span class='kw-2'>&amp;</span><span class='ident'>ATOM_VEC</span>) {
                 <span class='prelude-val'>Ok</span>(<span class='ident'>atoms</span>) <span class='op'>=&gt;</span> {
                     <span class='prelude-val'>Ok</span>(<span class='ident'>Wm</span> {

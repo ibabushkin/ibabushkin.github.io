@@ -128,9 +128,9 @@
 <span class='doccomment'>/// at first.</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Monocle</span> {
     <span class='doccomment'>/// x offset of master window (symmetric)</span>
-    <span class='kw'>pub</span> <span class='ident'>offset_x</span>: <span class='ident'>u16</span>,
+    <span class='kw'>pub</span> <span class='ident'>offset_x</span>: <span class='ident'>u32</span>,
     <span class='doccomment'>/// y offset of master window (symmetric)</span>
-    <span class='kw'>pub</span> <span class='ident'>offset_y</span>: <span class='ident'>u16</span>,
+    <span class='kw'>pub</span> <span class='ident'>offset_y</span>: <span class='ident'>u32</span>,
 }
 
 <span class='kw'>impl</span> <span class='ident'>Default</span> <span class='kw'>for</span> <span class='ident'>Monocle</span> {
@@ -183,13 +183,13 @@
             <span class='ident'>LayoutMessage</span>::<span class='ident'>XOffAbs</span>(<span class='ident'>x</span>) <span class='op'>=&gt;</span> <span class='self'>self</span>.<span class='ident'>offset_x</span> <span class='op'>=</span> <span class='ident'>x</span>,
             <span class='ident'>LayoutMessage</span>::<span class='ident'>XOffRel</span>(<span class='ident'>x</span>) <span class='op'>=&gt;</span>
                 <span class='self'>self</span>.<span class='ident'>offset_x</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>x</span> <span class='op'>&lt;</span> <span class='number'>0</span> {
-                    <span class='self'>self</span>.<span class='ident'>offset_x</span>.<span class='ident'>saturating_sub</span>(<span class='ident'>x</span>.<span class='ident'>abs</span>() <span class='kw'>as</span> <span class='ident'>u16</span>)
-                } <span class='kw'>else</span> { <span class='self'>self</span>.<span class='ident'>offset_x</span>.<span class='ident'>saturating_add</span>(<span class='ident'>x</span>.<span class='ident'>abs</span>() <span class='kw'>as</span> <span class='ident'>u16</span>) },
+                    <span class='self'>self</span>.<span class='ident'>offset_x</span>.<span class='ident'>saturating_sub</span>(<span class='ident'>x</span>.<span class='ident'>abs</span>() <span class='kw'>as</span> <span class='ident'>u32</span>)
+                } <span class='kw'>else</span> { <span class='self'>self</span>.<span class='ident'>offset_x</span>.<span class='ident'>saturating_add</span>(<span class='ident'>x</span>.<span class='ident'>abs</span>() <span class='kw'>as</span> <span class='ident'>u32</span>) },
             <span class='ident'>LayoutMessage</span>::<span class='ident'>YOffAbs</span>(<span class='ident'>y</span>) <span class='op'>=&gt;</span> <span class='self'>self</span>.<span class='ident'>offset_y</span> <span class='op'>=</span> <span class='ident'>y</span>,
             <span class='ident'>LayoutMessage</span>::<span class='ident'>YOffRel</span>(<span class='ident'>y</span>) <span class='op'>=&gt;</span>
                 <span class='self'>self</span>.<span class='ident'>offset_y</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>y</span> <span class='op'>&lt;</span> <span class='number'>0</span> {
-                    <span class='self'>self</span>.<span class='ident'>offset_y</span>.<span class='ident'>saturating_sub</span>(<span class='ident'>y</span>.<span class='ident'>abs</span>() <span class='kw'>as</span> <span class='ident'>u16</span>)
-                } <span class='kw'>else</span> { <span class='self'>self</span>.<span class='ident'>offset_y</span>.<span class='ident'>saturating_add</span>(<span class='ident'>y</span>.<span class='ident'>abs</span>() <span class='kw'>as</span> <span class='ident'>u16</span>) },
+                    <span class='self'>self</span>.<span class='ident'>offset_y</span>.<span class='ident'>saturating_sub</span>(<span class='ident'>y</span>.<span class='ident'>abs</span>() <span class='kw'>as</span> <span class='ident'>u32</span>)
+                } <span class='kw'>else</span> { <span class='self'>self</span>.<span class='ident'>offset_y</span>.<span class='ident'>saturating_add</span>(<span class='ident'>y</span>.<span class='ident'>abs</span>() <span class='kw'>as</span> <span class='ident'>u32</span>) },
             _ <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='bool-val'>false</span>,
         };
         <span class='bool-val'>true</span>

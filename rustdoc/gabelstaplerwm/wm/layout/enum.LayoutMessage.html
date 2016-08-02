@@ -47,16 +47,16 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-1277' class='srclink' href='../../../src/gabelstaplerwm/src/wm/layout/mod.rs.html#96-117' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-1280' class='srclink' href='../../../src/gabelstaplerwm/src/wm/layout/mod.rs.html#96-117' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum LayoutMessage {
     MasterFactorAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>),
     MasterFactorRel(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i8.html'>i8</a>),
     FixedAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>),
     FixedRel,
-    XOffAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>),
-    XOffRel(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a>),
-    YOffAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>),
-    YOffRel(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a>),
+    XOffAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>),
+    XOffRel(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>),
+    YOffAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>),
+    YOffRel(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>),
     ColumnAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>),
     ColumnRel(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i8.html'>i8</a>),
 }</pre><div class='docblock'><p>A message type being sent to layout objects.</p>
@@ -69,10 +69,10 @@ to any subset of the message variants below, or none at all.</p>
 </div><span id='variant.MasterFactorRel' class='variant'><code>MasterFactorRel(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i8.html'>i8</a>)</code></span><div class='docblock'><p>Add an offset to the master factor.</p>
 </div><span id='variant.FixedAbs' class='variant'><code>FixedAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></span><div class='docblock'><p>Set <code>fixed</code> attribute of layout.</p>
 </div><span id='variant.FixedRel' class='variant'><code>FixedRel</code></span><div class='docblock'><p>Toggle <code>fixed</code> attrbute of layout.</p>
-</div><span id='variant.XOffAbs' class='variant'><code>XOffAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>)</code></span><div class='docblock'><p>Set absolute value of the x offset.</p>
-</div><span id='variant.XOffRel' class='variant'><code>XOffRel(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a>)</code></span><div class='docblock'><p>Add an offset to the x offset.</p>
-</div><span id='variant.YOffAbs' class='variant'><code>YOffAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>)</code></span><div class='docblock'><p>Set absolute value of the y offset.</p>
-</div><span id='variant.YOffRel' class='variant'><code>YOffRel(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a>)</code></span><div class='docblock'><p>Add an offset to the y offset.</p>
+</div><span id='variant.XOffAbs' class='variant'><code>XOffAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>)</code></span><div class='docblock'><p>Set absolute value of the x offset.</p>
+</div><span id='variant.XOffRel' class='variant'><code>XOffRel(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>)</code></span><div class='docblock'><p>Add an offset to the x offset.</p>
+</div><span id='variant.YOffAbs' class='variant'><code>YOffAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>)</code></span><div class='docblock'><p>Set absolute value of the y offset.</p>
+</div><span id='variant.YOffRel' class='variant'><code>YOffRel(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>)</code></span><div class='docblock'><p>Add an offset to the y offset.</p>
 </div><span id='variant.ColumnAbs' class='variant'><code>ColumnAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>)</code></span><div class='docblock'><p>Set absolute value of the column amount.</p>
 </div><span id='variant.ColumnRel' class='variant'><code>ColumnRel(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i8.html'>i8</a>)</code></span><div class='docblock'><p>Add an offset to the column amount.</p>
 </div></section>

@@ -519,7 +519,6 @@
 <span id="475">475</span>
 <span id="476">476</span>
 <span id="477">477</span>
-<span id="478">478</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>layout</span>::<span class='op'>*</span>;
 
@@ -560,7 +559,7 @@
         <span class='kw'>let</span> <span class='ident'>master_width</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>master_factor</span> <span class='op'>&gt;=</span> <span class='number'>100</span> {
             <span class='ident'>screen</span>.<span class='ident'>width</span>
         } <span class='kw'>else</span> {
-            <span class='self'>self</span>.<span class='ident'>master_factor</span> <span class='kw'>as</span> <span class='ident'>u16</span> <span class='op'>*</span> <span class='ident'>screen</span>.<span class='ident'>width</span> <span class='op'>/</span> <span class='number'>100</span>
+            <span class='self'>self</span>.<span class='ident'>master_factor</span> <span class='kw'>as</span> <span class='ident'>u32</span> <span class='op'>*</span> <span class='ident'>screen</span>.<span class='ident'>width</span> <span class='op'>/</span> <span class='number'>100</span>
         };
         <span class='kw'>if</span> <span class='ident'>num_windows</span> <span class='op'>==</span> <span class='number'>1</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='self'>self</span>.<span class='ident'>fixed</span> {
             <span class='comment'>// one window only - fullscreen</span>
@@ -568,36 +567,36 @@
                 <span class='ident'>x</span>: <span class='ident'>screen</span>.<span class='ident'>offset_x</span>,
                 <span class='ident'>y</span>: <span class='ident'>screen</span>.<span class='ident'>offset_y</span>,
                 <span class='ident'>width</span>: <span class='ident'>screen</span>.<span class='ident'>width</span>,
-                <span class='ident'>height</span>: <span class='ident'>screen</span>.<span class='ident'>height</span> <span class='op'>-</span> <span class='number'>2</span>,
+                <span class='ident'>height</span>: <span class='ident'>screen</span>.<span class='ident'>height</span>.<span class='ident'>saturating_sub</span>(<span class='number'>2</span>),
             }));
         } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>num_windows</span> <span class='op'>&gt;</span> <span class='number'>1</span> {
             <span class='kw'>let</span> <span class='ident'>slave_width</span> <span class='op'>=</span> (<span class='ident'>screen</span>.<span class='ident'>width</span> <span class='op'>-</span> <span class='ident'>master_width</span>) <span class='op'>/</span> <span class='number'>2</span>;
             <span class='comment'>// setup two slave stacks if needed</span>
-            <span class='kw'>let</span> (<span class='ident'>master_x</span>, <span class='ident'>slave_right_x</span>) <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>num_windows</span> <span class='op'>==</span> <span class='number'>2</span> <span class='op'>&amp;&amp;</span>
-                                               <span class='op'>!</span><span class='self'>self</span>.<span class='ident'>fixed</span> {
-                (<span class='number'>0</span>, <span class='ident'>master_width</span>) <span class='comment'>// no left stack - no shift</span>
-            } <span class='kw'>else</span> {
-                <span class='comment'>// shift master + right stack</span>
-                (<span class='ident'>slave_width</span>, <span class='ident'>slave_width</span> <span class='op'>+</span> <span class='ident'>master_width</span>)
-            };
+            <span class='kw'>let</span> (<span class='ident'>master_x</span>, <span class='ident'>slave_right_x</span>) <span class='op'>=</span>
+                <span class='kw'>if</span> <span class='ident'>num_windows</span> <span class='op'>==</span> <span class='number'>2</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='self'>self</span>.<span class='ident'>fixed</span> {
+                    (<span class='number'>0</span>, <span class='ident'>master_width</span>) <span class='comment'>// no left stack - no shift</span>
+                } <span class='kw'>else</span> {
+                    <span class='comment'>// shift master + right stack</span>
+                    (<span class='ident'>slave_width</span>, <span class='ident'>slave_width</span> <span class='op'>+</span> <span class='ident'>master_width</span>)
+                };
             <span class='comment'>// master window</span>
             <span class='ident'>res</span>.<span class='ident'>push</span>(<span class='prelude-val'>Some</span>(<span class='ident'>Geometry</span> {
                 <span class='ident'>x</span>: <span class='ident'>master_x</span> <span class='op'>+</span> <span class='ident'>screen</span>.<span class='ident'>offset_x</span>,
                 <span class='ident'>y</span>: <span class='ident'>screen</span>.<span class='ident'>offset_y</span>,
-                <span class='ident'>width</span>: <span class='ident'>master_width</span> <span class='op'>-</span> <span class='number'>2</span>,
-                <span class='ident'>height</span>: <span class='ident'>screen</span>.<span class='ident'>height</span> <span class='op'>-</span> <span class='number'>2</span>,
+                <span class='ident'>width</span>: <span class='ident'>master_width</span>.<span class='ident'>saturating_sub</span>(<span class='number'>2</span>),
+                <span class='ident'>height</span>: <span class='ident'>screen</span>.<span class='ident'>height</span>.<span class='ident'>saturating_sub</span>(<span class='number'>2</span>),
             }));
             <span class='comment'>// num_left_slaves &lt;= num_right_slaves</span>
             <span class='kw'>let</span> <span class='ident'>num_left_slaves</span> <span class='op'>=</span> (<span class='ident'>num_windows</span> <span class='op'>-</span> <span class='number'>1</span>) <span class='op'>/</span> <span class='number'>2</span>;
             <span class='kw'>if</span> <span class='ident'>num_left_slaves</span> <span class='op'>&gt;</span> <span class='number'>0</span> {
-                <span class='kw'>let</span> <span class='ident'>slave_height_left</span> <span class='op'>=</span> <span class='ident'>screen</span>.<span class='ident'>height</span> <span class='op'>/</span> <span class='ident'>num_left_slaves</span> <span class='kw'>as</span> <span class='ident'>u16</span>;
+                <span class='kw'>let</span> <span class='ident'>slave_height_left</span> <span class='op'>=</span> <span class='ident'>screen</span>.<span class='ident'>height</span> <span class='op'>/</span> <span class='ident'>num_left_slaves</span> <span class='kw'>as</span> <span class='ident'>u32</span>;
                 <span class='comment'>// slave windows - left stack</span>
                 <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='ident'>num_left_slaves</span> {
                     <span class='ident'>res</span>.<span class='ident'>push</span>(<span class='prelude-val'>Some</span>(<span class='ident'>Geometry</span> {
                         <span class='ident'>x</span>: <span class='ident'>screen</span>.<span class='ident'>offset_x</span>,
-                        <span class='ident'>y</span>: <span class='ident'>i</span> <span class='kw'>as</span> <span class='ident'>u16</span> <span class='op'>*</span> <span class='ident'>slave_height_left</span> <span class='op'>+</span> <span class='ident'>screen</span>.<span class='ident'>offset_y</span>,
-                        <span class='ident'>height</span>: <span class='ident'>slave_height_left</span> <span class='op'>-</span> <span class='number'>2</span>,
-                        <span class='ident'>width</span>: <span class='ident'>slave_width</span> <span class='op'>-</span> <span class='number'>2</span>,
+                        <span class='ident'>y</span>: <span class='ident'>i</span> <span class='kw'>as</span> <span class='ident'>u32</span> <span class='op'>*</span> <span class='ident'>slave_height_left</span> <span class='op'>+</span> <span class='ident'>screen</span>.<span class='ident'>offset_y</span>,
+                        <span class='ident'>height</span>: <span class='ident'>slave_height_left</span>.<span class='ident'>saturating_sub</span>(<span class='number'>2</span>),
+                        <span class='ident'>width</span>: <span class='ident'>slave_width</span>.<span class='ident'>saturating_sub</span>(<span class='number'>2</span>),
                     }));
                 }
             }
@@ -605,8 +604,8 @@
             <span class='kw'>if</span> <span class='ident'>num_right_slaves</span> <span class='op'>&gt;</span> <span class='number'>0</span> {
                 <span class='comment'>// if no left stack is present, the right</span>
                 <span class='comment'>// stack can be made wider to avoid wasting space</span>
-                <span class='kw'>let</span> <span class='ident'>slave_height_right</span> <span class='op'>=</span> <span class='ident'>screen</span>.<span class='ident'>height</span> <span class='op'>/</span>
-                                         <span class='ident'>num_right_slaves</span> <span class='kw'>as</span> <span class='ident'>u16</span>;
+                <span class='kw'>let</span> <span class='ident'>slave_height_right</span> <span class='op'>=</span>
+                    <span class='ident'>screen</span>.<span class='ident'>height</span> <span class='op'>/</span> <span class='ident'>num_right_slaves</span> <span class='kw'>as</span> <span class='ident'>u32</span>;
                 <span class='kw'>let</span> <span class='ident'>width</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>num_left_slaves</span> <span class='op'>==</span> <span class='number'>0</span> {
                     <span class='ident'>screen</span>.<span class='ident'>width</span> <span class='op'>-</span> <span class='ident'>master_width</span>
                 } <span class='kw'>else</span> {
@@ -616,9 +615,9 @@
                 <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>0</span>..<span class='ident'>num_right_slaves</span> {
                     <span class='ident'>res</span>.<span class='ident'>push</span>(<span class='prelude-val'>Some</span>(<span class='ident'>Geometry</span> {
                         <span class='ident'>x</span>: <span class='ident'>slave_right_x</span> <span class='op'>+</span> <span class='ident'>screen</span>.<span class='ident'>offset_x</span>,
-                        <span class='ident'>y</span>: <span class='ident'>i</span> <span class='kw'>as</span> <span class='ident'>u16</span> <span class='op'>*</span> <span class='ident'>slave_height_right</span> <span class='op'>+</span> <span class='ident'>screen</span>.<span class='ident'>offset_y</span>,
-                        <span class='ident'>height</span>: <span class='ident'>slave_height_right</span> <span class='op'>-</span> <span class='number'>2</span>,
-                        <span class='ident'>width</span>: <span class='ident'>width</span> <span class='op'>-</span> <span class='number'>2</span>,
+                        <span class='ident'>y</span>: <span class='ident'>i</span> <span class='kw'>as</span> <span class='ident'>u32</span> <span class='op'>*</span> <span class='ident'>slave_height_right</span> <span class='op'>+</span> <span class='ident'>screen</span>.<span class='ident'>offset_y</span>,
+                        <span class='ident'>height</span>: <span class='ident'>slave_height_right</span>.<span class='ident'>saturating_sub</span>(<span class='number'>2</span>),
+                        <span class='ident'>width</span>: <span class='ident'>width</span>.<span class='ident'>saturating_sub</span>(<span class='number'>2</span>),
                     }));
                 }
             }
@@ -687,12 +686,13 @@
     <span class='kw'>fn</span> <span class='ident'>edit_layout</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>msg</span>: <span class='ident'>LayoutMessage</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>match</span> <span class='ident'>msg</span> {
             <span class='ident'>LayoutMessage</span>::<span class='ident'>MasterFactorAbs</span>(<span class='ident'>mf</span>) <span class='op'>=&gt;</span>
-                <span class='self'>self</span>.<span class='ident'>master_factor</span> <span class='op'>=</span> <span class='ident'>mf</span> <span class='op'>%</span> <span class='number'>100</span>,
+                <span class='self'>self</span>.<span class='ident'>master_factor</span> <span class='op'>=</span> <span class='ident'>mf</span> <span class='op'>%</span> <span class='number'>101</span>,
             <span class='ident'>LayoutMessage</span>::<span class='ident'>MasterFactorRel</span>(<span class='ident'>mf</span>) <span class='op'>=&gt;</span>
                 <span class='self'>self</span>.<span class='ident'>master_factor</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>mf</span> <span class='op'>&lt;</span> <span class='number'>0</span> {
                     <span class='self'>self</span>.<span class='ident'>master_factor</span>.<span class='ident'>saturating_sub</span>(<span class='ident'>mf</span>.<span class='ident'>abs</span>() <span class='kw'>as</span> <span class='ident'>u8</span>)
                 } <span class='kw'>else</span> {
-                    <span class='self'>self</span>.<span class='ident'>master_factor</span>.<span class='ident'>saturating_add</span>(<span class='ident'>mf</span>.<span class='ident'>abs</span>() <span class='kw'>as</span> <span class='ident'>u8</span>) <span class='op'>%</span> <span class='number'>100</span>
+                    <span class='kw'>let</span> <span class='ident'>m</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>master_factor</span>.<span class='ident'>saturating_add</span>(<span class='ident'>mf</span>.<span class='ident'>abs</span>() <span class='kw'>as</span> <span class='ident'>u8</span>);
+                    <span class='kw'>if</span> <span class='ident'>m</span> <span class='op'>&gt;</span> <span class='number'>100</span> { <span class='number'>100</span> } <span class='kw'>else</span> { <span class='ident'>m</span> }
                 },
             <span class='ident'>LayoutMessage</span>::<span class='ident'>FixedAbs</span>(<span class='ident'>f</span>) <span class='op'>=&gt;</span> <span class='self'>self</span>.<span class='ident'>fixed</span> <span class='op'>=</span> <span class='ident'>f</span>,
             <span class='ident'>LayoutMessage</span>::<span class='ident'>FixedRel</span> <span class='op'>=&gt;</span> <span class='self'>self</span>.<span class='ident'>fixed</span> <span class='op'>=</span> <span class='op'>!</span><span class='self'>self</span>.<span class='ident'>fixed</span>,
@@ -733,16 +733,14 @@
 }
 
 <span class='kw'>impl</span> <span class='ident'>Layout</span> <span class='kw'>for</span> <span class='ident'>HStack</span> {
-    <span class='kw'>fn</span> <span class='ident'>arrange</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>,
-               <span class='ident'>num_windows</span>: <span class='ident'>usize</span>,
-               <span class='ident'>screen</span>: <span class='kw-2'>&amp;</span><span class='ident'>ScreenSize</span>)
-               <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Geometry</span><span class='op'>&gt;&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>arrange</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>num_windows</span>: <span class='ident'>usize</span>, <span class='ident'>screen</span>: <span class='kw-2'>&amp;</span><span class='ident'>ScreenSize</span>)
+        <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Geometry</span><span class='op'>&gt;&gt;</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>with_capacity</span>(<span class='ident'>num_windows</span>);
         <span class='comment'>// set master window height, capping factor</span>
         <span class='kw'>let</span> <span class='ident'>master_height</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>master_factor</span> <span class='op'>&gt;=</span> <span class='number'>100</span> {
             <span class='ident'>screen</span>.<span class='ident'>height</span>
         } <span class='kw'>else</span> {
-            <span class='self'>self</span>.<span class='ident'>master_factor</span> <span class='kw'>as</span> <span class='ident'>u16</span> <span class='op'>*</span> <span class='ident'>screen</span>.<span class='ident'>height</span> <span class='op'>/</span> <span class='number'>100</span>
+            <span class='self'>self</span>.<span class='ident'>master_factor</span> <span class='kw'>as</span> <span class='ident'>u32</span> <span class='op'>*</span> <span class='ident'>screen</span>.<span class='ident'>height</span> <span class='op'>/</span> <span class='number'>100</span>
         };
         <span class='kw'>if</span> <span class='ident'>num_windows</span> <span class='op'>==</span> <span class='number'>1</span> {
             <span class='comment'>// one window only - fullscreen or fixed size</span>
@@ -755,7 +753,7 @@
                 <span class='ident'>x</span>: <span class='ident'>screen</span>.<span class='ident'>offset_x</span>,
                 <span class='ident'>y</span>: <span class='ident'>screen</span>.<span class='ident'>offset_y</span>,
                 <span class='ident'>width</span>: <span class='ident'>screen</span>.<span class='ident'>width</span>,
-                <span class='ident'>height</span>: <span class='ident'>h</span> <span class='op'>-</span> <span class='number'>2</span>,
+                <span class='ident'>height</span>: <span class='ident'>h</span>.<span class='ident'>saturating_sub</span>(<span class='number'>2</span>),
             }));
         } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>num_windows</span> <span class='op'>&gt;</span> <span class='number'>1</span> {
             <span class='comment'>// optionally swap stack and master area</span>
@@ -768,17 +766,17 @@
             <span class='ident'>res</span>.<span class='ident'>push</span>(<span class='prelude-val'>Some</span>(<span class='ident'>Geometry</span> {
                 <span class='ident'>x</span>: <span class='ident'>screen</span>.<span class='ident'>offset_x</span>,
                 <span class='ident'>y</span>: <span class='ident'>master_y</span> <span class='op'>+</span> <span class='ident'>screen</span>.<span class='ident'>offset_y</span>,
-                <span class='ident'>width</span>: <span class='ident'>screen</span>.<span class='ident'>width</span> <span class='op'>-</span> <span class='number'>2</span>,
-                <span class='ident'>height</span>: <span class='ident'>master_height</span> <span class='op'>-</span> <span class='number'>2</span>,
+                <span class='ident'>width</span>: <span class='ident'>screen</span>.<span class='ident'>width</span>.<span class='ident'>saturating_sub</span>(<span class='number'>2</span>),
+                <span class='ident'>height</span>: <span class='ident'>master_height</span>.<span class='ident'>saturating_sub</span>(<span class='number'>2</span>),
             }));
             <span class='comment'>// slave windows</span>
-            <span class='kw'>let</span> <span class='ident'>slave_width</span> <span class='op'>=</span> <span class='ident'>screen</span>.<span class='ident'>width</span> <span class='op'>/</span> (<span class='ident'>num_windows</span> <span class='kw'>as</span> <span class='ident'>u16</span> <span class='op'>-</span> <span class='number'>1</span>);
+            <span class='kw'>let</span> <span class='ident'>slave_width</span> <span class='op'>=</span> <span class='ident'>screen</span>.<span class='ident'>width</span> <span class='op'>/</span> (<span class='ident'>num_windows</span> <span class='kw'>as</span> <span class='ident'>u32</span> <span class='op'>-</span> <span class='number'>1</span>);
             <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>1</span>..<span class='ident'>num_windows</span> {
                 <span class='ident'>res</span>.<span class='ident'>push</span>(<span class='prelude-val'>Some</span>(<span class='ident'>Geometry</span> {
-                    <span class='ident'>x</span>: (<span class='ident'>i</span> <span class='kw'>as</span> <span class='ident'>u16</span> <span class='op'>-</span> <span class='number'>1</span>) <span class='op'>*</span> <span class='ident'>slave_width</span> <span class='op'>+</span> <span class='ident'>screen</span>.<span class='ident'>offset_x</span>,
+                    <span class='ident'>x</span>: (<span class='ident'>i</span> <span class='kw'>as</span> <span class='ident'>u32</span> <span class='op'>-</span> <span class='number'>1</span>) <span class='op'>*</span> <span class='ident'>slave_width</span> <span class='op'>+</span> <span class='ident'>screen</span>.<span class='ident'>offset_x</span>,
                     <span class='ident'>y</span>: <span class='ident'>slave_y</span> <span class='op'>+</span> <span class='ident'>screen</span>.<span class='ident'>offset_y</span>,
-                    <span class='ident'>width</span>: <span class='ident'>slave_width</span> <span class='op'>-</span> <span class='number'>2</span>,
-                    <span class='ident'>height</span>: <span class='ident'>screen</span>.<span class='ident'>height</span> <span class='op'>-</span> <span class='ident'>master_height</span> <span class='op'>-</span> <span class='number'>2</span>,
+                    <span class='ident'>width</span>: <span class='ident'>slave_width</span>.<span class='ident'>saturating_sub</span>(<span class='number'>2</span>),
+                    <span class='ident'>height</span>: (<span class='ident'>screen</span>.<span class='ident'>height</span> <span class='op'>-</span> <span class='ident'>master_height</span>).<span class='ident'>saturating_sub</span>(<span class='number'>2</span>),
                 }));
             }
         }
@@ -836,12 +834,13 @@
     <span class='kw'>fn</span> <span class='ident'>edit_layout</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>msg</span>: <span class='ident'>LayoutMessage</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>match</span> <span class='ident'>msg</span> {
             <span class='ident'>LayoutMessage</span>::<span class='ident'>MasterFactorAbs</span>(<span class='ident'>mf</span>) <span class='op'>=&gt;</span>
-                <span class='self'>self</span>.<span class='ident'>master_factor</span> <span class='op'>=</span> <span class='ident'>mf</span> <span class='op'>%</span> <span class='number'>100</span>,
+                <span class='self'>self</span>.<span class='ident'>master_factor</span> <span class='op'>=</span> <span class='ident'>mf</span> <span class='op'>%</span> <span class='number'>101</span>,
             <span class='ident'>LayoutMessage</span>::<span class='ident'>MasterFactorRel</span>(<span class='ident'>mf</span>) <span class='op'>=&gt;</span>
                 <span class='self'>self</span>.<span class='ident'>master_factor</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>mf</span> <span class='op'>&lt;</span> <span class='number'>0</span> {
                     <span class='self'>self</span>.<span class='ident'>master_factor</span>.<span class='ident'>saturating_sub</span>(<span class='ident'>mf</span>.<span class='ident'>abs</span>() <span class='kw'>as</span> <span class='ident'>u8</span>)
                 } <span class='kw'>else</span> {
-                    <span class='self'>self</span>.<span class='ident'>master_factor</span>.<span class='ident'>saturating_add</span>(<span class='ident'>mf</span>.<span class='ident'>abs</span>() <span class='kw'>as</span> <span class='ident'>u8</span>) <span class='op'>%</span> <span class='number'>100</span>
+                    <span class='kw'>let</span> <span class='ident'>m</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>master_factor</span>.<span class='ident'>saturating_add</span>(<span class='ident'>mf</span>.<span class='ident'>abs</span>() <span class='kw'>as</span> <span class='ident'>u8</span>);
+                    <span class='kw'>if</span> <span class='ident'>m</span> <span class='op'>&gt;</span> <span class='number'>100</span> { <span class='number'>100</span> } <span class='kw'>else</span> { <span class='ident'>m</span> }
                 },
             <span class='ident'>LayoutMessage</span>::<span class='ident'>FixedAbs</span>(<span class='ident'>f</span>) <span class='op'>=&gt;</span> <span class='self'>self</span>.<span class='ident'>fixed</span> <span class='op'>=</span> <span class='ident'>f</span>,
             <span class='ident'>LayoutMessage</span>::<span class='ident'>FixedRel</span> <span class='op'>=&gt;</span> <span class='self'>self</span>.<span class='ident'>fixed</span> <span class='op'>=</span> <span class='op'>!</span><span class='self'>self</span>.<span class='ident'>fixed</span>,
@@ -882,16 +881,14 @@
 }
 
 <span class='kw'>impl</span> <span class='ident'>Layout</span> <span class='kw'>for</span> <span class='ident'>VStack</span> {
-    <span class='kw'>fn</span> <span class='ident'>arrange</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>,
-               <span class='ident'>num_windows</span>: <span class='ident'>usize</span>,
-               <span class='ident'>screen</span>: <span class='kw-2'>&amp;</span><span class='ident'>ScreenSize</span>)
-               <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Geometry</span><span class='op'>&gt;&gt;</span> {
+    <span class='kw'>fn</span> <span class='ident'>arrange</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>num_windows</span>: <span class='ident'>usize</span>, <span class='ident'>screen</span>: <span class='kw-2'>&amp;</span><span class='ident'>ScreenSize</span>)
+        <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Geometry</span><span class='op'>&gt;&gt;</span> {
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>with_capacity</span>(<span class='ident'>num_windows</span>);
         <span class='comment'>// set master window width, capping factor</span>
         <span class='kw'>let</span> <span class='ident'>master_width</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>master_factor</span> <span class='op'>&gt;=</span> <span class='number'>100</span> {
             <span class='ident'>screen</span>.<span class='ident'>width</span>
         } <span class='kw'>else</span> {
-            <span class='self'>self</span>.<span class='ident'>master_factor</span> <span class='kw'>as</span> <span class='ident'>u16</span> <span class='op'>*</span> <span class='ident'>screen</span>.<span class='ident'>width</span> <span class='op'>/</span> <span class='number'>100</span>
+            <span class='self'>self</span>.<span class='ident'>master_factor</span> <span class='kw'>as</span> <span class='ident'>u32</span> <span class='op'>*</span> <span class='ident'>screen</span>.<span class='ident'>width</span> <span class='op'>/</span> <span class='number'>100</span>
         };
         <span class='kw'>if</span> <span class='ident'>num_windows</span> <span class='op'>==</span> <span class='number'>1</span> {
             <span class='comment'>// one window only - fullscreen or fixed size</span>
@@ -903,8 +900,8 @@
             <span class='ident'>res</span>.<span class='ident'>push</span>(<span class='prelude-val'>Some</span>(<span class='ident'>Geometry</span> {
                 <span class='ident'>x</span>: <span class='ident'>screen</span>.<span class='ident'>offset_x</span>,
                 <span class='ident'>y</span>: <span class='ident'>screen</span>.<span class='ident'>offset_y</span>,
-                <span class='ident'>width</span>: <span class='ident'>w</span> <span class='op'>-</span> <span class='number'>2</span>,
-                <span class='ident'>height</span>: <span class='ident'>screen</span>.<span class='ident'>height</span> <span class='op'>-</span> <span class='number'>2</span>,
+                <span class='ident'>width</span>: <span class='ident'>w</span>.<span class='ident'>saturating_sub</span>(<span class='number'>2</span>),
+                <span class='ident'>height</span>: <span class='ident'>screen</span>.<span class='ident'>height</span>.<span class='ident'>saturating_sub</span>(<span class='number'>2</span>),
             }));
         } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>num_windows</span> <span class='op'>&gt;</span> <span class='number'>1</span> {
             <span class='comment'>// optionally swap stack and master area</span>
@@ -917,17 +914,17 @@
             <span class='ident'>res</span>.<span class='ident'>push</span>(<span class='prelude-val'>Some</span>(<span class='ident'>Geometry</span> {
                 <span class='ident'>x</span>: <span class='ident'>master_x</span> <span class='op'>+</span> <span class='ident'>screen</span>.<span class='ident'>offset_x</span>,
                 <span class='ident'>y</span>: <span class='ident'>screen</span>.<span class='ident'>offset_y</span>,
-                <span class='ident'>width</span>: <span class='ident'>master_width</span> <span class='op'>-</span> <span class='number'>2</span>,
-                <span class='ident'>height</span>: <span class='ident'>screen</span>.<span class='ident'>height</span> <span class='op'>-</span> <span class='number'>2</span>,
+                <span class='ident'>width</span>: <span class='ident'>master_width</span>.<span class='ident'>saturating_sub</span>(<span class='number'>2</span>),
+                <span class='ident'>height</span>: <span class='ident'>screen</span>.<span class='ident'>height</span>.<span class='ident'>saturating_sub</span>(<span class='number'>2</span>),
             }));
             <span class='comment'>// slave windows</span>
-            <span class='kw'>let</span> <span class='ident'>slave_height</span> <span class='op'>=</span> <span class='ident'>screen</span>.<span class='ident'>height</span> <span class='op'>/</span> (<span class='ident'>num_windows</span> <span class='kw'>as</span> <span class='ident'>u16</span> <span class='op'>-</span> <span class='number'>1</span>);
+            <span class='kw'>let</span> <span class='ident'>slave_height</span> <span class='op'>=</span> <span class='ident'>screen</span>.<span class='ident'>height</span> <span class='op'>/</span> (<span class='ident'>num_windows</span> <span class='kw'>as</span> <span class='ident'>u32</span> <span class='op'>-</span> <span class='number'>1</span>);
             <span class='kw'>for</span> <span class='ident'>i</span> <span class='kw'>in</span> <span class='number'>1</span>..<span class='ident'>num_windows</span> {
                 <span class='ident'>res</span>.<span class='ident'>push</span>(<span class='prelude-val'>Some</span>(<span class='ident'>Geometry</span> {
                     <span class='ident'>x</span>: <span class='ident'>slave_x</span> <span class='op'>+</span> <span class='ident'>screen</span>.<span class='ident'>offset_x</span>,
-                    <span class='ident'>y</span>: (<span class='ident'>i</span> <span class='kw'>as</span> <span class='ident'>u16</span> <span class='op'>-</span> <span class='number'>1</span>) <span class='op'>*</span> <span class='ident'>slave_height</span> <span class='op'>+</span> <span class='ident'>screen</span>.<span class='ident'>offset_y</span>,
-                    <span class='ident'>width</span>: <span class='ident'>screen</span>.<span class='ident'>width</span> <span class='op'>-</span> <span class='ident'>master_width</span> <span class='op'>-</span> <span class='number'>2</span>,
-                    <span class='ident'>height</span>: <span class='ident'>slave_height</span> <span class='op'>-</span> <span class='number'>2</span>,
+                    <span class='ident'>y</span>: (<span class='ident'>i</span> <span class='kw'>as</span> <span class='ident'>u32</span> <span class='op'>-</span> <span class='number'>1</span>) <span class='op'>*</span> <span class='ident'>slave_height</span> <span class='op'>+</span> <span class='ident'>screen</span>.<span class='ident'>offset_y</span>,
+                    <span class='ident'>width</span>: (<span class='ident'>screen</span>.<span class='ident'>width</span> <span class='op'>-</span> <span class='ident'>master_width</span>).<span class='ident'>saturating_sub</span>(<span class='number'>2</span>),
+                    <span class='ident'>height</span>: <span class='ident'>slave_height</span>.<span class='ident'>saturating_sub</span>(<span class='number'>2</span>),
                 }));
             }
         }
@@ -985,12 +982,13 @@
     <span class='kw'>fn</span> <span class='ident'>edit_layout</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>msg</span>: <span class='ident'>LayoutMessage</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>match</span> <span class='ident'>msg</span> {
             <span class='ident'>LayoutMessage</span>::<span class='ident'>MasterFactorAbs</span>(<span class='ident'>mf</span>) <span class='op'>=&gt;</span>
-                <span class='self'>self</span>.<span class='ident'>master_factor</span> <span class='op'>=</span> <span class='ident'>mf</span> <span class='op'>%</span> <span class='number'>100</span>,
+                <span class='self'>self</span>.<span class='ident'>master_factor</span> <span class='op'>=</span> <span class='ident'>mf</span> <span class='op'>%</span> <span class='number'>101</span>,
             <span class='ident'>LayoutMessage</span>::<span class='ident'>MasterFactorRel</span>(<span class='ident'>mf</span>) <span class='op'>=&gt;</span>
                 <span class='self'>self</span>.<span class='ident'>master_factor</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>mf</span> <span class='op'>&lt;</span> <span class='number'>0</span> {
                     <span class='self'>self</span>.<span class='ident'>master_factor</span>.<span class='ident'>saturating_sub</span>(<span class='ident'>mf</span>.<span class='ident'>abs</span>() <span class='kw'>as</span> <span class='ident'>u8</span>)
                 } <span class='kw'>else</span> {
-                    <span class='self'>self</span>.<span class='ident'>master_factor</span>.<span class='ident'>saturating_add</span>(<span class='ident'>mf</span>.<span class='ident'>abs</span>() <span class='kw'>as</span> <span class='ident'>u8</span>) <span class='op'>%</span> <span class='number'>100</span>
+                    <span class='kw'>let</span> <span class='ident'>m</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>master_factor</span>.<span class='ident'>saturating_add</span>(<span class='ident'>mf</span>.<span class='ident'>abs</span>() <span class='kw'>as</span> <span class='ident'>u8</span>);
+                    <span class='kw'>if</span> <span class='ident'>m</span> <span class='op'>&gt;</span> <span class='number'>100</span> { <span class='number'>100</span> } <span class='kw'>else</span> { <span class='ident'>m</span> }
                 },
             <span class='ident'>LayoutMessage</span>::<span class='ident'>FixedAbs</span>(<span class='ident'>f</span>) <span class='op'>=&gt;</span> <span class='self'>self</span>.<span class='ident'>fixed</span> <span class='op'>=</span> <span class='ident'>f</span>,
             <span class='ident'>LayoutMessage</span>::<span class='ident'>FixedRel</span> <span class='op'>=&gt;</span> <span class='self'>self</span>.<span class='ident'>fixed</span> <span class='op'>=</span> <span class='op'>!</span><span class='self'>self</span>.<span class='ident'>fixed</span>,
