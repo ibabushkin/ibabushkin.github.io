@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # initialize the index
-printf "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset="utf-8" />\n<title>/dev/thoughtbin</title>\n<style type="text/css">body{margin:40px auto;max-width:700;text-align:justify;line-height:1.6;font-size:16px;color:#444;padding:0 10px}h1,h2,h3{line-height:1.2}</style>\n</head>\n" > index.html
+printf "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset="utf-8" />\n<title>/dev/thoughtbin</title>\n<style type="text/css">body{margin:40px auto;max-width:700px;text-align:justify;line-height:1.6;font-size:16px;color:#444;padding:0 10px}h1,h2,h3{line-height:1.2}</style>\n</head>\n" > index.html
 echo "<h1>/dev/thoughtbin</h1>" >> index.html
 cat banner >> index.html
 
