@@ -146,6 +146,11 @@
 <span id="102">102</span>
 <span id="103">103</span>
 <span id="104">104</span>
+<span id="105">105</span>
+<span id="106">106</span>
+<span id="107">107</span>
+<span id="108">108</span>
+<span id="109">109</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>layout</span>::<span class='op'>*</span>;
 
@@ -189,7 +194,12 @@
                 .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>i</span><span class='op'>|</span> {
                     <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> (<span class='ident'>width</span> <span class='op'>+</span> <span class='number'>2</span>) <span class='op'>*</span> (<span class='ident'>i</span> <span class='op'>%</span> <span class='ident'>max_col</span>) <span class='kw'>as</span> <span class='ident'>u32</span>;
                     <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> (<span class='ident'>height</span> <span class='op'>+</span> <span class='number'>2</span>) <span class='op'>*</span> (<span class='ident'>i</span> <span class='op'>/</span> <span class='ident'>max_col</span>) <span class='kw'>as</span> <span class='ident'>u32</span>;
-                    <span class='prelude-val'>Some</span>(<span class='ident'>Geometry</span> { <span class='ident'>x</span>: <span class='ident'>x</span>, <span class='ident'>y</span>: <span class='ident'>y</span>, <span class='ident'>width</span>: <span class='ident'>width</span>, <span class='ident'>height</span>: <span class='ident'>height</span> })
+                    <span class='prelude-val'>Some</span>(<span class='ident'>Geometry</span> {
+                        <span class='ident'>x</span>: <span class='ident'>x</span> <span class='op'>+</span> <span class='ident'>screen</span>.<span class='ident'>offset_x</span>,
+                        <span class='ident'>y</span>: <span class='ident'>y</span> <span class='op'>+</span> <span class='ident'>screen</span>.<span class='ident'>offset_y</span>,
+                        <span class='ident'>width</span>: <span class='ident'>width</span>,
+                        <span class='ident'>height</span>: <span class='ident'>height</span>
+                    })
                 })
                 .<span class='ident'>collect</span>()
         } <span class='kw'>else</span> {

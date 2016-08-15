@@ -675,6 +675,15 @@
 <span id="631">631</span>
 <span id="632">632</span>
 <span id="633">633</span>
+<span id="634">634</span>
+<span id="635">635</span>
+<span id="636">636</span>
+<span id="637">637</span>
+<span id="638">638</span>
+<span id="639">639</span>
+<span id="640">640</span>
+<span id="641">641</span>
+<span id="642">642</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cell</span>::{<span class='ident'>RefCell</span>,<span class='ident'>RefMut</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>::<span class='ident'>HashMap</span>;
@@ -688,11 +697,20 @@
 <span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>layout</span>::<span class='ident'>Layout</span>;
 <span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>window_system</span>::<span class='ident'>WmCommand</span>;
 
+<span class='doccomment'>/// Client property, as returned from a call.</span>
+<span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>ClientProp</span> {
+    <span class='ident'>PropAtom</span>(<span class='ident'>xproto</span>::<span class='ident'>Atom</span>),
+    <span class='ident'>PropString</span>(<span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>String</span><span class='op'>&gt;</span>),
+    <span class='ident'>NoProp</span>,
+}
+
 <span class='doccomment'>/// Client properties, as obtained from the X server.</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ClientProps</span> {
     <span class='doccomment'>/// client/window type</span>
     <span class='kw'>pub</span> <span class='ident'>window_type</span>: <span class='ident'>xproto</span>::<span class='ident'>Atom</span>,
+    <span class='doccomment'>/// window state</span>
+    <span class='kw'>pub</span> <span class='ident'>state</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>xproto</span>::<span class='ident'>Atom</span><span class='op'>&gt;</span>,
     <span class='doccomment'>/// the client&#39;s title</span>
     <span class='kw'>pub</span> <span class='ident'>name</span>: <span class='ident'>String</span>,
     <span class='doccomment'>/// the client&#39;s class(es)</span>
@@ -1180,7 +1198,7 @@
 <span class='kw'>impl</span> <span class='ident'>fmt</span>::<span class='ident'>Display</span> <span class='kw'>for</span> <span class='ident'>TagSet</span> {
     <span class='kw'>fn</span> <span class='ident'>fmt</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>f</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>fmt</span>::<span class='ident'>Formatter</span>) <span class='op'>-&gt;</span> <span class='ident'>fmt</span>::<span class='prelude-ty'>Result</span> {
         <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;[&quot;</span>));
-        <span class='kw'>for</span> <span class='ident'>tag</span> <span class='kw'>in</span> <span class='self'>self</span>.<span class='ident'>tags</span>.<span class='ident'>iter</span>().<span class='ident'>take</span>(<span class='self'>self</span>.<span class='ident'>tags</span>.<span class='ident'>len</span>() <span class='op'>-</span> <span class='number'>1</span>) {
+        <span class='kw'>for</span> <span class='ident'>tag</span> <span class='kw'>in</span> <span class='self'>self</span>.<span class='ident'>tags</span>.<span class='ident'>iter</span>().<span class='ident'>take</span>(<span class='self'>self</span>.<span class='ident'>tags</span>.<span class='ident'>len</span>().<span class='ident'>saturating_sub</span>(<span class='number'>1</span>)) {
             <span class='macro'>try</span><span class='macro'>!</span>(<span class='macro'>write</span><span class='macro'>!</span>(<span class='ident'>f</span>, <span class='string'>&quot;{},&quot;</span>, <span class='ident'>tag</span>));
         }
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>last_tag</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>tags</span>.<span class='ident'>last</span>() {

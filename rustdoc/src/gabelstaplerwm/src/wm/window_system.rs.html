@@ -703,6 +703,36 @@
 <span id="659">659</span>
 <span id="660">660</span>
 <span id="661">661</span>
+<span id="662">662</span>
+<span id="663">663</span>
+<span id="664">664</span>
+<span id="665">665</span>
+<span id="666">666</span>
+<span id="667">667</span>
+<span id="668">668</span>
+<span id="669">669</span>
+<span id="670">670</span>
+<span id="671">671</span>
+<span id="672">672</span>
+<span id="673">673</span>
+<span id="674">674</span>
+<span id="675">675</span>
+<span id="676">676</span>
+<span id="677">677</span>
+<span id="678">678</span>
+<span id="679">679</span>
+<span id="680">680</span>
+<span id="681">681</span>
+<span id="682">682</span>
+<span id="683">683</span>
+<span id="684">684</span>
+<span id="685">685</span>
+<span id="686">686</span>
+<span id="687">687</span>
+<span id="688">688</span>
+<span id="689">689</span>
+<span id="690">690</span>
+<span id="691">691</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>c_char</span>;
 
@@ -723,10 +753,11 @@
 <span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>layout</span>::<span class='op'>*</span>;
 
 <span class='doccomment'>/// Atoms we register with the X server for partial EWMH compliance.</span>
-<span class='kw'>static</span> <span class='ident'>ATOM_VEC</span>: [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>; <span class='number'>9</span>] <span class='op'>=</span>
-    [<span class='string'>&quot;WM_PROTOCOLS&quot;</span>, <span class='string'>&quot;WM_DELETE_WINDOW&quot;</span>, <span class='string'>&quot;WM_STATE&quot;</span>,
+<span class='kw'>static</span> <span class='ident'>ATOM_VEC</span>: [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>; <span class='number'>10</span>] <span class='op'>=</span>
+    [<span class='string'>&quot;WM_PROTOCOLS&quot;</span>, <span class='string'>&quot;WM_DELETE_WINDOW&quot;</span>, <span class='string'>&quot;_NET_WM_STATE&quot;</span>,
      <span class='string'>&quot;WM_TAKE_FOCUS&quot;</span>, <span class='string'>&quot;_NET_WM_TAKE_FOCUS&quot;</span>, <span class='string'>&quot;_NET_WM_NAME&quot;</span>, <span class='string'>&quot;_NET_WM_CLASS&quot;</span>,
-     <span class='string'>&quot;_NET_WM_WINDOW_TYPE&quot;</span>, <span class='string'>&quot;_NET_WM_WINDOW_TYPE_DOCK&quot;</span>];
+     <span class='string'>&quot;_NET_WM_WINDOW_TYPE&quot;</span>, <span class='string'>&quot;_NET_WM_WINDOW_TYPE_NORMAL&quot;</span>,
+     <span class='string'>&quot;_NET_WM_STATE_ABOVE&quot;</span>];
 
 <span class='doccomment'>/// Association vector type for atoms and their names.</span>
 <span class='kw'>type</span> <span class='ident'>AtomList</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>Vec</span><span class='op'>&lt;</span>(<span class='ident'>xproto</span>::<span class='ident'>Atom</span>, <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span>)<span class='op'>&gt;</span>;
@@ -1041,8 +1072,8 @@
     <span class='doccomment'>/// Reset focus.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// The datastructures have been altered, we need to focus the appropriate</span>
-    <span class='doccomment'>/// window as obtained from tehre. if an old window is given, uncolor it&#39;s</span>
-    <span class='doccomment'>/// border.</span>
+    <span class='doccomment'>/// window as obtained from there. If an old window is present, uncolor</span>
+    <span class='doccomment'>/// it&#39;s border.</span>
     <span class='kw'>fn</span> <span class='ident'>reset_focus</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>new</span>) <span class='op'>=</span> <span class='self'>self</span>
             .<span class='ident'>tag_stack</span>
@@ -1208,19 +1239,16 @@
         }
     }
 
-    <span class='doccomment'>/// Construct a client for a window, or don&#39;t if we don&#39;t want to manage it.</span>
+    <span class='doccomment'>/// Construct a client for a window if we want to manage it.</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// If the window has a type different from `_NET_WM_WINDOW_TYPE_DOCK`,</span>
+    <span class='doccomment'>/// If the window has type `_NET_WM_WINDOW_TYPE_NORMAL`,</span>
     <span class='doccomment'>/// generate a client structure for it and return it, otherwise don&#39;t.</span>
     <span class='kw'>fn</span> <span class='ident'>construct_client</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>window</span>: <span class='ident'>xproto</span>::<span class='ident'>Window</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Client</span><span class='op'>&gt;</span> {
-        <span class='kw'>let</span> <span class='ident'>props</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>get_properties</span>(<span class='ident'>window</span>) {
-            <span class='prelude-val'>Some</span>(<span class='ident'>props</span>) <span class='op'>=&gt;</span> <span class='ident'>props</span>,
-            <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> {
-                <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;could not lookup properties&quot;</span>);
-                <span class='kw'>return</span> <span class='prelude-val'>None</span>;
-            }
-        };
-        <span class='kw'>if</span> <span class='ident'>props</span>.<span class='ident'>window_type</span> <span class='op'>!=</span> <span class='self'>self</span>.<span class='ident'>lookup_atom</span>(<span class='string'>&quot;_NET_WM_WINDOW_TYPE_DOCK&quot;</span>) {
+        <span class='kw'>let</span> <span class='ident'>props</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>get_properties</span>(<span class='ident'>window</span>);
+        <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;props of new client: {:?}&quot;</span>, <span class='ident'>props</span>);
+        <span class='kw'>if</span> <span class='ident'>props</span>.<span class='ident'>window_type</span> <span class='op'>==</span>
+            <span class='self'>self</span>.<span class='ident'>lookup_atom</span>(<span class='string'>&quot;_NET_WM_WINDOW_TYPE_NORMAL&quot;</span>) <span class='op'>&amp;&amp;</span>
+            <span class='ident'>props</span>.<span class='ident'>state</span> <span class='op'>!=</span> <span class='prelude-val'>Some</span>(<span class='self'>self</span>.<span class='ident'>lookup_atom</span>(<span class='string'>&quot;_NET_WM_STATE_ABOVE&quot;</span>)) {
             <span class='comment'>// compute tags of the new client</span>
             <span class='kw'>let</span> <span class='ident'>tags</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>res</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>matching</span>
                 .<span class='ident'>as_ref</span>()
@@ -1286,68 +1314,100 @@
         ].<span class='number'>0</span>
     }
 
-    <span class='doccomment'>/// Get a window&#39;s properties (like window type and such), if possible.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_properties</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>window</span>: <span class='ident'>xproto</span>::<span class='ident'>Window</span>)
-        <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>ClientProps</span><span class='op'>&gt;</span> {
-        <span class='comment'>// request window type</span>
-        <span class='kw'>let</span> <span class='ident'>cookie1</span> <span class='op'>=</span> <span class='ident'>xproto</span>::<span class='ident'>get_property</span>(
-            <span class='self'>self</span>.<span class='ident'>con</span>, <span class='bool-val'>false</span>, <span class='ident'>window</span>,
-            <span class='self'>self</span>.<span class='ident'>lookup_atom</span>(<span class='string'>&quot;_NET_WM_WINDOW_TYPE&quot;</span>),
-            <span class='ident'>xproto</span>::<span class='ident'>ATOM_ATOM</span>, <span class='number'>0</span>, <span class='number'>0xffffffff</span>
-        );
-        <span class='comment'>// request window name</span>
-        <span class='kw'>let</span> <span class='ident'>cookie2</span> <span class='op'>=</span> <span class='ident'>xproto</span>::<span class='ident'>get_property</span>(
-            <span class='self'>self</span>.<span class='ident'>con</span>, <span class='bool-val'>false</span>, <span class='ident'>window</span>,
-            <span class='ident'>xproto</span>::<span class='ident'>ATOM_WM_NAME</span>, <span class='ident'>xproto</span>::<span class='ident'>ATOM_STRING</span>,
-            <span class='number'>0</span>, <span class='number'>0xffffffff</span>
-        );
-        <span class='comment'>// request window class(es)</span>
-        <span class='kw'>let</span> <span class='ident'>cookie3</span> <span class='op'>=</span> <span class='ident'>xproto</span>::<span class='ident'>get_property</span>(
-            <span class='self'>self</span>.<span class='ident'>con</span>, <span class='bool-val'>false</span>, <span class='ident'>window</span>,
-            <span class='ident'>xproto</span>::<span class='ident'>ATOM_WM_CLASS</span>, <span class='ident'>xproto</span>::<span class='ident'>ATOM_STRING</span>,
-            <span class='number'>0</span>, <span class='number'>0xffffffff</span>
-        );
-        <span class='comment'>// check for replies</span>
-        <span class='kw'>if</span> <span class='kw'>let</span> (<span class='prelude-val'>Ok</span>(<span class='ident'>r1</span>), <span class='prelude-val'>Ok</span>(<span class='ident'>r2</span>), <span class='prelude-val'>Ok</span>(<span class='ident'>r3</span>)) <span class='op'>=</span> (<span class='ident'>cookie1</span>.<span class='ident'>get_reply</span>(),
-                                           <span class='ident'>cookie2</span>.<span class='ident'>get_reply</span>(),
-                                           <span class='ident'>cookie3</span>.<span class='ident'>get_reply</span>()) {
-            <span class='kw'>unsafe</span> {
-                <span class='comment'>// we need to get exactly one atom for the type</span>
-                <span class='kw'>let</span> <span class='ident'>type_atoms</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>xproto</span>::<span class='ident'>Atom</span>] <span class='op'>=</span> <span class='ident'>r1</span>.<span class='ident'>value</span>();
-                <span class='kw'>if</span> <span class='ident'>type_atoms</span>.<span class='ident'>len</span>() <span class='op'>==</span> <span class='number'>0</span> {
-                    <span class='kw'>return</span> <span class='prelude-val'>None</span>;
-                }
-
-                <span class='comment'>// the name is a single (variable-sized) string</span>
-                <span class='kw'>let</span> <span class='ident'>name_slice</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>c_char</span>] <span class='op'>=</span> <span class='ident'>r2</span>.<span class='ident'>value</span>();
-                <span class='kw'>let</span> <span class='ident'>name</span> <span class='op'>=</span> <span class='ident'>CStr</span>::<span class='ident'>from_ptr</span>(<span class='ident'>name_slice</span>.<span class='ident'>as_ptr</span>())
-                    .<span class='ident'>to_string_lossy</span>();
-
-                <span class='comment'>// the class(es) are a list of strings</span>
-                <span class='kw'>let</span> <span class='ident'>class_slice</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>c_char</span>] <span class='op'>=</span> <span class='ident'>r3</span>.<span class='ident'>value</span>();
-                <span class='comment'>// iterate over them</span>
-                <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>class</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>new</span>();
-                <span class='kw'>for</span> <span class='ident'>c</span> <span class='kw'>in</span> <span class='ident'>class_slice</span>.<span class='ident'>split</span>(<span class='op'>|</span><span class='ident'>ch</span><span class='op'>|</span> <span class='op'>*</span><span class='ident'>ch</span> <span class='op'>==</span> <span class='number'>0</span>) {
-                    <span class='kw'>if</span> <span class='ident'>c</span>.<span class='ident'>len</span>() <span class='op'>&gt;</span> <span class='number'>0</span> {
-                        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>cl</span>) <span class='op'>=</span>
-                               <span class='ident'>str</span>::<span class='ident'>from_utf8</span>(<span class='ident'>CStr</span>::<span class='ident'>from_ptr</span>(<span class='ident'>c</span>.<span class='ident'>as_ptr</span>())
-                            .<span class='ident'>to_bytes</span>()) {
-                            <span class='ident'>class</span>.<span class='ident'>push</span>(<span class='ident'>cl</span>.<span class='ident'>to_owned</span>());
+    <span class='doccomment'>/// get a set of properties for a window, in parallel</span>
+    <span class='kw'>fn</span> <span class='ident'>get_property_set</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>window</span>: <span class='ident'>xproto</span>::<span class='ident'>Window</span>,
+                        <span class='ident'>atom_response_pairs</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>(<span class='ident'>xproto</span>::<span class='ident'>Atom</span>, <span class='ident'>xproto</span>::<span class='ident'>Atom</span>)<span class='op'>&gt;</span>)
+        <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>ClientProp</span><span class='op'>&gt;</span> {
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>cookies</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>atom_response_pairs</span>
+            .<span class='ident'>iter</span>()
+            .<span class='ident'>map</span>(<span class='op'>|</span><span class='kw-2'>&amp;</span>(<span class='ident'>atom</span>, <span class='ident'>response_type</span>)<span class='op'>|</span>
+                <span class='ident'>xproto</span>::<span class='ident'>get_property</span>(
+                    <span class='self'>self</span>.<span class='ident'>con</span>, <span class='bool-val'>false</span>, <span class='ident'>window</span>, <span class='ident'>atom</span>, <span class='ident'>response_type</span>, <span class='number'>0</span>, <span class='number'>0xffffffff</span>
+                )
+            )
+            .<span class='ident'>collect</span>();
+        <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>cookies</span>
+            .<span class='ident'>drain</span>(..)
+            .<span class='ident'>zip</span>(<span class='ident'>atom_response_pairs</span>.<span class='ident'>iter</span>())
+            .<span class='ident'>map</span>(<span class='op'>|</span>(<span class='ident'>cookie</span>, <span class='kw-2'>&amp;</span>(_, <span class='ident'>response_type</span>))<span class='op'>|</span>
+                <span class='kw'>match</span> <span class='ident'>response_type</span> {
+                    <span class='ident'>xproto</span>::<span class='ident'>ATOM_ATOM</span> <span class='op'>=&gt;</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>r</span>) <span class='op'>=</span> <span class='ident'>cookie</span>.<span class='ident'>get_reply</span>() {
+                        <span class='kw'>let</span> <span class='ident'>atoms</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>xproto</span>::<span class='ident'>Atom</span>] <span class='op'>=</span> <span class='ident'>r</span>.<span class='ident'>value</span>();
+                        <span class='kw'>if</span> <span class='ident'>atoms</span>.<span class='ident'>len</span>() <span class='op'>==</span> <span class='number'>0</span> {
+                            <span class='ident'>ClientProp</span>::<span class='ident'>NoProp</span>
                         } <span class='kw'>else</span> {
-                            <span class='kw'>return</span> <span class='prelude-val'>None</span>;
+                            <span class='ident'>ClientProp</span>::<span class='ident'>PropAtom</span>(<span class='ident'>atoms</span>[<span class='number'>0</span>])
                         }
-                    }
+                    } <span class='kw'>else</span> {
+                        <span class='ident'>ClientProp</span>::<span class='ident'>NoProp</span>
+                    },
+                    <span class='ident'>xproto</span>::<span class='ident'>ATOM_STRING</span> <span class='op'>=&gt;</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>r</span>) <span class='op'>=</span> <span class='ident'>cookie</span>.<span class='ident'>get_reply</span>() {
+                        <span class='kw'>let</span> <span class='ident'>raw</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>c_char</span>] <span class='op'>=</span> <span class='ident'>r</span>.<span class='ident'>value</span>();
+                        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>new</span>();
+                        <span class='kw'>for</span> <span class='ident'>c</span> <span class='kw'>in</span> <span class='ident'>raw</span>.<span class='ident'>split</span>(<span class='op'>|</span><span class='ident'>ch</span><span class='op'>|</span> <span class='op'>*</span><span class='ident'>ch</span> <span class='op'>==</span> <span class='number'>0</span>) {
+                            <span class='kw'>if</span> <span class='ident'>c</span>.<span class='ident'>len</span>() <span class='op'>&gt;</span> <span class='number'>0</span> {
+                                <span class='kw'>unsafe</span> {
+                                    <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>cl</span>) <span class='op'>=</span> <span class='ident'>str</span>::<span class='ident'>from_utf8</span>(
+                                        <span class='ident'>CStr</span>::<span class='ident'>from_ptr</span>(<span class='ident'>c</span>.<span class='ident'>as_ptr</span>()).<span class='ident'>to_bytes</span>()) {
+                                        <span class='ident'>res</span>.<span class='ident'>push</span>(<span class='ident'>cl</span>.<span class='ident'>to_owned</span>());
+                                    }
+                                }
+                            }
+                        }
+                        <span class='ident'>ClientProp</span>::<span class='ident'>PropString</span>(<span class='ident'>res</span>)
+                    } <span class='kw'>else</span> {
+                        <span class='ident'>ClientProp</span>::<span class='ident'>NoProp</span>
+                    },
+                    _ <span class='op'>=&gt;</span> <span class='ident'>ClientProp</span>::<span class='ident'>NoProp</span>,
                 }
+            )
+            .<span class='ident'>collect</span>();
+        <span class='ident'>res</span>
+    }
 
-                <span class='comment'>// return the properties obtained</span>
-                <span class='prelude-val'>Some</span>(<span class='ident'>ClientProps</span> {
-                    <span class='ident'>window_type</span>: <span class='ident'>type_atoms</span>[<span class='number'>0</span>],
-                    <span class='ident'>name</span>: <span class='ident'>name</span>.<span class='ident'>into_owned</span>(),
-                    <span class='ident'>class</span>: <span class='ident'>class</span>,
-                })
-            }
+    <span class='doccomment'>/// Get a window&#39;s properties (like window type and such), if possible.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_properties</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>window</span>: <span class='ident'>xproto</span>::<span class='ident'>Window</span>) <span class='op'>-&gt;</span> <span class='ident'>ClientProps</span> {
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>properties</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>get_property_set</span>(<span class='ident'>window</span>, <span class='macro'>vec</span><span class='macro'>!</span>[
+            (<span class='self'>self</span>.<span class='ident'>lookup_atom</span>(<span class='string'>&quot;_NET_WM_WINDOW_TYPE&quot;</span>), <span class='ident'>xproto</span>::<span class='ident'>ATOM_ATOM</span>),
+            (<span class='self'>self</span>.<span class='ident'>lookup_atom</span>(<span class='string'>&quot;_NET_WM_STATE&quot;</span>), <span class='ident'>xproto</span>::<span class='ident'>ATOM_ATOM</span>),
+            (<span class='ident'>xproto</span>::<span class='ident'>ATOM_WM_NAME</span>, <span class='ident'>xproto</span>::<span class='ident'>ATOM_STRING</span>),
+            (<span class='ident'>xproto</span>::<span class='ident'>ATOM_WM_CLASS</span>, <span class='ident'>xproto</span>::<span class='ident'>ATOM_STRING</span>)
+        ]);
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>props</span> <span class='op'>=</span> <span class='ident'>properties</span>.<span class='ident'>drain</span>(..);
+
+        <span class='kw'>let</span> <span class='ident'>window_type</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>ClientProp</span>::<span class='ident'>PropAtom</span>(<span class='ident'>t</span>)) <span class='op'>=</span> <span class='ident'>props</span>.<span class='ident'>next</span>() {
+            <span class='ident'>t</span>
+        } <span class='kw'>else</span> { <span class='comment'>// assume reasonable default</span>
+            <span class='self'>self</span>.<span class='ident'>lookup_atom</span>(<span class='string'>&quot;_NET_WM_WINDOW_TYPE_NORMAL&quot;</span>)
+        };
+
+        <span class='kw'>let</span> <span class='ident'>state</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>ClientProp</span>::<span class='ident'>PropAtom</span>(<span class='ident'>s</span>)) <span class='op'>=</span> <span class='ident'>props</span>.<span class='ident'>next</span>() {
+            <span class='prelude-val'>Some</span>(<span class='ident'>s</span>)
         } <span class='kw'>else</span> {
             <span class='prelude-val'>None</span>
+        };
+
+        <span class='kw'>let</span> <span class='ident'>name</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>ClientProp</span>::<span class='ident'>PropString</span>(<span class='kw-2'>mut</span> <span class='ident'>n</span>)) <span class='op'>=</span> <span class='ident'>props</span>.<span class='ident'>next</span>() {
+            <span class='kw'>if</span> <span class='ident'>n</span>.<span class='ident'>len</span>() <span class='op'>==</span> <span class='number'>1</span> {
+                <span class='ident'>n</span>.<span class='ident'>pop</span>().<span class='ident'>unwrap</span>()
+            } <span class='kw'>else</span> {
+                <span class='ident'>String</span>::<span class='ident'>new</span>()
+            }
+        } <span class='kw'>else</span> {
+            <span class='ident'>String</span>::<span class='ident'>new</span>()
+        };
+
+        <span class='kw'>let</span> <span class='ident'>class</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>ClientProp</span>::<span class='ident'>PropString</span>(<span class='ident'>c</span>)) <span class='op'>=</span> <span class='ident'>props</span>.<span class='ident'>next</span>() {
+            <span class='ident'>c</span>
+        } <span class='kw'>else</span> {
+            <span class='ident'>Vec</span>::<span class='ident'>new</span>()
+        };
+
+        <span class='ident'>ClientProps</span> {
+            <span class='ident'>window_type</span>: <span class='ident'>window_type</span>,
+            <span class='ident'>state</span>: <span class='ident'>state</span>,
+            <span class='ident'>name</span>: <span class='ident'>name</span>,
+            <span class='ident'>class</span>: <span class='ident'>class</span>,
         }
     }
 

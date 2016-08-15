@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `setup_wm` fn in crate `gabelstaplerwm`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, setup_wm">
+    <meta name="description" content="API documentation for the Rust `ClientProp` enum in crate `gabelstaplerwm`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, ClientProp">
 
-    <title>gabelstaplerwm::wm::config::setup_wm - Rust</title>
+    <title>gabelstaplerwm::wm::client::ClientProp - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
@@ -28,7 +28,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>config</a></p><script>window.sidebarCurrent = {name: 'setup_wm', ty: 'fn', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'><a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>client</a></p><script>window.sidebarCurrent = {name: 'ClientProp', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -42,16 +42,19 @@
         </form>
     </nav>
 
-    <section id='main' class="content fn">
-<h1 class='fqn'><span class='in-band'>Function <a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>config</a>::<wbr><a class='fn' href=''>setup_wm</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content enum">
+<h1 class='fqn'><span class='in-band'>Enum <a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>client</a>::<wbr><a class='enum' href=''>ClientProp</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-476' class='srclink' href='../../../src/gabelstaplerwm/src/wm/config.rs.html#127-255' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub fn setup_wm(wm: &amp;mut <a class='struct' href='../../../gabelstaplerwm/wm/window_system/struct.Wm.html' title='gabelstaplerwm::wm::window_system::Wm'>Wm</a>)</pre><div class='docblock'><p>Setup datastructures for the window manager.</p>
-
-<p>This includes keybindings, default tag stack and matching.</p>
-</div></section>
+               </span><a id='src-22' class='srclink' href='../../../src/gabelstaplerwm/src/wm/client.rs.html#14-18' title='goto source code'>[src]</a></span></h1>
+<pre class='rust enum'>pub enum ClientProp {
+    PropAtom(<a class='type' href='../../../xcb/xproto/type.Atom.html' title='xcb::xproto::Atom'>Atom</a>),
+    PropString(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;),
+    NoProp,
+}</pre><div class='docblock'><p>Client property, as returned from a call.</p>
+</div><h2 class='variants'>Variants</h2>
+<span id='variant.PropAtom' class='variant'><code>PropAtom(<a class='type' href='../../../xcb/xproto/type.Atom.html' title='xcb::xproto::Atom'>Atom</a>)</code></span><span id='variant.PropString' class='variant'><code>PropString(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='https://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;)</code></span><span id='variant.NoProp' class='variant'><code>NoProp</code></span></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>

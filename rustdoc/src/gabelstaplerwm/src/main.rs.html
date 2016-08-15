@@ -107,6 +107,13 @@
 <span id="63">63</span>
 <span id="64">64</span>
 <span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! # gabelstaplerwm - a semidynamic tiling window manager</span>
 <span class='doccomment'>//! It&#39;s what the heading says it is. The documentation found here is a very</span>
@@ -114,6 +121,8 @@
 <span class='doccomment'>//! with the sources, as the configuration process involves you editing them.</span>
 <span class='doccomment'>//! See the documentation for the `config` module for more information on</span>
 <span class='doccomment'>//! configuration.</span>
+
+<span class='attribute'>#<span class='op'>!</span>[<span class='ident'>feature</span>(<span class='ident'>slice_patterns</span>)]</span>
 
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>xcb</span>;
@@ -124,6 +133,8 @@
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>with_mousetrap</span>)]</span>
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>mousetrap</span>;
+
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>env</span>::<span class='ident'>remove_var</span>;
 
 <span class='kw'>use</span> <span class='ident'>xcb</span>::<span class='ident'>base</span>::<span class='op'>*</span>;
 
@@ -141,6 +152,9 @@
     <span class='kw'>if</span> <span class='ident'>env_logger</span>::<span class='ident'>init</span>().<span class='ident'>is_err</span>() {
         <span class='ident'>handle_logger_error</span>();
     }
+
+    <span class='comment'>// clean environment for cargo and other processes honoring `RUST_LOG`</span>
+    <span class='ident'>remove_var</span>(<span class='string'>&quot;RUST_LOG&quot;</span>);
 
     <span class='comment'>// include user config</span>
     <span class='kw'>let</span> <span class='ident'>config</span> <span class='op'>=</span> <span class='ident'>generate_config</span>();
