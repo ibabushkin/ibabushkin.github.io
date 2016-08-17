@@ -733,6 +733,9 @@
 <span id="689">689</span>
 <span id="690">690</span>
 <span id="691">691</span>
+<span id="692">692</span>
+<span id="693">693</span>
+<span id="694">694</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>c_char</span>;
 
@@ -1063,9 +1066,11 @@
     <span class='doccomment'>/// Send a client message and kill the client the hard and merciless way</span>
     <span class='doccomment'>/// if that fails, for instance if the client ignores such messages.</span>
     <span class='kw'>fn</span> <span class='ident'>destroy_window</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>window</span>: <span class='ident'>xproto</span>::<span class='ident'>Window</span>) {
-        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>send_event</span>(<span class='ident'>window</span>, <span class='string'>&quot;WM_DELETE_WINDOW&quot;</span>) <span class='op'>&amp;&amp;</span>
-            <span class='ident'>xproto</span>::<span class='ident'>kill_client</span>(<span class='self'>self</span>.<span class='ident'>con</span>, <span class='ident'>window</span>).<span class='ident'>request_check</span>().<span class='ident'>is_err</span>() {
-            <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;could not kill client&quot;</span>);
+        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>send_event</span>(<span class='ident'>window</span>, <span class='string'>&quot;WM_DELETE_WINDOW&quot;</span>) {
+            <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;client didn&#39;t accept WM_DELETE_WINDOW message&quot;</span>);
+            <span class='kw'>if</span> <span class='ident'>xproto</span>::<span class='ident'>kill_client</span>(<span class='self'>self</span>.<span class='ident'>con</span>, <span class='ident'>window</span>).<span class='ident'>request_check</span>().<span class='ident'>is_err</span>() {
+                <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;could not kill client&quot;</span>);
+            }
         }
     }
 
@@ -1087,7 +1092,7 @@
                 <span class='self'>self</span>.<span class='ident'>set_border_color</span>(<span class='ident'>old_win</span>, <span class='self'>self</span>.<span class='ident'>border_colors</span>.<span class='number'>1</span>);
             }
             <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>send_event</span>(<span class='ident'>new</span>, <span class='string'>&quot;WM_TAKE_FOCUS&quot;</span>) {
-                <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;could not send focus message to window&quot;</span>);
+                <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;client didn&#39;t acept WM_TAKE_FOCUS message&quot;</span>);
             }
             <span class='kw'>let</span> <span class='ident'>cookie</span> <span class='op'>=</span>
                 <span class='ident'>xproto</span>::<span class='ident'>set_input_focus</span>(<span class='self'>self</span>.<span class='ident'>con</span>,
@@ -1141,7 +1146,7 @@
                 <span class='self'>self</span>.<span class='ident'>handle_configure_request</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>)),
             <span class='ident'>xproto</span>::<span class='ident'>MAP_REQUEST</span> <span class='op'>=&gt;</span>
                 <span class='self'>self</span>.<span class='ident'>handle_map_request</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>)),
-            <span class='ident'>num</span> <span class='op'>=&gt;</span> <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;ignoring event: {}&quot;</span>, <span class='ident'>num</span>),
+            <span class='ident'>num</span> <span class='op'>=&gt;</span> <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;ignoring event: {}&quot;</span>, <span class='ident'>num</span>),
         }
     }
 
@@ -1245,10 +1250,10 @@
     <span class='doccomment'>/// generate a client structure for it and return it, otherwise don&#39;t.</span>
     <span class='kw'>fn</span> <span class='ident'>construct_client</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>window</span>: <span class='ident'>xproto</span>::<span class='ident'>Window</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Client</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>props</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>get_properties</span>(<span class='ident'>window</span>);
-        <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;props of new client: {:?}&quot;</span>, <span class='ident'>props</span>);
-        <span class='kw'>if</span> <span class='ident'>props</span>.<span class='ident'>window_type</span> <span class='op'>==</span>
-            <span class='self'>self</span>.<span class='ident'>lookup_atom</span>(<span class='string'>&quot;_NET_WM_WINDOW_TYPE_NORMAL&quot;</span>) <span class='op'>&amp;&amp;</span>
-            <span class='ident'>props</span>.<span class='ident'>state</span> <span class='op'>!=</span> <span class='prelude-val'>Some</span>(<span class='self'>self</span>.<span class='ident'>lookup_atom</span>(<span class='string'>&quot;_NET_WM_STATE_ABOVE&quot;</span>)) {
+        <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;props of new window: {:?}&quot;</span>, <span class='ident'>props</span>);
+        <span class='kw'>if</span> <span class='ident'>props</span>.<span class='ident'>state</span> <span class='op'>!=</span> <span class='prelude-val'>Some</span>(<span class='self'>self</span>.<span class='ident'>lookup_atom</span>(<span class='string'>&quot;_NET_WM_STATE_ABOVE&quot;</span>)) <span class='op'>&amp;&amp;</span>
+            <span class='ident'>props</span>.<span class='ident'>name</span> <span class='op'>!=</span> <span class='string'>&quot;&quot;</span> <span class='op'>&amp;&amp;</span>
+            <span class='ident'>props</span>.<span class='ident'>window_type</span> <span class='op'>==</span> <span class='self'>self</span>.<span class='ident'>lookup_atom</span>(<span class='string'>&quot;_NET_WM_WINDOW_TYPE_NORMAL&quot;</span>) {
             <span class='comment'>// compute tags of the new client</span>
             <span class='kw'>let</span> <span class='ident'>tags</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>res</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>matching</span>
                 .<span class='ident'>as_ref</span>()
@@ -1259,6 +1264,7 @@
             } <span class='kw'>else</span> {
                 <span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>default</span>()]
             };
+            <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;client added on tags: {:?}&quot;</span>, <span class='ident'>tags</span>);
             <span class='prelude-val'>Some</span>(<span class='ident'>Client</span>::<span class='ident'>new</span>(<span class='ident'>window</span>, <span class='ident'>tags</span>, <span class='ident'>props</span>))
         } <span class='kw'>else</span> {
             <span class='prelude-val'>None</span>
