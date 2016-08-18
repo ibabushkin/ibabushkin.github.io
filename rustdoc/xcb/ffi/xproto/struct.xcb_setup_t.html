@@ -69,27 +69,67 @@
     pub min_keycode: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a>,
     pub max_keycode: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a>,
     pub pad1: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 4]</a>,
-}</pre><h2 class='fields'>Fields</h2><span id='structfield.status' class='structfield'><code>status: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span><span class='stab '></span><span id='structfield.pad0' class='structfield'><code>pad0: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span><span class='stab '></span><span id='structfield.protocol_major_version' class='structfield'><code>protocol_major_version: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code>
-                           </span><span class='stab '></span><span id='structfield.protocol_minor_version' class='structfield'><code>protocol_minor_version: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code>
-                           </span><span class='stab '></span><span id='structfield.length' class='structfield'><code>length: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code>
-                           </span><span class='stab '></span><span id='structfield.release_number' class='structfield'><code>release_number: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code>
-                           </span><span class='stab '></span><span id='structfield.resource_id_base' class='structfield'><code>resource_id_base: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code>
-                           </span><span class='stab '></span><span id='structfield.resource_id_mask' class='structfield'><code>resource_id_mask: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code>
-                           </span><span class='stab '></span><span id='structfield.motion_buffer_size' class='structfield'><code>motion_buffer_size: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code>
-                           </span><span class='stab '></span><span id='structfield.vendor_len' class='structfield'><code>vendor_len: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code>
-                           </span><span class='stab '></span><span id='structfield.maximum_request_length' class='structfield'><code>maximum_request_length: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code>
-                           </span><span class='stab '></span><span id='structfield.roots_len' class='structfield'><code>roots_len: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span><span class='stab '></span><span id='structfield.pixmap_formats_len' class='structfield'><code>pixmap_formats_len: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span><span class='stab '></span><span id='structfield.image_byte_order' class='structfield'><code>image_byte_order: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span><span class='stab '></span><span id='structfield.bitmap_format_bit_order' class='structfield'><code>bitmap_format_bit_order: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span><span class='stab '></span><span id='structfield.bitmap_format_scanline_unit' class='structfield'><code>bitmap_format_scanline_unit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span><span class='stab '></span><span id='structfield.bitmap_format_scanline_pad' class='structfield'><code>bitmap_format_scanline_pad: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span><span class='stab '></span><span id='structfield.min_keycode' class='structfield'><code>min_keycode: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a></code>
-                           </span><span class='stab '></span><span id='structfield.max_keycode' class='structfield'><code>max_keycode: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a></code>
-                           </span><span class='stab '></span><span id='structfield.pad1' class='structfield'><code>pad1: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 4]</a></code>
-                           </span><span class='stab '></span></section>
+}</pre><h2 class='fields'>Fields</h2><span id='structfield.status' class='structfield'>
+                           <span id='status.v' class='invisible'>
+                           <code>status: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.pad0' class='structfield'>
+                           <span id='pad0.v' class='invisible'>
+                           <code>pad0: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.protocol_major_version' class='structfield'>
+                           <span id='protocol_major_version.v' class='invisible'>
+                           <code>protocol_major_version: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.protocol_minor_version' class='structfield'>
+                           <span id='protocol_minor_version.v' class='invisible'>
+                           <code>protocol_minor_version: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.length' class='structfield'>
+                           <span id='length.v' class='invisible'>
+                           <code>length: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.release_number' class='structfield'>
+                           <span id='release_number.v' class='invisible'>
+                           <code>release_number: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.resource_id_base' class='structfield'>
+                           <span id='resource_id_base.v' class='invisible'>
+                           <code>resource_id_base: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.resource_id_mask' class='structfield'>
+                           <span id='resource_id_mask.v' class='invisible'>
+                           <code>resource_id_mask: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.motion_buffer_size' class='structfield'>
+                           <span id='motion_buffer_size.v' class='invisible'>
+                           <code>motion_buffer_size: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.vendor_len' class='structfield'>
+                           <span id='vendor_len.v' class='invisible'>
+                           <code>vendor_len: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.maximum_request_length' class='structfield'>
+                           <span id='maximum_request_length.v' class='invisible'>
+                           <code>maximum_request_length: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.roots_len' class='structfield'>
+                           <span id='roots_len.v' class='invisible'>
+                           <code>roots_len: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.pixmap_formats_len' class='structfield'>
+                           <span id='pixmap_formats_len.v' class='invisible'>
+                           <code>pixmap_formats_len: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.image_byte_order' class='structfield'>
+                           <span id='image_byte_order.v' class='invisible'>
+                           <code>image_byte_order: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.bitmap_format_bit_order' class='structfield'>
+                           <span id='bitmap_format_bit_order.v' class='invisible'>
+                           <code>bitmap_format_bit_order: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.bitmap_format_scanline_unit' class='structfield'>
+                           <span id='bitmap_format_scanline_unit.v' class='invisible'>
+                           <code>bitmap_format_scanline_unit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.bitmap_format_scanline_pad' class='structfield'>
+                           <span id='bitmap_format_scanline_pad.v' class='invisible'>
+                           <code>bitmap_format_scanline_pad: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.min_keycode' class='structfield'>
+                           <span id='min_keycode.v' class='invisible'>
+                           <code>min_keycode: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.max_keycode' class='structfield'>
+                           <span id='max_keycode.v' class='invisible'>
+                           <code>max_keycode: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.pad1' class='structfield'>
+                           <span id='pad1.v' class='invisible'>
+                           <code>pad1: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 4]</a></code>
+                           </span></span><span class='stab '></span></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>

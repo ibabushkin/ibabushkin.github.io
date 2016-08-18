@@ -66,22 +66,36 @@ font-descent are as returned by <code>xcb_query_text_extents</code> (TODO).</p>
 
 <p>Note that using X core fonts is deprecated (but still supported) in favor of
 client-side rendering using Xft.</p>
-</div><h2 class='fields'>Fields</h2><span id='structfield.major_opcode' class='structfield'><code>major_opcode: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span><span class='stab '></span><span id='structfield.string_len' class='structfield'><code>string_len: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span><span class='stab '></span><div class='docblock'><p>The length of the <code>string</code>. Note that this parameter limited by 255 due to
+</div><h2 class='fields'>Fields</h2><span id='structfield.major_opcode' class='structfield'>
+                           <span id='major_opcode.v' class='invisible'>
+                           <code>major_opcode: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.string_len' class='structfield'>
+                           <span id='string_len.v' class='invisible'>
+                           <code>string_len: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
+                           </span></span><span class='stab '></span><div class='docblock'><p>The length of the <code>string</code>. Note that this parameter limited by 255 due to
 using 8 bits!</p>
-</div><span id='structfield.length' class='structfield'><code>length: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code>
-                           </span><span class='stab '></span><span id='structfield.drawable' class='structfield'><code>drawable: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_drawable_t.html' title='xcb::ffi::xproto::xcb_drawable_t'>xcb_drawable_t</a></code>
-                           </span><span class='stab '></span><div class='docblock'><p>The drawable (Window or Pixmap) to draw text on.</p>
-</div><span id='structfield.gc' class='structfield'><code>gc: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_gcontext_t.html' title='xcb::ffi::xproto::xcb_gcontext_t'>xcb_gcontext_t</a></code>
-                           </span><span class='stab '></span><div class='docblock'><p>The graphics context to use.</p>
+</div><span id='structfield.length' class='structfield'>
+                           <span id='length.v' class='invisible'>
+                           <code>length: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.drawable' class='structfield'>
+                           <span id='drawable.v' class='invisible'>
+                           <code>drawable: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_drawable_t.html' title='xcb::ffi::xproto::xcb_drawable_t'>xcb_drawable_t</a></code>
+                           </span></span><span class='stab '></span><div class='docblock'><p>The drawable (Window or Pixmap) to draw text on.</p>
+</div><span id='structfield.gc' class='structfield'>
+                           <span id='gc.v' class='invisible'>
+                           <code>gc: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_gcontext_t.html' title='xcb::ffi::xproto::xcb_gcontext_t'>xcb_gcontext_t</a></code>
+                           </span></span><span class='stab '></span><div class='docblock'><p>The graphics context to use.</p>
 
 <p>The following graphics context components are used: plane-mask, foreground,
 background, font, subwindow-mode, clip-x-origin, clip-y-origin, and clip-mask.</p>
-</div><span id='structfield.x' class='structfield'><code>x: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a></code>
-                           </span><span class='stab '></span><div class='docblock'><p>The x coordinate of the first character, relative to the origin of <code>drawable</code>.</p>
-</div><span id='structfield.y' class='structfield'><code>y: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a></code>
-                           </span><span class='stab '></span><div class='docblock'><p>The y coordinate of the first character, relative to the origin of <code>drawable</code>.</p>
+</div><span id='structfield.x' class='structfield'>
+                           <span id='x.v' class='invisible'>
+                           <code>x: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a></code>
+                           </span></span><span class='stab '></span><div class='docblock'><p>The x coordinate of the first character, relative to the origin of <code>drawable</code>.</p>
+</div><span id='structfield.y' class='structfield'>
+                           <span id='y.v' class='invisible'>
+                           <code>y: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i16.html'>i16</a></code>
+                           </span></span><span class='stab '></span><div class='docblock'><p>The y coordinate of the first character, relative to the origin of <code>drawable</code>.</p>
 </div></section>
     <section id='search' class="content hidden"></section>
 

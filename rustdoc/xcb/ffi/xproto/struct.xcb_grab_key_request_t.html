@@ -90,30 +90,48 @@ and max_keycode in the connection setup, or a BadValue error results.</p>
 <p>If some other client has issued a XGrabKey with the same key combination on the same window, a BadAccess
 error results.  When using AnyModifier or AnyKey, the request fails completely, and a BadAccess error
 results (no grabs are established) if there is a conflicting grab for any combination.</p>
-</div><h2 class='fields'>Fields</h2><span id='structfield.major_opcode' class='structfield'><code>major_opcode: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span><span class='stab '></span><span id='structfield.owner_events' class='structfield'><code>owner_events: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span><span class='stab '></span><div class='docblock'><p>If 1, the <code>grab_window</code> will still get the pointer events. If 0, events are not
+</div><h2 class='fields'>Fields</h2><span id='structfield.major_opcode' class='structfield'>
+                           <span id='major_opcode.v' class='invisible'>
+                           <code>major_opcode: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.owner_events' class='structfield'>
+                           <span id='owner_events.v' class='invisible'>
+                           <code>owner_events: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
+                           </span></span><span class='stab '></span><div class='docblock'><p>If 1, the <code>grab_window</code> will still get the pointer events. If 0, events are not
 reported to the <code>grab_window</code>.</p>
-</div><span id='structfield.length' class='structfield'><code>length: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code>
-                           </span><span class='stab '></span><span id='structfield.grab_window' class='structfield'><code>grab_window: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_window_t.html' title='xcb::ffi::xproto::xcb_window_t'>xcb_window_t</a></code>
-                           </span><span class='stab '></span><div class='docblock'><p>Specifies the window on which the pointer should be grabbed.</p>
-</div><span id='structfield.modifiers' class='structfield'><code>modifiers: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code>
-                           </span><span class='stab '></span><div class='docblock'><p>The modifiers to grab.</p>
+</div><span id='structfield.length' class='structfield'>
+                           <span id='length.v' class='invisible'>
+                           <code>length: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code>
+                           </span></span><span class='stab '></span><span id='structfield.grab_window' class='structfield'>
+                           <span id='grab_window.v' class='invisible'>
+                           <code>grab_window: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_window_t.html' title='xcb::ffi::xproto::xcb_window_t'>xcb_window_t</a></code>
+                           </span></span><span class='stab '></span><div class='docblock'><p>Specifies the window on which the pointer should be grabbed.</p>
+</div><span id='structfield.modifiers' class='structfield'>
+                           <span id='modifiers.v' class='invisible'>
+                           <code>modifiers: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code>
+                           </span></span><span class='stab '></span><div class='docblock'><p>The modifiers to grab.</p>
 
 <p>Using the special value <code>XCB_MOD_MASK_ANY</code> means grab the pointer with all
 possible modifier combinations.</p>
-</div><span id='structfield.key' class='structfield'><code>key: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a></code>
-                           </span><span class='stab '></span><div class='docblock'><p>The keycode of the key to grab.</p>
+</div><span id='structfield.key' class='structfield'>
+                           <span id='key.v' class='invisible'>
+                           <code>key: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a></code>
+                           </span></span><span class='stab '></span><div class='docblock'><p>The keycode of the key to grab.</p>
 
 <p>The special value <code>XCB_GRAB_ANY</code> means grab any key.</p>
-</div><span id='structfield.pointer_mode' class='structfield'><code>pointer_mode: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span><span class='stab '></span><div class='docblock'></div><span id='structfield.keyboard_mode' class='structfield'><code>keyboard_mode: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span><span class='stab '></span><div class='docblock'></div><span id='structfield.pad0' class='structfield'><code>pad0: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 3]</a></code>
-                           </span><span class='stab '></span><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='struct' href='../../../xcb/ffi/xproto/struct.xcb_grab_key_request_t.html' title='xcb::ffi::xproto::xcb_grab_key_request_t'>xcb_grab_key_request_t</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-9304' class='srclink' href='../../../src/xcb/ffi/xproto.rs.html#2785' title='goto source code'>[src]</a></span></h3>
+</div><span id='structfield.pointer_mode' class='structfield'>
+                           <span id='pointer_mode.v' class='invisible'>
+                           <code>pointer_mode: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
+                           </span></span><span class='stab '></span><div class='docblock'></div><span id='structfield.keyboard_mode' class='structfield'>
+                           <span id='keyboard_mode.v' class='invisible'>
+                           <code>keyboard_mode: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
+                           </span></span><span class='stab '></span><div class='docblock'></div><span id='structfield.pad0' class='structfield'>
+                           <span id='pad0.v' class='invisible'>
+                           <code>pad0: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 3]</a></code>
+                           </span></span><span class='stab '></span><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='struct' href='../../../xcb/ffi/xproto/struct.xcb_grab_key_request_t.html' title='xcb::ffi::xproto::xcb_grab_key_request_t'>xcb_grab_key_request_t</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-9304' class='srclink' href='../../../src/xcb/ffi/xproto.rs.html#2785' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../../../xcb/ffi/xproto/struct.xcb_grab_key_request_t.html' title='xcb::ffi::xproto::xcb_grab_key_request_t'>xcb_grab_key_request_t</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-9305' class='srclink' href='../../../src/xcb/ffi/xproto.rs.html#2786-2788' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../../../xcb/ffi/xproto/struct.xcb_grab_key_request_t.html' title='xcb::ffi::xproto::xcb_grab_key_request_t'>xcb_grab_key_request_t</a></code></h4>
+<div class='impl-items'><h4 id='method.clone' class='method'><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../../../xcb/ffi/xproto/struct.xcb_grab_key_request_t.html' title='xcb::ffi::xproto::xcb_grab_key_request_t'>xcb_grab_key_request_t</a></code></span></h4>
 <div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
-</div><h4 id='method.clone_from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></h4>
+</div><h4 id='method.clone_from' class='method'><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
 <div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
 </div></div></section>
     <section id='search' class="content hidden"></section>
