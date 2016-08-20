@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">body{margin:40px auto;max-width:700px;text-align:justify;line-height:1.6;font-size:16px;color:#444;padding:0 10px}h1,h2,h3{line-height:1.2}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+</head>
+<body>
+<a href="index">back home</a>
+<h1>/dev/thoughtbin</h1>
+<h1 id="fixing-gabelstaplerwm-to-make-it-production-ready-and-other-tweaks">Fixing gabelstaplerwm to make it production-ready and other tweaks</h1>
+<p>Last time I talked about firefox causing issues in gabelstaplerwm. Those have been fixed by a magical driver update. Yay I guess?</p>
+<p>Now, ironically, browsers remain the main focal point of weird bugs and behaviours in this piece of software. We'll traverse those in chronological order and look at other things I did in the past... was it two weeks?</p>
+<h2 id="act-i-uzbl-freezing-the-window-manager">Act I: <code>uzbl</code> freezing the window manager</h2>
+<p>First issue - the browser <code>uzbl</code> manages to freeze the window manager when a specific usage pattern is encountered. Attaching <code>gdb</code> yields an interesting result: the process receives a <code>SIGTTOU</code> while it's executing... a <code>poll()</code> call in XCB's event waiting routine. Now that's unexpected, after all the process isn't accessing the TTY it was started on at that point in time.</p>
+<p>Now after some conversation, a few beers and some experimentation I got on the right track: The <code>uzbl</code> instance that I used to trigger the bug was spawned as a child of the window manager (with some <code>dmenu</code> instance inbetween). And... stdin, stdout and stderr are inherited from the parent process in such a case. So essentially, uzbl was causing the <code>SIGTTOU</code> to be sent, and locked up both the window manager and itself. Now why is this always happening at the same address in the window manager's code? The answer is simple once you realize that the user<sup>M</sup>M<sup>M</sup>M I caused the offending behaviour of the browser in the first place. Thus, the window manager was waiting for events using a <code>poll()</code>. This meant that the kernel has put the process to sleep at that time and it didn't get any chance to do anything else before being delivered a nice warm signal causing it to stop. The fix is trivial at this point: redirect your output. Luckily, this is the intended usage of <code>gabelstaplerwm</code> anyway, but I hadn't set that up at that time.</p>
+<h2 id="act-ii-display-issues-with-gnupgs-gui">Act II: Display issues with GnuPG's GUI</h2>
+<p>This one was due to the GTK dialog box not playing well when it's wishes of being treated specially didn't receive proper attention. This triggered me to rewrite the property lookup code to write a nifty generic-set based implementation:</p>
+<div class="sourceCode"><pre class="sourceCode rust"><code class="sourceCode rust"><span class="co">/// get a set of properties for a window, in parallel</span>
+<span class="kw">fn</span> get_property_set(&amp;<span class="kw">self</span>, window: xproto::Window,
+                    atom_response_pairs: <span class="dt">Vec</span>&lt;(xproto::Atom, xproto::Atom)&gt;)
+    -&gt; <span class="dt">Vec</span>&lt;ClientProp&gt; {
+    <span class="kw">let</span> <span class="kw">mut</span> cookies: <span class="dt">Vec</span>&lt;_&gt; = atom_response_pairs
+        .iter()
+        .map(|&amp;(atom, response_type)|
+            xproto::get_property(
+                <span class="kw">self</span>.con, <span class="cn">false</span>, window, atom, response_type, <span class="dv">0</span>, <span class="dv">0xffffffff</span>
+            )
+        )
+        .collect();
+    <span class="kw">let</span> res = cookies
+        .drain(..)
+        .zip(atom_response_pairs.iter())
+        .map(|(cookie, &amp;(_, response_type))|
+            <span class="kw">match</span> response_type {
+                xproto::ATOM_ATOM =&gt; <span class="kw">if</span> <span class="kw">let</span> <span class="cn">Ok</span>(r) = cookie.get_reply() {
+                    <span class="kw">let</span> atoms: &amp;[xproto::Atom] = r.value();
+                    <span class="kw">if</span> atoms.len() == <span class="dv">0</span> {
+                        ClientProp::NoProp
+                    } <span class="kw">else</span> {
+                        ClientProp::PropAtom(atoms[<span class="dv">0</span>])
+                    }
+                } <span class="kw">else</span> {
+                    ClientProp::NoProp
+                },
+                xproto::ATOM_STRING =&gt; <span class="kw">if</span> <span class="kw">let</span> <span class="cn">Ok</span>(r) = cookie.get_reply() {
+                    <span class="kw">let</span> raw: &amp;[<span class="dt">c_char</span>] = r.value();
+                    <span class="kw">let</span> <span class="kw">mut</span> res = <span class="dt">Vec</span>::new();
+                    <span class="kw">for</span> c <span class="kw">in</span> raw.split(|ch| *ch == <span class="dv">0</span>) {
+                        <span class="kw">if</span> c.len() &gt; <span class="dv">0</span> {
+                            <span class="kw">unsafe</span> {
+                                <span class="kw">if</span> <span class="kw">let</span> <span class="cn">Ok</span>(cl) = <span class="dt">str</span>::from_utf8(
+                                    CStr::from_ptr(c.as_ptr()).to_bytes()) {
+                                    res.push(cl.to_owned());
+                                }
+                            }
+                        }
+                    }
+                    ClientProp::PropString(res)
+                } <span class="kw">else</span> {
+                    ClientProp::NoProp
+                },
+                _ =&gt; ClientProp::NoProp,
+            }
+        )
+        .collect();
+    res
+}</code></pre></div>
+<p>This approach essentially lets me pull multiple properties with interleaved requests and takes care of all the heavy lifting and datatype wrapping. It is surely not the holy grail of elegant Rust code, but it does it's job reasonably well, making property lookup for new clients pretty straightforward.</p>
+<h2 id="act-iii-firefox-unable-to-display-some-dialog-boxes">Act III: Firefox unable to display some dialog boxes</h2>
+<p>This issue is still unresolved and needs more work from my side. Just thought I'd mention it's existence for an ironic effect.</p>
+<h2 id="act-iv-vdrift-freezing-the-window-manager">Act IV: <code>vdrift</code> freezing the window manager</h2>
+<p>Yes, I sometimes play computer games. In this particular case, the window attribute the window manager relies on to decide whether the window is to be mapped when it's type is <code>_ǸET_WM_TYPE_NORMAL</code> seems to be set only after the window sends a request to be mapped. This still needs to be solved. Actually, I have forgotten an act in this magnificent play of weird interaction between software components: the attribute in question is <code>_NET_WM_NAME</code>. It is checked only to prevent some weird dummy windows from getting client structures and not going away.</p>
+<h2 id="different-storyline-more-homegrown-tools-for-my-or-your-desktop">Different storyline: more homegrown tools for my (or your) desktop</h2>
+<p>I have written a small multiplexing tool to pipe multiple sources of data into a bar. This works by spawning a thread for each source of data and performing blocking reads on the source (or some semantic equivalent) and send new values over a channel to the main thread that manages updating and outputting a formatted version of all data units. However, while writing this in Rust I noticed a few things:</p>
+<ul>
+<li>using a <code>BufReader</code> and getting blocking semantics is... awkward. As in, had-to-call-to-libc awkward.</li>
+<li>using <code>poll(3)</code> on a FIFO is also pretty awkward. If no process is currently attached to the input end of the FIFO, <code>poll</code> returns immediately and signals a <code>POLLHUP</code>. Opening the file descriptor in read-write mode avoids this issue.</li>
+<li>some parts of Rust's standard libary still need some love.</li>
+</ul>
+<p>The whole thing goes by the name of <code>bartender</code>, read the <a href="https://github.com/ibabushkin/bartender">README</a> for more information.</p>
+<a href="index">back home</a>
+</body>
+</html>
