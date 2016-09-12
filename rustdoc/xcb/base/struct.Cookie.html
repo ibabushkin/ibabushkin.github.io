@@ -47,10 +47,10 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-73' class='srclink' href='../../src/xcb/base.rs.html#168-172' title='goto source code'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct Cookie&lt;T:&nbsp;<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a>&gt; {
+               </span><a id='src-73' class='srclink' href='../../src/xcb/base.rs.html#178-182' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct Cookie&lt;'a,&nbsp;T:&nbsp;<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a>&gt; {
     pub cookie: T,
-    pub conn: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='enum' href='../../xcb/ffi/base/enum.xcb_connection_t.html' title='xcb::ffi::base::xcb_connection_t'>xcb_connection_t</a>,
+    pub conn: &amp;'a <a class='struct' href='../../xcb/base/struct.Connection.html' title='xcb::base::Connection'>Connection</a>,
     pub checked: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>,
 }</pre><div class='docblock'><p>wraps a cookie as returned by a request function.
 Instantiations of <code>Cookie</code> that are not <code>VoidCookie</code>
@@ -60,7 +60,7 @@ should provide a <code>get_reply</code> method to return a <code>Reply</code></p
                            <code>cookie: T</code>
                            </span></span><span class='stab '></span><span id='structfield.conn' class='structfield'>
                            <span id='conn.v' class='invisible'>
-                           <code>conn: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='enum' href='../../xcb/ffi/base/enum.xcb_connection_t.html' title='xcb::ffi::base::xcb_connection_t'>xcb_connection_t</a></code>
+                           <code>conn: &amp;'a <a class='struct' href='../../xcb/base/struct.Connection.html' title='xcb::base::Connection'>Connection</a></code>
                            </span></span><span class='stab '></span><span id='structfield.checked' class='structfield'>
                            <span id='checked.v' class='invisible'>
                            <code>checked: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code>

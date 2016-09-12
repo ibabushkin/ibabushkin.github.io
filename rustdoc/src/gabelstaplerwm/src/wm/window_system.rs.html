@@ -736,6 +736,63 @@
 <span id="692">692</span>
 <span id="693">693</span>
 <span id="694">694</span>
+<span id="695">695</span>
+<span id="696">696</span>
+<span id="697">697</span>
+<span id="698">698</span>
+<span id="699">699</span>
+<span id="700">700</span>
+<span id="701">701</span>
+<span id="702">702</span>
+<span id="703">703</span>
+<span id="704">704</span>
+<span id="705">705</span>
+<span id="706">706</span>
+<span id="707">707</span>
+<span id="708">708</span>
+<span id="709">709</span>
+<span id="710">710</span>
+<span id="711">711</span>
+<span id="712">712</span>
+<span id="713">713</span>
+<span id="714">714</span>
+<span id="715">715</span>
+<span id="716">716</span>
+<span id="717">717</span>
+<span id="718">718</span>
+<span id="719">719</span>
+<span id="720">720</span>
+<span id="721">721</span>
+<span id="722">722</span>
+<span id="723">723</span>
+<span id="724">724</span>
+<span id="725">725</span>
+<span id="726">726</span>
+<span id="727">727</span>
+<span id="728">728</span>
+<span id="729">729</span>
+<span id="730">730</span>
+<span id="731">731</span>
+<span id="732">732</span>
+<span id="733">733</span>
+<span id="734">734</span>
+<span id="735">735</span>
+<span id="736">736</span>
+<span id="737">737</span>
+<span id="738">738</span>
+<span id="739">739</span>
+<span id="740">740</span>
+<span id="741">741</span>
+<span id="742">742</span>
+<span id="743">743</span>
+<span id="744">744</span>
+<span id="745">745</span>
+<span id="746">746</span>
+<span id="747">747</span>
+<span id="748">748</span>
+<span id="749">749</span>
+<span id="750">750</span>
+<span id="751">751</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>c_char</span>;
 
@@ -1094,6 +1151,9 @@
             <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>send_event</span>(<span class='ident'>new</span>, <span class='string'>&quot;WM_TAKE_FOCUS&quot;</span>) {
                 <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;client didn&#39;t acept WM_TAKE_FOCUS message&quot;</span>);
             }
+            <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>send_event</span>(<span class='ident'>new</span>, <span class='string'>&quot;_NET_WM_TAKE_FOCUS&quot;</span>) {
+                <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;client didn&#39;t acept _NET_WM_TAKE_FOCUS message&quot;</span>);
+            }
             <span class='kw'>let</span> <span class='ident'>cookie</span> <span class='op'>=</span>
                 <span class='ident'>xproto</span>::<span class='ident'>set_input_focus</span>(<span class='self'>self</span>.<span class='ident'>con</span>,
                                         <span class='ident'>xproto</span>::<span class='ident'>INPUT_FOCUS_POINTER_ROOT</span> <span class='kw'>as</span> <span class='ident'>u8</span>,
@@ -1134,18 +1194,30 @@
     <span class='doccomment'>/// Handle an event received from the X server.</span>
     <span class='kw'>fn</span> <span class='ident'>handle</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>event</span>: <span class='ident'>base</span>::<span class='ident'>GenericEvent</span>) {
         <span class='kw'>match</span> <span class='ident'>event</span>.<span class='ident'>response_type</span>() {
-            <span class='ident'>xkb</span>::<span class='ident'>STATE_NOTIFY</span> <span class='op'>=&gt;</span>
-                <span class='self'>self</span>.<span class='ident'>handle_state_notify</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>)),
-            <span class='ident'>xproto</span>::<span class='ident'>PROPERTY_NOTIFY</span> <span class='op'>=&gt;</span>
-                <span class='self'>self</span>.<span class='ident'>handle_property_notify</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>)),
-            <span class='ident'>xproto</span>::<span class='ident'>CLIENT_MESSAGE</span> <span class='op'>=&gt;</span>
-                <span class='self'>self</span>.<span class='ident'>handle_client_message</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>)),
-            <span class='ident'>xproto</span>::<span class='ident'>DESTROY_NOTIFY</span> <span class='op'>=&gt;</span>
-                <span class='self'>self</span>.<span class='ident'>handle_destroy_notify</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>)),
-            <span class='ident'>xproto</span>::<span class='ident'>CONFIGURE_REQUEST</span> <span class='op'>=&gt;</span>
-                <span class='self'>self</span>.<span class='ident'>handle_configure_request</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>)),
-            <span class='ident'>xproto</span>::<span class='ident'>MAP_REQUEST</span> <span class='op'>=&gt;</span>
-                <span class='self'>self</span>.<span class='ident'>handle_map_request</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>)),
+            <span class='ident'>xkb</span>::<span class='ident'>STATE_NOTIFY</span> <span class='op'>=&gt;</span> {
+                <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;received event: STATE_NOTIFY&quot;</span>);
+                <span class='self'>self</span>.<span class='ident'>handle_state_notify</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>))
+            },
+            <span class='ident'>xproto</span>::<span class='ident'>PROPERTY_NOTIFY</span> <span class='op'>=&gt;</span> {
+                <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;received event: PROPERTY_NOTIFY&quot;</span>);
+                <span class='self'>self</span>.<span class='ident'>handle_property_notify</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>))
+            },
+            <span class='ident'>xproto</span>::<span class='ident'>CLIENT_MESSAGE</span> <span class='op'>=&gt;</span> {
+                <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;received event: CLIENT_MESSAGE&quot;</span>);
+                <span class='self'>self</span>.<span class='ident'>handle_client_message</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>))
+            },
+            <span class='ident'>xproto</span>::<span class='ident'>DESTROY_NOTIFY</span> <span class='op'>=&gt;</span> {
+                <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;received event: DESTROY_NOTIFY&quot;</span>);
+                <span class='self'>self</span>.<span class='ident'>handle_destroy_notify</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>))
+            },
+            <span class='ident'>xproto</span>::<span class='ident'>CONFIGURE_REQUEST</span> <span class='op'>=&gt;</span> {
+                <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;received event: CONFIGURE_REQUEST&quot;</span>);
+                <span class='self'>self</span>.<span class='ident'>handle_configure_request</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>))
+            },
+            <span class='ident'>xproto</span>::<span class='ident'>MAP_REQUEST</span> <span class='op'>=&gt;</span> {
+                <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;received event: MAP_REQUEST&quot;</span>);
+                <span class='self'>self</span>.<span class='ident'>handle_map_request</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>))
+            },
             <span class='ident'>num</span> <span class='op'>=&gt;</span> <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;ignoring event: {}&quot;</span>, <span class='ident'>num</span>),
         }
     }
@@ -1335,7 +1407,7 @@
         <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>cookies</span>
             .<span class='ident'>drain</span>(..)
             .<span class='ident'>zip</span>(<span class='ident'>atom_response_pairs</span>.<span class='ident'>iter</span>())
-            .<span class='ident'>map</span>(<span class='op'>|</span>(<span class='ident'>cookie</span>, <span class='kw-2'>&amp;</span>(_, <span class='ident'>response_type</span>))<span class='op'>|</span>
+            .<span class='ident'>map</span>(<span class='op'>|</span>(<span class='ident'>cookie</span>, <span class='kw-2'>&amp;</span>(_, <span class='ident'>response_type</span>))<span class='op'>|</span> <span class='comment'>// TODO: use the returned response type</span>
                 <span class='kw'>match</span> <span class='ident'>response_type</span> {
                     <span class='ident'>xproto</span>::<span class='ident'>ATOM_ATOM</span> <span class='op'>=&gt;</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>r</span>) <span class='op'>=</span> <span class='ident'>cookie</span>.<span class='ident'>get_reply</span>() {
                         <span class='kw'>let</span> <span class='ident'>atoms</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>xproto</span>::<span class='ident'>Atom</span>] <span class='op'>=</span> <span class='ident'>r</span>.<span class='ident'>value</span>();
@@ -1350,12 +1422,16 @@
                     <span class='ident'>xproto</span>::<span class='ident'>ATOM_STRING</span> <span class='op'>=&gt;</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>r</span>) <span class='op'>=</span> <span class='ident'>cookie</span>.<span class='ident'>get_reply</span>() {
                         <span class='kw'>let</span> <span class='ident'>raw</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>c_char</span>] <span class='op'>=</span> <span class='ident'>r</span>.<span class='ident'>value</span>();
                         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>new</span>();
+                        <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;raw property data: {:?}, length: {}, type: {}&quot;</span>,
+                               <span class='ident'>raw</span>, <span class='ident'>r</span>.<span class='ident'>value_len</span>(), <span class='ident'>r</span>.<span class='ident'>type_</span>());
                         <span class='kw'>for</span> <span class='ident'>c</span> <span class='kw'>in</span> <span class='ident'>raw</span>.<span class='ident'>split</span>(<span class='op'>|</span><span class='ident'>ch</span><span class='op'>|</span> <span class='op'>*</span><span class='ident'>ch</span> <span class='op'>==</span> <span class='number'>0</span>) {
                             <span class='kw'>if</span> <span class='ident'>c</span>.<span class='ident'>len</span>() <span class='op'>&gt;</span> <span class='number'>0</span> {
                                 <span class='kw'>unsafe</span> {
                                     <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>cl</span>) <span class='op'>=</span> <span class='ident'>str</span>::<span class='ident'>from_utf8</span>(
                                         <span class='ident'>CStr</span>::<span class='ident'>from_ptr</span>(<span class='ident'>c</span>.<span class='ident'>as_ptr</span>()).<span class='ident'>to_bytes</span>()) {
                                         <span class='ident'>res</span>.<span class='ident'>push</span>(<span class='ident'>cl</span>.<span class='ident'>to_owned</span>());
+                                    } <span class='kw'>else</span> {
+                                        <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;decoding utf-8 from property failed&quot;</span>);
                                     }
                                 }
                             }
@@ -1377,19 +1453,28 @@
             (<span class='self'>self</span>.<span class='ident'>lookup_atom</span>(<span class='string'>&quot;_NET_WM_WINDOW_TYPE&quot;</span>), <span class='ident'>xproto</span>::<span class='ident'>ATOM_ATOM</span>),
             (<span class='self'>self</span>.<span class='ident'>lookup_atom</span>(<span class='string'>&quot;_NET_WM_STATE&quot;</span>), <span class='ident'>xproto</span>::<span class='ident'>ATOM_ATOM</span>),
             (<span class='ident'>xproto</span>::<span class='ident'>ATOM_WM_NAME</span>, <span class='ident'>xproto</span>::<span class='ident'>ATOM_STRING</span>),
-            (<span class='ident'>xproto</span>::<span class='ident'>ATOM_WM_CLASS</span>, <span class='ident'>xproto</span>::<span class='ident'>ATOM_STRING</span>)
+            (<span class='self'>self</span>.<span class='ident'>lookup_atom</span>(<span class='string'>&quot;_NET_WM_NAME&quot;</span>), <span class='ident'>xproto</span>::<span class='ident'>ATOM_STRING</span>),
+            (<span class='ident'>xproto</span>::<span class='ident'>ATOM_WM_CLASS</span>, <span class='ident'>xproto</span>::<span class='ident'>ATOM_STRING</span>),
+            (<span class='self'>self</span>.<span class='ident'>lookup_atom</span>(<span class='string'>&quot;_NET_WM_CLASS&quot;</span>), <span class='ident'>xproto</span>::<span class='ident'>ATOM_STRING</span>)
         ]);
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>props</span> <span class='op'>=</span> <span class='ident'>properties</span>.<span class='ident'>drain</span>(..);
 
         <span class='kw'>let</span> <span class='ident'>window_type</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>ClientProp</span>::<span class='ident'>PropAtom</span>(<span class='ident'>t</span>)) <span class='op'>=</span> <span class='ident'>props</span>.<span class='ident'>next</span>() {
             <span class='ident'>t</span>
         } <span class='kw'>else</span> { <span class='comment'>// assume reasonable default</span>
+            <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;_NET_WM_WINDOW_TYPE: not set, assuming _NET_WM_WINDOW_TYPE_NORMAL&quot;</span>);
             <span class='self'>self</span>.<span class='ident'>lookup_atom</span>(<span class='string'>&quot;_NET_WM_WINDOW_TYPE_NORMAL&quot;</span>)
         };
 
-        <span class='kw'>let</span> <span class='ident'>state</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>ClientProp</span>::<span class='ident'>PropAtom</span>(<span class='ident'>s</span>)) <span class='op'>=</span> <span class='ident'>props</span>.<span class='ident'>next</span>() {
+        <span class='kw'>let</span> <span class='ident'>state_iter</span> <span class='op'>=</span> <span class='ident'>props</span>.<span class='ident'>next</span>();
+        <span class='kw'>let</span> <span class='ident'>state</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>ClientProp</span>::<span class='ident'>PropAtom</span>(<span class='ident'>s</span>)) <span class='op'>=</span> <span class='ident'>state_iter</span> {
             <span class='prelude-val'>Some</span>(<span class='ident'>s</span>)
         } <span class='kw'>else</span> {
+            <span class='kw'>if</span> <span class='ident'>state_iter</span> <span class='op'>==</span> <span class='prelude-val'>Some</span>(<span class='ident'>ClientProp</span>::<span class='ident'>NoProp</span>) {
+                <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;_NET_WM_STATE: not set&quot;</span>);
+            } <span class='kw'>else</span> {
+                <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;_NET_WM_STATE: unexpected response type&quot;</span>);
+            }
             <span class='prelude-val'>None</span>
         };
 
@@ -1397,22 +1482,51 @@
             <span class='kw'>if</span> <span class='ident'>n</span>.<span class='ident'>len</span>() <span class='op'>&gt;=</span> <span class='number'>1</span> {
                 <span class='ident'>n</span>.<span class='ident'>remove</span>(<span class='number'>0</span>)
             } <span class='kw'>else</span> {
+                <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;WM_NAME: no value(s)&quot;</span>);
                 <span class='ident'>String</span>::<span class='ident'>new</span>()
             }
         } <span class='kw'>else</span> {
+            <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;WM_NAME: unexpected or no response type&quot;</span>);
             <span class='ident'>String</span>::<span class='ident'>new</span>()
         };
 
-        <span class='kw'>let</span> <span class='ident'>class</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>ClientProp</span>::<span class='ident'>PropString</span>(<span class='ident'>c</span>)) <span class='op'>=</span> <span class='ident'>props</span>.<span class='ident'>next</span>() {
+        <span class='kw'>let</span> <span class='ident'>name2</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>ClientProp</span>::<span class='ident'>PropString</span>(<span class='kw-2'>mut</span> <span class='ident'>n</span>)) <span class='op'>=</span> <span class='ident'>props</span>.<span class='ident'>next</span>() {
+            <span class='kw'>if</span> <span class='ident'>n</span>.<span class='ident'>len</span>() <span class='op'>&gt;=</span> <span class='number'>1</span> {
+                <span class='ident'>n</span>.<span class='ident'>remove</span>(<span class='number'>0</span>)
+            } <span class='kw'>else</span> {
+                <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;_NET_WM_NAME: no value(s)&quot;</span>);
+                <span class='ident'>String</span>::<span class='ident'>new</span>()
+            }
+        } <span class='kw'>else</span> {
+            <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;_NET_WM_NAME: unexpected or no response type&quot;</span>);
+            <span class='ident'>String</span>::<span class='ident'>new</span>()
+        };
+
+        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>class</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>ClientProp</span>::<span class='ident'>PropString</span>(<span class='ident'>c</span>)) <span class='op'>=</span> <span class='ident'>props</span>.<span class='ident'>next</span>() {
             <span class='ident'>c</span>
         } <span class='kw'>else</span> {
+            <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;WM_CLASS: unexpected or no response type&quot;</span>);
             <span class='ident'>Vec</span>::<span class='ident'>new</span>()
         };
+
+        <span class='kw'>let</span> <span class='ident'>class2_iter</span> <span class='op'>=</span> <span class='ident'>props</span>.<span class='ident'>next</span>();
+        <span class='kw'>let</span> <span class='ident'>class2</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>ClientProp</span>::<span class='ident'>PropString</span>(<span class='ident'>c</span>)) <span class='op'>=</span> <span class='ident'>class2_iter</span> {
+            <span class='ident'>c</span>
+        } <span class='kw'>else</span> {
+            <span class='kw'>if</span> <span class='ident'>class2_iter</span> <span class='op'>==</span> <span class='prelude-val'>Some</span>(<span class='ident'>ClientProp</span>::<span class='ident'>NoProp</span>) {
+                <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;_NET_WM_CLASS: not set&quot;</span>);
+            } <span class='kw'>else</span> {
+                <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;_NET_WM_CLASS: unexpected response type&quot;</span>);
+            }
+            <span class='ident'>Vec</span>::<span class='ident'>new</span>()
+        };
+
+        <span class='ident'>class</span>.<span class='ident'>extend</span>(<span class='ident'>class2</span>);
 
         <span class='ident'>ClientProps</span> {
             <span class='ident'>window_type</span>: <span class='ident'>window_type</span>,
             <span class='ident'>state</span>: <span class='ident'>state</span>,
-            <span class='ident'>name</span>: <span class='ident'>name</span>,
+            <span class='ident'>name</span>: <span class='kw'>if</span> <span class='ident'>name2</span> <span class='op'>==</span> <span class='string'>&quot;&quot;</span> { <span class='ident'>name</span> } <span class='kw'>else</span> { <span class='ident'>name2</span> },
             <span class='ident'>class</span>: <span class='ident'>class</span>,
         }
     }

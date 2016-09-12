@@ -332,7 +332,7 @@
 <span class='doccomment'>/// Each window has one or more tags, and you can display zero or more tags.</span>
 <span class='doccomment'>/// This means that all windows having at least one of the tags of the</span>
 <span class='doccomment'>/// *tagset* to be displayed attached get displayed.</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>Clone</span>, <span class='ident'>Hash</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>Hash</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>Tag</span> {
     <span class='doccomment'>/// the web tag - for browsers and stuff</span>
     <span class='ident'>Web</span>,
@@ -389,7 +389,7 @@
 <span class='doccomment'>/// is currently impossible. This can be lifted in the future, if we decide to</span>
 <span class='doccomment'>/// regrab on every mode change, but that&#39;s a rather expensive operation, given</span>
 <span class='doccomment'>/// the currrent, `HashMap`-based design.</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Hash</span>, <span class='ident'>Eq</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Clone</span>, <span class='ident'>Copy</span>, <span class='ident'>Debug</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Copy</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>Hash</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>Mode</span> {
     <span class='doccomment'>/// normal mode doing normal stuff</span>
     <span class='ident'>Normal</span>,

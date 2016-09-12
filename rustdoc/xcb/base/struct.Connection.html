@@ -47,13 +47,13 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-116' class='srclink' href='../../src/xcb/base.rs.html#253-257' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-119' class='srclink' href='../../src/xcb/base.rs.html#273-277' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Connection {
     // some fields omitted
 }</pre><div class='docblock'><p>xcb::Connection handles communication with the X server.
 It wraps an <code>xcb_connection_t</code> object and
 will call <code>xcb_disconnect</code> when the <code>Connection</code> goes out of scope</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../../xcb/base/struct.Connection.html' title='xcb::base::Connection'>Connection</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-118' class='srclink' href='../../src/xcb/base.rs.html#259-593' title='goto source code'>[src]</a></span></h3>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../../xcb/base/struct.Connection.html' title='xcb::base::Connection'>Connection</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-121' class='srclink' href='../../src/xcb/base.rs.html#285-619' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.flush' class='method'><span id='flush.v' class='invisible'><code>fn <a href='#method.flush' class='fnname'>flush</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></span></h4>
 <div class='docblock'><p>Forces any buffered output to be written to the server. Blocks
 until the write is complete.</p>
@@ -179,7 +179,7 @@ authorization auth.
 The second member of the returned tuple is the preferred screen, or 0</p>
 </div><h4 id='method.from_raw_conn' class='method'><span id='from_raw_conn.v' class='invisible'><code>unsafe fn <a href='#method.from_raw_conn' class='fnname'>from_raw_conn</a>(conn: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='enum' href='../../xcb/ffi/base/enum.xcb_connection_t.html' title='xcb::ffi::base::xcb_connection_t'>xcb_connection_t</a>) -&gt; <a class='struct' href='../../xcb/base/struct.Connection.html' title='xcb::base::Connection'>Connection</a></code></span></h4>
 <div class='docblock'><p>builds a new Connection object from an available connection</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../../xcb/base/struct.Connection.html' title='xcb::base::Connection'>Connection</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-192' class='srclink' href='../../src/xcb/base.rs.html#595-614' title='goto source code'>[src]</a></span></h3>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../../xcb/base/struct.Connection.html' title='xcb::base::Connection'>Connection</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-195' class='srclink' href='../../src/xcb/base.rs.html#621-640' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.drop' class='method'><span id='drop.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></span></h4>
 <div class='docblock'><p>A method called when the value goes out of scope. <a href="https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop">Read more</a></p>
 </div></div></section>
