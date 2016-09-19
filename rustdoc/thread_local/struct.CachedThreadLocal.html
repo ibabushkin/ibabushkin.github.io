@@ -48,9 +48,7 @@
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a id='src-192' class='srclink' href='../src/thread_local/lib.rs.html#466-470' title='goto source code'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct CachedThreadLocal&lt;T:&nbsp;?<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a>&gt; {
-    // some fields omitted
-}</pre><div class='docblock'><p>Wrapper around <code>ThreadLocal</code> which adds a fast path for a single thread.</p>
+<pre class='rust struct'>pub struct CachedThreadLocal&lt;T:&nbsp;?<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a>&gt; { /* fields omitted */ }</pre><div class='docblock'><p>Wrapper around <code>ThreadLocal</code> which adds a fast path for a single thread.</p>
 
 <p>This has the same API as <code>ThreadLocal</code>, but will register the first thread
 that sets a value as its owner. All accesses by the owner will go through

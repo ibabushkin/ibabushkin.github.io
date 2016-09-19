@@ -817,6 +817,16 @@
 <span id="773">773</span>
 <span id="774">774</span>
 <span id="775">775</span>
+<span id="776">776</span>
+<span id="777">777</span>
+<span id="778">778</span>
+<span id="779">779</span>
+<span id="780">780</span>
+<span id="781">781</span>
+<span id="782">782</span>
+<span id="783">783</span>
+<span id="784">784</span>
+<span id="785">785</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>c_char</span>;
 
@@ -1297,11 +1307,11 @@
                 <span class='self'>self</span>.<span class='ident'>visible_windows</span>.<span class='ident'>swap_remove</span>(<span class='ident'>index</span>);
                 <span class='self'>self</span>.<span class='ident'>arrange_windows</span>();
             }
-        }
-        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>index</span>) <span class='op'>=</span> <span class='self'>self</span>
+        } <span class='kw'>else</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>index</span>) <span class='op'>=</span> <span class='self'>self</span>
             .<span class='ident'>unmanaged_windows</span>
             .<span class='ident'>iter</span>()
             .<span class='ident'>position</span>(<span class='op'>|</span><span class='ident'>win</span><span class='op'>|</span> <span class='op'>*</span><span class='ident'>win</span> <span class='op'>==</span> <span class='ident'>window</span>) {
+            <span class='self'>self</span>.<span class='ident'>reset_focus</span>();
             <span class='self'>self</span>.<span class='ident'>unmanaged_windows</span>.<span class='ident'>swap_remove</span>(<span class='ident'>index</span>);
             <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;unregistered unmanaged window&quot;</span>);
         }
@@ -1355,10 +1365,20 @@
                 }
             } <span class='kw'>else</span> {
                 <span class='comment'>// it&#39;s a window we don&#39;t care about</span>
+                <span class='comment'>// TODO: add resizing and centred display for popups (for</span>
+                <span class='comment'>// some definition of popup)</span>
                 <span class='kw'>let</span> <span class='ident'>cookie</span> <span class='op'>=</span> <span class='ident'>xproto</span>::<span class='ident'>map_window</span>(<span class='self'>self</span>.<span class='ident'>con</span>, <span class='ident'>window</span>);
+                <span class='kw'>let</span> <span class='ident'>cookie2</span> <span class='op'>=</span> <span class='ident'>xproto</span>::<span class='ident'>set_input_focus</span>(
+                    <span class='self'>self</span>.<span class='ident'>con</span>,
+                    <span class='ident'>xproto</span>::<span class='ident'>INPUT_FOCUS_POINTER_ROOT</span> <span class='kw'>as</span> <span class='ident'>u8</span>,
+                    <span class='ident'>window</span>,
+                    <span class='ident'>xproto</span>::<span class='ident'>TIME_CURRENT_TIME</span>);
                 <span class='self'>self</span>.<span class='ident'>add_unmanaged</span>(<span class='ident'>window</span>);
                 <span class='kw'>if</span> <span class='ident'>cookie</span>.<span class='ident'>request_check</span>().<span class='ident'>is_err</span>() {
                     <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;could not map window&quot;</span>);
+                }
+                <span class='kw'>if</span> <span class='ident'>cookie2</span>.<span class='ident'>request_check</span>().<span class='ident'>is_err</span>() {
+                    <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;could not focus window&quot;</span>);
                 }
             }
         }
