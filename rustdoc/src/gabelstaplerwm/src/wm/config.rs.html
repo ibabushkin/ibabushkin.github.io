@@ -547,7 +547,7 @@
     <span class='comment'>// matching function deciding upon client placement</span>
     <span class='ident'>wm</span>.<span class='ident'>setup_matching</span>(<span class='ident'>Box</span>::<span class='ident'>new</span>(
         <span class='op'>|</span><span class='ident'>props</span><span class='op'>|</span> <span class='kw'>if</span> <span class='ident'>props</span>.<span class='ident'>name</span> <span class='op'>==</span> <span class='string'>&quot;Mozilla Firefox&quot;</span> {
-            <span class='prelude-val'>Some</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Web</span>])
+            <span class='prelude-val'>Some</span>((<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Web</span>], <span class='bool-val'>true</span>))
         } <span class='kw'>else</span> {
             <span class='prelude-val'>None</span>
         }

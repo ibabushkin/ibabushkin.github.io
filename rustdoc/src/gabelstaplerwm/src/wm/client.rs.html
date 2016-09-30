@@ -688,6 +688,10 @@
 <span id="644">644</span>
 <span id="645">645</span>
 <span id="646">646</span>
+<span id="647">647</span>
+<span id="648">648</span>
+<span id="649">649</span>
+<span id="650">650</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cell</span>::{<span class='ident'>RefCell</span>,<span class='ident'>RefMut</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>::<span class='ident'>HashMap</span>;
@@ -919,8 +923,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Adds client object to master `HashMap` and creates references to</span>
     <span class='doccomment'>/// on the tagsets the client is visible on.</span>
-    <span class='comment'>// TODO: add as_master/as_slave distinction</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>client</span>: <span class='ident'>Client</span>) {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>client</span>: <span class='ident'>Client</span>, <span class='ident'>as_slave</span>: <span class='ident'>bool</span>) {
         <span class='kw'>let</span> <span class='ident'>window</span> <span class='op'>=</span> <span class='ident'>client</span>.<span class='ident'>window</span>;
         <span class='kw'>let</span> <span class='ident'>dummy_client</span> <span class='op'>=</span> <span class='ident'>client</span>.<span class='ident'>clone</span>();
         <span class='kw'>let</span> <span class='ident'>wrapped_client</span> <span class='op'>=</span> <span class='ident'>Rc</span>::<span class='ident'>new</span>(<span class='ident'>RefCell</span>::<span class='ident'>new</span>(<span class='ident'>client</span>));
@@ -929,7 +932,12 @@
         <span class='kw'>for</span> (<span class='ident'>tags</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> (<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>current</span>, <span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>clients</span>))
             <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>order</span> {
             <span class='kw'>if</span> <span class='ident'>dummy_client</span>.<span class='ident'>match_tags</span>(<span class='ident'>tags</span>) {
-                <span class='ident'>clients</span>.<span class='ident'>push</span>(<span class='ident'>weak</span>.<span class='ident'>clone</span>());
+                <span class='kw'>let</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='ident'>weak</span>.<span class='ident'>clone</span>();
+                <span class='kw'>if</span> <span class='ident'>as_slave</span> {
+                    <span class='ident'>clients</span>.<span class='ident'>push</span>(<span class='ident'>c</span>);
+                } <span class='kw'>else</span> {
+                    <span class='ident'>clients</span>.<span class='ident'>insert</span>(<span class='number'>0</span>, <span class='ident'>c</span>);
+                }
                 <span class='op'>*</span><span class='ident'>current</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>weak</span>.<span class='ident'>clone</span>());
             }
         }
