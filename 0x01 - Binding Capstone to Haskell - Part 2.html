@@ -149,10 +149,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
               setType <span class="dt">Arm64OpBarrier</span>
           _ <span class="ot">-&gt;</span> setType <span class="dt">Arm64OpInvalid</span></code></pre></div>
 <p>Most of the code is self-explanatory after a lecture of the <code>c2hs</code> docs and the basic idea behind the <code>Storable</code> typeclass. Some interesting bits are the large case-expression near the end. This is my take on porting C-style tagged unions to sum datatypes in Haskell. This could be much more pleasant if anonymous unions were supported by <code>c2hs</code>, but instead I had to rely on ugly pointer juggling to get to the memory location of interest. This might need fixing. Most of the other structures should be similar (I haven't done them yet). Another bit worth showing off before I get the code on GitHub is the heart of capstone's API: <code>cs_disasm</code>. Because of the issues with <code>GHCI</code> mentioned earlier, I resorted to writing the marshalling by hand (see <code>capstone.h</code> for the C source):</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">size_t cs_disasm(csh handle,
-    <span class="dt">const</span> <span class="dt">uint8_t</span> *code, size_t code_size,
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">size_t</span> cs_disasm(csh handle,
+    <span class="dt">const</span> <span class="dt">uint8_t</span> *code, <span class="dt">size_t</span> code_size,
     <span class="dt">uint64_t</span> address,
-    size_t count,
+    <span class="dt">size_t</span> count,
     cs_insn **insn);</code></pre></div>
 <p>The corresponding Haskell code:</p>
 <div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">foreign <span class="kw">import </span>ccall &quot;capstone/capstone.h cs_disasm&quot;

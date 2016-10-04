@@ -296,7 +296,6 @@
 <span id="252">252</span>
 <span id="253">253</span>
 <span id="254">254</span>
-<span id="255">255</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! # Configuration module for gabelstaplerwm</span>
 <span class='doccomment'>//! This module is intended to be edited by the user in order to customize</span>
@@ -311,8 +310,8 @@
 <span class='doccomment'>//!   a more involved and complex feature that you are working on.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! But feel free to do otherwise if you wish.</span>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>::<span class='ident'>BTreeSet</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
-
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>process</span>::<span class='ident'>Command</span>;
 
 <span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>client</span>::{<span class='ident'>TagSet</span>, <span class='ident'>TagStack</span>, <span class='ident'>ClientSet</span>, <span class='ident'>current_tagset</span>};
@@ -332,7 +331,7 @@
 <span class='doccomment'>/// Each window has one or more tags, and you can display zero or more tags.</span>
 <span class='doccomment'>/// This means that all windows having at least one of the tags of the</span>
 <span class='doccomment'>/// *tagset* to be displayed attached get displayed.</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>Hash</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Debug</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>, <span class='ident'>Hash</span>, <span class='ident'>PartialOrd</span>, <span class='ident'>Ord</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>Tag</span> {
     <span class='doccomment'>/// the web tag - for browsers and stuff</span>
     <span class='ident'>Web</span>,
@@ -529,25 +528,24 @@
               <span class='macro'>toggle_show_tag</span><span class='macro'>!</span>(<span class='ident'>Tag</span>::<span class='ident'>Mon</span>;; <span class='ident'>current_tagset</span>)),
     ]);
     <span class='comment'>// default tag stack</span>
-    <span class='ident'>wm</span>.<span class='ident'>setup_tags</span>(
-        <span class='ident'>TagStack</span>::<span class='ident'>from_presets</span>(
-            <span class='macro'>vec</span><span class='macro'>!</span>[
-                <span class='ident'>TagSet</span>::<span class='ident'>new</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Web</span>], <span class='ident'>DStack</span>::<span class='ident'>default</span>()),
-                <span class='ident'>TagSet</span>::<span class='ident'>new</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Work2</span>], <span class='ident'>VStack</span>::<span class='ident'>default</span>()),
-                <span class='ident'>TagSet</span>::<span class='ident'>new</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Work3</span>], <span class='ident'>VStack</span>::<span class='ident'>default</span>()),
-                <span class='ident'>TagSet</span>::<span class='ident'>new</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Work4</span>], <span class='ident'>Spiral</span>::<span class='ident'>default</span>()),
-                <span class='ident'>TagSet</span>::<span class='ident'>new</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Work5</span>], <span class='ident'>Grid</span>::<span class='ident'>default</span>()),
-                <span class='ident'>TagSet</span>::<span class='ident'>new</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Media</span>], <span class='ident'>Monocle</span>::<span class='ident'>default</span>()),
-                <span class='ident'>TagSet</span>::<span class='ident'>new</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Chat</span>], <span class='ident'>HStack</span>::<span class='ident'>default</span>()),
-                <span class='ident'>TagSet</span>::<span class='ident'>new</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Logs</span>], <span class='ident'>HStack</span>::<span class='ident'>default</span>()),
-                <span class='ident'>TagSet</span>::<span class='ident'>new</span>(<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Mon</span>], <span class='ident'>HStack</span>::<span class='ident'>default</span>()),
-            ], <span class='number'>1</span>
-        )
-    );
+    <span class='ident'>wm</span>.<span class='ident'>setup_tags</span>({
+        <span class='kw'>let</span> <span class='ident'>tagsets</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[
+            <span class='ident'>TagSet</span>::<span class='ident'>new</span>(<span class='macro'>set</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Web</span>], <span class='ident'>DStack</span>::<span class='ident'>default</span>()),
+            <span class='ident'>TagSet</span>::<span class='ident'>new</span>(<span class='macro'>set</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Work2</span>], <span class='ident'>VStack</span>::<span class='ident'>default</span>()),
+            <span class='ident'>TagSet</span>::<span class='ident'>new</span>(<span class='macro'>set</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Work3</span>], <span class='ident'>VStack</span>::<span class='ident'>default</span>()),
+            <span class='ident'>TagSet</span>::<span class='ident'>new</span>(<span class='macro'>set</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Work4</span>], <span class='ident'>Spiral</span>::<span class='ident'>default</span>()),
+            <span class='ident'>TagSet</span>::<span class='ident'>new</span>(<span class='macro'>set</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Work5</span>], <span class='ident'>Grid</span>::<span class='ident'>default</span>()),
+            <span class='ident'>TagSet</span>::<span class='ident'>new</span>(<span class='macro'>set</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Media</span>], <span class='ident'>Monocle</span>::<span class='ident'>default</span>()),
+            <span class='ident'>TagSet</span>::<span class='ident'>new</span>(<span class='macro'>set</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Chat</span>], <span class='ident'>HStack</span>::<span class='ident'>default</span>()),
+            <span class='ident'>TagSet</span>::<span class='ident'>new</span>(<span class='macro'>set</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Logs</span>], <span class='ident'>HStack</span>::<span class='ident'>default</span>()),
+            <span class='ident'>TagSet</span>::<span class='ident'>new</span>(<span class='macro'>set</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Mon</span>], <span class='ident'>HStack</span>::<span class='ident'>default</span>())
+        ];
+        <span class='ident'>TagStack</span>::<span class='ident'>from_presets</span>(<span class='ident'>tagsets</span>, <span class='number'>1</span>)
+    });
     <span class='comment'>// matching function deciding upon client placement</span>
     <span class='ident'>wm</span>.<span class='ident'>setup_matching</span>(<span class='ident'>Box</span>::<span class='ident'>new</span>(
         <span class='op'>|</span><span class='ident'>props</span><span class='op'>|</span> <span class='kw'>if</span> <span class='ident'>props</span>.<span class='ident'>name</span> <span class='op'>==</span> <span class='string'>&quot;Mozilla Firefox&quot;</span> {
-            <span class='prelude-val'>Some</span>((<span class='macro'>vec</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Web</span>], <span class='bool-val'>true</span>))
+            <span class='prelude-val'>Some</span>((<span class='macro'>set</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Web</span>], <span class='bool-val'>true</span>))
         } <span class='kw'>else</span> {
             <span class='prelude-val'>None</span>
         }
