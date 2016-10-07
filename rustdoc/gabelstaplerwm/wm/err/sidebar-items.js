@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["WmError","An error encountered by the WM."]],"fn":[["handle_logger_error",""]]});
+initSidebarItems({"enum":[["WmError","An error encountered by the WM."]],"fn":[["handle_logger_error","Output a pseudo-logger message in case said component could not be initialized (hint: that shouldn't happen)."]]});

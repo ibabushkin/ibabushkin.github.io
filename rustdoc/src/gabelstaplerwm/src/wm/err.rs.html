@@ -87,6 +87,16 @@
 <span id="43">43</span>
 <span id="44">44</span>
 <span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>process</span>::<span class='ident'>exit</span>;
 
@@ -94,12 +104,20 @@
 
 <span class='doccomment'>/// An error encountered by the WM.</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>WmError</span> {
+    <span class='doccomment'>/// Signal handlers handling SIGCHLD&#39;s can&#39;t be established.</span>
     <span class='ident'>CouldNotEstablishHandlers</span>,
+    <span class='doccomment'>/// Could not connect to X server.</span>
     <span class='ident'>CouldNotConnect</span>(<span class='ident'>base</span>::<span class='ident'>ConnError</span>),
+    <span class='doccomment'>/// Could not acquire a screen reference from the X server.</span>
     <span class='ident'>CouldNotAcquireScreen</span>,
+    <span class='doccomment'>/// An atom used by the window manager wasn&#39;t accepted by the X server.</span>
     <span class='ident'>CouldNotRegisterAtom</span>(<span class='ident'>String</span>),
+    <span class='doccomment'>/// Another window manager is running, so we can&#39;t get the necessary event</span>
+    <span class='doccomment'>/// mask registered with the X server.</span>
     <span class='ident'>OtherWmRunning</span>,
+    <span class='doccomment'>/// The connection to the X server has been interrupted.</span>
     <span class='ident'>ConnectionInterrupted</span>,
+    <span class='doccomment'>/// Input/Output with the X server has issues.</span>
     <span class='ident'>IOError</span>,
 }
 
@@ -129,6 +147,8 @@
     }
 }
 
+<span class='doccomment'>/// Output a pseudo-logger message in case said component could not be</span>
+<span class='doccomment'>/// initialized (hint: that shouldn&#39;t happen).</span>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>handle_logger_error</span>() {
     <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;ERROR:main: could not initialize logger&quot;</span>);
     <span class='ident'>exit</span>(<span class='number'>1</span>);
