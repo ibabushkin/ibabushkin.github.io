@@ -924,6 +924,33 @@
 <span id="880">880</span>
 <span id="881">881</span>
 <span id="882">882</span>
+<span id="883">883</span>
+<span id="884">884</span>
+<span id="885">885</span>
+<span id="886">886</span>
+<span id="887">887</span>
+<span id="888">888</span>
+<span id="889">889</span>
+<span id="890">890</span>
+<span id="891">891</span>
+<span id="892">892</span>
+<span id="893">893</span>
+<span id="894">894</span>
+<span id="895">895</span>
+<span id="896">896</span>
+<span id="897">897</span>
+<span id="898">898</span>
+<span id="899">899</span>
+<span id="900">900</span>
+<span id="901">901</span>
+<span id="902">902</span>
+<span id="903">903</span>
+<span id="904">904</span>
+<span id="905">905</span>
+<span id="906">906</span>
+<span id="907">907</span>
+<span id="908">908</span>
+<span id="909">909</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>c_char</span>;
 
@@ -933,6 +960,7 @@
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>;
 
 <span class='kw'>use</span> <span class='ident'>xcb</span>::<span class='ident'>base</span>;
+<span class='kw'>use</span> <span class='ident'>xcb</span>::<span class='ident'>randr</span>;
 <span class='kw'>use</span> <span class='ident'>xcb</span>::<span class='ident'>xkb</span>;
 <span class='kw'>use</span> <span class='ident'>xcb</span>::<span class='ident'>xproto</span>;
 <span class='kw'>use</span> <span class='ident'>xcb</span>::<span class='ident'>ffi</span>::<span class='ident'>xcb_client_message_data_t</span>;
@@ -944,11 +972,11 @@
 <span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>layout</span>::<span class='op'>*</span>;
 
 <span class='doccomment'>/// Atoms we register with the X server for partial EWMH compliance.</span>
-<span class='kw'>static</span> <span class='ident'>ATOM_VEC</span>: [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>; <span class='number'>10</span>] <span class='op'>=</span>
+<span class='kw'>static</span> <span class='ident'>ATOM_VEC</span>: [<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;static</span> <span class='ident'>str</span>; <span class='number'>11</span>] <span class='op'>=</span>
     [<span class='string'>&quot;WM_PROTOCOLS&quot;</span>, <span class='string'>&quot;WM_DELETE_WINDOW&quot;</span>, <span class='string'>&quot;_NET_WM_STATE&quot;</span>,
      <span class='string'>&quot;WM_TAKE_FOCUS&quot;</span>, <span class='string'>&quot;_NET_WM_TAKE_FOCUS&quot;</span>, <span class='string'>&quot;_NET_WM_NAME&quot;</span>, <span class='string'>&quot;_NET_WM_CLASS&quot;</span>,
      <span class='string'>&quot;_NET_WM_WINDOW_TYPE&quot;</span>, <span class='string'>&quot;_NET_WM_WINDOW_TYPE_NORMAL&quot;</span>,
-     <span class='string'>&quot;_NET_WM_STATE_ABOVE&quot;</span>];
+     <span class='string'>&quot;_NET_WM_WINDOW_TYPE_DOCK&quot;</span>, <span class='string'>&quot;_NET_WM_STATE_ABOVE&quot;</span>];
 
 <span class='doccomment'>/// Association vector type for atoms and their names.</span>
 <span class='kw'>type</span> <span class='ident'>AtomList</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>Vec</span><span class='op'>&lt;</span>(<span class='ident'>xproto</span>::<span class='ident'>Atom</span>, <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>str</span>)<span class='op'>&gt;</span>;
@@ -1107,13 +1135,30 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>register</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>WmError</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>values</span> <span class='op'>=</span> <span class='ident'>xproto</span>::<span class='ident'>EVENT_MASK_SUBSTRUCTURE_REDIRECT</span>
             <span class='op'>|</span> <span class='ident'>xproto</span>::<span class='ident'>EVENT_MASK_SUBSTRUCTURE_NOTIFY</span>;
-            <span class='comment'>//| xproto::EVENT_MASK_PROPERTY_CHANGE;</span>
-        <span class='kw'>match</span> <span class='ident'>xproto</span>::<span class='ident'>change_window_attributes</span>(
-            <span class='self'>self</span>.<span class='ident'>con</span>, <span class='self'>self</span>.<span class='ident'>root</span>, <span class='kw-2'>&amp;</span>[(<span class='ident'>xproto</span>::<span class='ident'>CW_EVENT_MASK</span>, <span class='ident'>values</span>)])
-            .<span class='ident'>request_check</span>() {
-            <span class='prelude-val'>Ok</span>(()) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>(()),
-            <span class='prelude-val'>Err</span>(_) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>WmError</span>::<span class='ident'>OtherWmRunning</span>),
+        <span class='kw'>let</span> <span class='ident'>cookie</span> <span class='op'>=</span> <span class='ident'>xproto</span>::<span class='ident'>change_window_attributes</span>(
+            <span class='self'>self</span>.<span class='ident'>con</span>, <span class='self'>self</span>.<span class='ident'>root</span>, <span class='kw-2'>&amp;</span>[(<span class='ident'>xproto</span>::<span class='ident'>CW_EVENT_MASK</span>, <span class='ident'>values</span>)]);
+        <span class='kw'>let</span> <span class='ident'>cookie2</span> <span class='op'>=</span> <span class='ident'>randr</span>::<span class='ident'>query_version</span>(<span class='self'>self</span>.<span class='ident'>con</span>, <span class='number'>1</span>, <span class='number'>2</span>);
+        <span class='kw'>match</span> (<span class='ident'>cookie</span>.<span class='ident'>request_check</span>(), <span class='ident'>cookie2</span>.<span class='ident'>get_reply</span>()) {
+            (<span class='prelude-val'>Ok</span>(()), <span class='prelude-val'>Ok</span>(<span class='kw-2'>ref</span> <span class='ident'>r</span>)) <span class='op'>=&gt;</span>
+                <span class='kw'>if</span> <span class='ident'>r</span>.<span class='ident'>major_version</span>() <span class='op'>==</span> <span class='number'>1</span> <span class='op'>&amp;&amp;</span> <span class='ident'>r</span>.<span class='ident'>minor_version</span>() <span class='op'>&gt;=</span> <span class='number'>2</span> {
+                    <span class='prelude-val'>Ok</span>(())
+                } <span class='kw'>else</span> {
+                    <span class='prelude-val'>Err</span>(<span class='ident'>WmError</span>::<span class='ident'>RandRVersionMismatch</span>)
+                },
+            (_, <span class='prelude-val'>Err</span>(_)) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>WmError</span>::<span class='ident'>RandRVersionMismatch</span>),
+            (<span class='prelude-val'>Err</span>(_), _) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>WmError</span>::<span class='ident'>OtherWmRunning</span>),
         }
+    }
+
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>init_randr</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>WmError</span><span class='op'>&gt;</span> {
+        <span class='kw'>let</span> <span class='ident'>values</span> <span class='op'>=</span> <span class='ident'>randr</span>::<span class='ident'>NOTIFY_MASK_SCREEN_CHANGE</span>
+            <span class='op'>|</span> <span class='ident'>randr</span>::<span class='ident'>NOTIFY_MASK_CRTC_CHANGE</span>
+            <span class='op'>|</span> <span class='ident'>randr</span>::<span class='ident'>NOTIFY_MASK_OUTPUT_CHANGE</span>;
+
+        <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>randr</span>::<span class='ident'>select_input</span>(<span class='self'>self</span>.<span class='ident'>con</span>, <span class='self'>self</span>.<span class='ident'>root</span>, <span class='ident'>values</span> <span class='kw'>as</span> <span class='ident'>u16</span>)
+            .<span class='ident'>request_check</span>();
+
+        <span class='kw'>if</span> <span class='ident'>res</span>.<span class='ident'>is_ok</span>() { <span class='prelude-val'>Ok</span>(()) } <span class='kw'>else</span> { <span class='prelude-val'>Err</span>(<span class='ident'>WmError</span>::<span class='ident'>RandRSetupFailed</span>) }
     }
 
     <span class='doccomment'>/// Set up keybindings and necessary keygrabs.</span>
@@ -1369,6 +1414,8 @@
 
     <span class='doccomment'>/// Handle an event received from the X server.</span>
     <span class='kw'>fn</span> <span class='ident'>handle</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>event</span>: <span class='ident'>base</span>::<span class='ident'>GenericEvent</span>) {
+        <span class='kw'>const</span> <span class='ident'>SCREEN_CHANGE_NOTIFY</span>: <span class='ident'>u8</span> <span class='op'>=</span> <span class='ident'>randr</span>::<span class='ident'>SCREEN_CHANGE_NOTIFY</span> <span class='kw'>as</span> <span class='ident'>u8</span>;
+
         <span class='kw'>match</span> <span class='ident'>event</span>.<span class='ident'>response_type</span>() {
             <span class='ident'>xkb</span>::<span class='ident'>STATE_NOTIFY</span> <span class='op'>=&gt;</span> {
                 <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;received event: STATE_NOTIFY&quot;</span>);
@@ -1386,15 +1433,18 @@
                 <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;received event: MAP_REQUEST&quot;</span>);
                 <span class='self'>self</span>.<span class='ident'>handle_map_request</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>))
             },
+            <span class='ident'>SCREEN_CHANGE_NOTIFY</span> <span class='op'>=&gt;</span> {
+                <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;received event: SCREEN_CHANGE_NOTIFY&quot;</span>);
+            },
             <span class='ident'>num</span> <span class='op'>=&gt;</span> <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;ignoring event: {}&quot;</span>, <span class='ident'>num</span>),
         }
     }
 
     <span class='doccomment'>/// A key has been pressed, react accordingly.</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// Look for a matching key binding upon event receival and call a callback</span>
-    <span class='doccomment'>/// closure if necessary. Determine what to do next based on the</span>
-    <span class='doccomment'>/// return value received.</span>
+    <span class='doccomment'>/// Look for a matching key binding upon event receival and call a</span>
+    <span class='doccomment'>/// callback closure if necessary. Determine what to do next based on</span>
+    <span class='doccomment'>/// the return value received.</span>
     <span class='kw'>fn</span> <span class='ident'>handle_state_notify</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>ev</span>: <span class='kw-2'>&amp;</span><span class='ident'>xkb</span>::<span class='ident'>StateNotifyEvent</span>) {
         <span class='kw'>let</span> <span class='ident'>key</span> <span class='op'>=</span> <span class='ident'>from_key</span>(<span class='ident'>ev</span>, <span class='self'>self</span>.<span class='ident'>mode</span>);
         <span class='kw'>let</span> <span class='ident'>command</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>func</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>bindings</span>.<span class='ident'>get</span>(<span class='kw-2'>&amp;</span><span class='ident'>key</span>) {
@@ -1430,7 +1480,6 @@
                 .<span class='ident'>visible_windows</span>
                 .<span class='ident'>iter</span>()
                 .<span class='ident'>position</span>(<span class='op'>|</span><span class='ident'>win</span><span class='op'>|</span> <span class='op'>*</span><span class='ident'>win</span> <span class='op'>==</span> <span class='ident'>window</span>) {
-                <span class='self'>self</span>.<span class='ident'>reset_focus</span>();
                 <span class='self'>self</span>.<span class='ident'>visible_windows</span>.<span class='ident'>swap_remove</span>(<span class='ident'>index</span>);
                 <span class='self'>self</span>.<span class='ident'>arrange_windows</span>();
             }
@@ -1438,10 +1487,13 @@
             .<span class='ident'>unmanaged_windows</span>
             .<span class='ident'>iter</span>()
             .<span class='ident'>position</span>(<span class='op'>|</span><span class='ident'>win</span><span class='op'>|</span> <span class='op'>*</span><span class='ident'>win</span> <span class='op'>==</span> <span class='ident'>window</span>) {
-            <span class='self'>self</span>.<span class='ident'>reset_focus</span>();
             <span class='self'>self</span>.<span class='ident'>unmanaged_windows</span>.<span class='ident'>swap_remove</span>(<span class='ident'>index</span>);
             <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;unregistered unmanaged window&quot;</span>);
         }
+        <span class='comment'>// we reset the focus no matter what - since destroyed windows</span>
+        <span class='comment'>// were often focused without our knowledge or otherwise lead to</span>
+        <span class='comment'>// unexpected behaviour when destroyed.</span>
+        <span class='self'>self</span>.<span class='ident'>reset_focus</span>();
     }
 
     <span class='doccomment'>/// A window wants to get a new geometry, react accordingly.</span>
@@ -1450,7 +1502,9 @@
     <span class='doccomment'>/// Otherwise, set it&#39;s geometry as desired.</span>
     <span class='kw'>fn</span> <span class='ident'>handle_configure_request</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>ev</span>: <span class='kw-2'>&amp;</span><span class='ident'>xproto</span>::<span class='ident'>ConfigureRequestEvent</span>) {
         <span class='kw'>let</span> <span class='ident'>window</span> <span class='op'>=</span> <span class='ident'>ev</span>.<span class='ident'>window</span>();
-        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>clients</span>.<span class='ident'>get_client_by_window</span>(<span class='ident'>window</span>).<span class='ident'>is_none</span>() {
+        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>clients</span>.<span class='ident'>get_client_by_window</span>(<span class='ident'>window</span>).<span class='ident'>is_none</span>() <span class='op'>&amp;&amp;</span>
+            <span class='self'>self</span>.<span class='ident'>get_properties</span>(<span class='ident'>window</span>).<span class='ident'>window_type</span> <span class='op'>!=</span>
+            <span class='self'>self</span>.<span class='ident'>lookup_atom</span>(<span class='string'>&quot;_NET_WM_WINDOW_TYPE_DOCK&quot;</span>) {
             <span class='kw'>let</span> <span class='ident'>value_mask</span> <span class='op'>=</span> <span class='ident'>ev</span>.<span class='ident'>value_mask</span>();
             <span class='kw'>let</span> <span class='ident'>cookie</span> <span class='op'>=</span>
                 <span class='kw'>if</span> <span class='ident'>value_mask</span> <span class='kw'>as</span> <span class='ident'>u32</span> <span class='kw-2'>&amp;</span> <span class='ident'>xproto</span>::<span class='ident'>CONFIG_WINDOW_WIDTH</span> <span class='op'>!=</span> <span class='number'>0</span> <span class='op'>&amp;&amp;</span>

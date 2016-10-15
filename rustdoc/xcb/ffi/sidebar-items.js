@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["base",""],["big_requests",""],["xc_misc",""],["xkb",""],["xproto",""]]});
+initSidebarItems({"mod":[["base",""],["big_requests",""],["randr",""],["render",""],["xc_misc",""],["xkb",""],["xproto",""]]});

@@ -97,6 +97,14 @@
 <span id="53">53</span>
 <span id="54">54</span>
 <span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>process</span>::<span class='ident'>exit</span>;
 
@@ -112,9 +120,13 @@
     <span class='ident'>CouldNotAcquireScreen</span>,
     <span class='doccomment'>/// An atom used by the window manager wasn&#39;t accepted by the X server.</span>
     <span class='ident'>CouldNotRegisterAtom</span>(<span class='ident'>String</span>),
-    <span class='doccomment'>/// Another window manager is running, so we can&#39;t get the necessary event</span>
-    <span class='doccomment'>/// mask registered with the X server.</span>
+    <span class='doccomment'>/// Another window manager is running, so we can&#39;t get the</span>
+    <span class='doccomment'>/// necessary event mask registered with the X server.</span>
     <span class='ident'>OtherWmRunning</span>,
+    <span class='doccomment'>/// The RandR version we need is not supported.</span>
+    <span class='ident'>RandRVersionMismatch</span>,
+    <span class='doccomment'>/// The call to RandR initializing event receival failed.</span>
+    <span class='ident'>RandRSetupFailed</span>,
     <span class='doccomment'>/// The connection to the X server has been interrupted.</span>
     <span class='ident'>ConnectionInterrupted</span>,
     <span class='doccomment'>/// Input/Output with the X server has issues.</span>
@@ -138,6 +150,10 @@
                 <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;could not register atom {}&quot;</span>, <span class='ident'>s</span>)
             }
             <span class='ident'>WmError</span>::<span class='ident'>OtherWmRunning</span> <span class='op'>=&gt;</span> <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;another wm is running&quot;</span>),
+            <span class='ident'>WmError</span>::<span class='ident'>RandRVersionMismatch</span> <span class='op'>=&gt;</span>
+                <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;randr 1.2 not supported&quot;</span>),
+            <span class='ident'>WmError</span>::<span class='ident'>RandRSetupFailed</span> <span class='op'>=&gt;</span>
+                <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;randr setup failed&quot;</span>),
             <span class='ident'>WmError</span>::<span class='ident'>ConnectionInterrupted</span> <span class='op'>=&gt;</span> {
                 <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;connection interrupted&quot;</span>)
             }

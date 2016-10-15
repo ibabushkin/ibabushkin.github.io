@@ -152,6 +152,11 @@
 <span id="108">108</span>
 <span id="109">109</span>
 <span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! # gabelstaplerwm - a semidynamic tiling window manager</span>
 <span class='doccomment'>//! It&#39;s what the heading says it is. The documentation found here is a very</span>
@@ -249,6 +254,11 @@
 
     <span class='comment'>// register as a window manager and fail if another WM is running</span>
     <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=</span> <span class='ident'>wm</span>.<span class='ident'>register</span>() {
+        <span class='ident'>e</span>.<span class='ident'>handle</span>();
+    }
+
+    <span class='comment'>// setup necessary RandR machinery</span>
+    <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=</span> <span class='ident'>wm</span>.<span class='ident'>init_randr</span>() {
         <span class='ident'>e</span>.<span class='ident'>handle</span>();
     }
 
