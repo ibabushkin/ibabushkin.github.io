@@ -48,7 +48,7 @@
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a id='src-1982' class='srclink' href='../../src/xcb/xproto.rs.html#4637-4649' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub fn get_geometry_unchecked&lt;'a&gt;(c: &amp;'a <a class='struct' href='../../xcb/base/struct.Connection.html' title='xcb::base::Connection'>Connection</a>, drawable: <a class='type' href='../../xcb/xproto/type.Drawable.html' title='xcb::xproto::Drawable'>Drawable</a>) -&gt; <a class='type' href='../../xcb/xproto/type.GetGeometryCookie.html' title='xcb::xproto::GetGeometryCookie'>GetGeometryCookie</a>&lt;'a&gt;</pre><div class='docblock'><p>Get current window geometry</p>
+<pre class='rust fn'>pub fn get_geometry_unchecked&lt;'a&gt;(c: &amp;'a <a class='struct' href='../../xcb/base/struct.Connection.html' title='xcb::base::Connection'>Connection</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; drawable: <a class='type' href='../../xcb/xproto/type.Drawable.html' title='xcb::xproto::Drawable'>Drawable</a>)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class='type' href='../../xcb/xproto/type.GetGeometryCookie.html' title='xcb::xproto::GetGeometryCookie'>GetGeometryCookie</a>&lt;'a&gt;</pre><div class='docblock'><p>Get current window geometry</p>
 
 <p>Gets the current geometry of the specified drawable (either <code>Window</code> or <code>Pixmap</code>).</p>
 
@@ -116,11 +116,9 @@
     <script>
         window.rootPath = "../../";
         window.currentCrate = "xcb";
-        window.playgroundUrl = "";
     </script>
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
-    
     <script defer src="../../search-index.js"></script>
 </body>
 </html>

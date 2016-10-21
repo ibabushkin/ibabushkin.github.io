@@ -48,7 +48,7 @@
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a id='src-3697' class='srclink' href='../../src/xcb/xproto.rs.html#10674-10692' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub fn alloc_color&lt;'a&gt;(c: &amp;'a <a class='struct' href='../../xcb/base/struct.Connection.html' title='xcb::base::Connection'>Connection</a>, cmap: <a class='type' href='../../xcb/xproto/type.Colormap.html' title='xcb::xproto::Colormap'>Colormap</a>, red: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>, green: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>, blue: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>) -&gt; <a class='type' href='../../xcb/xproto/type.AllocColorCookie.html' title='xcb::xproto::AllocColorCookie'>AllocColorCookie</a>&lt;'a&gt;</pre><div class='docblock'><p>Allocate a color</p>
+<pre class='rust fn'>pub fn alloc_color&lt;'a&gt;(c: &amp;'a <a class='struct' href='../../xcb/base/struct.Connection.html' title='xcb::base::Connection'>Connection</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cmap: <a class='type' href='../../xcb/xproto/type.Colormap.html' title='xcb::xproto::Colormap'>Colormap</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; red: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; green: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; blue: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class='type' href='../../xcb/xproto/type.AllocColorCookie.html' title='xcb::xproto::AllocColorCookie'>AllocColorCookie</a>&lt;'a&gt;</pre><div class='docblock'><p>Allocate a color</p>
 
 <p>Allocates a read-only colormap entry corresponding to the closest RGB value
 supported by the hardware. If you are using TrueColor, you can take a shortcut
@@ -126,11 +126,9 @@ RGB value to the RGB value you are specifying.</p>
     <script>
         window.rootPath = "../../";
         window.currentCrate = "xcb";
-        window.playgroundUrl = "";
     </script>
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
-    
     <script defer src="../../search-index.js"></script>
 </body>
 </html>

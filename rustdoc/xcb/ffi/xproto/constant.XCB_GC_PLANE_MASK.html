@@ -54,7 +54,7 @@ operation is performed in each bit plane. The plane-mask restricts the
 operation to a subset of planes, so the result is:</p>
 
 <pre class='rust rust-example-rendered'>
-    ((<span class='ident'>src</span> <span class='ident'>FUNC</span> <span class='ident'>dst</span>) <span class='ident'>AND</span> <span class='ident'>plane</span><span class='op'>-</span><span class='ident'>mask</span>) <span class='ident'>OR</span> (<span class='ident'>dst</span> <span class='ident'>AND</span> (<span class='ident'>NOT</span> <span class='ident'>plane</span><span class='op'>-</span><span class='ident'>mask</span>))<a class='test-arrow' target='_blank' href=''>Run</a></pre>
+    ((<span class='ident'>src</span> <span class='ident'>FUNC</span> <span class='ident'>dst</span>) <span class='ident'>AND</span> <span class='ident'>plane</span><span class='op'>-</span><span class='ident'>mask</span>) <span class='ident'>OR</span> (<span class='ident'>dst</span> <span class='ident'>AND</span> (<span class='ident'>NOT</span> <span class='ident'>plane</span><span class='op'>-</span><span class='ident'>mask</span>))</pre>
 </div></section>
     <section id='search' class="content hidden"></section>
 
@@ -111,11 +111,9 @@ operation to a subset of planes, so the result is:</p>
     <script>
         window.rootPath = "../../../";
         window.currentCrate = "xcb";
-        window.playgroundUrl = "";
     </script>
     <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
-    
     <script defer src="../../../search-index.js"></script>
 </body>
 </html>

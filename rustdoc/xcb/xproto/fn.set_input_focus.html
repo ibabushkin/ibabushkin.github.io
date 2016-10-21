@@ -48,7 +48,7 @@
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a id='src-2631' class='srclink' href='../../src/xcb/xproto.rs.html#7330-7346' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub fn set_input_focus&lt;'a&gt;(c: &amp;'a <a class='struct' href='../../xcb/base/struct.Connection.html' title='xcb::base::Connection'>Connection</a>, revert_to: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>, focus: <a class='type' href='../../xcb/xproto/type.Window.html' title='xcb::xproto::Window'>Window</a>, time: <a class='type' href='../../xcb/xproto/type.Timestamp.html' title='xcb::xproto::Timestamp'>Timestamp</a>) -&gt; <a class='type' href='../../xcb/base/type.VoidCookie.html' title='xcb::base::VoidCookie'>VoidCookie</a>&lt;'a&gt;</pre><div class='docblock'><p>Sets input focus</p>
+<pre class='rust fn'>pub fn set_input_focus&lt;'a&gt;(c: &amp;'a <a class='struct' href='../../xcb/base/struct.Connection.html' title='xcb::base::Connection'>Connection</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; revert_to: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; focus: <a class='type' href='../../xcb/xproto/type.Window.html' title='xcb::xproto::Window'>Window</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; time: <a class='type' href='../../xcb/xproto/type.Timestamp.html' title='xcb::xproto::Timestamp'>Timestamp</a>)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class='type' href='../../xcb/base/type.VoidCookie.html' title='xcb::base::VoidCookie'>VoidCookie</a>&lt;'a&gt;</pre><div class='docblock'><p>Sets input focus</p>
 
 <p>Changes the input focus and the last-focus-change time. If the specified <code>time</code>
 is earlier than the current last-focus-change time, the request is ignored (to
@@ -135,11 +135,9 @@ avoid race conditions when running X over the network).</p>
     <script>
         window.rootPath = "../../";
         window.currentCrate = "xcb";
-        window.playgroundUrl = "";
     </script>
     <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
-    
     <script defer src="../../search-index.js"></script>
 </body>
 </html>
