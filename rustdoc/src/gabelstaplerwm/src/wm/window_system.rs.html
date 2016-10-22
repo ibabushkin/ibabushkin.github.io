@@ -946,6 +946,22 @@
 <span id="902">902</span>
 <span id="903">903</span>
 <span id="904">904</span>
+<span id="905">905</span>
+<span id="906">906</span>
+<span id="907">907</span>
+<span id="908">908</span>
+<span id="909">909</span>
+<span id="910">910</span>
+<span id="911">911</span>
+<span id="912">912</span>
+<span id="913">913</span>
+<span id="914">914</span>
+<span id="915">915</span>
+<span id="916">916</span>
+<span id="917">917</span>
+<span id="918">918</span>
+<span id="919">919</span>
+<span id="920">920</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>c_char</span>;
 
@@ -1048,6 +1064,8 @@
     <span class='ident'>tag_stack</span>: <span class='ident'>TagStack</span>,
     <span class='doccomment'>/// atoms registered at runtime</span>
     <span class='ident'>atoms</span>: <span class='ident'>AtomList</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>,
+    <span class='doccomment'>/// the first event index of our RandR extension</span>
+    <span class='ident'>randr_base</span>: <span class='ident'>u8</span>,
     <span class='doccomment'>/// all windows currently visible</span>
     <span class='ident'>visible_windows</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>xproto</span>::<span class='ident'>Window</span><span class='op'>&gt;</span>,
     <span class='doccomment'>/// currently focused window</span>
@@ -1087,6 +1105,7 @@
                         <span class='ident'>tag_stack</span>: <span class='ident'>TagStack</span>::<span class='ident'>new</span>(),
                         <span class='ident'>atoms</span>: <span class='ident'>atoms</span>,
                         <span class='ident'>visible_windows</span>: <span class='ident'>Vec</span>::<span class='ident'>new</span>(),
+                        <span class='ident'>randr_base</span>: <span class='number'>0</span>, <span class='comment'>// TODO</span>
                         <span class='ident'>focused_window</span>: <span class='prelude-val'>None</span>,
                         <span class='ident'>unmanaged_windows</span>: <span class='ident'>Vec</span>::<span class='ident'>new</span>(),
                     })
@@ -1121,29 +1140,31 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Issues substructure redirects for the root window and registers for</span>
     <span class='doccomment'>/// all events we are interested in.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>register</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>WmError</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>register</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>WmError</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>values</span> <span class='op'>=</span> <span class='ident'>xproto</span>::<span class='ident'>EVENT_MASK_SUBSTRUCTURE_REDIRECT</span>
             <span class='op'>|</span> <span class='ident'>xproto</span>::<span class='ident'>EVENT_MASK_SUBSTRUCTURE_NOTIFY</span>;
         <span class='kw'>let</span> <span class='ident'>cookie</span> <span class='op'>=</span> <span class='ident'>xproto</span>::<span class='ident'>change_window_attributes</span>(
             <span class='self'>self</span>.<span class='ident'>con</span>, <span class='self'>self</span>.<span class='ident'>root</span>, <span class='kw-2'>&amp;</span>[(<span class='ident'>xproto</span>::<span class='ident'>CW_EVENT_MASK</span>, <span class='ident'>values</span>)]);
         <span class='kw'>let</span> <span class='ident'>cookie2</span> <span class='op'>=</span> <span class='ident'>randr</span>::<span class='ident'>query_version</span>(<span class='self'>self</span>.<span class='ident'>con</span>, <span class='number'>1</span>, <span class='number'>2</span>);
-        <span class='kw'>match</span> (<span class='ident'>cookie</span>.<span class='ident'>request_check</span>(), <span class='ident'>cookie2</span>.<span class='ident'>get_reply</span>()) {
-            (<span class='prelude-val'>Ok</span>(()), <span class='prelude-val'>Ok</span>(<span class='kw-2'>ref</span> <span class='ident'>r</span>)) <span class='op'>=&gt;</span>
+        <span class='kw'>let</span> <span class='ident'>randr_query</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>con</span>.<span class='ident'>get_extension_data</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>randr</span>::<span class='ident'>id</span>());
+        <span class='kw'>match</span> (<span class='ident'>cookie</span>.<span class='ident'>request_check</span>(), <span class='ident'>cookie2</span>.<span class='ident'>get_reply</span>(), <span class='ident'>randr_query</span>) {
+            (<span class='prelude-val'>Ok</span>(()), <span class='prelude-val'>Ok</span>(<span class='kw-2'>ref</span> <span class='ident'>r</span>), <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>res</span>)) <span class='op'>=&gt;</span>
                 <span class='kw'>if</span> <span class='ident'>r</span>.<span class='ident'>major_version</span>() <span class='op'>==</span> <span class='number'>1</span> <span class='op'>&amp;&amp;</span> <span class='ident'>r</span>.<span class='ident'>minor_version</span>() <span class='op'>&gt;=</span> <span class='number'>2</span> {
+                    <span class='self'>self</span>.<span class='ident'>randr_base</span> <span class='op'>=</span> <span class='ident'>res</span>.<span class='ident'>first_event</span>();
                     <span class='prelude-val'>Ok</span>(())
                 } <span class='kw'>else</span> {
                     <span class='prelude-val'>Err</span>(<span class='ident'>WmError</span>::<span class='ident'>RandRVersionMismatch</span>)
                 },
-            (_, <span class='prelude-val'>Err</span>(_)) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>WmError</span>::<span class='ident'>RandRVersionMismatch</span>),
-            (<span class='prelude-val'>Err</span>(_), _) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>WmError</span>::<span class='ident'>OtherWmRunning</span>),
+            (_, <span class='prelude-val'>Err</span>(_), _) <span class='op'>|</span> (_, _, <span class='prelude-val'>None</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>WmError</span>::<span class='ident'>RandRVersionMismatch</span>),
+            (<span class='prelude-val'>Err</span>(_), _, _) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>WmError</span>::<span class='ident'>OtherWmRunning</span>),
         }
     }
 
     <span class='doccomment'>/// Initialize the RandR extension for multimonitor support</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>init_randr</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>WmError</span><span class='op'>&gt;</span> {
-        <span class='kw'>let</span> <span class='ident'>values</span> <span class='op'>=</span> <span class='ident'>randr</span>::<span class='ident'>NOTIFY_MASK_SCREEN_CHANGE</span>
-            <span class='op'>|</span> <span class='ident'>randr</span>::<span class='ident'>NOTIFY_MASK_CRTC_CHANGE</span>
-            <span class='op'>|</span> <span class='ident'>randr</span>::<span class='ident'>NOTIFY_MASK_OUTPUT_CHANGE</span>;
+        <span class='kw'>let</span> <span class='ident'>values</span> <span class='op'>=</span> <span class='ident'>randr</span>::<span class='ident'>NOTIFY_MASK_OUTPUT_CHANGE</span>
+            <span class='op'>|</span> <span class='ident'>randr</span>::<span class='ident'>NOTIFY_MASK_SCREEN_CHANGE</span>;
+            <span class='comment'>//| randr::NOTIFY_MASK_CRTC_CHANGE</span>
 
         <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>randr</span>::<span class='ident'>select_input</span>(<span class='self'>self</span>.<span class='ident'>con</span>, <span class='self'>self</span>.<span class='ident'>root</span>, <span class='ident'>values</span> <span class='kw'>as</span> <span class='ident'>u16</span>)
             .<span class='ident'>request_check</span>();
@@ -1404,31 +1425,42 @@
 
     <span class='doccomment'>/// Handle an event received from the X server.</span>
     <span class='kw'>fn</span> <span class='ident'>handle</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>event</span>: <span class='ident'>base</span>::<span class='ident'>GenericEvent</span>) {
-        <span class='kw'>const</span> <span class='ident'>SCREEN_CHANGE_NOTIFY</span>: <span class='ident'>u8</span> <span class='op'>=</span> <span class='ident'>randr</span>::<span class='ident'>SCREEN_CHANGE_NOTIFY</span> <span class='kw'>as</span> <span class='ident'>u8</span>;
-
         <span class='kw'>match</span> <span class='ident'>event</span>.<span class='ident'>response_type</span>() {
             <span class='ident'>xkb</span>::<span class='ident'>STATE_NOTIFY</span> <span class='op'>=&gt;</span> {
                 <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;received event: STATE_NOTIFY&quot;</span>);
-                <span class='self'>self</span>.<span class='ident'>handle_state_notify</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>))
+                <span class='self'>self</span>.<span class='ident'>handle_state_notify</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>));
             },
             <span class='ident'>xproto</span>::<span class='ident'>DESTROY_NOTIFY</span> <span class='op'>=&gt;</span> {
                 <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;received event: DESTROY_NOTIFY&quot;</span>);
-                <span class='self'>self</span>.<span class='ident'>handle_destroy_notify</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>))
+                <span class='self'>self</span>.<span class='ident'>handle_destroy_notify</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>));
             },
             <span class='ident'>xproto</span>::<span class='ident'>CONFIGURE_REQUEST</span> <span class='op'>=&gt;</span> {
                 <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;received event: CONFIGURE_REQUEST&quot;</span>);
-                <span class='self'>self</span>.<span class='ident'>handle_configure_request</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>))
+                <span class='self'>self</span>.<span class='ident'>handle_configure_request</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>));
             },
             <span class='ident'>xproto</span>::<span class='ident'>MAP_REQUEST</span> <span class='op'>=&gt;</span> {
                 <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;received event: MAP_REQUEST&quot;</span>);
-                <span class='self'>self</span>.<span class='ident'>handle_map_request</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>))
+                <span class='self'>self</span>.<span class='ident'>handle_map_request</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>));
             },
-            <span class='ident'>SCREEN_CHANGE_NOTIFY</span> <span class='op'>=&gt;</span> {
-                <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;received event: SCREEN_CHANGE_NOTIFY&quot;</span>);
-            },
-            <span class='ident'>num</span> <span class='op'>=&gt;</span> <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;ignoring event: {}&quot;</span>, <span class='ident'>num</span>),
+            <span class='ident'>res</span> <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>res</span> <span class='op'>-</span> <span class='self'>self</span>.<span class='ident'>randr_base</span> <span class='kw'>as</span> <span class='ident'>u8</span> {
+                <span class='ident'>randr</span>::<span class='ident'>SCREEN_CHANGE_NOTIFY</span> <span class='op'>=&gt;</span> {
+                    <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;received event: SCREEN_CHANGE_NOTIFY&quot;</span>);
+                    <span class='self'>self</span>.<span class='ident'>handle_screen_change_notify</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>));
+                },
+                <span class='ident'>randr</span>::<span class='ident'>NOTIFY</span> <span class='op'>=&gt;</span> {
+                    <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;received event: OUTPUT_NOTIFY&quot;</span>);
+                    <span class='self'>self</span>.<span class='ident'>handle_output_notify</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>));
+                },
+                _ <span class='op'>=&gt;</span> <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;ignoring event: {}&quot;</span>, <span class='ident'>res</span>),
+            }
         }
     }
+
+    <span class='doccomment'>/// The screen has been changed, react accordingly.</span>
+    <span class='kw'>fn</span> <span class='ident'>handle_screen_change_notify</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, _: <span class='kw-2'>&amp;</span><span class='ident'>randr</span>::<span class='ident'>ScreenChangeNotifyEvent</span>) { }
+
+    <span class='doccomment'>/// An output has been changed, react accordingly.</span>
+    <span class='kw'>fn</span> <span class='ident'>handle_output_notify</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, _: <span class='kw-2'>&amp;</span><span class='ident'>randr</span>::<span class='ident'>NotifyEvent</span>) { }
 
     <span class='doccomment'>/// A key has been pressed, react accordingly.</span>
     <span class='doccomment'>///</span>
