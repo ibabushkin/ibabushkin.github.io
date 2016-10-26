@@ -296,6 +296,10 @@
 <span id="252">252</span>
 <span id="253">253</span>
 <span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! # Configuration module for gabelstaplerwm</span>
 <span class='doccomment'>//! This module is intended to be edited by the user in order to customize</span>
@@ -317,7 +321,7 @@
 <span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>client</span>::{<span class='ident'>TagSet</span>, <span class='ident'>TagStack</span>, <span class='ident'>ClientSet</span>, <span class='ident'>current_tagset</span>};
 <span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>kbd</span>::<span class='op'>*</span>;
 
-<span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>layout</span>::{<span class='ident'>ScreenSize</span>,<span class='ident'>LayoutMessage</span>};
+<span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>layout</span>::{<span class='ident'>TilingArea</span>,<span class='ident'>LayoutMessage</span>};
 <span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>layout</span>::<span class='ident'>grid</span>::<span class='ident'>Grid</span>;
 <span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>layout</span>::<span class='ident'>monocle</span>::<span class='ident'>Monocle</span>;
 <span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>layout</span>::<span class='ident'>spiral</span>::<span class='ident'>Spiral</span>;
@@ -405,13 +409,16 @@
 <span class='doccomment'>/// Generate a window manager config - colors, border width...</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// Here you can specify (or compute) the settings you want to have.</span>
-<span class='doccomment'>/// See the docs for `ScreenSize` for more information.</span>
+<span class='doccomment'>/// See the docs for `TilingArea` for more information.</span>
 <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>generate_config</span>() <span class='op'>-&gt;</span> <span class='ident'>WmConfig</span> {
     <span class='ident'>WmConfig</span> {
         <span class='ident'>f_color</span>: (<span class='number'>0x5353</span>, <span class='number'>0x5d5d</span>, <span class='number'>0x6c6c</span>), <span class='comment'>// this is #535d6c</span>
         <span class='ident'>u_color</span>: (<span class='number'>0x0000</span>, <span class='number'>0x0000</span>, <span class='number'>0x0000</span>), <span class='comment'>// and this is #000000</span>
         <span class='ident'>border_width</span>: <span class='number'>1</span>,
-        <span class='ident'>screen</span>: <span class='ident'>ScreenSize</span> {
+        <span class='comment'>// TODO: future configs should contain a closure (or define a function or w/e)</span>
+        <span class='comment'>// that gets passed a vector of tiling areas (corresponding to monitors) and</span>
+        <span class='comment'>// returns a vector of tiling areas to use.</span>
+        <span class='ident'>screen</span>: <span class='ident'>TilingArea</span> {
             <span class='ident'>offset_x</span>: <span class='number'>0</span>,
             <span class='ident'>offset_y</span>: <span class='number'>20</span>,
             <span class='ident'>width</span>: <span class='number'>1366</span>,  <span class='comment'>// defaults reasonable for Xephyr,</span>
@@ -482,7 +489,7 @@
         <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>24</span>, <span class='ident'>modkey</span><span class='op'>+</span><span class='ident'>CTRL</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='op'>|</span>_, _<span class='op'>|</span> <span class='ident'>WmCommand</span>::<span class='ident'>Quit</span>),
         <span class='comment'>// go back in tagset history</span>
         <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>42</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='op'>|</span><span class='ident'>c</span>, <span class='ident'>s</span><span class='op'>|</span> {
-            <span class='kw'>if</span> <span class='ident'>s</span>.<span class='ident'>view_prev</span>() {
+            <span class='kw'>if</span> <span class='ident'>s</span>.<span class='ident'>tag_stack_mut</span>().<span class='ident'>view_prev</span>() {
                 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='ident'>current_tagset</span>(<span class='ident'>c</span>, <span class='ident'>s</span>));
                 <span class='ident'>WmCommand</span>::<span class='ident'>Redraw</span>
             } <span class='kw'>else</span> {
@@ -496,6 +503,7 @@
         }),
         <span class='comment'>// kill current client</span>
         <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>54</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='op'>|</span><span class='ident'>c</span>, <span class='ident'>s</span><span class='op'>|</span> <span class='ident'>s</span>
+            .<span class='ident'>tag_stack</span>()
             .<span class='ident'>current</span>()
             .<span class='ident'>and_then</span>(<span class='op'>|</span><span class='ident'>t</span><span class='op'>|</span> <span class='ident'>c</span>.<span class='ident'>get_focused_window</span>(<span class='kw-2'>&amp;</span><span class='ident'>t</span>.<span class='ident'>tags</span>))
             .<span class='ident'>map</span>(<span class='ident'>WmCommand</span>::<span class='ident'>Kill</span>)

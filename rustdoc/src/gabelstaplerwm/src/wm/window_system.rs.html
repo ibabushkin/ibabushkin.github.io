@@ -962,6 +962,16 @@
 <span id="918">918</span>
 <span id="919">919</span>
 <span id="920">920</span>
+<span id="921">921</span>
+<span id="922">922</span>
+<span id="923">923</span>
+<span id="924">924</span>
+<span id="925">925</span>
+<span id="926">926</span>
+<span id="927">927</span>
+<span id="928">928</span>
+<span id="929">929</span>
+<span id="930">930</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>c_char</span>;
 
@@ -1032,7 +1042,7 @@
     <span class='doccomment'>/// window border width</span>
     <span class='kw'>pub</span> <span class='ident'>border_width</span>: <span class='ident'>u8</span>,
     <span class='doccomment'>/// screen parameters requested by user</span>
-    <span class='kw'>pub</span> <span class='ident'>screen</span>: <span class='ident'>ScreenSize</span>,
+    <span class='kw'>pub</span> <span class='ident'>screen</span>: <span class='ident'>TilingArea</span>,
 }
 
 <span class='doccomment'>/// A window manager master-structure.</span>
@@ -1048,8 +1058,8 @@
     <span class='ident'>root</span>: <span class='ident'>xproto</span>::<span class='ident'>Window</span>,
     <span class='doccomment'>/// user-defined configuration parameters</span>
     <span class='ident'>config</span>: <span class='ident'>WmConfig</span>,
-    <span class='doccomment'>/// screen parameters as obtained from the X server upon connection</span>
-    <span class='ident'>screen</span>: <span class='ident'>ScreenSize</span>,
+    <span class='doccomment'>/// all screen areas we tile windows on, and their tag stacks</span>
+    <span class='ident'>screens</span>: <span class='ident'>ScreenSet</span>,
     <span class='doccomment'>/// colors used for window borders, first denotes focused windows</span>
     <span class='ident'>border_colors</span>: (<span class='ident'>u32</span>, <span class='ident'>u32</span>),
     <span class='doccomment'>/// keybinding callbacks</span>
@@ -1060,8 +1070,6 @@
     <span class='ident'>mode</span>: <span class='ident'>Mode</span>,
     <span class='doccomment'>/// set of currently present clients</span>
     <span class='ident'>clients</span>: <span class='ident'>ClientSet</span>,
-    <span class='doccomment'>/// set of currently present tagsets and their display history</span>
-    <span class='ident'>tag_stack</span>: <span class='ident'>TagStack</span>,
     <span class='doccomment'>/// atoms registered at runtime</span>
     <span class='ident'>atoms</span>: <span class='ident'>AtomList</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>,
     <span class='doccomment'>/// the first event index of our RandR extension</span>
@@ -1084,7 +1092,7 @@
             <span class='kw'>let</span> <span class='ident'>height</span> <span class='op'>=</span> <span class='ident'>screen</span>.<span class='ident'>height_in_pixels</span>();
             <span class='kw'>let</span> <span class='ident'>colormap</span> <span class='op'>=</span> <span class='ident'>screen</span>.<span class='ident'>default_colormap</span>();
             <span class='kw'>let</span> <span class='ident'>new_screen</span> <span class='op'>=</span>
-                <span class='ident'>ScreenSize</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='ident'>config</span>.<span class='ident'>screen</span>, <span class='ident'>width</span> <span class='kw'>as</span> <span class='ident'>u32</span>, <span class='ident'>height</span> <span class='kw'>as</span> <span class='ident'>u32</span>);
+                <span class='ident'>TilingArea</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='ident'>config</span>.<span class='ident'>screen</span>, <span class='ident'>width</span> <span class='kw'>as</span> <span class='ident'>u32</span>, <span class='ident'>height</span> <span class='kw'>as</span> <span class='ident'>u32</span>);
             <span class='kw'>let</span> <span class='ident'>colors</span> <span class='op'>=</span> <span class='ident'>Wm</span>::<span class='ident'>setup_colors</span>(<span class='ident'>con</span>,
                                           <span class='ident'>colormap</span>,
                                           <span class='ident'>config</span>.<span class='ident'>f_color</span>,
@@ -1096,13 +1104,12 @@
                         <span class='ident'>con</span>: <span class='ident'>con</span>,
                         <span class='ident'>root</span>: <span class='ident'>screen</span>.<span class='ident'>root</span>(),
                         <span class='ident'>config</span>: <span class='ident'>config</span>,
-                        <span class='ident'>screen</span>: <span class='ident'>new_screen</span>,
+                        <span class='ident'>screens</span>: <span class='ident'>ScreenSet</span>::<span class='ident'>new</span>(<span class='macro'>vec</span><span class='macro'>!</span>[(<span class='ident'>new_screen</span>, <span class='ident'>TagStack</span>::<span class='ident'>new</span>())]),
                         <span class='ident'>border_colors</span>: <span class='ident'>colors</span>,
                         <span class='ident'>bindings</span>: <span class='ident'>HashMap</span>::<span class='ident'>new</span>(),
                         <span class='ident'>matching</span>: <span class='prelude-val'>None</span>,
                         <span class='ident'>mode</span>: <span class='ident'>Mode</span>::<span class='ident'>default</span>(),
                         <span class='ident'>clients</span>: <span class='ident'>ClientSet</span>::<span class='ident'>default</span>(),
-                        <span class='ident'>tag_stack</span>: <span class='ident'>TagStack</span>::<span class='ident'>new</span>(),
                         <span class='ident'>atoms</span>: <span class='ident'>atoms</span>,
                         <span class='ident'>visible_windows</span>: <span class='ident'>Vec</span>::<span class='ident'>new</span>(),
                         <span class='ident'>randr_base</span>: <span class='number'>0</span>, <span class='comment'>// TODO</span>
@@ -1164,7 +1171,6 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>init_randr</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>WmError</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='ident'>values</span> <span class='op'>=</span> <span class='ident'>randr</span>::<span class='ident'>NOTIFY_MASK_OUTPUT_CHANGE</span>
             <span class='op'>|</span> <span class='ident'>randr</span>::<span class='ident'>NOTIFY_MASK_SCREEN_CHANGE</span>;
-            <span class='comment'>//| randr::NOTIFY_MASK_CRTC_CHANGE</span>
 
         <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>randr</span>::<span class='ident'>select_input</span>(<span class='self'>self</span>.<span class='ident'>con</span>, <span class='self'>self</span>.<span class='ident'>root</span>, <span class='ident'>values</span> <span class='kw'>as</span> <span class='ident'>u16</span>)
             .<span class='ident'>request_check</span>();
@@ -1215,7 +1221,7 @@
 
     <span class='doccomment'>/// Set up the tagset stack.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>setup_tags</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>stack</span>: <span class='ident'>TagStack</span>) {
-        <span class='self'>self</span>.<span class='ident'>tag_stack</span> <span class='op'>=</span> <span class='ident'>stack</span>;
+        <span class='op'>*</span><span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>tag_stack_mut</span>() <span class='op'>=</span> <span class='ident'>stack</span>;
     }
 
     <span class='doccomment'>/// Add all present clients to the datastructures on startup.</span>
@@ -1238,7 +1244,7 @@
     <span class='doccomment'>/// For instance, the `Monocle` layout only shows the master window,</span>
     <span class='doccomment'>/// rendering client creation as a slave useless and unergonomic.</span>
     <span class='kw'>fn</span> <span class='ident'>new_window_as_master</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>tag_stack</span>.<span class='ident'>current</span>() {
+        <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>tag_stack</span>().<span class='ident'>current</span>() {
             <span class='prelude-val'>Some</span>(<span class='ident'>tagset</span>) <span class='op'>=&gt;</span> <span class='ident'>tagset</span>.<span class='ident'>layout</span>.<span class='ident'>new_window_as_master</span>(),
             _ <span class='op'>=&gt;</span> <span class='bool-val'>false</span>,
         }
@@ -1258,7 +1264,7 @@
         <span class='self'>self</span>.<span class='ident'>visible_windows</span>.<span class='ident'>clear</span>();
 
         <span class='comment'>// setup current client list</span>
-        <span class='kw'>let</span> (<span class='ident'>clients</span>, <span class='ident'>layout</span>) <span class='op'>=</span> <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>tag_stack</span>.<span class='ident'>current</span>() {
+        <span class='kw'>let</span> (<span class='ident'>clients</span>, <span class='ident'>layout</span>) <span class='op'>=</span> <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>tag_stack</span>().<span class='ident'>current</span>() {
             <span class='prelude-val'>Some</span>(<span class='ident'>tagset</span>) <span class='op'>=&gt;</span> (
                 <span class='self'>self</span>.<span class='ident'>clients</span>.<span class='ident'>get_order_or_insert</span>(<span class='kw-2'>&amp;</span><span class='ident'>tagset</span>.<span class='ident'>tags</span>),
                 <span class='kw-2'>&amp;</span><span class='ident'>tagset</span>.<span class='ident'>layout</span>
@@ -1267,7 +1273,7 @@
         };
 
         <span class='comment'>// get geometries ...</span>
-        <span class='kw'>let</span> <span class='ident'>geometries</span> <span class='op'>=</span> <span class='ident'>layout</span>.<span class='ident'>arrange</span>(<span class='ident'>clients</span>.<span class='number'>1</span>.<span class='ident'>len</span>(), <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>screen</span>);
+        <span class='kw'>let</span> <span class='ident'>geometries</span> <span class='op'>=</span> <span class='ident'>layout</span>.<span class='ident'>arrange</span>(<span class='ident'>clients</span>.<span class='number'>1</span>.<span class='ident'>len</span>(), <span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>screen</span>());
         <span class='comment'>// ... and apply them if a window is to be displayed</span>
         <span class='kw'>if</span> <span class='macro'>cfg</span><span class='macro'>!</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;parallel-resizing&quot;</span>) {
             <span class='kw'>let</span> <span class='ident'>connection</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>con</span>;
@@ -1328,7 +1334,7 @@
 
     <span class='doccomment'>/// Hide some windows by moving them offscreen.</span>
     <span class='kw'>fn</span> <span class='ident'>hide_windows</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>windows</span>: <span class='kw-2'>&amp;</span>[<span class='ident'>xproto</span>::<span class='ident'>Window</span>]) {
-        <span class='kw'>let</span> <span class='ident'>safe_x</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>screen</span>.<span class='ident'>width</span> <span class='op'>+</span> <span class='number'>2</span>;
+        <span class='kw'>let</span> <span class='ident'>safe_x</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>screen</span>().<span class='ident'>width</span> <span class='op'>+</span> <span class='number'>2</span>;
         <span class='kw'>let</span> <span class='ident'>cookies</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>windows</span>
             .<span class='ident'>iter</span>()
             .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>window</span><span class='op'>|</span> <span class='ident'>xproto</span>::<span class='ident'>configure_window</span>(
@@ -1366,11 +1372,12 @@
     <span class='doccomment'>/// it&#39;s border.</span>
     <span class='kw'>fn</span> <span class='ident'>reset_focus</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>new</span>) <span class='op'>=</span> <span class='self'>self</span>
-            .<span class='ident'>tag_stack</span>
+            .<span class='ident'>screens</span>
+            .<span class='ident'>tag_stack</span>()
             .<span class='ident'>current</span>()
             .<span class='ident'>and_then</span>(<span class='op'>|</span><span class='ident'>t</span><span class='op'>|</span> <span class='self'>self</span>.<span class='ident'>clients</span>.<span class='ident'>get_focused_window</span>(<span class='kw-2'>&amp;</span><span class='ident'>t</span>.<span class='ident'>tags</span>)) {
             <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>new_window_as_master</span>() {
-               <span class='self'>self</span>.<span class='ident'>clients</span>.<span class='ident'>swap_master</span>(<span class='self'>self</span>.<span class='ident'>tag_stack</span>.<span class='ident'>current</span>().<span class='ident'>unwrap</span>());
+               <span class='self'>self</span>.<span class='ident'>clients</span>.<span class='ident'>swap_master</span>(<span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>tag_stack</span>().<span class='ident'>current</span>().<span class='ident'>unwrap</span>());
                <span class='self'>self</span>.<span class='ident'>arrange_windows</span>();
             }
             <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>old_win</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>focused_window</span> {
@@ -1442,7 +1449,7 @@
                 <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;received event: MAP_REQUEST&quot;</span>);
                 <span class='self'>self</span>.<span class='ident'>handle_map_request</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>));
             },
-            <span class='ident'>res</span> <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>res</span> <span class='op'>-</span> <span class='self'>self</span>.<span class='ident'>randr_base</span> <span class='kw'>as</span> <span class='ident'>u8</span> {
+            <span class='ident'>res</span> <span class='kw'>if</span> <span class='ident'>res</span> <span class='op'>&gt;</span> <span class='self'>self</span>.<span class='ident'>randr_base</span> <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>res</span> <span class='op'>-</span> <span class='self'>self</span>.<span class='ident'>randr_base</span> <span class='kw'>as</span> <span class='ident'>u8</span> {
                 <span class='ident'>randr</span>::<span class='ident'>SCREEN_CHANGE_NOTIFY</span> <span class='op'>=&gt;</span> {
                     <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;received event: SCREEN_CHANGE_NOTIFY&quot;</span>);
                     <span class='self'>self</span>.<span class='ident'>handle_screen_change_notify</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>));
@@ -1452,15 +1459,27 @@
                     <span class='self'>self</span>.<span class='ident'>handle_output_notify</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>));
                 },
                 _ <span class='op'>=&gt;</span> <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;ignoring event: {}&quot;</span>, <span class='ident'>res</span>),
-            }
+            },
+            <span class='ident'>res</span> <span class='op'>=&gt;</span> <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;ignoring event: {}&quot;</span>, <span class='ident'>res</span>),
         }
     }
 
     <span class='doccomment'>/// The screen has been changed, react accordingly.</span>
-    <span class='kw'>fn</span> <span class='ident'>handle_screen_change_notify</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, _: <span class='kw-2'>&amp;</span><span class='ident'>randr</span>::<span class='ident'>ScreenChangeNotifyEvent</span>) { }
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// If a rotation took place, make the geometries of our screens rotate.</span>
+    <span class='doccomment'>/// This might need some update in case we need to change some offsets as well.</span>
+    <span class='doccomment'>/// However, this code isn&#39;t likely to be used often.</span>
+    <span class='kw'>fn</span> <span class='ident'>handle_screen_change_notify</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>ev</span>: <span class='kw-2'>&amp;</span><span class='ident'>randr</span>::<span class='ident'>ScreenChangeNotifyEvent</span>) {
+        <span class='kw'>if</span> <span class='ident'>ev</span>.<span class='ident'>root</span>() <span class='op'>==</span> <span class='self'>self</span>.<span class='ident'>root</span> <span class='op'>&amp;&amp;</span> <span class='ident'>ev</span>.<span class='ident'>rotation</span>() <span class='kw'>as</span> <span class='ident'>u32</span> <span class='kw-2'>&amp;</span>
+            (<span class='ident'>randr</span>::<span class='ident'>ROTATION_ROTATE_90</span> <span class='op'>|</span> <span class='ident'>randr</span>::<span class='ident'>ROTATION_ROTATE_270</span>) <span class='op'>!=</span> <span class='number'>0</span> {
+            <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;rotating all screen areas.&quot;</span>);
+            <span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>rotate</span>();
+        }
+    }
 
     <span class='doccomment'>/// An output has been changed, react accordingly.</span>
-    <span class='kw'>fn</span> <span class='ident'>handle_output_notify</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, _: <span class='kw-2'>&amp;</span><span class='ident'>randr</span>::<span class='ident'>NotifyEvent</span>) { }
+    <span class='kw'>fn</span> <span class='ident'>handle_output_notify</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, _: <span class='kw-2'>&amp;</span><span class='ident'>randr</span>::<span class='ident'>NotifyEvent</span>) {
+    }
 
     <span class='doccomment'>/// A key has been pressed, react accordingly.</span>
     <span class='doccomment'>///</span>
@@ -1471,7 +1490,7 @@
         <span class='kw'>let</span> <span class='ident'>key</span> <span class='op'>=</span> <span class='ident'>from_key</span>(<span class='ident'>ev</span>, <span class='self'>self</span>.<span class='ident'>mode</span>);
         <span class='kw'>let</span> <span class='ident'>command</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>func</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>bindings</span>.<span class='ident'>get</span>(<span class='kw-2'>&amp;</span><span class='ident'>key</span>) {
             <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;executing binding for {:?}&quot;</span>, <span class='ident'>key</span>);
-            <span class='kw'>let</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='ident'>func</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>clients</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>tag_stack</span>);
+            <span class='kw'>let</span> <span class='ident'>c</span> <span class='op'>=</span> <span class='ident'>func</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>clients</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>screens</span>);
             <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;resulting command: {:?}&quot;</span>, <span class='ident'>c</span>);
             <span class='ident'>c</span>
         } <span class='kw'>else</span> {
@@ -1528,14 +1547,15 @@
             <span class='self'>self</span>.<span class='ident'>get_properties</span>(<span class='ident'>window</span>).<span class='ident'>window_type</span> <span class='op'>!=</span>
             <span class='self'>self</span>.<span class='ident'>lookup_atom</span>(<span class='string'>&quot;_NET_WM_WINDOW_TYPE_DOCK&quot;</span>) {
             <span class='kw'>let</span> <span class='ident'>value_mask</span> <span class='op'>=</span> <span class='ident'>ev</span>.<span class='ident'>value_mask</span>();
+            <span class='kw'>let</span> <span class='ident'>screen</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>screen</span>();
             <span class='kw'>let</span> <span class='ident'>cookie</span> <span class='op'>=</span>
                 <span class='kw'>if</span> <span class='ident'>value_mask</span> <span class='kw'>as</span> <span class='ident'>u32</span> <span class='kw-2'>&amp;</span> <span class='ident'>xproto</span>::<span class='ident'>CONFIG_WINDOW_WIDTH</span> <span class='op'>!=</span> <span class='number'>0</span> <span class='op'>&amp;&amp;</span>
                     <span class='ident'>value_mask</span> <span class='kw'>as</span> <span class='ident'>u32</span> <span class='kw-2'>&amp;</span> <span class='ident'>xproto</span>::<span class='ident'>CONFIG_WINDOW_HEIGHT</span> <span class='op'>!=</span> <span class='number'>0</span> {
                     <span class='kw'>let</span> <span class='ident'>width</span> <span class='op'>=</span> <span class='ident'>ev</span>.<span class='ident'>width</span>() <span class='kw'>as</span> <span class='ident'>u32</span>;
                     <span class='kw'>let</span> <span class='ident'>height</span> <span class='op'>=</span> <span class='ident'>ev</span>.<span class='ident'>height</span>() <span class='kw'>as</span> <span class='ident'>u32</span>;
 
-                    <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> (<span class='self'>self</span>.<span class='ident'>screen</span>.<span class='ident'>width</span> <span class='op'>-</span> <span class='ident'>width</span>) <span class='op'>/</span> <span class='number'>2</span>;
-                    <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> (<span class='self'>self</span>.<span class='ident'>screen</span>.<span class='ident'>height</span> <span class='op'>-</span> <span class='ident'>height</span>) <span class='op'>/</span> <span class='number'>2</span>;
+                    <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> (<span class='ident'>screen</span>.<span class='ident'>width</span> <span class='op'>-</span> <span class='ident'>width</span>) <span class='op'>/</span> <span class='number'>2</span>;
+                    <span class='kw'>let</span> <span class='ident'>y</span> <span class='op'>=</span> (<span class='ident'>screen</span>.<span class='ident'>height</span> <span class='op'>-</span> <span class='ident'>height</span>) <span class='op'>/</span> <span class='number'>2</span>;
 
                     <span class='kw'>let</span> <span class='ident'>cookie</span> <span class='op'>=</span> <span class='ident'>xproto</span>::<span class='ident'>configure_window</span>(
                         <span class='self'>self</span>.<span class='ident'>con</span>, <span class='ident'>window</span>,
@@ -1558,8 +1578,8 @@
                         <span class='self'>self</span>.<span class='ident'>con</span>, <span class='ident'>window</span>).<span class='ident'>get_reply</span>() {
                         <span class='kw'>let</span> <span class='ident'>width</span> <span class='op'>=</span> <span class='ident'>geom</span>.<span class='ident'>width</span>() <span class='kw'>as</span> <span class='ident'>u32</span>;
                         <span class='kw'>let</span> <span class='ident'>height</span> <span class='op'>=</span> <span class='ident'>geom</span>.<span class='ident'>height</span>() <span class='kw'>as</span> <span class='ident'>u32</span>;
-                        <span class='ident'>x</span> <span class='op'>=</span> (<span class='self'>self</span>.<span class='ident'>screen</span>.<span class='ident'>width</span> <span class='op'>-</span> <span class='ident'>width</span>) <span class='op'>/</span> <span class='number'>2</span>;
-                        <span class='ident'>y</span> <span class='op'>=</span> (<span class='self'>self</span>.<span class='ident'>screen</span>.<span class='ident'>height</span> <span class='op'>-</span> <span class='ident'>height</span>) <span class='op'>/</span> <span class='number'>2</span>;
+                        <span class='ident'>x</span> <span class='op'>=</span> (<span class='ident'>screen</span>.<span class='ident'>width</span> <span class='op'>-</span> <span class='ident'>width</span>) <span class='op'>/</span> <span class='number'>2</span>;
+                        <span class='ident'>y</span> <span class='op'>=</span> (<span class='ident'>screen</span>.<span class='ident'>height</span> <span class='op'>-</span> <span class='ident'>height</span>) <span class='op'>/</span> <span class='number'>2</span>;
                     } <span class='kw'>else</span> {
                         <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;could not get window geometry, \
                                expect ugly results&quot;</span>);
@@ -1596,7 +1616,7 @@
                     <span class='comment'>// map window</span>
                     <span class='kw'>let</span> <span class='ident'>cookie</span> <span class='op'>=</span> <span class='ident'>xproto</span>::<span class='ident'>map_window</span>(<span class='self'>self</span>.<span class='ident'>con</span>, <span class='ident'>window</span>);
                     <span class='comment'>// set border width and coordinates</span>
-                    <span class='kw'>let</span> <span class='ident'>safe_x</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>screen</span>.<span class='ident'>width</span> <span class='op'>+</span> <span class='number'>2</span>;
+                    <span class='kw'>let</span> <span class='ident'>safe_x</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>screen</span>().<span class='ident'>width</span> <span class='op'>+</span> <span class='number'>2</span>;
                     <span class='kw'>let</span> <span class='ident'>cookie2</span> <span class='op'>=</span> <span class='ident'>xproto</span>::<span class='ident'>configure_window</span>(<span class='self'>self</span>.<span class='ident'>con</span>, <span class='ident'>window</span>,
                         <span class='kw-2'>&amp;</span>[(<span class='ident'>xproto</span>::<span class='ident'>CONFIG_WINDOW_BORDER_WIDTH</span> <span class='kw'>as</span> <span class='ident'>u16</span>,
                            <span class='self'>self</span>.<span class='ident'>config</span>.<span class='ident'>border_width</span> <span class='kw'>as</span> <span class='ident'>u32</span>),
@@ -1606,7 +1626,7 @@
 
                     <span class='comment'>// decide whether the client will be immediately visible</span>
                     <span class='kw'>let</span> <span class='ident'>visible</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>tags</span>) <span class='op'>=</span>
-                        <span class='self'>self</span>.<span class='ident'>tag_stack</span>.<span class='ident'>current</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>t</span><span class='op'>|</span> <span class='kw-2'>&amp;</span><span class='ident'>t</span>.<span class='ident'>tags</span>) {
+                        <span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>tag_stack</span>().<span class='ident'>current</span>().<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>t</span><span class='op'>|</span> <span class='kw-2'>&amp;</span><span class='ident'>t</span>.<span class='ident'>tags</span>) {
                             <span class='ident'>client</span>.<span class='ident'>match_tags</span>(<span class='ident'>tags</span>)
                         } <span class='kw'>else</span> {
                             <span class='bool-val'>false</span>
@@ -1672,7 +1692,7 @@
                 .<span class='ident'>as_ref</span>()
                 .<span class='ident'>and_then</span>(<span class='op'>|</span><span class='ident'>f</span><span class='op'>|</span> <span class='ident'>f</span>(<span class='kw-2'>&amp;</span><span class='ident'>props</span>)) {
                 <span class='ident'>res</span>
-            } <span class='kw'>else</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>tagset</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>tag_stack</span>.<span class='ident'>current</span>() {
+            } <span class='kw'>else</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>tagset</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>tag_stack</span>().<span class='ident'>current</span>() {
                 (<span class='ident'>tagset</span>.<span class='ident'>tags</span>.<span class='ident'>clone</span>(), <span class='bool-val'>false</span>)
             } <span class='kw'>else</span> {
                 (<span class='macro'>set</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>default</span>()], <span class='bool-val'>false</span>)
@@ -1690,7 +1710,7 @@
     <span class='doccomment'>/// currenlty used layout dictates it.</span>
     <span class='kw'>fn</span> <span class='ident'>add_client</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>client</span>: <span class='ident'>Client</span>, <span class='ident'>as_slave</span>: <span class='ident'>bool</span>) {
         <span class='self'>self</span>.<span class='ident'>clients</span>.<span class='ident'>add</span>(<span class='ident'>client</span>, <span class='ident'>as_slave</span>);
-        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>tagset</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>tag_stack</span>.<span class='ident'>current</span>() {
+        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>tagset</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>tag_stack</span>().<span class='ident'>current</span>() {
             <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>new_window_as_master</span>() {
                 <span class='self'>self</span>.<span class='ident'>clients</span>.<span class='ident'>swap_master</span>(<span class='ident'>tagset</span>);
             }

@@ -102,7 +102,7 @@
 
 <span class='kw'>use</span> <span class='ident'>xcb</span>::<span class='ident'>xkb</span>;
 
-<span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>client</span>::{<span class='ident'>ClientSet</span>, <span class='ident'>TagStack</span>};
+<span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>client</span>::{<span class='ident'>ClientSet</span>, <span class='ident'>ScreenSet</span>};
 <span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>config</span>::<span class='ident'>Mode</span>;
 <span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>window_system</span>::<span class='ident'>WmCommand</span>;
 
@@ -130,7 +130,7 @@
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>ALTGR</span>: <span class='ident'>u8</span> <span class='op'>=</span> <span class='number'>136</span>;
 
 <span class='doccomment'>/// Closure type of a callback function running on key press.</span>
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>KeyCallback</span> <span class='op'>=</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Fn</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ClientSet</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>TagStack</span>) <span class='op'>-&gt;</span> <span class='ident'>WmCommand</span><span class='op'>&gt;</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>KeyCallback</span> <span class='op'>=</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Fn</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ClientSet</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ScreenSet</span>) <span class='op'>-&gt;</span> <span class='ident'>WmCommand</span><span class='op'>&gt;</span>;
 <span class='doccomment'>/// Keybinding map.</span>
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>Keybindings</span> <span class='op'>=</span> <span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>KeyPress</span>, <span class='ident'>KeyCallback</span><span class='op'>&gt;</span>;
 

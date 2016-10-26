@@ -165,12 +165,12 @@
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>spiral</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>stack</span>;
 
-<span class='doccomment'>/// A screen size to be accounted for when arranging windows.</span>
+<span class='doccomment'>/// A screen area size to be accounted for when arranging windows.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// Describes the area used for tiling windows. This allows to leave an open</span>
 <span class='doccomment'>/// spot for desktop windows, bars and whatever else you might want.</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ScreenSize</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>TilingArea</span> {
     <span class='doccomment'>/// x offset of tiling area</span>
     <span class='kw'>pub</span> <span class='ident'>offset_x</span>: <span class='ident'>u32</span>,
     <span class='doccomment'>/// y offset of tiling area</span>
@@ -181,12 +181,12 @@
     <span class='kw'>pub</span> <span class='ident'>height</span>: <span class='ident'>u32</span>,
 }
 
-<span class='kw'>impl</span> <span class='ident'>ScreenSize</span> {
-    <span class='doccomment'>/// Create a new `ScreenSize` object.</span>
+<span class='kw'>impl</span> <span class='ident'>TilingArea</span> {
+    <span class='doccomment'>/// Create a new `TilingArea` object.</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// Uses a `ScreenSize` that represents the user&#39;s wishes to get something</span>
+    <span class='doccomment'>/// Uses a `TilingArea` that represents the user&#39;s wishes to get something</span>
     <span class='doccomment'>/// that is actually possible.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>old</span>: <span class='kw-2'>&amp;</span><span class='ident'>ScreenSize</span>, <span class='ident'>width</span>: <span class='ident'>u32</span>, <span class='ident'>height</span>: <span class='ident'>u32</span>) <span class='op'>-&gt;</span> <span class='ident'>ScreenSize</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>old</span>: <span class='kw-2'>&amp;</span><span class='ident'>TilingArea</span>, <span class='ident'>width</span>: <span class='ident'>u32</span>, <span class='ident'>height</span>: <span class='ident'>u32</span>) <span class='op'>-&gt;</span> <span class='ident'>TilingArea</span> {
         <span class='kw'>let</span> <span class='ident'>new_width</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ident'>old</span>.<span class='ident'>width</span> <span class='op'>+</span> <span class='ident'>old</span>.<span class='ident'>offset_x</span> <span class='op'>&lt;</span> <span class='ident'>width</span> {
             <span class='ident'>old</span>.<span class='ident'>width</span> <span class='op'>-</span> <span class='ident'>old</span>.<span class='ident'>offset_x</span>
         } <span class='kw'>else</span> {
@@ -197,7 +197,7 @@
         } <span class='kw'>else</span> {
             <span class='ident'>height</span> <span class='op'>-</span> <span class='ident'>old</span>.<span class='ident'>offset_y</span>
         };
-        <span class='ident'>ScreenSize</span> {
+        <span class='ident'>TilingArea</span> {
             <span class='ident'>offset_x</span>: <span class='ident'>old</span>.<span class='ident'>offset_x</span>,
             <span class='ident'>offset_y</span>: <span class='ident'>old</span>.<span class='ident'>offset_y</span>,
             <span class='ident'>width</span>: <span class='ident'>new_width</span>,
@@ -221,13 +221,13 @@
 
 <span class='doccomment'>/// Types that compute geometries for arbitrary amounts of windows.</span>
 <span class='doccomment'>///</span>
-<span class='doccomment'>/// The only input such objects get are `ScreenSize` and number of windows.</span>
+<span class='doccomment'>/// The only input such objects get are `TilingArea` and number of windows.</span>
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>Layout</span> {
     <span class='doccomment'>/// Compute window geometries. </span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// If a `None` is returned at a particular position, that window is not</span>
     <span class='doccomment'>/// to be made visible.</span>
-    <span class='kw'>fn</span> <span class='ident'>arrange</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>num_windows</span>: <span class='ident'>usize</span>, <span class='ident'>screen</span>: <span class='kw-2'>&amp;</span><span class='ident'>ScreenSize</span>)
+    <span class='kw'>fn</span> <span class='ident'>arrange</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>num_windows</span>: <span class='ident'>usize</span>, <span class='ident'>screen</span>: <span class='kw-2'>&amp;</span><span class='ident'>TilingArea</span>)
         <span class='op'>-&gt;</span> <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Geometry</span><span class='op'>&gt;&gt;</span>;
     <span class='doccomment'>/// Get the window to the right of the nth window.</span>
     <span class='kw'>fn</span> <span class='ident'>right_window</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>index</span>: <span class='ident'>usize</span>, <span class='ident'>max</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span>;
