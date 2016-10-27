@@ -972,10 +972,17 @@
 <span id="928">928</span>
 <span id="929">929</span>
 <span id="930">930</span>
+<span id="931">931</span>
+<span id="932">932</span>
+<span id="933">933</span>
+<span id="934">934</span>
+<span id="935">935</span>
+<span id="936">936</span>
+<span id="937">937</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>c_char</span>;
 
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>::{<span class='ident'>HashMap</span>,<span class='ident'>BTreeSet</span>};
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>::{<span class='ident'>HashMap</span>, <span class='ident'>BTreeSet</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>ffi</span>::<span class='ident'>CStr</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>process</span>::<span class='ident'>exit</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>str</span>;
@@ -987,7 +994,7 @@
 <span class='kw'>use</span> <span class='ident'>xcb</span>::<span class='ident'>ffi</span>::<span class='ident'>xcb_client_message_data_t</span>;
 
 <span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>client</span>::<span class='op'>*</span>;
-<span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>config</span>::{<span class='ident'>Tag</span>,<span class='ident'>Mode</span>};
+<span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>config</span>::{<span class='ident'>Tag</span>, <span class='ident'>Mode</span>};
 <span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>err</span>::<span class='op'>*</span>;
 <span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>kbd</span>::<span class='op'>*</span>;
 <span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>layout</span>::<span class='op'>*</span>;
@@ -1112,7 +1119,8 @@
                         <span class='ident'>clients</span>: <span class='ident'>ClientSet</span>::<span class='ident'>default</span>(),
                         <span class='ident'>atoms</span>: <span class='ident'>atoms</span>,
                         <span class='ident'>visible_windows</span>: <span class='ident'>Vec</span>::<span class='ident'>new</span>(),
-                        <span class='ident'>randr_base</span>: <span class='number'>0</span>, <span class='comment'>// TODO</span>
+                        <span class='ident'>randr_base</span>: <span class='number'>0</span>, <span class='comment'>// this is fine because we fail in cases</span>
+                                       <span class='comment'>// where we can&#39;t reset this value</span>
                         <span class='ident'>focused_window</span>: <span class='prelude-val'>None</span>,
                         <span class='ident'>unmanaged_windows</span>: <span class='ident'>Vec</span>::<span class='ident'>new</span>(),
                     })
@@ -1478,7 +1486,13 @@
     }
 
     <span class='doccomment'>/// An output has been changed, react accordingly.</span>
-    <span class='kw'>fn</span> <span class='ident'>handle_output_notify</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, _: <span class='kw-2'>&amp;</span><span class='ident'>randr</span>::<span class='ident'>NotifyEvent</span>) {
+    <span class='kw'>fn</span> <span class='ident'>handle_output_notify</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>ev</span>: <span class='kw-2'>&amp;</span><span class='ident'>randr</span>::<span class='ident'>NotifyEvent</span>) {
+        <span class='kw'>if</span> <span class='ident'>ev</span>.<span class='ident'>sub_code</span>() <span class='kw'>as</span> <span class='ident'>u32</span> <span class='op'>==</span> <span class='ident'>randr</span>::<span class='ident'>NOTIFY_OUTPUT_CHANGE</span> {
+            <span class='kw'>let</span> _: <span class='kw-2'>&amp;</span><span class='ident'>randr</span>::<span class='ident'>OutputChange</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
+                <span class='kw-2'>&amp;</span><span class='op'>*</span>(<span class='ident'>ev</span>.<span class='ident'>u</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>randr</span>::<span class='ident'>NotifyData</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>randr</span>::<span class='ident'>OutputChange</span>)
+            };
+            <span class='comment'>// TODO: handling logic here</span>
+        }
     }
 
     <span class='doccomment'>/// A key has been pressed, react accordingly.</span>

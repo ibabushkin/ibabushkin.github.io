@@ -53,7 +53,7 @@
 <p>A screen is a rectangular area on the X server screen&#39;s root window,
 that is used to show a distinct set of tags associated with a
 <code>TagStack</code>. There is an active screen at all times.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../../../gabelstaplerwm/wm/client/struct.ScreenSet.html' title='gabelstaplerwm::wm::client::ScreenSet'>ScreenSet</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-305' class='srclink' href='../../../src/gabelstaplerwm/src/wm/client.rs.html#685-729' title='goto source code'>[src]</a></span></h3>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../../../gabelstaplerwm/wm/client/struct.ScreenSet.html' title='gabelstaplerwm::wm::client::ScreenSet'>ScreenSet</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-305' class='srclink' href='../../../src/gabelstaplerwm/src/wm/client.rs.html#685-730' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.new' class='method'><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>(screens: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(</a><a class='struct' href='../../../gabelstaplerwm/wm/layout/struct.TilingArea.html' title='gabelstaplerwm::wm::layout::TilingArea'>TilingArea</a>, <a class='struct' href='../../../gabelstaplerwm/wm/client/struct.TagStack.html' title='gabelstaplerwm::wm::client::TagStack'>TagStack</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>)</a>&gt;) -&gt; <a class='struct' href='../../../gabelstaplerwm/wm/client/struct.ScreenSet.html' title='gabelstaplerwm::wm::client::ScreenSet'>ScreenSet</a></code></span></h4>
 <div class='docblock'><p>Setup a new screen set.</p>
 </div><h4 id='method.current_mut' class='method'><span id='current_mut.v' class='invisible'><code>fn <a href='#method.current_mut' class='fnname'>current_mut</a>(&amp;mut self) -&gt; &amp;mut <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(</a><a class='struct' href='../../../gabelstaplerwm/wm/layout/struct.TilingArea.html' title='gabelstaplerwm::wm::layout::TilingArea'>TilingArea</a>, <a class='struct' href='../../../gabelstaplerwm/wm/client/struct.TagStack.html' title='gabelstaplerwm::wm::client::TagStack'>TagStack</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>)</a></code></span></h4>
@@ -67,7 +67,8 @@ that is used to show a distinct set of tags associated with a
 </div><h4 id='method.tag_stack' class='method'><span id='tag_stack.v' class='invisible'><code>fn <a href='#method.tag_stack' class='fnname'>tag_stack</a>(&amp;self) -&gt; &amp;<a class='struct' href='../../../gabelstaplerwm/wm/client/struct.TagStack.html' title='gabelstaplerwm::wm::client::TagStack'>TagStack</a></code></span></h4>
 <div class='docblock'><p>Get an immutable reference to the current screen&#39;s tag stack.</p>
 </div><h4 id='method.rotate' class='method'><span id='rotate.v' class='invisible'><code>fn <a href='#method.rotate' class='fnname'>rotate</a>(&amp;mut self)</code></span></h4>
-</div></section>
+<div class='docblock'><p>Swap horizontal and vertical axes of all screens.</p>
+</div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
