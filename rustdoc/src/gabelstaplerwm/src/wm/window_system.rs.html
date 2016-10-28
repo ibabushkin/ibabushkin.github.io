@@ -979,6 +979,38 @@
 <span id="935">935</span>
 <span id="936">936</span>
 <span id="937">937</span>
+<span id="938">938</span>
+<span id="939">939</span>
+<span id="940">940</span>
+<span id="941">941</span>
+<span id="942">942</span>
+<span id="943">943</span>
+<span id="944">944</span>
+<span id="945">945</span>
+<span id="946">946</span>
+<span id="947">947</span>
+<span id="948">948</span>
+<span id="949">949</span>
+<span id="950">950</span>
+<span id="951">951</span>
+<span id="952">952</span>
+<span id="953">953</span>
+<span id="954">954</span>
+<span id="955">955</span>
+<span id="956">956</span>
+<span id="957">957</span>
+<span id="958">958</span>
+<span id="959">959</span>
+<span id="960">960</span>
+<span id="961">961</span>
+<span id="962">962</span>
+<span id="963">963</span>
+<span id="964">964</span>
+<span id="965">965</span>
+<span id="966">966</span>
+<span id="967">967</span>
+<span id="968">968</span>
+<span id="969">969</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>c_char</span>;
 
@@ -1061,32 +1093,32 @@
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Wm</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
     <span class='doccomment'>/// connection to the X server</span>
     <span class='ident'>con</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>base</span>::<span class='ident'>Connection</span>,
+    <span class='doccomment'>/// atoms registered at runtime</span>
+    <span class='ident'>atoms</span>: <span class='ident'>AtomList</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>,
     <span class='doccomment'>/// root window</span>
     <span class='ident'>root</span>: <span class='ident'>xproto</span>::<span class='ident'>Window</span>,
-    <span class='doccomment'>/// user-defined configuration parameters</span>
-    <span class='ident'>config</span>: <span class='ident'>WmConfig</span>,
-    <span class='doccomment'>/// all screen areas we tile windows on, and their tag stacks</span>
-    <span class='ident'>screens</span>: <span class='ident'>ScreenSet</span>,
+    <span class='doccomment'>/// the first event index of our RandR extension</span>
+    <span class='ident'>randr_base</span>: <span class='ident'>u8</span>,
+    <span class='doccomment'>/// border width</span>
+    <span class='ident'>border_width</span>: <span class='ident'>u8</span>,
     <span class='doccomment'>/// colors used for window borders, first denotes focused windows</span>
     <span class='ident'>border_colors</span>: (<span class='ident'>u32</span>, <span class='ident'>u32</span>),
+    <span class='doccomment'>/// all screen areas we tile windows on, and their tag stacks</span>
+    <span class='ident'>screens</span>: <span class='ident'>ScreenSet</span>,
+    <span class='doccomment'>/// set of currently present clients</span>
+    <span class='ident'>clients</span>: <span class='ident'>ClientSet</span>,
+    <span class='doccomment'>/// all windows currently visible</span>
+    <span class='ident'>visible_windows</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>xproto</span>::<span class='ident'>Window</span><span class='op'>&gt;</span>,
+    <span class='doccomment'>/// windows we know about, but do not manage</span>
+    <span class='ident'>unmanaged_windows</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>xproto</span>::<span class='ident'>Window</span><span class='op'>&gt;</span>,
+    <span class='doccomment'>/// currently focused window</span>
+    <span class='ident'>focused_window</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>xproto</span>::<span class='ident'>Window</span><span class='op'>&gt;</span>,
+    <span class='doccomment'>/// current keyboard mode</span>
+    <span class='ident'>mode</span>: <span class='ident'>Mode</span>,
     <span class='doccomment'>/// keybinding callbacks</span>
     <span class='ident'>bindings</span>: <span class='ident'>Keybindings</span>,
     <span class='doccomment'>/// matching function for client placement</span>
     <span class='ident'>matching</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Matching</span><span class='op'>&gt;</span>,
-    <span class='doccomment'>/// current keyboard mode</span>
-    <span class='ident'>mode</span>: <span class='ident'>Mode</span>,
-    <span class='doccomment'>/// set of currently present clients</span>
-    <span class='ident'>clients</span>: <span class='ident'>ClientSet</span>,
-    <span class='doccomment'>/// atoms registered at runtime</span>
-    <span class='ident'>atoms</span>: <span class='ident'>AtomList</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>,
-    <span class='doccomment'>/// the first event index of our RandR extension</span>
-    <span class='ident'>randr_base</span>: <span class='ident'>u8</span>,
-    <span class='doccomment'>/// all windows currently visible</span>
-    <span class='ident'>visible_windows</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>xproto</span>::<span class='ident'>Window</span><span class='op'>&gt;</span>,
-    <span class='doccomment'>/// currently focused window</span>
-    <span class='ident'>focused_window</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>xproto</span>::<span class='ident'>Window</span><span class='op'>&gt;</span>,
-    <span class='doccomment'>/// windows we know about, but do not manage</span>
-    <span class='ident'>unmanaged_windows</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>xproto</span>::<span class='ident'>Window</span><span class='op'>&gt;</span>,
 }
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Wm</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
@@ -1095,34 +1127,28 @@
         <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Wm</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>, <span class='ident'>WmError</span><span class='op'>&gt;</span> {
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>screen</span>) <span class='op'>=</span>
             <span class='ident'>con</span>.<span class='ident'>get_setup</span>().<span class='ident'>roots</span>().<span class='ident'>nth</span>(<span class='ident'>screen_num</span> <span class='kw'>as</span> <span class='ident'>usize</span>) {
-            <span class='kw'>let</span> <span class='ident'>width</span> <span class='op'>=</span> <span class='ident'>screen</span>.<span class='ident'>width_in_pixels</span>();
-            <span class='kw'>let</span> <span class='ident'>height</span> <span class='op'>=</span> <span class='ident'>screen</span>.<span class='ident'>height_in_pixels</span>();
+            <span class='kw'>let</span> <span class='ident'>root</span> <span class='op'>=</span> <span class='ident'>screen</span>.<span class='ident'>root</span>();
             <span class='kw'>let</span> <span class='ident'>colormap</span> <span class='op'>=</span> <span class='ident'>screen</span>.<span class='ident'>default_colormap</span>();
-            <span class='kw'>let</span> <span class='ident'>new_screen</span> <span class='op'>=</span>
-                <span class='ident'>TilingArea</span>::<span class='ident'>new</span>(<span class='kw-2'>&amp;</span><span class='ident'>config</span>.<span class='ident'>screen</span>, <span class='ident'>width</span> <span class='kw'>as</span> <span class='ident'>u32</span>, <span class='ident'>height</span> <span class='kw'>as</span> <span class='ident'>u32</span>);
-            <span class='kw'>let</span> <span class='ident'>colors</span> <span class='op'>=</span> <span class='ident'>Wm</span>::<span class='ident'>setup_colors</span>(<span class='ident'>con</span>,
-                                          <span class='ident'>colormap</span>,
-                                          <span class='ident'>config</span>.<span class='ident'>f_color</span>,
-                                          <span class='ident'>config</span>.<span class='ident'>u_color</span>);
+            <span class='kw'>let</span> <span class='ident'>colors</span> <span class='op'>=</span>
+                <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Wm</span>::<span class='ident'>setup_colors</span>(<span class='ident'>con</span>, <span class='ident'>colormap</span>, <span class='ident'>config</span>.<span class='ident'>f_color</span>, <span class='ident'>config</span>.<span class='ident'>u_color</span>));
 
             <span class='kw'>match</span> <span class='ident'>Wm</span>::<span class='ident'>get_atoms</span>(<span class='ident'>con</span>, <span class='kw-2'>&amp;</span><span class='ident'>ATOM_VEC</span>) {
                 <span class='prelude-val'>Ok</span>(<span class='ident'>atoms</span>) <span class='op'>=&gt;</span> {
                     <span class='prelude-val'>Ok</span>(<span class='ident'>Wm</span> {
                         <span class='ident'>con</span>: <span class='ident'>con</span>,
-                        <span class='ident'>root</span>: <span class='ident'>screen</span>.<span class='ident'>root</span>(),
-                        <span class='ident'>config</span>: <span class='ident'>config</span>,
-                        <span class='ident'>screens</span>: <span class='ident'>ScreenSet</span>::<span class='ident'>new</span>(<span class='macro'>vec</span><span class='macro'>!</span>[(<span class='ident'>new_screen</span>, <span class='ident'>TagStack</span>::<span class='ident'>new</span>())]),
+                        <span class='ident'>atoms</span>: <span class='ident'>atoms</span>,
+                        <span class='ident'>root</span>: <span class='ident'>root</span>,
+                        <span class='ident'>randr_base</span>: <span class='number'>0</span>,
+                        <span class='ident'>border_width</span>: <span class='ident'>config</span>.<span class='ident'>border_width</span>,
                         <span class='ident'>border_colors</span>: <span class='ident'>colors</span>,
+                        <span class='ident'>screens</span>: <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Wm</span>::<span class='ident'>setup_screens</span>(<span class='ident'>con</span>, <span class='ident'>root</span>)),
+                        <span class='ident'>clients</span>: <span class='ident'>ClientSet</span>::<span class='ident'>default</span>(),
+                        <span class='ident'>visible_windows</span>: <span class='ident'>Vec</span>::<span class='ident'>new</span>(),
+                        <span class='ident'>unmanaged_windows</span>: <span class='ident'>Vec</span>::<span class='ident'>new</span>(),
+                        <span class='ident'>focused_window</span>: <span class='prelude-val'>None</span>,
+                        <span class='ident'>mode</span>: <span class='ident'>Mode</span>::<span class='ident'>default</span>(),
                         <span class='ident'>bindings</span>: <span class='ident'>HashMap</span>::<span class='ident'>new</span>(),
                         <span class='ident'>matching</span>: <span class='prelude-val'>None</span>,
-                        <span class='ident'>mode</span>: <span class='ident'>Mode</span>::<span class='ident'>default</span>(),
-                        <span class='ident'>clients</span>: <span class='ident'>ClientSet</span>::<span class='ident'>default</span>(),
-                        <span class='ident'>atoms</span>: <span class='ident'>atoms</span>,
-                        <span class='ident'>visible_windows</span>: <span class='ident'>Vec</span>::<span class='ident'>new</span>(),
-                        <span class='ident'>randr_base</span>: <span class='number'>0</span>, <span class='comment'>// this is fine because we fail in cases</span>
-                                       <span class='comment'>// where we can&#39;t reset this value</span>
-                        <span class='ident'>focused_window</span>: <span class='prelude-val'>None</span>,
-                        <span class='ident'>unmanaged_windows</span>: <span class='ident'>Vec</span>::<span class='ident'>new</span>(),
                     })
                 }
                 <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>e</span>),
@@ -1137,7 +1163,7 @@
                     <span class='ident'>colormap</span>: <span class='ident'>xproto</span>::<span class='ident'>Colormap</span>,
                     <span class='ident'>f_color</span>: (<span class='ident'>u16</span>, <span class='ident'>u16</span>, <span class='ident'>u16</span>),
                     <span class='ident'>u_color</span>: (<span class='ident'>u16</span>, <span class='ident'>u16</span>, <span class='ident'>u16</span>))
-        <span class='op'>-&gt;</span> (<span class='ident'>u32</span>, <span class='ident'>u32</span>) {
+        <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(<span class='ident'>u32</span>, <span class='ident'>u32</span>), <span class='ident'>WmError</span><span class='op'>&gt;</span> {
         <span class='comment'>// request color pixels</span>
         <span class='kw'>let</span> <span class='ident'>f_cookie</span> <span class='op'>=</span> <span class='ident'>xproto</span>::<span class='ident'>alloc_color</span>(
             <span class='ident'>con</span>, <span class='ident'>colormap</span>, <span class='ident'>f_color</span>.<span class='number'>0</span>, <span class='ident'>f_color</span>.<span class='number'>1</span>, <span class='ident'>f_color</span>.<span class='number'>2</span>);
@@ -1146,8 +1172,44 @@
 
         <span class='comment'>// get the replies</span>
         <span class='kw'>match</span> (<span class='ident'>f_cookie</span>.<span class='ident'>get_reply</span>(), <span class='ident'>u_cookie</span>.<span class='ident'>get_reply</span>()) {
-            (<span class='prelude-val'>Ok</span>(<span class='ident'>f_reply</span>), <span class='prelude-val'>Ok</span>(<span class='ident'>u_reply</span>)) <span class='op'>=&gt;</span> (<span class='ident'>f_reply</span>.<span class='ident'>pixel</span>(), <span class='ident'>u_reply</span>.<span class='ident'>pixel</span>()),
-            _ <span class='op'>=&gt;</span> <span class='macro'>panic</span><span class='macro'>!</span>(<span class='string'>&quot;Could not allocate your colors!&quot;</span>),
+            (<span class='prelude-val'>Ok</span>(<span class='ident'>f_reply</span>), <span class='prelude-val'>Ok</span>(<span class='ident'>u_reply</span>)) <span class='op'>=&gt;</span> <span class='prelude-val'>Ok</span>((<span class='ident'>f_reply</span>.<span class='ident'>pixel</span>(), <span class='ident'>u_reply</span>.<span class='ident'>pixel</span>())),
+            _ <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>WmError</span>::<span class='ident'>CouldNotAllocateColors</span>),
+        }
+    }
+
+    <span class='comment'>// Get info on all outputs and register them in a `ScreenSet`.</span>
+    <span class='kw'>fn</span> <span class='ident'>setup_screens</span>(<span class='ident'>con</span>: <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>base</span>::<span class='ident'>Connection</span>, <span class='ident'>root</span>: <span class='ident'>xproto</span>::<span class='ident'>Window</span>)
+        <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>ScreenSet</span>, <span class='ident'>WmError</span><span class='op'>&gt;</span> {
+        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>reply</span>) <span class='op'>=</span> <span class='ident'>randr</span>::<span class='ident'>get_screen_resources</span>(<span class='ident'>con</span>, <span class='ident'>root</span>).<span class='ident'>get_reply</span>() {
+            <span class='kw'>let</span> <span class='ident'>cfg</span> <span class='op'>=</span> <span class='ident'>reply</span>.<span class='ident'>config_timestamp</span>();
+            <span class='kw'>let</span> <span class='ident'>cookies</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>reply</span>
+                .<span class='ident'>crtcs</span>()
+                .<span class='ident'>iter</span>()
+                .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>crtc</span><span class='op'>|</span> (<span class='ident'>crtc</span>, <span class='ident'>randr</span>::<span class='ident'>get_crtc_info</span>(<span class='ident'>con</span>, <span class='op'>*</span><span class='ident'>crtc</span>, <span class='ident'>cfg</span>)))
+                .<span class='ident'>collect</span>();
+            <span class='kw'>let</span> <span class='ident'>screens</span> <span class='op'>=</span> <span class='ident'>cookies</span>
+                .<span class='ident'>iter</span>()
+                .<span class='ident'>filter_map</span>(<span class='op'>|</span><span class='kw-2'>&amp;</span>(<span class='ident'>crtc</span>, <span class='kw-2'>ref</span> <span class='ident'>cookie</span>)<span class='op'>|</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>r</span>) <span class='op'>=</span> <span class='ident'>cookie</span>.<span class='ident'>get_reply</span>() {
+                    <span class='prelude-val'>Some</span>((<span class='op'>*</span><span class='ident'>crtc</span>, <span class='ident'>Screen</span> {
+                        <span class='ident'>area</span>: <span class='ident'>TilingArea</span> {
+                            <span class='ident'>offset_x</span>: <span class='ident'>r</span>.<span class='ident'>x</span>() <span class='kw'>as</span> <span class='ident'>u32</span>,
+                            <span class='ident'>offset_y</span>: <span class='ident'>r</span>.<span class='ident'>y</span>() <span class='kw'>as</span> <span class='ident'>u32</span>,
+                            <span class='ident'>width</span>: <span class='ident'>r</span>.<span class='ident'>width</span>() <span class='kw'>as</span> <span class='ident'>u32</span>,
+                            <span class='ident'>height</span>: <span class='ident'>r</span>.<span class='ident'>height</span>() <span class='kw'>as</span> <span class='ident'>u32</span>,
+                        },
+                        <span class='ident'>tag_stack</span>: <span class='ident'>TagStack</span>::<span class='ident'>new</span>(),
+                    }))
+                } <span class='kw'>else</span> {
+                    <span class='prelude-val'>None</span>
+                })
+                .<span class='ident'>collect</span>();
+            <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>res</span>) <span class='op'>=</span> <span class='ident'>ScreenSet</span>::<span class='ident'>new</span>(<span class='ident'>screens</span>) {
+                <span class='prelude-val'>Ok</span>(<span class='ident'>res</span>)
+            } <span class='kw'>else</span> {
+                <span class='prelude-val'>Err</span>(<span class='ident'>WmError</span>::<span class='ident'>BadCrtc</span>)
+            }
+        } <span class='kw'>else</span> {
+            <span class='prelude-val'>Err</span>(<span class='ident'>WmError</span>::<span class='ident'>CouldNotGetScreenResources</span>)
         }
     }
 
@@ -1166,6 +1228,7 @@
             (<span class='prelude-val'>Ok</span>(()), <span class='prelude-val'>Ok</span>(<span class='kw-2'>ref</span> <span class='ident'>r</span>), <span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>res</span>)) <span class='op'>=&gt;</span>
                 <span class='kw'>if</span> <span class='ident'>r</span>.<span class='ident'>major_version</span>() <span class='op'>==</span> <span class='number'>1</span> <span class='op'>&amp;&amp;</span> <span class='ident'>r</span>.<span class='ident'>minor_version</span>() <span class='op'>&gt;=</span> <span class='number'>2</span> {
                     <span class='self'>self</span>.<span class='ident'>randr_base</span> <span class='op'>=</span> <span class='ident'>res</span>.<span class='ident'>first_event</span>();
+                    <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;got RANDR base: {}&quot;</span>, <span class='self'>self</span>.<span class='ident'>randr_base</span>);
                     <span class='prelude-val'>Ok</span>(())
                 } <span class='kw'>else</span> {
                     <span class='prelude-val'>Err</span>(<span class='ident'>WmError</span>::<span class='ident'>RandRVersionMismatch</span>)
@@ -1177,7 +1240,7 @@
 
     <span class='doccomment'>/// Initialize the RandR extension for multimonitor support</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>init_randr</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span>(), <span class='ident'>WmError</span><span class='op'>&gt;</span> {
-        <span class='kw'>let</span> <span class='ident'>values</span> <span class='op'>=</span> <span class='ident'>randr</span>::<span class='ident'>NOTIFY_MASK_OUTPUT_CHANGE</span>
+        <span class='kw'>let</span> <span class='ident'>values</span> <span class='op'>=</span> <span class='ident'>randr</span>::<span class='ident'>NOTIFY_MASK_CRTC_CHANGE</span>
             <span class='op'>|</span> <span class='ident'>randr</span>::<span class='ident'>NOTIFY_MASK_SCREEN_CHANGE</span>;
 
         <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='ident'>randr</span>::<span class='ident'>select_input</span>(<span class='self'>self</span>.<span class='ident'>con</span>, <span class='self'>self</span>.<span class='ident'>root</span>, <span class='ident'>values</span> <span class='kw'>as</span> <span class='ident'>u16</span>)
@@ -1457,13 +1520,13 @@
                 <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;received event: MAP_REQUEST&quot;</span>);
                 <span class='self'>self</span>.<span class='ident'>handle_map_request</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>));
             },
-            <span class='ident'>res</span> <span class='kw'>if</span> <span class='ident'>res</span> <span class='op'>&gt;</span> <span class='self'>self</span>.<span class='ident'>randr_base</span> <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>res</span> <span class='op'>-</span> <span class='self'>self</span>.<span class='ident'>randr_base</span> <span class='kw'>as</span> <span class='ident'>u8</span> {
+            <span class='ident'>res</span> <span class='kw'>if</span> <span class='ident'>res</span> <span class='op'>&gt;=</span> <span class='self'>self</span>.<span class='ident'>randr_base</span> <span class='op'>=&gt;</span> <span class='kw'>match</span> <span class='ident'>res</span> <span class='op'>-</span> <span class='self'>self</span>.<span class='ident'>randr_base</span> <span class='kw'>as</span> <span class='ident'>u8</span> {
                 <span class='ident'>randr</span>::<span class='ident'>SCREEN_CHANGE_NOTIFY</span> <span class='op'>=&gt;</span> {
                     <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;received event: SCREEN_CHANGE_NOTIFY&quot;</span>);
                     <span class='self'>self</span>.<span class='ident'>handle_screen_change_notify</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>));
                 },
                 <span class='ident'>randr</span>::<span class='ident'>NOTIFY</span> <span class='op'>=&gt;</span> {
-                    <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;received event: OUTPUT_NOTIFY&quot;</span>);
+                    <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;received event: CRTC_NOTIFY&quot;</span>);
                     <span class='self'>self</span>.<span class='ident'>handle_output_notify</span>(<span class='ident'>base</span>::<span class='ident'>cast_event</span>(<span class='kw-2'>&amp;</span><span class='ident'>event</span>));
                 },
                 _ <span class='op'>=&gt;</span> <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;ignoring event: {}&quot;</span>, <span class='ident'>res</span>),
@@ -1487,11 +1550,12 @@
 
     <span class='doccomment'>/// An output has been changed, react accordingly.</span>
     <span class='kw'>fn</span> <span class='ident'>handle_output_notify</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>ev</span>: <span class='kw-2'>&amp;</span><span class='ident'>randr</span>::<span class='ident'>NotifyEvent</span>) {
-        <span class='kw'>if</span> <span class='ident'>ev</span>.<span class='ident'>sub_code</span>() <span class='kw'>as</span> <span class='ident'>u32</span> <span class='op'>==</span> <span class='ident'>randr</span>::<span class='ident'>NOTIFY_OUTPUT_CHANGE</span> {
-            <span class='kw'>let</span> _: <span class='kw-2'>&amp;</span><span class='ident'>randr</span>::<span class='ident'>OutputChange</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
-                <span class='kw-2'>&amp;</span><span class='op'>*</span>(<span class='ident'>ev</span>.<span class='ident'>u</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>randr</span>::<span class='ident'>NotifyData</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>randr</span>::<span class='ident'>OutputChange</span>)
+        <span class='kw'>if</span> <span class='ident'>ev</span>.<span class='ident'>sub_code</span>() <span class='kw'>as</span> <span class='ident'>u32</span> <span class='op'>==</span> <span class='ident'>randr</span>::<span class='ident'>NOTIFY_CRTC_CHANGE</span> {
+            <span class='kw'>let</span> <span class='ident'>crtc_change</span>: <span class='kw-2'>&amp;</span><span class='ident'>randr</span>::<span class='ident'>CrtcChange</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
+                <span class='kw-2'>&amp;</span><span class='op'>*</span>(<span class='ident'>ev</span>.<span class='ident'>u</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>randr</span>::<span class='ident'>NotifyData</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>randr</span>::<span class='ident'>CrtcChange</span>)
             };
-            <span class='comment'>// TODO: handling logic here</span>
+
+            <span class='comment'>// TODO</span>
         }
     }
 
@@ -1633,7 +1697,7 @@
                     <span class='kw'>let</span> <span class='ident'>safe_x</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>screen</span>().<span class='ident'>width</span> <span class='op'>+</span> <span class='number'>2</span>;
                     <span class='kw'>let</span> <span class='ident'>cookie2</span> <span class='op'>=</span> <span class='ident'>xproto</span>::<span class='ident'>configure_window</span>(<span class='self'>self</span>.<span class='ident'>con</span>, <span class='ident'>window</span>,
                         <span class='kw-2'>&amp;</span>[(<span class='ident'>xproto</span>::<span class='ident'>CONFIG_WINDOW_BORDER_WIDTH</span> <span class='kw'>as</span> <span class='ident'>u16</span>,
-                           <span class='self'>self</span>.<span class='ident'>config</span>.<span class='ident'>border_width</span> <span class='kw'>as</span> <span class='ident'>u32</span>),
+                           <span class='self'>self</span>.<span class='ident'>border_width</span> <span class='kw'>as</span> <span class='ident'>u32</span>),
                           (<span class='ident'>xproto</span>::<span class='ident'>CONFIG_WINDOW_X</span> <span class='kw'>as</span> <span class='ident'>u16</span>, <span class='ident'>safe_x</span>),
                           (<span class='ident'>xproto</span>::<span class='ident'>CONFIG_WINDOW_Y</span> <span class='kw'>as</span> <span class='ident'>u16</span>, <span class='number'>0</span>)
                         ]);
