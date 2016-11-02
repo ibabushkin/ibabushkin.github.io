@@ -1014,6 +1014,18 @@
 <span id="970">970</span>
 <span id="971">971</span>
 <span id="972">972</span>
+<span id="973">973</span>
+<span id="974">974</span>
+<span id="975">975</span>
+<span id="976">976</span>
+<span id="977">977</span>
+<span id="978">978</span>
+<span id="979">979</span>
+<span id="980">980</span>
+<span id="981">981</span>
+<span id="982">982</span>
+<span id="983">983</span>
+<span id="984">984</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>c_char</span>;
 
@@ -1053,6 +1065,8 @@
 <span class='doccomment'>/// tuple signifies an insertion as a slave window, a value of `false`</span>
 <span class='doccomment'>/// indicates the window being inserted as a master window.</span>
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>Matching</span> <span class='op'>=</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Fn</span>(<span class='kw-2'>&amp;</span><span class='ident'>ClientProps</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span>(<span class='ident'>BTreeSet</span><span class='op'>&lt;</span><span class='ident'>Tag</span><span class='op'>&gt;</span>, <span class='ident'>bool</span>)<span class='op'>&gt;&gt;</span>;
+
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>ScreenMatching</span> <span class='op'>=</span> <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Fn</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ScreenSet</span>)<span class='op'>&gt;</span>;
 
 <span class='doccomment'>/// Enumeration type of commands executed by the window manager.</span>
 <span class='doccomment'>///</span>
@@ -1122,6 +1136,8 @@
     <span class='ident'>bindings</span>: <span class='ident'>Keybindings</span>,
     <span class='doccomment'>/// matching function for client placement</span>
     <span class='ident'>matching</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Matching</span><span class='op'>&gt;</span>,
+    <span class='doccomment'>/// matching function for screen editing</span>
+    <span class='ident'>screen_matching</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>ScreenMatching</span><span class='op'>&gt;</span>,
 }
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Wm</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
@@ -1152,6 +1168,7 @@
                         <span class='ident'>mode</span>: <span class='ident'>Mode</span>::<span class='ident'>default</span>(),
                         <span class='ident'>bindings</span>: <span class='ident'>HashMap</span>::<span class='ident'>new</span>(),
                         <span class='ident'>matching</span>: <span class='prelude-val'>None</span>,
+                        <span class='ident'>screen_matching</span>: <span class='prelude-val'>None</span>,
                     })
                 }
                 <span class='prelude-val'>Err</span>(<span class='ident'>e</span>) <span class='op'>=&gt;</span> <span class='prelude-val'>Err</span>(<span class='ident'>e</span>),
@@ -1185,8 +1202,8 @@
         <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>ScreenSet</span>, <span class='ident'>WmError</span><span class='op'>&gt;</span> {
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>reply</span>) <span class='op'>=</span> <span class='ident'>randr</span>::<span class='ident'>get_screen_resources</span>(<span class='ident'>con</span>, <span class='ident'>root</span>).<span class='ident'>get_reply</span>() {
             <span class='kw'>let</span> <span class='ident'>cfg</span> <span class='op'>=</span> <span class='ident'>reply</span>.<span class='ident'>config_timestamp</span>();
-            <span class='kw'>let</span> <span class='ident'>cookies</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>reply</span>
-                .<span class='ident'>crtcs</span>()
+            <span class='kw'>let</span> <span class='ident'>crtcs</span> <span class='op'>=</span> <span class='ident'>reply</span>.<span class='ident'>crtcs</span>();
+            <span class='kw'>let</span> <span class='ident'>cookies</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>crtcs</span>
                 .<span class='ident'>iter</span>()
                 .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>crtc</span><span class='op'>|</span> (<span class='ident'>crtc</span>, <span class='ident'>randr</span>::<span class='ident'>get_crtc_info</span>(<span class='ident'>con</span>, <span class='op'>*</span><span class='ident'>crtc</span>, <span class='ident'>cfg</span>)))
                 .<span class='ident'>collect</span>();
@@ -1206,7 +1223,7 @@
                     <span class='prelude-val'>None</span>
                 })
                 .<span class='ident'>collect</span>();
-            <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>res</span>) <span class='op'>=</span> <span class='ident'>ScreenSet</span>::<span class='ident'>new</span>(<span class='ident'>screens</span>) {
+            <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>res</span>) <span class='op'>=</span> <span class='ident'>ScreenSet</span>::<span class='ident'>new</span>(<span class='ident'>screens</span>, <span class='ident'>crtcs</span>.<span class='ident'>to_vec</span>()) {
                 <span class='prelude-val'>Ok</span>(<span class='ident'>res</span>)
             } <span class='kw'>else</span> {
                 <span class='prelude-val'>Err</span>(<span class='ident'>WmError</span>::<span class='ident'>BadCrtc</span>)
@@ -1291,6 +1308,12 @@
     <span class='doccomment'>/// Set up client matching.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>setup_matching</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>matching</span>: <span class='ident'>Matching</span>) {
         <span class='self'>self</span>.<span class='ident'>matching</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>matching</span>);
+    }
+
+    <span class='doccomment'>/// Set up screen matching.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>setup_screen_matching</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>matching</span>: <span class='ident'>ScreenMatching</span>) {
+        <span class='ident'>matching</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>screens</span>);
+        <span class='self'>self</span>.<span class='ident'>screen_matching</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>matching</span>);
     }
 
     <span class='doccomment'>/// Set up the tagset stack.</span>
@@ -1554,13 +1577,14 @@
     <span class='doccomment'>/// A crtc has been changed, react accordingly.</span>
     <span class='kw'>fn</span> <span class='ident'>handle_crtc_notify</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>ev</span>: <span class='kw-2'>&amp;</span><span class='ident'>randr</span>::<span class='ident'>NotifyEvent</span>) {
         <span class='kw'>if</span> <span class='ident'>ev</span>.<span class='ident'>sub_code</span>() <span class='kw'>as</span> <span class='ident'>u32</span> <span class='op'>==</span> <span class='ident'>randr</span>::<span class='ident'>NOTIFY_CRTC_CHANGE</span> {
-            <span class='kw'>let</span> <span class='ident'>crtc_change</span>: <span class='kw-2'>&amp;</span><span class='ident'>randr</span>::<span class='ident'>CrtcChange</span> <span class='op'>=</span> <span class='kw'>unsafe</span> {
-                <span class='kw-2'>&amp;</span><span class='op'>*</span>(<span class='ident'>ev</span>.<span class='ident'>u</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>randr</span>::<span class='ident'>NotifyData</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>randr</span>::<span class='ident'>CrtcChange</span>)
+            <span class='kw'>let</span> <span class='ident'>crtc_change</span>: <span class='ident'>randr</span>::<span class='ident'>CrtcChange</span> <span class='op'>=</span> <span class='kw'>unsafe</span> { <span class='comment'>// BOO!</span>
+                <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>;
+                <span class='ident'>transmute</span>(<span class='ident'>ev</span>.<span class='ident'>u</span>())
             };
             <span class='kw'>if</span> <span class='ident'>crtc_change</span>.<span class='ident'>mode</span>() <span class='op'>==</span> <span class='number'>0</span> {
                 <span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>remove</span>(<span class='ident'>crtc_change</span>.<span class='ident'>crtc</span>());
             } <span class='kw'>else</span> {
-                <span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>update</span>(<span class='ident'>crtc_change</span>);
+                <span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>update</span>(<span class='kw-2'>&amp;</span><span class='ident'>crtc_change</span>);
             }
         }
     }
