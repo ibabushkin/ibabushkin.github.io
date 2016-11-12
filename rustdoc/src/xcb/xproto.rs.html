@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/thewormkill/.multirust/toolchains/nightly/cargo/registry/src/github.com-1ecc6299db9ec823/xcb-0.7.5/src/xproto.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/thewormkill/.multirust/toolchains/nightly/cargo/git/checkouts/rust-xcb-4fdfe1b194dff81b/6f7ef92f8434f040df3a3fb4f2637cb8264608b5/src/xproto.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>xproto.rs.html -- source</title>
@@ -13236,8 +13236,16 @@
 <span id="13192">13192</span>
 <span id="13193">13193</span>
 <span id="13194">13194</span>
+<span id="13195">13195</span>
+<span id="13196">13196</span>
+<span id="13197">13197</span>
+<span id="13198">13198</span>
+<span id="13199">13199</span>
+<span id="13200">13200</span>
+<span id="13201">13201</span>
+<span id="13202">13202</span>
 </pre><pre class='rust '>
-<span class='comment'>// edited from xproto.xml by rs_client.py on Mon Sep 12 20:27:11 2016</span>
+<span class='comment'>// edited from xproto.xml by rs_client.py on Fri Nov 11 20:20:21 2016</span>
 <span class='comment'>// do not edit!</span>
 
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allow</span>(<span class='ident'>unused_unsafe</span>)]</span>
@@ -14118,6 +14126,7 @@
 
 
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Char2b</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_char2b_t</span>,
 }
@@ -14165,6 +14174,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Point</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_point_t</span>,
 }
@@ -14212,6 +14222,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Rectangle</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_rectangle_t</span>,
 }
@@ -14273,6 +14284,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Arc</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_arc_t</span>,
 }
@@ -14962,8 +14974,8 @@
     }
     <span class='doccomment'>/// Constructs a new KeyPressEvent</span>
     <span class='doccomment'>/// `response_type` must be set to one of:</span>
-    <span class='doccomment'>///     - `KEY_RELEASE`</span>
     <span class='doccomment'>///     - `KEY_PRESS`</span>
+    <span class='doccomment'>///     - `KEY_RELEASE`</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>response_type</span>: <span class='ident'>u8</span>,
                <span class='ident'>detail</span>: <span class='ident'>Keycode</span>,
                <span class='ident'>time</span>: <span class='ident'>Timestamp</span>,
@@ -14979,8 +14991,8 @@
             <span class='op'>-&gt;</span> <span class='ident'>KeyPressEvent</span> {
         <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>raw</span> <span class='op'>=</span> <span class='ident'>libc</span>::<span class='ident'>malloc</span>(<span class='number'>32</span> <span class='kw'>as</span> <span class='ident'>usize</span>) <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_key_press_event_t</span>;
-            <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>KEY_RELEASE</span> <span class='op'>||</span>
-                    <span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>KEY_PRESS</span>,
+            <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>KEY_PRESS</span> <span class='op'>||</span>
+                    <span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>KEY_RELEASE</span>,
                     <span class='string'>&quot;wrong response_type supplied to KeyPressEvent::new&quot;</span>);
             (<span class='op'>*</span><span class='ident'>raw</span>).<span class='ident'>response_type</span> <span class='op'>=</span> <span class='ident'>response_type</span>;
             (<span class='op'>*</span><span class='ident'>raw</span>).<span class='ident'>detail</span> <span class='op'>=</span> <span class='ident'>detail</span>;
@@ -15391,8 +15403,8 @@
     }
     <span class='doccomment'>/// Constructs a new FocusInEvent</span>
     <span class='doccomment'>/// `response_type` must be set to one of:</span>
-    <span class='doccomment'>///     - `FOCUS_IN`</span>
     <span class='doccomment'>///     - `FOCUS_OUT`</span>
+    <span class='doccomment'>///     - `FOCUS_IN`</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>response_type</span>: <span class='ident'>u8</span>,
                <span class='ident'>detail</span>: <span class='ident'>u8</span>,
                <span class='ident'>event</span>: <span class='ident'>Window</span>,
@@ -15400,8 +15412,8 @@
             <span class='op'>-&gt;</span> <span class='ident'>FocusInEvent</span> {
         <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>raw</span> <span class='op'>=</span> <span class='ident'>libc</span>::<span class='ident'>malloc</span>(<span class='number'>32</span> <span class='kw'>as</span> <span class='ident'>usize</span>) <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_focus_in_event_t</span>;
-            <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>FOCUS_IN</span> <span class='op'>||</span>
-                    <span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>FOCUS_OUT</span>,
+            <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>FOCUS_OUT</span> <span class='op'>||</span>
+                    <span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>FOCUS_IN</span>,
                     <span class='string'>&quot;wrong response_type supplied to FocusInEvent::new&quot;</span>);
             (<span class='op'>*</span><span class='ident'>raw</span>).<span class='ident'>response_type</span> <span class='op'>=</span> <span class='ident'>response_type</span>;
             (<span class='op'>*</span><span class='ident'>raw</span>).<span class='ident'>detail</span> <span class='op'>=</span> <span class='ident'>detail</span>;
@@ -16251,8 +16263,8 @@
     }
     <span class='doccomment'>/// Constructs a new CirculateNotifyEvent</span>
     <span class='doccomment'>/// `response_type` must be set to one of:</span>
-    <span class='doccomment'>///     - `CIRCULATE_NOTIFY`</span>
     <span class='doccomment'>///     - `CIRCULATE_REQUEST`</span>
+    <span class='doccomment'>///     - `CIRCULATE_NOTIFY`</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>response_type</span>: <span class='ident'>u8</span>,
                <span class='ident'>event</span>: <span class='ident'>Window</span>,
                <span class='ident'>window</span>: <span class='ident'>Window</span>,
@@ -16260,8 +16272,8 @@
             <span class='op'>-&gt;</span> <span class='ident'>CirculateNotifyEvent</span> {
         <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>raw</span> <span class='op'>=</span> <span class='ident'>libc</span>::<span class='ident'>malloc</span>(<span class='number'>32</span> <span class='kw'>as</span> <span class='ident'>usize</span>) <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_circulate_notify_event_t</span>;
-            <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>CIRCULATE_NOTIFY</span> <span class='op'>||</span>
-                    <span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>CIRCULATE_REQUEST</span>,
+            <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>CIRCULATE_REQUEST</span> <span class='op'>||</span>
+                    <span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>CIRCULATE_NOTIFY</span>,
                     <span class='string'>&quot;wrong response_type supplied to CirculateNotifyEvent::new&quot;</span>);
             (<span class='op'>*</span><span class='ident'>raw</span>).<span class='ident'>response_type</span> <span class='op'>=</span> <span class='ident'>response_type</span>;
             (<span class='op'>*</span><span class='ident'>raw</span>).<span class='ident'>event</span> <span class='op'>=</span> <span class='ident'>event</span>;
@@ -20172,6 +20184,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Timecoord</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_timecoord_t</span>,
 }
@@ -20861,6 +20874,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Fontprop</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_fontprop_t</span>,
 }
@@ -20908,6 +20922,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Charinfo</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_charinfo_t</span>,
 }
@@ -22643,6 +22658,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Segment</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_segment_t</span>,
 }

@@ -100,11 +100,11 @@ reallocating.</p>
 <span class='kw'>let</span> <span class='ident'>vec</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>i32</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>Vec</span>::<span class='ident'>with_capacity</span>(<span class='number'>10</span>);
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>vec</span>.<span class='ident'>capacity</span>(), <span class='number'>10</span>);</pre>
 </div><h4 id='method.into_boxed_slice' class='method'><span id='into_boxed_slice.v' class='invisible'><code>fn <a href='#method.into_boxed_slice' class='fnname'>into_boxed_slice</a>(self) -&gt; <a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>[</a>T<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>&gt;</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
-<div class='docblock'><p>Converts the vector into Box&lt;[T]&gt;.</p>
+<div class='docblock'><p>Converts the vector into <a href="../../std/boxed/struct.Box.html"><code>Box&lt;[T]&gt;</code></a>.</p>
 
 <p>Note that this will drop any excess capacity. Calling this and
-converting back to a vector with <code>into_vec()</code> is equivalent to calling
-<code>shrink_to_fit()</code>.</p>
+converting back to a vector with <a href="../../std/primitive.slice.html#method.into_vec"><code>into_vec()</code></a> is equivalent to calling
+<a href="#method.shrink_to_fit"><code>shrink_to_fit()</code></a>.</p>
 
 <h1 id='examples-1' class='section-header'><a href='#examples-1'>Examples</a></h1>
 <pre class='rust rust-example-rendered'>

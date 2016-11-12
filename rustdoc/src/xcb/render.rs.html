@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/thewormkill/.multirust/toolchains/nightly/cargo/registry/src/github.com-1ecc6299db9ec823/xcb-0.7.5/src/render.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/thewormkill/.multirust/toolchains/nightly/cargo/git/checkouts/rust-xcb-4fdfe1b194dff81b/6f7ef92f8434f040df3a3fb4f2637cb8264608b5/src/render.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>render.rs.html -- source</title>
@@ -2772,8 +2772,21 @@
 <span id="2728">2728</span>
 <span id="2729">2729</span>
 <span id="2730">2730</span>
+<span id="2731">2731</span>
+<span id="2732">2732</span>
+<span id="2733">2733</span>
+<span id="2734">2734</span>
+<span id="2735">2735</span>
+<span id="2736">2736</span>
+<span id="2737">2737</span>
+<span id="2738">2738</span>
+<span id="2739">2739</span>
+<span id="2740">2740</span>
+<span id="2741">2741</span>
+<span id="2742">2742</span>
+<span id="2743">2743</span>
 </pre><pre class='rust '>
-<span class='comment'>// edited from render.xml by rs_client.py on Mon Sep 12 20:27:15 2016</span>
+<span class='comment'>// edited from render.xml by rs_client.py on Fri Nov 11 20:20:24 2016</span>
 <span class='comment'>// do not edit!</span>
 
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allow</span>(<span class='ident'>unused_unsafe</span>)]</span>
@@ -2938,6 +2951,7 @@
 
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>GLYPH</span>: <span class='ident'>u8</span> <span class='op'>=</span> <span class='number'>4</span>;
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Directformat</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_render_directformat_t</span>,
 }
@@ -3074,6 +3088,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Pictvisual</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_render_pictvisual_t</span>,
 }
@@ -3195,6 +3210,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Indexvalue</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_render_indexvalue_t</span>,
 }
@@ -3263,6 +3279,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Color</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_render_color_t</span>,
 }
@@ -3324,6 +3341,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Pointfix</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_render_pointfix_t</span>,
 }
@@ -3371,6 +3389,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Linefix</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_render_linefix_t</span>,
 }
@@ -3418,6 +3437,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Triangle</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_render_triangle_t</span>,
 }
@@ -3472,6 +3492,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Trapezoid</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_render_trapezoid_t</span>,
 }
@@ -3533,6 +3554,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Glyphinfo</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_render_glyphinfo_t</span>,
 }
@@ -4802,6 +4824,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Transform</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_render_transform_t</span>,
 }
@@ -5064,6 +5087,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Animcursorelt</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_render_animcursorelt_t</span>,
 }
@@ -5151,6 +5175,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Spanfix</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_render_spanfix_t</span>,
 }
@@ -5205,6 +5230,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Trap</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_render_trap_t</span>,
 }

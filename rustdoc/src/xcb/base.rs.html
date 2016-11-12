@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/thewormkill/.multirust/toolchains/nightly/cargo/registry/src/github.com-1ecc6299db9ec823/xcb-0.7.5/src/base.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/thewormkill/.multirust/toolchains/nightly/cargo/git/checkouts/rust-xcb-4fdfe1b194dff81b/6f7ef92f8434f040df3a3fb4f2637cb8264608b5/src/base.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>base.rs.html -- source</title>
@@ -782,6 +782,7 @@
 <span id="738">738</span>
 <span id="739">739</span>
 <span id="740">740</span>
+<span id="741">741</span>
 </pre><pre class='rust '>
 <span class='comment'>/*
  * Copyright (C) 2013 James Miller &lt;james@aatch.net&gt;
@@ -1269,11 +1270,11 @@
     <span class='doccomment'>/// xcb_query_extension to retrieve extension information from the</span>
     <span class='doccomment'>/// server, and may block until extension data is received from the</span>
     <span class='doccomment'>/// server.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_extension_data</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>ext</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Extension</span>)
-            <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>QueryExtensionData</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_extension_data</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>, <span class='ident'>ext</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Extension</span>)
+            <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>QueryExtensionData</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;&gt;</span> {
         <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>ptr</span> <span class='op'>=</span> <span class='ident'>xcb_get_extension_data</span>(<span class='self'>self</span>.<span class='ident'>c</span>, <span class='ident'>ext</span>);
-            <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>ptr</span>.<span class='ident'>is_null</span>() { <span class='prelude-val'>Some</span>(<span class='ident'>QueryExtensionData</span> { <span class='ident'>ptr</span>: <span class='ident'>ptr</span> }) }
+            <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>ptr</span>.<span class='ident'>is_null</span>() { <span class='prelude-val'>Some</span>(<span class='ident'>QueryExtensionData</span> { <span class='ident'>ptr</span>: <span class='ident'>ptr</span>, <span class='ident'>_marker</span>: <span class='ident'>PhantomData</span> }) }
             <span class='kw'>else</span> { <span class='prelude-val'>None</span> }
         }
     }
@@ -1284,10 +1285,10 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_event_queue_owner</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>owner</span>: <span class='ident'>EventQueueOwner</span>) {
         <span class='macro'>debug_assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='self'>self</span>.<span class='ident'>dpy</span>.<span class='ident'>is_null</span>());
         <span class='kw'>unsafe</span> {
-            <span class='kw'>let</span> <span class='ident'>owner</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>owner</span> { <span class='ident'>EventQueueOwner</span>::<span class='ident'>Xcb</span> <span class='op'>=&gt;</span> <span class='ident'>XCBOwnsEventQueue</span>,
+            <span class='ident'>XSetEventQueueOwner</span>(<span class='self'>self</span>.<span class='ident'>dpy</span>, <span class='kw'>match</span> <span class='ident'>owner</span> {
+                <span class='ident'>EventQueueOwner</span>::<span class='ident'>Xcb</span> <span class='op'>=&gt;</span> <span class='ident'>XCBOwnsEventQueue</span>,
                 <span class='ident'>EventQueueOwner</span>::<span class='ident'>Xlib</span> <span class='op'>=&gt;</span> <span class='ident'>XlibOwnsEventQueue</span>
-            };
-            <span class='ident'>XSetEventQueueOwner</span>(<span class='self'>self</span>.<span class='ident'>dpy</span>, <span class='ident'>owner</span>);
+            });
         }
     }
 
@@ -1429,11 +1430,12 @@
 <span class='comment'>// Used for Connection::get_extension_data whose returned value</span>
 <span class='comment'>// must not be freed.</span>
 <span class='comment'>// Named QueryExtensionData to avoid name collision</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>QueryExtensionData</span> {
-    <span class='ident'>ptr</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_query_extension_reply_t</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>QueryExtensionData</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+    <span class='ident'>ptr</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_query_extension_reply_t</span>,
+    <span class='ident'>_marker</span>: <span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> ()<span class='op'>&gt;</span>,
 }
 
-<span class='kw'>impl</span> <span class='ident'>QueryExtensionData</span> {
+<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>QueryExtensionData</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>present</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u8</span> {
         <span class='kw'>unsafe</span> {
             (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>present</span>

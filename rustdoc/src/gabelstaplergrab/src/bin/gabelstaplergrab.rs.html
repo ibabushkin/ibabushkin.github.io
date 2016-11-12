@@ -162,7 +162,7 @@
     }
     <span class='kw'>loop</span> {
         <span class='ident'>con</span>.<span class='ident'>flush</span>();
-        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Err</span>(_) <span class='op'>=</span> <span class='ident'>con</span>.<span class='ident'>has_error</span>() {
+        <span class='kw'>if</span> <span class='ident'>con</span>.<span class='ident'>has_error</span>().<span class='ident'>is_err</span>() {
             <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;connection error&quot;</span>);
             <span class='ident'>exit</span>(<span class='number'>4</span>);
         }

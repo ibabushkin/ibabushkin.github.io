@@ -519,6 +519,9 @@
 <span id="475">475</span>
 <span id="476">476</span>
 <span id="477">477</span>
+<span id="478">478</span>
+<span id="479">479</span>
+<span id="480">480</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>layout</span>::<span class='op'>*</span>;
 
@@ -534,6 +537,7 @@
 <span class='doccomment'>/// New windows are added as slaves to the right stack, being pushed to the</span>
 <span class='doccomment'>/// left one to keep the amount of windows balanced. The following invariant</span>
 <span class='doccomment'>/// holds: `num_slaves_left &lt;= num_slaves_right`.</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>DStack</span> {
     <span class='doccomment'>/// percentage of screen width taken by the master window area,</span>
     <span class='doccomment'>/// saturating semantics</span>
@@ -712,6 +716,7 @@
 <span class='doccomment'>/// +-+-+-+-+</span>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>/// New windows are added as slaves to the stack.</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>HStack</span> {
     <span class='doccomment'>/// percentage of screen height taken by the master window area,</span>
     <span class='doccomment'>/// saturating semantics</span>
@@ -860,6 +865,7 @@
 <span class='doccomment'>/// +----+--+</span>
 <span class='doccomment'>/// ```</span>
 <span class='doccomment'>/// New windows are added as slaves to the stack.</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>VStack</span> {
     <span class='doccomment'>/// percentage of screen height taken by the master window area,</span>
     <span class='doccomment'>/// saturating semantics</span>

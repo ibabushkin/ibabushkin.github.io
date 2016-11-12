@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/thewormkill/.multirust/toolchains/nightly/cargo/registry/src/github.com-1ecc6299db9ec823/xcb-0.7.5/src/xkb.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/thewormkill/.multirust/toolchains/nightly/cargo/git/checkouts/rust-xcb-4fdfe1b194dff81b/6f7ef92f8434f040df3a3fb4f2637cb8264608b5/src/xkb.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>xkb.rs.html -- source</title>
@@ -6806,8 +6806,186 @@
 <span id="6762">6762</span>
 <span id="6763">6763</span>
 <span id="6764">6764</span>
+<span id="6765">6765</span>
+<span id="6766">6766</span>
+<span id="6767">6767</span>
+<span id="6768">6768</span>
+<span id="6769">6769</span>
+<span id="6770">6770</span>
+<span id="6771">6771</span>
+<span id="6772">6772</span>
+<span id="6773">6773</span>
+<span id="6774">6774</span>
+<span id="6775">6775</span>
+<span id="6776">6776</span>
+<span id="6777">6777</span>
+<span id="6778">6778</span>
+<span id="6779">6779</span>
+<span id="6780">6780</span>
+<span id="6781">6781</span>
+<span id="6782">6782</span>
+<span id="6783">6783</span>
+<span id="6784">6784</span>
+<span id="6785">6785</span>
+<span id="6786">6786</span>
+<span id="6787">6787</span>
+<span id="6788">6788</span>
+<span id="6789">6789</span>
+<span id="6790">6790</span>
+<span id="6791">6791</span>
+<span id="6792">6792</span>
+<span id="6793">6793</span>
+<span id="6794">6794</span>
+<span id="6795">6795</span>
+<span id="6796">6796</span>
+<span id="6797">6797</span>
+<span id="6798">6798</span>
+<span id="6799">6799</span>
+<span id="6800">6800</span>
+<span id="6801">6801</span>
+<span id="6802">6802</span>
+<span id="6803">6803</span>
+<span id="6804">6804</span>
+<span id="6805">6805</span>
+<span id="6806">6806</span>
+<span id="6807">6807</span>
+<span id="6808">6808</span>
+<span id="6809">6809</span>
+<span id="6810">6810</span>
+<span id="6811">6811</span>
+<span id="6812">6812</span>
+<span id="6813">6813</span>
+<span id="6814">6814</span>
+<span id="6815">6815</span>
+<span id="6816">6816</span>
+<span id="6817">6817</span>
+<span id="6818">6818</span>
+<span id="6819">6819</span>
+<span id="6820">6820</span>
+<span id="6821">6821</span>
+<span id="6822">6822</span>
+<span id="6823">6823</span>
+<span id="6824">6824</span>
+<span id="6825">6825</span>
+<span id="6826">6826</span>
+<span id="6827">6827</span>
+<span id="6828">6828</span>
+<span id="6829">6829</span>
+<span id="6830">6830</span>
+<span id="6831">6831</span>
+<span id="6832">6832</span>
+<span id="6833">6833</span>
+<span id="6834">6834</span>
+<span id="6835">6835</span>
+<span id="6836">6836</span>
+<span id="6837">6837</span>
+<span id="6838">6838</span>
+<span id="6839">6839</span>
+<span id="6840">6840</span>
+<span id="6841">6841</span>
+<span id="6842">6842</span>
+<span id="6843">6843</span>
+<span id="6844">6844</span>
+<span id="6845">6845</span>
+<span id="6846">6846</span>
+<span id="6847">6847</span>
+<span id="6848">6848</span>
+<span id="6849">6849</span>
+<span id="6850">6850</span>
+<span id="6851">6851</span>
+<span id="6852">6852</span>
+<span id="6853">6853</span>
+<span id="6854">6854</span>
+<span id="6855">6855</span>
+<span id="6856">6856</span>
+<span id="6857">6857</span>
+<span id="6858">6858</span>
+<span id="6859">6859</span>
+<span id="6860">6860</span>
+<span id="6861">6861</span>
+<span id="6862">6862</span>
+<span id="6863">6863</span>
+<span id="6864">6864</span>
+<span id="6865">6865</span>
+<span id="6866">6866</span>
+<span id="6867">6867</span>
+<span id="6868">6868</span>
+<span id="6869">6869</span>
+<span id="6870">6870</span>
+<span id="6871">6871</span>
+<span id="6872">6872</span>
+<span id="6873">6873</span>
+<span id="6874">6874</span>
+<span id="6875">6875</span>
+<span id="6876">6876</span>
+<span id="6877">6877</span>
+<span id="6878">6878</span>
+<span id="6879">6879</span>
+<span id="6880">6880</span>
+<span id="6881">6881</span>
+<span id="6882">6882</span>
+<span id="6883">6883</span>
+<span id="6884">6884</span>
+<span id="6885">6885</span>
+<span id="6886">6886</span>
+<span id="6887">6887</span>
+<span id="6888">6888</span>
+<span id="6889">6889</span>
+<span id="6890">6890</span>
+<span id="6891">6891</span>
+<span id="6892">6892</span>
+<span id="6893">6893</span>
+<span id="6894">6894</span>
+<span id="6895">6895</span>
+<span id="6896">6896</span>
+<span id="6897">6897</span>
+<span id="6898">6898</span>
+<span id="6899">6899</span>
+<span id="6900">6900</span>
+<span id="6901">6901</span>
+<span id="6902">6902</span>
+<span id="6903">6903</span>
+<span id="6904">6904</span>
+<span id="6905">6905</span>
+<span id="6906">6906</span>
+<span id="6907">6907</span>
+<span id="6908">6908</span>
+<span id="6909">6909</span>
+<span id="6910">6910</span>
+<span id="6911">6911</span>
+<span id="6912">6912</span>
+<span id="6913">6913</span>
+<span id="6914">6914</span>
+<span id="6915">6915</span>
+<span id="6916">6916</span>
+<span id="6917">6917</span>
+<span id="6918">6918</span>
+<span id="6919">6919</span>
+<span id="6920">6920</span>
+<span id="6921">6921</span>
+<span id="6922">6922</span>
+<span id="6923">6923</span>
+<span id="6924">6924</span>
+<span id="6925">6925</span>
+<span id="6926">6926</span>
+<span id="6927">6927</span>
+<span id="6928">6928</span>
+<span id="6929">6929</span>
+<span id="6930">6930</span>
+<span id="6931">6931</span>
+<span id="6932">6932</span>
+<span id="6933">6933</span>
+<span id="6934">6934</span>
+<span id="6935">6935</span>
+<span id="6936">6936</span>
+<span id="6937">6937</span>
+<span id="6938">6938</span>
+<span id="6939">6939</span>
+<span id="6940">6940</span>
+<span id="6941">6941</span>
+<span id="6942">6942</span>
 </pre><pre class='rust '>
-<span class='comment'>// edited from xkb.xml by rs_client.py on Mon Sep 12 20:27:10 2016</span>
+<span class='comment'>// edited from xkb.xml by rs_client.py on Fri Nov 11 20:20:19 2016</span>
 <span class='comment'>// do not edit!</span>
 
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allow</span>(<span class='ident'>unused_unsafe</span>)]</span>
@@ -7232,6 +7410,7 @@
 
 
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>IndicatorMap</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_xkb_indicator_map_t</span>,
 }
@@ -7321,6 +7500,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ModDef</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_xkb_mod_def_t</span>,
 }
@@ -7639,6 +7819,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>CommonBehavior</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_xkb_common_behavior_t</span>,
 }
@@ -7740,6 +7921,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>RadioGroupBehavior</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_xkb_radio_group_behavior_t</span>,
 }
@@ -7787,6 +7969,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>OverlayBehavior</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_xkb_overlay_behavior_t</span>,
 }
@@ -7861,6 +8044,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>PermamentRadioGroupBehavior</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_xkb_permament_radio_group_behavior_t</span>,
 }
@@ -7908,6 +8092,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>PermamentOverlayBehavior</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_xkb_permament_overlay_behavior_t</span>,
 }
@@ -7958,6 +8143,63 @@
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>Behavior</span> <span class='op'>=</span> <span class='ident'>xcb_xkb_behavior_t</span>;
 
 <span class='kw'>impl</span> <span class='ident'>Behavior</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>common</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>CommonBehavior</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='kw'>let</span> <span class='ident'>_ptr</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>data</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>CommonBehavior</span>;
+            <span class='op'>*</span><span class='ident'>_ptr</span>
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>default</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>DefaultBehavior</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>)
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>lock</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>LockBehavior</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>)
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>radio_group</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>RadioGroupBehavior</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='kw'>let</span> <span class='ident'>_ptr</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>data</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>RadioGroupBehavior</span>;
+            <span class='op'>*</span><span class='ident'>_ptr</span>
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>overlay1</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>OverlayBehavior</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='kw'>let</span> <span class='ident'>_ptr</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>data</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>OverlayBehavior</span>;
+            <span class='op'>*</span><span class='ident'>_ptr</span>
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>overlay2</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>OverlayBehavior</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='kw'>let</span> <span class='ident'>_ptr</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>data</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>OverlayBehavior</span>;
+            <span class='op'>*</span><span class='ident'>_ptr</span>
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>permament_lock</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>PermamentLockBehavior</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>)
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>permament_radio_group</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>PermamentRadioGroupBehavior</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='kw'>let</span> <span class='ident'>_ptr</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>data</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>PermamentRadioGroupBehavior</span>;
+            <span class='op'>*</span><span class='ident'>_ptr</span>
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>permament_overlay1</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>PermamentOverlayBehavior</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='kw'>let</span> <span class='ident'>_ptr</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>data</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>PermamentOverlayBehavior</span>;
+            <span class='op'>*</span><span class='ident'>_ptr</span>
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>permament_overlay2</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>PermamentOverlayBehavior</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='kw'>let</span> <span class='ident'>_ptr</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>data</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>PermamentOverlayBehavior</span>;
+            <span class='op'>*</span><span class='ident'>_ptr</span>
+        }
+    }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>type_</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u8</span> {
         <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>_ptr</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>data</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>;
@@ -8023,6 +8265,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>SetExplicit</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_xkb_set_explicit_t</span>,
 }
@@ -8070,6 +8313,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>KeyModMap</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_xkb_key_mod_map_t</span>,
 }
@@ -8149,6 +8393,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>KtSetMapEntry</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_xkb_kt_set_map_entry_t</span>,
 }
@@ -9118,6 +9363,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>SaIsoLock</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_xkb_sa_iso_lock_t</span>,
 }
@@ -9382,6 +9628,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>SaRedirectKey</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_xkb_sa_redirect_key_t</span>,
 }
@@ -9560,6 +9807,7 @@
     }
 }
 
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>SaDeviceValuator</span> {
     <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_xkb_sa_device_valuator_t</span>,
 }
@@ -9736,6 +9984,114 @@
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>Action</span> <span class='op'>=</span> <span class='ident'>xcb_xkb_action_t</span>;
 
 <span class='kw'>impl</span> <span class='ident'>Action</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>noaction</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SaNoAction</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>)
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>setmods</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SaSetMods</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>)
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>latchmods</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SaLatchMods</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>)
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>lockmods</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SaLockMods</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>)
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>setgroup</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SaSetGroup</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>)
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>latchgroup</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SaLatchGroup</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>)
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>lockgroup</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SaLockGroup</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>)
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>moveptr</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SaMovePtr</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>)
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>ptrbtn</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SaPtrBtn</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>)
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>lockptrbtn</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SaLockPtrBtn</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>)
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>setptrdflt</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SaSetPtrDflt</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>)
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>isolock</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SaIsoLock</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='kw'>let</span> <span class='ident'>_ptr</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>data</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>SaIsoLock</span>;
+            <span class='op'>*</span><span class='ident'>_ptr</span>
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>terminate</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SaTerminate</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>)
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>switchscreen</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SaSwitchScreen</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>)
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>setcontrols</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SaSetControls</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>)
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>lockcontrols</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SaLockControls</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>)
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>message</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SaActionMessage</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>)
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>redirect</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SaRedirectKey</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='kw'>let</span> <span class='ident'>_ptr</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>data</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>SaRedirectKey</span>;
+            <span class='op'>*</span><span class='ident'>_ptr</span>
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>devbtn</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SaDeviceBtn</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>)
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>lockdevbtn</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SaLockDeviceBtn</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>)
+        }
+    }
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>devval</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>SaDeviceValuator</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='kw'>let</span> <span class='ident'>_ptr</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>data</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>SaDeviceValuator</span>;
+            <span class='op'>*</span><span class='ident'>_ptr</span>
+        }
+    }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>type_</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u8</span> {
         <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>_ptr</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>data</span>.<span class='ident'>as_ptr</span>() <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>;

@@ -151,6 +151,7 @@
 <span id="107">107</span>
 <span id="108">108</span>
 <span id="109">109</span>
+<span id="110">110</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>wm</span>::<span class='ident'>layout</span>::<span class='op'>*</span>;
 
@@ -167,6 +168,7 @@
 <span class='doccomment'>/// as necessary. Number of columns is configurable.</span>
 <span class='doccomment'>/// If the amount of windows present isn&#39;t evenly divisible by the number of</span>
 <span class='doccomment'>/// columns, the leftover slots are left empty.</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Grid</span> {
     <span class='doccomment'>/// Maximum number of columns.</span>
     <span class='kw'>pub</span> <span class='ident'>max_col</span>: <span class='ident'>u8</span>,
