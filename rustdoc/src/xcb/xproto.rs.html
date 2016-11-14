@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/thewormkill/.multirust/toolchains/nightly/cargo/git/checkouts/rust-xcb-4fdfe1b194dff81b/6f7ef92f8434f040df3a3fb4f2637cb8264608b5/src/xproto.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/twk/.multirust/toolchains/nightly/cargo/registry/src/github.com-1ecc6299db9ec823/xcb-0.7.6/src/xproto.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>xproto.rs.html -- source</title>
@@ -13244,9 +13244,97 @@
 <span id="13200">13200</span>
 <span id="13201">13201</span>
 <span id="13202">13202</span>
+<span id="13203">13203</span>
+<span id="13204">13204</span>
+<span id="13205">13205</span>
+<span id="13206">13206</span>
+<span id="13207">13207</span>
+<span id="13208">13208</span>
+<span id="13209">13209</span>
+<span id="13210">13210</span>
+<span id="13211">13211</span>
+<span id="13212">13212</span>
+<span id="13213">13213</span>
+<span id="13214">13214</span>
+<span id="13215">13215</span>
+<span id="13216">13216</span>
+<span id="13217">13217</span>
+<span id="13218">13218</span>
+<span id="13219">13219</span>
+<span id="13220">13220</span>
+<span id="13221">13221</span>
+<span id="13222">13222</span>
+<span id="13223">13223</span>
+<span id="13224">13224</span>
+<span id="13225">13225</span>
+<span id="13226">13226</span>
+<span id="13227">13227</span>
+<span id="13228">13228</span>
+<span id="13229">13229</span>
+<span id="13230">13230</span>
+<span id="13231">13231</span>
+<span id="13232">13232</span>
+<span id="13233">13233</span>
+<span id="13234">13234</span>
+<span id="13235">13235</span>
+<span id="13236">13236</span>
+<span id="13237">13237</span>
+<span id="13238">13238</span>
+<span id="13239">13239</span>
+<span id="13240">13240</span>
+<span id="13241">13241</span>
+<span id="13242">13242</span>
+<span id="13243">13243</span>
+<span id="13244">13244</span>
+<span id="13245">13245</span>
+<span id="13246">13246</span>
+<span id="13247">13247</span>
+<span id="13248">13248</span>
+<span id="13249">13249</span>
+<span id="13250">13250</span>
+<span id="13251">13251</span>
+<span id="13252">13252</span>
+<span id="13253">13253</span>
+<span id="13254">13254</span>
+<span id="13255">13255</span>
+<span id="13256">13256</span>
+<span id="13257">13257</span>
+<span id="13258">13258</span>
+<span id="13259">13259</span>
+<span id="13260">13260</span>
+<span id="13261">13261</span>
+<span id="13262">13262</span>
+<span id="13263">13263</span>
+<span id="13264">13264</span>
+<span id="13265">13265</span>
+<span id="13266">13266</span>
+<span id="13267">13267</span>
+<span id="13268">13268</span>
+<span id="13269">13269</span>
+<span id="13270">13270</span>
+<span id="13271">13271</span>
+<span id="13272">13272</span>
+<span id="13273">13273</span>
+<span id="13274">13274</span>
+<span id="13275">13275</span>
+<span id="13276">13276</span>
+<span id="13277">13277</span>
+<span id="13278">13278</span>
+<span id="13279">13279</span>
+<span id="13280">13280</span>
+<span id="13281">13281</span>
+<span id="13282">13282</span>
+<span id="13283">13283</span>
+<span id="13284">13284</span>
+<span id="13285">13285</span>
+<span id="13286">13286</span>
+<span id="13287">13287</span>
+<span id="13288">13288</span>
+<span id="13289">13289</span>
+<span id="13290">13290</span>
 </pre><pre class='rust '>
-<span class='comment'>// edited from xproto.xml by rs_client.py on Fri Nov 11 20:20:21 2016</span>
-<span class='comment'>// do not edit!</span>
+<span class='comment'>// Generated automatically from xproto.xml by rs_client.py on Mon Nov 14 19:55:29 2016.</span>
+<span class='comment'>// Do not edit!</span>
 
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allow</span>(<span class='ident'>unused_unsafe</span>)]</span>
 
@@ -14360,95 +14448,141 @@
     }
 }
 
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>Format</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>base</span>::<span class='ident'>StructPtr</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>xcb_format_t</span><span class='op'>&gt;</span>;
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Format</span> {
+    <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_format_t</span>,
+}
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Format</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>impl</span> <span class='ident'>Format</span> {
+    <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>unused_unsafe</span>)]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>depth</span>:          <span class='ident'>u8</span>,
+               <span class='ident'>bits_per_pixel</span>: <span class='ident'>u8</span>,
+               <span class='ident'>scanline_pad</span>:   <span class='ident'>u8</span>)
+            <span class='op'>-&gt;</span> <span class='ident'>Format</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>Format</span> {
+                <span class='ident'>base</span>: <span class='ident'>xcb_format_t</span> {
+                    <span class='ident'>depth</span>:          <span class='ident'>depth</span>,
+                    <span class='ident'>bits_per_pixel</span>: <span class='ident'>bits_per_pixel</span>,
+                    <span class='ident'>scanline_pad</span>:   <span class='ident'>scanline_pad</span>,
+                    <span class='ident'>pad0</span>:           [<span class='number'>0</span>; <span class='number'>5</span>],
+                }
+            }
+        }
+    }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>depth</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u8</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>depth</span>
+            <span class='self'>self</span>.<span class='ident'>base</span>.<span class='ident'>depth</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>bits_per_pixel</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u8</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>bits_per_pixel</span>
+            <span class='self'>self</span>.<span class='ident'>base</span>.<span class='ident'>bits_per_pixel</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>scanline_pad</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u8</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>scanline_pad</span>
+            <span class='self'>self</span>.<span class='ident'>base</span>.<span class='ident'>scanline_pad</span>
         }
     }
 }
 
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>FormatIterator</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>xcb_format_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>FormatIterator</span> <span class='op'>=</span> <span class='ident'>xcb_format_iterator_t</span>;
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Iterator</span> <span class='kw'>for</span> <span class='ident'>FormatIterator</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
-    <span class='kw'>type</span> <span class='ident'>Item</span> <span class='op'>=</span> <span class='ident'>Format</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>;
-    <span class='kw'>fn</span> <span class='ident'>next</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>std</span>::<span class='ident'>option</span>::<span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Format</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;&gt;</span> {
+<span class='kw'>impl</span> <span class='ident'>Iterator</span> <span class='kw'>for</span> <span class='ident'>FormatIterator</span> {
+    <span class='kw'>type</span> <span class='ident'>Item</span> <span class='op'>=</span> <span class='ident'>Format</span>;
+    <span class='kw'>fn</span> <span class='ident'>next</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>std</span>::<span class='ident'>option</span>::<span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Format</span><span class='op'>&gt;</span> {
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>rem</span> <span class='op'>==</span> <span class='number'>0</span> { <span class='prelude-val'>None</span> }
         <span class='kw'>else</span> {
             <span class='kw'>unsafe</span> {
                 <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_format_iterator_t</span>;
                 <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='op'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
                 <span class='ident'>xcb_format_next</span>(<span class='ident'>iter</span>);
-                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='ident'>data</span>))
+                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='op'>*</span><span class='ident'>data</span>))
             }
         }
     }
 }
 
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>Visualtype</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>base</span>::<span class='ident'>StructPtr</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>xcb_visualtype_t</span><span class='op'>&gt;</span>;
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Visualtype</span> {
+    <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_visualtype_t</span>,
+}
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Visualtype</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>impl</span> <span class='ident'>Visualtype</span> {
+    <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>unused_unsafe</span>)]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>visual_id</span>:          <span class='ident'>Visualid</span>,
+               <span class='ident'>class</span>:              <span class='ident'>u8</span>,
+               <span class='ident'>bits_per_rgb_value</span>: <span class='ident'>u8</span>,
+               <span class='ident'>colormap_entries</span>:   <span class='ident'>u16</span>,
+               <span class='ident'>red_mask</span>:           <span class='ident'>u32</span>,
+               <span class='ident'>green_mask</span>:         <span class='ident'>u32</span>,
+               <span class='ident'>blue_mask</span>:          <span class='ident'>u32</span>)
+            <span class='op'>-&gt;</span> <span class='ident'>Visualtype</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>Visualtype</span> {
+                <span class='ident'>base</span>: <span class='ident'>xcb_visualtype_t</span> {
+                    <span class='ident'>visual_id</span>:          <span class='ident'>visual_id</span>,
+                    <span class='ident'>class</span>:              <span class='ident'>class</span>,
+                    <span class='ident'>bits_per_rgb_value</span>: <span class='ident'>bits_per_rgb_value</span>,
+                    <span class='ident'>colormap_entries</span>:   <span class='ident'>colormap_entries</span>,
+                    <span class='ident'>red_mask</span>:           <span class='ident'>red_mask</span>,
+                    <span class='ident'>green_mask</span>:         <span class='ident'>green_mask</span>,
+                    <span class='ident'>blue_mask</span>:          <span class='ident'>blue_mask</span>,
+                    <span class='ident'>pad0</span>:               [<span class='number'>0</span>; <span class='number'>4</span>],
+                }
+            }
+        }
+    }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>visual_id</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Visualid</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>visual_id</span>
+            <span class='self'>self</span>.<span class='ident'>base</span>.<span class='ident'>visual_id</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>class</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u8</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>class</span>
+            <span class='self'>self</span>.<span class='ident'>base</span>.<span class='ident'>class</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>bits_per_rgb_value</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u8</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>bits_per_rgb_value</span>
+            <span class='self'>self</span>.<span class='ident'>base</span>.<span class='ident'>bits_per_rgb_value</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>colormap_entries</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u16</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>colormap_entries</span>
+            <span class='self'>self</span>.<span class='ident'>base</span>.<span class='ident'>colormap_entries</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>red_mask</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u32</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>red_mask</span>
+            <span class='self'>self</span>.<span class='ident'>base</span>.<span class='ident'>red_mask</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>green_mask</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u32</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>green_mask</span>
+            <span class='self'>self</span>.<span class='ident'>base</span>.<span class='ident'>green_mask</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>blue_mask</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u32</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>blue_mask</span>
+            <span class='self'>self</span>.<span class='ident'>base</span>.<span class='ident'>blue_mask</span>
         }
     }
 }
 
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>VisualtypeIterator</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>xcb_visualtype_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>VisualtypeIterator</span> <span class='op'>=</span> <span class='ident'>xcb_visualtype_iterator_t</span>;
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Iterator</span> <span class='kw'>for</span> <span class='ident'>VisualtypeIterator</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
-    <span class='kw'>type</span> <span class='ident'>Item</span> <span class='op'>=</span> <span class='ident'>Visualtype</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>;
-    <span class='kw'>fn</span> <span class='ident'>next</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>std</span>::<span class='ident'>option</span>::<span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Visualtype</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;&gt;</span> {
+<span class='kw'>impl</span> <span class='ident'>Iterator</span> <span class='kw'>for</span> <span class='ident'>VisualtypeIterator</span> {
+    <span class='kw'>type</span> <span class='ident'>Item</span> <span class='op'>=</span> <span class='ident'>Visualtype</span>;
+    <span class='kw'>fn</span> <span class='ident'>next</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>std</span>::<span class='ident'>option</span>::<span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Visualtype</span><span class='op'>&gt;</span> {
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>rem</span> <span class='op'>==</span> <span class='number'>0</span> { <span class='prelude-val'>None</span> }
         <span class='kw'>else</span> {
             <span class='kw'>unsafe</span> {
                 <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_visualtype_iterator_t</span>;
                 <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='op'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
                 <span class='ident'>xcb_visualtype_next</span>(<span class='ident'>iter</span>);
-                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='ident'>data</span>))
+                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='op'>*</span><span class='ident'>data</span>))
             }
         }
     }
@@ -14467,7 +14601,7 @@
             (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>visuals_len</span>
         }
     }
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>visuals</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>VisualtypeIterator</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>visuals</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>VisualtypeIterator</span> {
         <span class='kw'>unsafe</span> {
             <span class='ident'>xcb_depth_visuals_iterator</span>(<span class='self'>self</span>.<span class='ident'>ptr</span>)
         }
@@ -14867,7 +15001,7 @@
             <span class='ident'>std</span>::<span class='ident'>str</span>::<span class='ident'>from_utf8_unchecked</span>(<span class='kw-2'>&amp;</span><span class='ident'>slice</span>)
         }
     }
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>pixmap_formats</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>FormatIterator</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>pixmap_formats</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>FormatIterator</span> {
         <span class='kw'>unsafe</span> {
             <span class='ident'>xcb_setup_pixmap_formats_iterator</span>(<span class='self'>self</span>.<span class='ident'>ptr</span>)
         }
@@ -16263,8 +16397,8 @@
     }
     <span class='doccomment'>/// Constructs a new CirculateNotifyEvent</span>
     <span class='doccomment'>/// `response_type` must be set to one of:</span>
-    <span class='doccomment'>///     - `CIRCULATE_REQUEST`</span>
     <span class='doccomment'>///     - `CIRCULATE_NOTIFY`</span>
+    <span class='doccomment'>///     - `CIRCULATE_REQUEST`</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>response_type</span>: <span class='ident'>u8</span>,
                <span class='ident'>event</span>: <span class='ident'>Window</span>,
                <span class='ident'>window</span>: <span class='ident'>Window</span>,
@@ -16272,8 +16406,8 @@
             <span class='op'>-&gt;</span> <span class='ident'>CirculateNotifyEvent</span> {
         <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>raw</span> <span class='op'>=</span> <span class='ident'>libc</span>::<span class='ident'>malloc</span>(<span class='number'>32</span> <span class='kw'>as</span> <span class='ident'>usize</span>) <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_circulate_notify_event_t</span>;
-            <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>CIRCULATE_REQUEST</span> <span class='op'>||</span>
-                    <span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>CIRCULATE_NOTIFY</span>,
+            <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>CIRCULATE_NOTIFY</span> <span class='op'>||</span>
+                    <span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>CIRCULATE_REQUEST</span>,
                     <span class='string'>&quot;wrong response_type supplied to CirculateNotifyEvent::new&quot;</span>);
             (<span class='op'>*</span><span class='ident'>raw</span>).<span class='ident'>response_type</span> <span class='op'>=</span> <span class='ident'>response_type</span>;
             (<span class='op'>*</span><span class='ident'>raw</span>).<span class='ident'>event</span> <span class='op'>=</span> <span class='ident'>event</span>;
@@ -24338,48 +24472,71 @@
     }
 }
 
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>Coloritem</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>base</span>::<span class='ident'>StructPtr</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>xcb_coloritem_t</span><span class='op'>&gt;</span>;
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Coloritem</span> {
+    <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_coloritem_t</span>,
+}
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Coloritem</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>impl</span> <span class='ident'>Coloritem</span> {
+    <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>unused_unsafe</span>)]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>pixel</span>: <span class='ident'>u32</span>,
+               <span class='ident'>red</span>:   <span class='ident'>u16</span>,
+               <span class='ident'>green</span>: <span class='ident'>u16</span>,
+               <span class='ident'>blue</span>:  <span class='ident'>u16</span>,
+               <span class='ident'>flags</span>: <span class='ident'>u8</span>)
+            <span class='op'>-&gt;</span> <span class='ident'>Coloritem</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>Coloritem</span> {
+                <span class='ident'>base</span>: <span class='ident'>xcb_coloritem_t</span> {
+                    <span class='ident'>pixel</span>: <span class='ident'>pixel</span>,
+                    <span class='ident'>red</span>:   <span class='ident'>red</span>,
+                    <span class='ident'>green</span>: <span class='ident'>green</span>,
+                    <span class='ident'>blue</span>:  <span class='ident'>blue</span>,
+                    <span class='ident'>flags</span>: <span class='ident'>flags</span>,
+                    <span class='ident'>pad0</span>:  <span class='number'>0</span>,
+                }
+            }
+        }
+    }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>pixel</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u32</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>pixel</span>
+            <span class='self'>self</span>.<span class='ident'>base</span>.<span class='ident'>pixel</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>red</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u16</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>red</span>
+            <span class='self'>self</span>.<span class='ident'>base</span>.<span class='ident'>red</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>green</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u16</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>green</span>
+            <span class='self'>self</span>.<span class='ident'>base</span>.<span class='ident'>green</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>blue</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u16</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>blue</span>
+            <span class='self'>self</span>.<span class='ident'>base</span>.<span class='ident'>blue</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>flags</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u8</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>flags</span>
+            <span class='self'>self</span>.<span class='ident'>base</span>.<span class='ident'>flags</span>
         }
     }
 }
 
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>ColoritemIterator</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>xcb_coloritem_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>ColoritemIterator</span> <span class='op'>=</span> <span class='ident'>xcb_coloritem_iterator_t</span>;
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Iterator</span> <span class='kw'>for</span> <span class='ident'>ColoritemIterator</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
-    <span class='kw'>type</span> <span class='ident'>Item</span> <span class='op'>=</span> <span class='ident'>Coloritem</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>;
-    <span class='kw'>fn</span> <span class='ident'>next</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>std</span>::<span class='ident'>option</span>::<span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Coloritem</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;&gt;</span> {
+<span class='kw'>impl</span> <span class='ident'>Iterator</span> <span class='kw'>for</span> <span class='ident'>ColoritemIterator</span> {
+    <span class='kw'>type</span> <span class='ident'>Item</span> <span class='op'>=</span> <span class='ident'>Coloritem</span>;
+    <span class='kw'>fn</span> <span class='ident'>next</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>std</span>::<span class='ident'>option</span>::<span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Coloritem</span><span class='op'>&gt;</span> {
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>rem</span> <span class='op'>==</span> <span class='number'>0</span> { <span class='prelude-val'>None</span> }
         <span class='kw'>else</span> {
             <span class='kw'>unsafe</span> {
                 <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_coloritem_iterator_t</span>;
                 <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='op'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
                 <span class='ident'>xcb_coloritem_next</span>(<span class='ident'>iter</span>);
-                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='ident'>data</span>))
+                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='op'>*</span><span class='ident'>data</span>))
             }
         }
     }
@@ -24475,38 +24632,57 @@
     }
 }
 
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>Rgb</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>base</span>::<span class='ident'>StructPtr</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>xcb_rgb_t</span><span class='op'>&gt;</span>;
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Rgb</span> {
+    <span class='kw'>pub</span> <span class='ident'>base</span>: <span class='ident'>xcb_rgb_t</span>,
+}
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Rgb</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>impl</span> <span class='ident'>Rgb</span> {
+    <span class='attribute'>#[<span class='ident'>allow</span>(<span class='ident'>unused_unsafe</span>)]</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>red</span>:   <span class='ident'>u16</span>,
+               <span class='ident'>green</span>: <span class='ident'>u16</span>,
+               <span class='ident'>blue</span>:  <span class='ident'>u16</span>)
+            <span class='op'>-&gt;</span> <span class='ident'>Rgb</span> {
+        <span class='kw'>unsafe</span> {
+            <span class='ident'>Rgb</span> {
+                <span class='ident'>base</span>: <span class='ident'>xcb_rgb_t</span> {
+                    <span class='ident'>red</span>:   <span class='ident'>red</span>,
+                    <span class='ident'>green</span>: <span class='ident'>green</span>,
+                    <span class='ident'>blue</span>:  <span class='ident'>blue</span>,
+                    <span class='ident'>pad0</span>:  [<span class='number'>0</span>; <span class='number'>2</span>],
+                }
+            }
+        }
+    }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>red</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u16</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>red</span>
+            <span class='self'>self</span>.<span class='ident'>base</span>.<span class='ident'>red</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>green</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u16</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>green</span>
+            <span class='self'>self</span>.<span class='ident'>base</span>.<span class='ident'>green</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>blue</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u16</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>blue</span>
+            <span class='self'>self</span>.<span class='ident'>base</span>.<span class='ident'>blue</span>
         }
     }
 }
 
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>RgbIterator</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>xcb_rgb_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>;
+<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>RgbIterator</span> <span class='op'>=</span> <span class='ident'>xcb_rgb_iterator_t</span>;
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Iterator</span> <span class='kw'>for</span> <span class='ident'>RgbIterator</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
-    <span class='kw'>type</span> <span class='ident'>Item</span> <span class='op'>=</span> <span class='ident'>Rgb</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span>;
-    <span class='kw'>fn</span> <span class='ident'>next</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>std</span>::<span class='ident'>option</span>::<span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Rgb</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;&gt;</span> {
+<span class='kw'>impl</span> <span class='ident'>Iterator</span> <span class='kw'>for</span> <span class='ident'>RgbIterator</span> {
+    <span class='kw'>type</span> <span class='ident'>Item</span> <span class='op'>=</span> <span class='ident'>Rgb</span>;
+    <span class='kw'>fn</span> <span class='ident'>next</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>std</span>::<span class='ident'>option</span>::<span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Rgb</span><span class='op'>&gt;</span> {
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>rem</span> <span class='op'>==</span> <span class='number'>0</span> { <span class='prelude-val'>None</span> }
         <span class='kw'>else</span> {
             <span class='kw'>unsafe</span> {
                 <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_rgb_iterator_t</span>;
                 <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='op'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
                 <span class='ident'>xcb_rgb_next</span>(<span class='ident'>iter</span>);
-                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='ident'>data</span>))
+                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='op'>*</span><span class='ident'>data</span>))
             }
         }
     }

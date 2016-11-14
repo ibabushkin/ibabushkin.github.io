@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-2067' class='srclink' href='../src/gabelstaplerwm/src/wm/util.rs.html#320-333' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-2074' class='srclink' href='../src/gabelstaplerwm/src/wm/util.rs.html#320-333' title='goto source code'>[src]</a></span></h1>
 <pre class='rust macro'>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>edit_layout</span> {
     ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>cmd</span>:<span class='ident'>expr</span>),<span class='op'>*</span>;; <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>print</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> { ... };
@@ -58,13 +58,13 @@
 <p>Returns a closure for use with <code>bind!</code>.</p>
 
 <h1 id='usage' class='section-header'><a href='#usage'>Usage</a></h1>
-<p>The <code>edit_layout!</code> macro expects a <code>LayoutCommand</code> and passes it to the
-layout of the currently viewed tagset. This allows for modification of
-layout parameters from keybindings. However, there is no guarantee that
-a specific layout reacts to a specific <code>LayoutCommand</code>, as it may be
-meaningless in some contexts. For example, the <code>Monocle</code> layout doesn&#39;t
-have a notion of a master factor, so the corresponding <code>LayoutCommand</code>s
-have no effect on it.</p>
+<p>The <code>edit_layout!</code> macro expects one or more <code>LayoutCommand</code>s and passes
+them to the layout of the currently viewed tagset. This allows for
+modification of layout parameters from keybindings. However, there is no
+guarantee that a specific layout reacts to a specific <code>LayoutCommand</code>,
+as it may be meaningless in some contexts. For example, the <code>Monocle</code>
+layout doesn&#39;t have a notion of a master factor, so the corresponding
+<code>LayoutCommand</code>s have no effect on it.</p>
 
 <p>As always, the last parameter(s) specify objects to be printed after
 completion of the action.</p>

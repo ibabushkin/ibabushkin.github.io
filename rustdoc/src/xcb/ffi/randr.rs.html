@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/thewormkill/.multirust/toolchains/nightly/cargo/git/checkouts/rust-xcb-4fdfe1b194dff81b/6f7ef92f8434f040df3a3fb4f2637cb8264608b5/src/ffi/randr.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/twk/.multirust/toolchains/nightly/cargo/registry/src/github.com-1ecc6299db9ec823/xcb-0.7.6/src/ffi/randr.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>randr.rs.html -- source</title>
@@ -2661,14 +2661,9 @@
 <span id="2617">2617</span>
 <span id="2618">2618</span>
 <span id="2619">2619</span>
-<span id="2620">2620</span>
-<span id="2621">2621</span>
-<span id="2622">2622</span>
-<span id="2623">2623</span>
-<span id="2624">2624</span>
 </pre><pre class='rust '>
-<span class='comment'>// edited from randr.xml by rs_client.py on Fri Nov 11 20:20:22 2016</span>
-<span class='comment'>// do not edit!</span>
+<span class='comment'>// Generated automatically from randr.xml by rs_client.py on Mon Nov 14 19:55:30 2016.</span>
+<span class='comment'>// Do not edit!</span>
 
 
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allow</span>(<span class='ident'>improper_ctypes</span>)]</span>
@@ -4093,11 +4088,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_randr_crtc_change_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_randr_crtc_change_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_randr_crtc_change_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_randr_crtc_change_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -4141,11 +4135,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_randr_output_property_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_randr_output_property_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_randr_output_property_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_randr_output_property_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -4162,11 +4155,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_randr_provider_change_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_randr_provider_change_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_randr_provider_change_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_randr_provider_change_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -4185,11 +4177,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_randr_provider_property_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_randr_provider_property_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_randr_provider_property_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_randr_provider_property_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -4205,11 +4196,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_randr_resource_change_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_randr_resource_change_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_randr_resource_change_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_randr_resource_change_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='comment'>// union</span>

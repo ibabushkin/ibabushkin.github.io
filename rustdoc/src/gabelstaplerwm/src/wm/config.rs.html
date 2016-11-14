@@ -298,6 +298,12 @@
 <span id="254">254</span>
 <span id="255">255</span>
 <span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! # Configuration module for gabelstaplerwm</span>
 <span class='doccomment'>//! This module is intended to be edited by the user in order to customize</span>
@@ -474,6 +480,12 @@
         <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>45</span>, <span class='ident'>modkey</span><span class='op'>+</span><span class='ident'>CTRL</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>edit_layout</span><span class='macro'>!</span>(
                 <span class='ident'>LayoutMessage</span>::<span class='ident'>MasterFactorRel</span>(<span class='number'>5</span>),
                 <span class='ident'>LayoutMessage</span>::<span class='ident'>ColumnRel</span>(<span class='number'>1</span>))),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>55</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>change_layout</span><span class='macro'>!</span>(<span class='ident'>VStack</span>::<span class='ident'>default</span>())),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>56</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>change_layout</span><span class='macro'>!</span>(<span class='ident'>HStack</span>::<span class='ident'>default</span>())),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>57</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>change_layout</span><span class='macro'>!</span>(<span class='ident'>DStack</span>::<span class='ident'>default</span>())),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>58</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>change_layout</span><span class='macro'>!</span>(<span class='ident'>Grid</span>::<span class='ident'>default</span>())),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>59</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>change_layout</span><span class='macro'>!</span>(<span class='ident'>Spiral</span>::<span class='ident'>default</span>())),
+        <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>60</span>, <span class='ident'>modkey</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='macro'>change_layout</span><span class='macro'>!</span>(<span class='ident'>Monocle</span>::<span class='ident'>default</span>())),
         <span class='comment'>// quit the window manager</span>
         <span class='macro'>bind</span><span class='macro'>!</span>(<span class='number'>24</span>, <span class='ident'>modkey</span><span class='op'>+</span><span class='ident'>CTRL</span>, <span class='ident'>Mode</span>::<span class='ident'>Normal</span>, <span class='op'>|</span>_, _<span class='op'>|</span> <span class='ident'>WmCommand</span>::<span class='ident'>Quit</span>),
         <span class='comment'>// go back in tagset history</span>

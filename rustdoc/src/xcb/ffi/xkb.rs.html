@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/thewormkill/.multirust/toolchains/nightly/cargo/git/checkouts/rust-xcb-4fdfe1b194dff81b/6f7ef92f8434f040df3a3fb4f2637cb8264608b5/src/ffi/xkb.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/twk/.multirust/toolchains/nightly/cargo/registry/src/github.com-1ecc6299db9ec823/xcb-0.7.6/src/ffi/xkb.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>xkb.rs.html -- source</title>
@@ -4812,31 +4812,9 @@
 <span id="4768">4768</span>
 <span id="4769">4769</span>
 <span id="4770">4770</span>
-<span id="4771">4771</span>
-<span id="4772">4772</span>
-<span id="4773">4773</span>
-<span id="4774">4774</span>
-<span id="4775">4775</span>
-<span id="4776">4776</span>
-<span id="4777">4777</span>
-<span id="4778">4778</span>
-<span id="4779">4779</span>
-<span id="4780">4780</span>
-<span id="4781">4781</span>
-<span id="4782">4782</span>
-<span id="4783">4783</span>
-<span id="4784">4784</span>
-<span id="4785">4785</span>
-<span id="4786">4786</span>
-<span id="4787">4787</span>
-<span id="4788">4788</span>
-<span id="4789">4789</span>
-<span id="4790">4790</span>
-<span id="4791">4791</span>
-<span id="4792">4792</span>
 </pre><pre class='rust '>
-<span class='comment'>// edited from xkb.xml by rs_client.py on Fri Nov 11 20:20:19 2016</span>
-<span class='comment'>// do not edit!</span>
+<span class='comment'>// Generated automatically from xkb.xml by rs_client.py on Mon Nov 14 19:55:28 2016.</span>
+<span class='comment'>// Do not edit!</span>
 
 
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allow</span>(<span class='ident'>improper_ctypes</span>)]</span>
@@ -5269,11 +5247,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_kt_map_entry_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_kt_map_entry_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xkb_kt_map_entry_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_xkb_kt_map_entry_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -5341,11 +5318,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_default_behavior_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_default_behavior_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xkb_default_behavior_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_xkb_default_behavior_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -5360,11 +5336,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_lock_behavior_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_lock_behavior_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xkb_lock_behavior_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_xkb_lock_behavior_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -5415,11 +5390,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_permament_lock_behavior_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_permament_lock_behavior_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xkb_permament_lock_behavior_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_xkb_permament_lock_behavior_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -5556,11 +5530,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_key_v_mod_map_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_key_v_mod_map_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xkb_key_v_mod_map_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_xkb_key_v_mod_map_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -5832,11 +5805,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_no_action_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_no_action_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xkb_sa_no_action_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_xkb_sa_no_action_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -5856,11 +5828,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_set_mods_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_set_mods_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xkb_sa_set_mods_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_xkb_sa_set_mods_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -5880,11 +5851,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_latch_mods_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_latch_mods_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xkb_sa_latch_mods_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_xkb_sa_latch_mods_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -5904,11 +5874,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_lock_mods_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_lock_mods_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xkb_sa_lock_mods_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_xkb_sa_lock_mods_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -5925,11 +5894,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_set_group_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_set_group_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xkb_sa_set_group_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_xkb_sa_set_group_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -5946,11 +5914,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_latch_group_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_latch_group_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xkb_sa_latch_group_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_xkb_sa_latch_group_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -5967,11 +5934,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_lock_group_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_lock_group_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xkb_sa_lock_group_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_xkb_sa_lock_group_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>xcb_xkb_sa_move_ptr_flag_t</span> <span class='op'>=</span> <span class='ident'>u32</span>;
@@ -5996,11 +5962,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_move_ptr_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_move_ptr_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xkb_sa_move_ptr_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_xkb_sa_move_ptr_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -6018,11 +5983,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_ptr_btn_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_ptr_btn_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xkb_sa_ptr_btn_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_xkb_sa_ptr_btn_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -6040,11 +6004,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_lock_ptr_btn_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_lock_ptr_btn_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xkb_sa_lock_ptr_btn_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_xkb_sa_lock_ptr_btn_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>xcb_xkb_sa_set_ptr_dflt_flag_t</span> <span class='op'>=</span> <span class='ident'>u32</span>;
@@ -6066,11 +6029,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_set_ptr_dflt_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_set_ptr_dflt_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xkb_sa_set_ptr_dflt_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_xkb_sa_set_ptr_dflt_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>xcb_xkb_sa_iso_lock_flag_t</span> <span class='op'>=</span> <span class='ident'>u32</span>;
@@ -6122,11 +6084,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_terminate_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_terminate_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xkb_sa_terminate_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_xkb_sa_terminate_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>xcb_xkb_switch_screen_flag_t</span> <span class='op'>=</span> <span class='ident'>u32</span>;
@@ -6147,11 +6108,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_switch_screen_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_switch_screen_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xkb_sa_switch_screen_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_xkb_sa_switch_screen_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>xcb_xkb_bool_ctrls_high_t</span> <span class='op'>=</span> <span class='ident'>u32</span>;
@@ -6186,11 +6146,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_set_controls_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_set_controls_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xkb_sa_set_controls_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_xkb_sa_set_controls_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -6208,11 +6167,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_lock_controls_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_lock_controls_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xkb_sa_lock_controls_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_xkb_sa_lock_controls_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>xcb_xkb_action_message_flag_t</span> <span class='op'>=</span> <span class='ident'>u32</span>;
@@ -6280,11 +6238,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_device_btn_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_device_btn_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xkb_sa_device_btn_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_xkb_sa_device_btn_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>xcb_xkb_lock_device_flags_t</span> <span class='op'>=</span> <span class='ident'>u32</span>;
@@ -6307,11 +6264,10 @@
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_lock_device_btn_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
+<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_xkb_sa_lock_device_btn_iterator_t</span> {
     <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xkb_sa_lock_device_btn_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
-    <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_xkb_sa_lock_device_btn_t</span><span class='op'>&gt;</span>,
 }
 
 <span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>xcb_xkb_sa_val_what_t</span> <span class='op'>=</span> <span class='ident'>u32</span>;

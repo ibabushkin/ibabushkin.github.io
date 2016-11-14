@@ -375,6 +375,33 @@
 <span id="331">331</span>
 <span id="332">332</span>
 <span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
+<span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
+<span id="352">352</span>
+<span id="353">353</span>
+<span id="354">354</span>
+<span id="355">355</span>
+<span id="356">356</span>
+<span id="357">357</span>
+<span id="358">358</span>
+<span id="359">359</span>
+<span id="360">360</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! # General design concepts behind the macros</span>
 <span class='doccomment'>//! All macros to be passed to `bind!` share a common property:</span>
@@ -684,20 +711,20 @@
 <span class='doccomment'>/// Returns a closure for use with `bind!`.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// # Usage</span>
-<span class='doccomment'>/// The `edit_layout!` macro expects a `LayoutCommand` and passes it to the</span>
-<span class='doccomment'>/// layout of the currently viewed tagset. This allows for modification of</span>
-<span class='doccomment'>/// layout parameters from keybindings. However, there is no guarantee that</span>
-<span class='doccomment'>/// a specific layout reacts to a specific `LayoutCommand`, as it may be</span>
-<span class='doccomment'>/// meaningless in some contexts. For example, the `Monocle` layout doesn&#39;t</span>
-<span class='doccomment'>/// have a notion of a master factor, so the corresponding `LayoutCommand`s</span>
-<span class='doccomment'>/// have no effect on it.</span>
+<span class='doccomment'>/// The `edit_layout!` macro expects one or more `LayoutCommand`s and passes</span>
+<span class='doccomment'>/// them to the layout of the currently viewed tagset. This allows for</span>
+<span class='doccomment'>/// modification of layout parameters from keybindings. However, there is no</span>
+<span class='doccomment'>/// guarantee that a specific layout reacts to a specific `LayoutCommand`,</span>
+<span class='doccomment'>/// as it may be meaningless in some contexts. For example, the `Monocle`</span>
+<span class='doccomment'>/// layout doesn&#39;t have a notion of a master factor, so the corresponding</span>
+<span class='doccomment'>/// `LayoutCommand`s have no effect on it.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// As always, the last parameter(s) specify objects to be printed after</span>
 <span class='doccomment'>/// completion of the action.</span>
 <span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>edit_layout</span> {
     ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>cmd</span>:<span class='ident'>expr</span>),<span class='op'>*</span>;; <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>print</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {
-        <span class='op'>|</span>_, _<span class='op'>|</span> {
+        <span class='op'>|</span><span class='ident'>c</span>, <span class='ident'>s</span><span class='op'>|</span> {
             <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>print</span>(<span class='ident'>c</span>, <span class='ident'>s</span>));
             <span class='ident'>WmCommand</span>::<span class='ident'>LayoutMsg</span>(<span class='macro'>vec</span><span class='macro'>!</span>[$(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>cmd</span>,)<span class='op'>*</span>])
         }
@@ -708,6 +735,33 @@
             <span class='ident'>WmCommand</span>::<span class='ident'>LayoutMsg</span>(<span class='macro'>vec</span><span class='macro'>!</span>[$(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>cmd</span>,)<span class='op'>*</span>])
         }
     }
+}
+
+<span class='doccomment'>/// Change the current layout ot something different.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// Returns a closure for use with `bind!`.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// # Usage</span>
+<span class='doccomment'>/// The `change_layout!` macro expects an expression of a type implementing</span>
+<span class='doccomment'>/// the `Layout` trait, which is then used to replace the layout of the</span>
+<span class='doccomment'>/// currently viewed `TagSet`.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// As always, the last parameter(s) specify objects to be printed after</span>
+<span class='doccomment'>/// completion of the action.</span>
+<span class='attribute'>#[<span class='ident'>macro_export</span>]</span>
+<span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>change_layout</span> {
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>layout</span>:<span class='ident'>expr</span>;; <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>print</span>:<span class='ident'>expr</span>) <span class='op'>=&gt;</span> {
+        <span class='op'>|</span><span class='ident'>c</span>, <span class='ident'>s</span><span class='op'>|</span> {
+            <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>print</span>(<span class='ident'>c</span>, <span class='ident'>s</span>));
+            <span class='ident'>WmCommand</span>::<span class='ident'>LayoutSwitch</span>(<span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>layout</span>))
+        }
+    };
+    (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>layout</span>:<span class='ident'>expr</span> $(; <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>print</span>:<span class='ident'>expr</span>)<span class='op'>*</span>) <span class='op'>=&gt;</span> {
+        <span class='op'>|</span>_, _<span class='op'>|</span> {
+            $( <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{}&quot;</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>print</span>); )<span class='op'>*</span>
+            <span class='ident'>WmCommand</span>::<span class='ident'>LayoutSwitch</span>(<span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>layout</span>))
+        }
+    };
 }
 </pre>
 </section>
