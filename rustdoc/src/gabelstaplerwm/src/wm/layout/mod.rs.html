@@ -173,7 +173,7 @@
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// Describes the area used for tiling windows. This allows to leave an open</span>
 <span class='doccomment'>/// spot for desktop windows, bars and whatever else you might want.</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Default</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Debug</span>, <span class='ident'>Default</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>TilingArea</span> {
     <span class='doccomment'>/// x offset of tiling area</span>
     <span class='kw'>pub</span> <span class='ident'>offset_x</span>: <span class='ident'>u32</span>,
@@ -211,7 +211,7 @@
 }
 
 <span class='doccomment'>/// A window&#39;s geometry.</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>, <span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Geometry</span> {
     <span class='doccomment'>/// x coordinate of window</span>
     <span class='kw'>pub</span> <span class='ident'>x</span>: <span class='ident'>u32</span>,
