@@ -1084,6 +1084,12 @@
 <span id="1040">1040</span>
 <span id="1041">1041</span>
 <span id="1042">1042</span>
+<span id="1043">1043</span>
+<span id="1044">1044</span>
+<span id="1045">1045</span>
+<span id="1046">1046</span>
+<span id="1047">1047</span>
+<span id="1048">1048</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>c_char</span>;
 
@@ -1223,7 +1229,6 @@
                         <span class='ident'>root</span>: <span class='ident'>root</span>,
                         <span class='ident'>randr_base</span>: <span class='number'>0</span>,
                         <span class='ident'>border_width</span>: <span class='ident'>config</span>.<span class='ident'>border_width</span>,
-                        <span class='comment'>// TODO: remove this ugly hack</span>
                         <span class='ident'>safe_x</span>: <span class='ident'>screen</span>.<span class='ident'>width_in_pixels</span>() <span class='kw'>as</span> <span class='ident'>u32</span>,
                         <span class='ident'>border_colors</span>: <span class='ident'>colors</span>,
                         <span class='ident'>screens</span>: <span class='macro'>try</span><span class='macro'>!</span>(<span class='ident'>Wm</span>::<span class='ident'>setup_screens</span>(<span class='ident'>con</span>, <span class='ident'>root</span>)),
@@ -1472,38 +1477,42 @@
     <span class='doccomment'>/// window as obtained from there. If an old window is present, uncolor</span>
     <span class='doccomment'>/// it&#39;s border.</span>
     <span class='kw'>fn</span> <span class='ident'>reset_focus</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
-        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>new</span>) <span class='op'>=</span> <span class='self'>self</span>
-            .<span class='ident'>screens</span>
-            .<span class='ident'>tag_stack</span>()
-            .<span class='ident'>current</span>()
-            .<span class='ident'>and_then</span>(<span class='op'>|</span><span class='ident'>t</span><span class='op'>|</span> <span class='self'>self</span>.<span class='ident'>clients</span>.<span class='ident'>get_focused_window</span>(<span class='kw-2'>&amp;</span><span class='ident'>t</span>.<span class='ident'>tags</span>)) {
-            <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>new_window_as_master</span>() {
-               <span class='self'>self</span>.<span class='ident'>clients</span>.<span class='ident'>swap_master</span>(<span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>tag_stack</span>().<span class='ident'>current</span>().<span class='ident'>unwrap</span>());
-               <span class='self'>self</span>.<span class='ident'>arrange_windows</span>();
-            }
-            <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>old_win</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>focused_window</span> {
-                <span class='self'>self</span>.<span class='ident'>set_border_color</span>(<span class='ident'>old_win</span>, <span class='self'>self</span>.<span class='ident'>border_colors</span>.<span class='number'>1</span>);
-            }
+        <span class='kw'>let</span> <span class='ident'>new</span> <span class='op'>=</span>
+            <span class='self'>self</span>.<span class='ident'>screens</span>
+                .<span class='ident'>tag_stack</span>()
+                .<span class='ident'>current</span>()
+                .<span class='ident'>and_then</span>(<span class='op'>|</span><span class='ident'>t</span><span class='op'>|</span> <span class='self'>self</span>.<span class='ident'>clients</span>.<span class='ident'>get_focused_window</span>(<span class='kw-2'>&amp;</span><span class='ident'>t</span>.<span class='ident'>tags</span>))
+                .<span class='ident'>unwrap_or</span>(<span class='self'>self</span>.<span class='ident'>root</span>);
 
-            <span class='comment'>// TODO: decide whether we really need this</span>
-            <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>send_event</span>(<span class='ident'>new</span>, <span class='string'>&quot;WM_TAKE_FOCUS&quot;</span>) {
-                <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;client didn&#39;t acept WM_TAKE_FOCUS message&quot;</span>);
-            }
-            <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>send_event</span>(<span class='ident'>new</span>, <span class='string'>&quot;_NET_WM_TAKE_FOCUS&quot;</span>) {
-                <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;client didn&#39;t acept _NET_WM_TAKE_FOCUS message&quot;</span>);
-            }
+        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>new_window_as_master</span>() {
+           <span class='self'>self</span>.<span class='ident'>clients</span>.<span class='ident'>swap_master</span>(<span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>tag_stack</span>().<span class='ident'>current</span>().<span class='ident'>unwrap</span>());
+           <span class='self'>self</span>.<span class='ident'>arrange_windows</span>();
+        }
 
-            <span class='kw'>let</span> <span class='ident'>cookie</span> <span class='op'>=</span>
-                <span class='ident'>xproto</span>::<span class='ident'>set_input_focus</span>(<span class='self'>self</span>.<span class='ident'>con</span>,
-                                        <span class='ident'>xproto</span>::<span class='ident'>INPUT_FOCUS_POINTER_ROOT</span> <span class='kw'>as</span> <span class='ident'>u8</span>,
-                                        <span class='ident'>new</span>,
-                                        <span class='ident'>xproto</span>::<span class='ident'>TIME_CURRENT_TIME</span>);
-            <span class='self'>self</span>.<span class='ident'>set_border_color</span>(<span class='ident'>new</span>, <span class='self'>self</span>.<span class='ident'>border_colors</span>.<span class='number'>0</span>);
-            <span class='kw'>if</span> <span class='ident'>cookie</span>.<span class='ident'>request_check</span>().<span class='ident'>is_err</span>() {
-                <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;could not focus window&quot;</span>);
-            } <span class='kw'>else</span> {
-                <span class='self'>self</span>.<span class='ident'>focused_window</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>new</span>);
-            }
+        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>old_win</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>focused_window</span> {
+            <span class='self'>self</span>.<span class='ident'>set_border_color</span>(<span class='ident'>old_win</span>, <span class='self'>self</span>.<span class='ident'>border_colors</span>.<span class='number'>1</span>);
+        }
+
+        <span class='comment'>// TODO: decide whether we really need this</span>
+        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>send_event</span>(<span class='ident'>new</span>, <span class='string'>&quot;WM_TAKE_FOCUS&quot;</span>) {
+            <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;client didn&#39;t acept WM_TAKE_FOCUS message&quot;</span>);
+        }
+        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>send_event</span>(<span class='ident'>new</span>, <span class='string'>&quot;_NET_WM_TAKE_FOCUS&quot;</span>) {
+            <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;client didn&#39;t acept _NET_WM_TAKE_FOCUS message&quot;</span>);
+        }
+
+        <span class='kw'>let</span> <span class='ident'>cookie</span> <span class='op'>=</span>
+            <span class='ident'>xproto</span>::<span class='ident'>set_input_focus</span>(<span class='self'>self</span>.<span class='ident'>con</span>,
+                                    <span class='ident'>xproto</span>::<span class='ident'>INPUT_FOCUS_POINTER_ROOT</span> <span class='kw'>as</span> <span class='ident'>u8</span>,
+                                    <span class='ident'>new</span>,
+                                    <span class='ident'>xproto</span>::<span class='ident'>TIME_CURRENT_TIME</span>);
+
+        <span class='self'>self</span>.<span class='ident'>set_border_color</span>(<span class='ident'>new</span>, <span class='self'>self</span>.<span class='ident'>border_colors</span>.<span class='number'>0</span>);
+
+        <span class='kw'>if</span> <span class='ident'>cookie</span>.<span class='ident'>request_check</span>().<span class='ident'>is_err</span>() {
+            <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;could not focus window&quot;</span>);
+        } <span class='kw'>else</span> {
+            <span class='self'>self</span>.<span class='ident'>focused_window</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>new</span>);
         }
     }
 
@@ -1590,8 +1599,11 @@
             <span class='kw'>let</span> <span class='ident'>crtc_change</span>: <span class='ident'>randr</span>::<span class='ident'>CrtcChange</span> <span class='op'>=</span> <span class='ident'>ev</span>.<span class='ident'>u</span>().<span class='ident'>cc</span>();
 
             <span class='kw'>if</span> <span class='ident'>crtc_change</span>.<span class='ident'>mode</span>() <span class='op'>==</span> <span class='number'>0</span> {
-                <span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>remove</span>(<span class='ident'>crtc_change</span>.<span class='ident'>crtc</span>());
                 <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;a crtc/screen removed from the screen set&quot;</span>);
+                <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>remove</span>(<span class='ident'>crtc_change</span>.<span class='ident'>crtc</span>()) {
+                    <span class='self'>self</span>.<span class='ident'>arrange_windows</span>();
+                    <span class='self'>self</span>.<span class='ident'>reset_focus</span>();
+                }
             } <span class='kw'>else</span> {
                 <span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>update</span>(<span class='kw-2'>&amp;</span><span class='ident'>crtc_change</span>);
                 <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;a crtc/screen from the screen set changed&quot;</span>);
