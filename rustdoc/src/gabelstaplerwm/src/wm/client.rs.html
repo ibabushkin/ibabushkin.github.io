@@ -905,6 +905,37 @@
 <span id="861">861</span>
 <span id="862">862</span>
 <span id="863">863</span>
+<span id="864">864</span>
+<span id="865">865</span>
+<span id="866">866</span>
+<span id="867">867</span>
+<span id="868">868</span>
+<span id="869">869</span>
+<span id="870">870</span>
+<span id="871">871</span>
+<span id="872">872</span>
+<span id="873">873</span>
+<span id="874">874</span>
+<span id="875">875</span>
+<span id="876">876</span>
+<span id="877">877</span>
+<span id="878">878</span>
+<span id="879">879</span>
+<span id="880">880</span>
+<span id="881">881</span>
+<span id="882">882</span>
+<span id="883">883</span>
+<span id="884">884</span>
+<span id="885">885</span>
+<span id="886">886</span>
+<span id="887">887</span>
+<span id="888">888</span>
+<span id="889">889</span>
+<span id="890">890</span>
+<span id="891">891</span>
+<span id="892">892</span>
+<span id="893">893</span>
+<span id="894">894</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cell</span>::{<span class='ident'>RefCell</span>, <span class='ident'>RefMut</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>::{<span class='ident'>HashMap</span>, <span class='ident'>BTreeSet</span>};
@@ -1478,6 +1509,8 @@
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>TagStack</span> {
     <span class='doccomment'>/// all tagsets known to man</span>
     <span class='ident'>tagsets</span>: <span class='ident'>HashMap</span><span class='op'>&lt;</span><span class='ident'>u8</span>, <span class='ident'>TagSet</span><span class='op'>&gt;</span>,
+    <span class='doccomment'>/// the set of tags currently hidden (due to overlap with other tag stacks)</span>
+    <span class='ident'>hidden</span>: <span class='ident'>BTreeSet</span><span class='op'>&lt;</span><span class='ident'>Tag</span><span class='op'>&gt;</span>,
     <span class='doccomment'>/// the last few tagsets shown</span>
     <span class='ident'>history</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>u8</span><span class='op'>&gt;</span>,
 }
@@ -1498,6 +1531,7 @@
         };
         <span class='ident'>TagStack</span> {
             <span class='ident'>tagsets</span>: <span class='ident'>tagsets</span>,
+            <span class='ident'>hidden</span>: <span class='ident'>BTreeSet</span>::<span class='ident'>new</span>(),
             <span class='ident'>history</span>: <span class='ident'>history</span>,
         }
     }
@@ -1573,6 +1607,24 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>view_prev</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='self'>self</span>.<span class='ident'>history</span>.<span class='ident'>pop</span>().<span class='ident'>is_some</span>()
     }
+
+    <span class='doccomment'>/// Ensure a set of tags is set as hidden when present in the current tagset.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// If there is no current tagset, ensure the set of hidden tags to be empty.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>set_hidden</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>hide</span>: <span class='kw-2'>&amp;</span><span class='ident'>BTreeSet</span><span class='op'>&lt;</span><span class='ident'>Tag</span><span class='op'>&gt;</span>) {
+        <span class='self'>self</span>.<span class='ident'>hidden</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>t</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>current</span>() {
+            <span class='kw'>let</span> <span class='ident'>tags</span> <span class='op'>=</span> <span class='ident'>t</span>.<span class='ident'>tags</span>.<span class='ident'>intersection</span>(<span class='ident'>hide</span>).<span class='ident'>cloned</span>().<span class='ident'>collect</span>();
+            <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;hidden tags set: {:?}&quot;</span>, <span class='ident'>tags</span>);
+            <span class='ident'>tags</span>
+        } <span class='kw'>else</span> {
+            <span class='ident'>BTreeSet</span>::<span class='ident'>new</span>()
+        };
+    }
+
+    <span class='doccomment'>/// Get an immutable reference to the set of currently hidden tags on this tag stack.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_hidden</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='ident'>BTreeSet</span><span class='op'>&lt;</span><span class='ident'>Tag</span><span class='op'>&gt;</span> {
+        <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>hidden</span>
+    }
 }
 
 <span class='doccomment'>/// A rectangular screen area displaying a `TagStack`.</span>
@@ -1642,6 +1694,11 @@
     <span class='doccomment'>/// Get an immutable reference to the set of screens.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>screens</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span>[(<span class='ident'>Crtc</span>, <span class='ident'>Screen</span>)] {
         <span class='kw-2'>&amp;</span><span class='self'>self</span>.<span class='ident'>screens</span>
+    }
+
+    <span class='doccomment'>/// Get a mutable reference to the set of screens.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>screens_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [(<span class='ident'>Crtc</span>, <span class='ident'>Screen</span>)] {
+        <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>screens</span>
     }
 
     <span class='doccomment'>/// Get a mutable reference to current screen&#39;s geometry and tag stack.</span>
@@ -1766,6 +1823,11 @@
             } <span class='kw'>else</span> {
                 <span class='ident'>string</span>.<span class='ident'>push_str</span>(<span class='string'>&quot;[]&quot;</span>);
             }
+
+            <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>s</span>.<span class='ident'>tag_stack</span>.<span class='ident'>hidden</span>.<span class='ident'>is_empty</span>() {
+                <span class='ident'>string</span>.<span class='ident'>push</span>(<span class='string'>&#39;*&#39;</span>);
+            }
+
             <span class='ident'>string</span>
         })
 }

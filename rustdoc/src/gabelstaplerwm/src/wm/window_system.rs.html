@@ -1090,6 +1090,11 @@
 <span id="1046">1046</span>
 <span id="1047">1047</span>
 <span id="1048">1048</span>
+<span id="1049">1049</span>
+<span id="1050">1050</span>
+<span id="1051">1051</span>
+<span id="1052">1052</span>
+<span id="1053">1053</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>libc</span>::<span class='ident'>c_char</span>;
 
@@ -1426,10 +1431,16 @@
         <span class='comment'>// ... and reset the vector of visible windows</span>
         <span class='self'>self</span>.<span class='ident'>visible_windows</span>.<span class='ident'>clear</span>();
 
-        <span class='kw'>for</span> <span class='kw-2'>&amp;</span>(_, <span class='kw-2'>ref</span> <span class='ident'>screen</span>) <span class='kw'>in</span> <span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>screens</span>() {
+        <span class='kw'>for</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> (_, <span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>screen</span>) <span class='kw'>in</span> <span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>screens_mut</span>() {
             <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>tagset</span>) <span class='op'>=</span> <span class='ident'>screen</span>.<span class='ident'>tag_stack</span>.<span class='ident'>current</span>() {
-                <span class='comment'>// get client set and geometries...</span>
-                <span class='kw'>let</span> <span class='ident'>clients</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>clients</span>.<span class='ident'>get_order_or_insert</span>(<span class='kw-2'>&amp;</span><span class='ident'>tagset</span>.<span class='ident'>tags</span>);
+                <span class='comment'>// calculate next tag set ...</span>
+                <span class='kw'>let</span> <span class='ident'>hidden</span> <span class='op'>=</span> <span class='ident'>screen</span>.<span class='ident'>tag_stack</span>.<span class='ident'>get_hidden</span>();
+                <span class='kw'>let</span> <span class='ident'>tags</span> <span class='op'>=</span> <span class='ident'>tagset</span>.<span class='ident'>tags</span>.<span class='ident'>difference</span>(<span class='ident'>hidden</span>).<span class='ident'>cloned</span>().<span class='ident'>collect</span>();
+                <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;next batch of tags: {:?} \\ {:?} = {:?}&quot;</span>,
+                       <span class='ident'>tagset</span>.<span class='ident'>tags</span>, <span class='ident'>hidden</span>, <span class='ident'>tags</span>);
+
+                <span class='comment'>// ... get the corresponding client set and geometries ...</span>
+                <span class='kw'>let</span> <span class='ident'>clients</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>clients</span>.<span class='ident'>get_order_or_insert</span>(<span class='kw-2'>&amp;</span><span class='ident'>tags</span>);
                 <span class='kw'>let</span> <span class='ident'>geometries</span> <span class='op'>=</span> <span class='ident'>tagset</span>.<span class='ident'>layout</span>.<span class='ident'>arrange</span>(<span class='ident'>clients</span>.<span class='number'>1</span>.<span class='ident'>len</span>(), <span class='kw-2'>&amp;</span><span class='ident'>screen</span>.<span class='ident'>area</span>);
                 <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;calculated geometries: {:?}&quot;</span>, <span class='ident'>geometries</span>);
 
@@ -2074,9 +2085,8 @@
     <span class='kw'>let</span> <span class='ident'>cookies</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>clients</span>.<span class='number'>1</span>
         .<span class='ident'>iter</span>()
         .<span class='ident'>zip</span>(<span class='ident'>geometries</span>.<span class='ident'>iter</span>())
-        .<span class='ident'>filter_map</span>(<span class='op'>|</span>(<span class='ident'>client</span>, <span class='ident'>geometry</span>)<span class='op'>|</span> {
-            <span class='kw'>if</span> <span class='kw'>let</span> (<span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>cl</span>), <span class='kw-2'>&amp;</span><span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>geom</span>)) <span class='op'>=</span>
-                (<span class='ident'>client</span>.<span class='ident'>upgrade</span>(), <span class='ident'>geometry</span>) {
+        .<span class='ident'>filter_map</span>(<span class='op'>|</span>(<span class='ident'>client</span>, <span class='ident'>geometry</span>)<span class='op'>|</span>
+            <span class='kw'>if</span> <span class='kw'>let</span> (<span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>cl</span>), <span class='kw-2'>&amp;</span><span class='prelude-val'>Some</span>(<span class='kw-2'>ref</span> <span class='ident'>geom</span>)) <span class='op'>=</span> (<span class='ident'>client</span>.<span class='ident'>upgrade</span>(), <span class='ident'>geometry</span>) {
                 <span class='kw'>let</span> <span class='ident'>window</span> <span class='op'>=</span> <span class='ident'>cl</span>.<span class='ident'>borrow</span>().<span class='ident'>window</span>;
                 <span class='kw'>if</span> <span class='op'>!</span><span class='ident'>visible</span>.<span class='ident'>contains</span>(<span class='kw-2'>&amp;</span><span class='ident'>window</span>) {
                     <span class='prelude-val'>Some</span>((<span class='ident'>window</span>, <span class='ident'>geom</span>))
@@ -2086,8 +2096,8 @@
             } <span class='kw'>else</span> {
                 <span class='prelude-val'>None</span>
             }
-        })
-        .<span class='ident'>map</span>(<span class='op'>|</span>(<span class='ident'>window</span>, <span class='ident'>geometry</span>)<span class='op'>|</span> {
+        )
+        .<span class='ident'>map</span>(<span class='op'>|</span>(<span class='ident'>window</span>, <span class='ident'>geometry</span>)<span class='op'>|</span>
             (<span class='ident'>xproto</span>::<span class='ident'>configure_window</span>(
                 <span class='ident'>con</span>, <span class='ident'>window</span>,
                 <span class='kw-2'>&amp;</span>[(<span class='ident'>xproto</span>::<span class='ident'>CONFIG_WINDOW_X</span> <span class='kw'>as</span> <span class='ident'>u16</span>, <span class='ident'>geometry</span>.<span class='ident'>x</span> <span class='kw'>as</span> <span class='ident'>u32</span>),
@@ -2097,7 +2107,7 @@
                   (<span class='ident'>xproto</span>::<span class='ident'>CONFIG_WINDOW_HEIGHT</span> <span class='kw'>as</span> <span class='ident'>u16</span>,
                    <span class='ident'>geometry</span>.<span class='ident'>height</span> <span class='kw'>as</span> <span class='ident'>u32</span>)
                 ]), <span class='ident'>window</span>)
-        })
+        )
         .<span class='ident'>collect</span>();
 
     <span class='kw'>for</span> (<span class='ident'>cookie</span>, <span class='ident'>window</span>) <span class='kw'>in</span> <span class='ident'>cookies</span> {
