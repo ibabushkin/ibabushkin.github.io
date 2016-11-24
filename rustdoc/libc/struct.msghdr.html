@@ -48,7 +48,8 @@
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a id='src-3395' class='srclink' href='../src/libc/macros.rs.html#42' title='goto source code'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct msghdr {
+<pre class='rust struct'><div class="docblock attributes">#[repr(C)]
+</div>pub struct msghdr {
     pub msg_name: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='enum' href='../libc/enum.c_void.html' title='libc::c_void'>c_void</a>,
     pub msg_namelen: <a class='type' href='../libc/type.socklen_t.html' title='libc::socklen_t'>socklen_t</a>,
     pub msg_iov: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='struct' href='../libc/struct.iovec.html' title='libc::iovec'>iovec</a>,

@@ -310,6 +310,7 @@
 <span id="266">266</span>
 <span id="267">267</span>
 <span id="268">268</span>
+<span id="269">269</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! # Configuration module for gabelstaplerwm</span>
 <span class='doccomment'>//! This module is intended to be edited by the user in order to customize</span>
@@ -565,6 +566,7 @@
             <span class='ident'>screen</span>.<span class='ident'>area</span>.<span class='ident'>height</span> <span class='op'>-=</span> <span class='number'>20</span>;
         }
 
+        <span class='comment'>// TODO: add a reasonable condition</span>
         <span class='kw'>let</span> <span class='ident'>tagsets</span> <span class='op'>=</span> <span class='macro'>vec</span><span class='macro'>!</span>[
             <span class='ident'>TagSet</span>::<span class='ident'>new</span>(<span class='macro'>set</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Web</span>], <span class='ident'>DStack</span>::<span class='ident'>default</span>()),
             <span class='ident'>TagSet</span>::<span class='ident'>new</span>(<span class='macro'>set</span><span class='macro'>!</span>[<span class='ident'>Tag</span>::<span class='ident'>Work2</span>], <span class='ident'>VStack</span>::<span class='ident'>default</span>()),

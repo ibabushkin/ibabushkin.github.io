@@ -917,19 +917,6 @@
 <span id="873">873</span>
 <span id="874">874</span>
 <span id="875">875</span>
-<span id="876">876</span>
-<span id="877">877</span>
-<span id="878">878</span>
-<span id="879">879</span>
-<span id="880">880</span>
-<span id="881">881</span>
-<span id="882">882</span>
-<span id="883">883</span>
-<span id="884">884</span>
-<span id="885">885</span>
-<span id="886">886</span>
-<span id="887">887</span>
-<span id="888">888</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cell</span>::{<span class='ident'>RefCell</span>, <span class='ident'>RefMut</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>collections</span>::{<span class='ident'>HashMap</span>, <span class='ident'>BTreeSet</span>};
@@ -1016,7 +1003,7 @@
     <span class='doccomment'>/// Setup a new client for a specific window, on a set of tags</span>
     <span class='doccomment'>/// and with given properties.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>window</span>: <span class='ident'>Window</span>, <span class='ident'>tags</span>: <span class='ident'>BTreeSet</span><span class='op'>&lt;</span><span class='ident'>Tag</span><span class='op'>&gt;</span>, <span class='ident'>props</span>: <span class='ident'>ClientProps</span>)
-        <span class='op'>-&gt;</span> <span class='ident'>Client</span> {
+            <span class='op'>-&gt;</span> <span class='ident'>Client</span> {
         <span class='ident'>Client</span> {
             <span class='ident'>window</span>: <span class='ident'>window</span>,
             <span class='ident'>props</span>: <span class='ident'>props</span>,
@@ -1095,7 +1082,7 @@
 <span class='kw'>impl</span> <span class='ident'>ClientSet</span> {
     <span class='doccomment'>/// Get a client that corresponds to a given window.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_client_by_window</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>window</span>: <span class='ident'>Window</span>)
-        <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>ClientRef</span><span class='op'>&gt;</span> {
+            <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='ident'>ClientRef</span><span class='op'>&gt;</span> {
         <span class='self'>self</span>.<span class='ident'>clients</span>.<span class='ident'>get</span>(<span class='kw-2'>&amp;</span><span class='ident'>window</span>)
     }
 
@@ -1103,13 +1090,13 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// If not present, create it.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_order_or_insert</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>tags</span>: <span class='kw-2'>&amp;</span><span class='ident'>BTreeSet</span><span class='op'>&lt;</span><span class='ident'>Tag</span><span class='op'>&gt;</span>)
-        <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>OrderEntry</span> {
-        <span class='kw'>let</span> <span class='ident'>clients</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>WeakClientRef</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='self'>self</span>
-            .<span class='ident'>clients</span>
-            .<span class='ident'>values</span>()
-            .<span class='ident'>filter</span>(<span class='op'>|</span><span class='ident'>cl</span><span class='op'>|</span> <span class='ident'>cl</span>.<span class='ident'>borrow</span>().<span class='ident'>match_tags</span>(<span class='ident'>tags</span>))
-            .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>r</span><span class='op'>|</span> <span class='ident'>Rc</span>::<span class='ident'>downgrade</span>(<span class='ident'>r</span>))
-            .<span class='ident'>collect</span>();
+            <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>OrderEntry</span> {
+        <span class='kw'>let</span> <span class='ident'>clients</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>WeakClientRef</span><span class='op'>&gt;</span> <span class='op'>=</span>
+            <span class='self'>self</span>.<span class='ident'>clients</span>
+                .<span class='ident'>values</span>()
+                .<span class='ident'>filter</span>(<span class='op'>|</span><span class='ident'>cl</span><span class='op'>|</span> <span class='ident'>cl</span>.<span class='ident'>borrow</span>().<span class='ident'>match_tags</span>(<span class='ident'>tags</span>))
+                .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>r</span><span class='op'>|</span> <span class='ident'>Rc</span>::<span class='ident'>downgrade</span>(<span class='ident'>r</span>))
+                .<span class='ident'>collect</span>();
         <span class='kw'>let</span> <span class='ident'>focused</span> <span class='op'>=</span> <span class='ident'>clients</span>.<span class='ident'>first</span>().<span class='ident'>cloned</span>();
         <span class='self'>self</span>.<span class='ident'>order</span>.<span class='ident'>entry</span>(<span class='ident'>tags</span>.<span class='ident'>clone</span>()).<span class='ident'>or_insert</span>((<span class='ident'>focused</span>, <span class='ident'>clients</span>))
     }
@@ -1216,14 +1203,14 @@
     <span class='doccomment'>/// Maps the function and updates references as needed, returning a</span>
     <span class='doccomment'>/// window manager command as returned by the passed closure.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>update_client</span><span class='op'>&lt;</span><span class='ident'>F</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>window</span>: <span class='ident'>Window</span>, <span class='ident'>func</span>: <span class='ident'>F</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>WmCommand</span><span class='op'>&gt;</span>
-        <span class='kw'>where</span> <span class='ident'>F</span>: <span class='ident'>Fn</span>(<span class='ident'>RefMut</span><span class='op'>&lt;</span><span class='ident'>Client</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>WmCommand</span> {
+            <span class='kw'>where</span> <span class='ident'>F</span>: <span class='ident'>Fn</span>(<span class='ident'>RefMut</span><span class='op'>&lt;</span><span class='ident'>Client</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span> <span class='ident'>WmCommand</span> {
         <span class='kw'>let</span> <span class='ident'>res</span> <span class='op'>=</span> <span class='self'>self</span>
             .<span class='ident'>clients</span>
             .<span class='ident'>get_mut</span>(<span class='kw-2'>&amp;</span><span class='ident'>window</span>)
             .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>c</span><span class='op'>|</span> <span class='ident'>func</span>(<span class='ident'>c</span>.<span class='ident'>borrow_mut</span>()));
 
         <span class='kw'>if</span> <span class='ident'>res</span>.<span class='ident'>is_some</span>() {
-            <span class='kw'>let</span> <span class='ident'>client</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>clients</span>.<span class='ident'>get</span>(<span class='kw-2'>&amp;</span><span class='ident'>window</span>).<span class='ident'>unwrap</span>().<span class='ident'>clone</span>();
+            <span class='kw'>let</span> <span class='ident'>client</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>clients</span>[<span class='kw-2'>&amp;</span><span class='ident'>window</span>].<span class='ident'>clone</span>();
             <span class='self'>self</span>.<span class='ident'>fix_references</span>(<span class='ident'>client</span>);
         }
         <span class='ident'>res</span>
@@ -1241,8 +1228,7 @@
     <span class='doccomment'>/// Focus a window on a set of tags relative to the current</span>
     <span class='doccomment'>/// by index difference, returning whether changes have been made.</span>
     <span class='kw'>fn</span> <span class='ident'>focus_offset</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>tags</span>: <span class='kw-2'>&amp;</span><span class='ident'>BTreeSet</span><span class='op'>&lt;</span><span class='ident'>Tag</span><span class='op'>&gt;</span>, <span class='ident'>offset</span>: <span class='ident'>isize</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-        <span class='kw'>let</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> (<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>current</span>, <span class='kw-2'>ref</span> <span class='ident'>clients</span>) <span class='op'>=</span>
-            <span class='self'>self</span>.<span class='ident'>get_order_or_insert</span>(<span class='ident'>tags</span>);
+        <span class='kw'>let</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> (<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>current</span>, <span class='kw-2'>ref</span> <span class='ident'>clients</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>get_order_or_insert</span>(<span class='ident'>tags</span>);
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>current_window</span>) <span class='op'>=</span> <span class='ident'>current</span>
             .<span class='ident'>clone</span>()
             .<span class='ident'>and_then</span>(<span class='op'>|</span><span class='ident'>c</span><span class='op'>|</span> <span class='ident'>c</span>.<span class='ident'>upgrade</span>())
@@ -1267,12 +1253,11 @@
     <span class='doccomment'>/// Swap with current window on a set of tags relative to the current</span>
     <span class='doccomment'>/// by index difference, returning whether changes have been made.</span>
     <span class='kw'>fn</span> <span class='ident'>swap_offset</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>tags</span>: <span class='kw-2'>&amp;</span><span class='ident'>BTreeSet</span><span class='op'>&lt;</span><span class='ident'>Tag</span><span class='op'>&gt;</span>, <span class='ident'>offset</span>: <span class='ident'>isize</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-        <span class='kw'>let</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> (<span class='kw-2'>ref</span> <span class='ident'>current</span>, <span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>clients</span>) <span class='op'>=</span>
-            <span class='self'>self</span>.<span class='ident'>get_order_or_insert</span>(<span class='ident'>tags</span>);
+        <span class='kw'>let</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> (<span class='kw-2'>ref</span> <span class='ident'>current</span>, <span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>clients</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>get_order_or_insert</span>(<span class='ident'>tags</span>);
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>current_window</span>) <span class='op'>=</span> <span class='ident'>current</span>
-            .<span class='ident'>clone</span>()
-            .<span class='ident'>and_then</span>(<span class='op'>|</span><span class='ident'>c</span><span class='op'>|</span> <span class='ident'>c</span>.<span class='ident'>upgrade</span>())
-            .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>r</span><span class='op'>|</span> <span class='ident'>r</span>.<span class='ident'>borrow</span>().<span class='ident'>window</span>) {
+                .<span class='ident'>clone</span>()
+                .<span class='ident'>and_then</span>(<span class='op'>|</span><span class='ident'>c</span><span class='op'>|</span> <span class='ident'>c</span>.<span class='ident'>upgrade</span>())
+                .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>r</span><span class='op'>|</span> <span class='ident'>r</span>.<span class='ident'>borrow</span>().<span class='ident'>window</span>) {
             <span class='kw'>let</span> <span class='ident'>current_index</span> <span class='op'>=</span> <span class='ident'>clients</span>
                 .<span class='ident'>iter</span>()
                 .<span class='ident'>position</span>(<span class='op'>|</span><span class='ident'>client</span><span class='op'>|</span> <span class='ident'>client</span>
@@ -1280,8 +1265,7 @@
                     .<span class='ident'>map_or</span>(<span class='bool-val'>false</span>, <span class='op'>|</span><span class='ident'>r</span><span class='op'>|</span> <span class='ident'>r</span>.<span class='ident'>borrow</span>().<span class='ident'>window</span> <span class='op'>==</span> <span class='ident'>current_window</span>)
                 )
                 .<span class='ident'>unwrap</span>();
-            <span class='kw'>let</span> <span class='ident'>new_index</span> <span class='op'>=</span>
-                (<span class='ident'>current_index</span> <span class='kw'>as</span> <span class='ident'>isize</span> <span class='op'>+</span> <span class='ident'>offset</span>) <span class='kw'>as</span> <span class='ident'>usize</span> <span class='op'>%</span> <span class='ident'>clients</span>.<span class='ident'>len</span>();
+            <span class='kw'>let</span> <span class='ident'>new_index</span> <span class='op'>=</span> (<span class='ident'>current_index</span> <span class='kw'>as</span> <span class='ident'>isize</span> <span class='op'>+</span> <span class='ident'>offset</span>) <span class='kw'>as</span> <span class='ident'>usize</span> <span class='op'>%</span> <span class='ident'>clients</span>.<span class='ident'>len</span>();
             <span class='kw'>if</span> <span class='ident'>new_index</span> <span class='op'>!=</span> <span class='ident'>current_index</span> {
                 <span class='ident'>clients</span>.<span class='ident'>swap</span>(<span class='ident'>current_index</span>, <span class='ident'>new_index</span>);
                 <span class='bool-val'>true</span>
@@ -1316,13 +1300,13 @@
     <span class='doccomment'>/// Focus a window on a set of tags relative to the current by direction,</span>
     <span class='doccomment'>/// returning whether changes have been made.</span>
     <span class='kw'>fn</span> <span class='ident'>focus_direction</span><span class='op'>&lt;</span><span class='ident'>F</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>tags</span>: <span class='kw-2'>&amp;</span><span class='ident'>BTreeSet</span><span class='op'>&lt;</span><span class='ident'>Tag</span><span class='op'>&gt;</span>, <span class='ident'>focus_func</span>: <span class='ident'>F</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span>
-        <span class='kw'>where</span> <span class='ident'>F</span>: <span class='ident'>Fn</span>(<span class='ident'>usize</span>, <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span> {
+            <span class='kw'>where</span> <span class='ident'>F</span>: <span class='ident'>Fn</span>(<span class='ident'>usize</span>, <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> (<span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>current</span>, <span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>clients</span>) <span class='op'>=</span>
             <span class='self'>self</span>.<span class='ident'>get_order_or_insert</span>(<span class='ident'>tags</span>);
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>current_window</span>) <span class='op'>=</span> <span class='ident'>current</span>
-            .<span class='ident'>clone</span>()
-            .<span class='ident'>and_then</span>(<span class='op'>|</span><span class='ident'>c</span><span class='op'>|</span> <span class='ident'>c</span>.<span class='ident'>upgrade</span>())
-            .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>r</span><span class='op'>|</span> <span class='ident'>r</span>.<span class='ident'>borrow</span>().<span class='ident'>window</span>) {
+                .<span class='ident'>clone</span>()
+                .<span class='ident'>and_then</span>(<span class='op'>|</span><span class='ident'>c</span><span class='op'>|</span> <span class='ident'>c</span>.<span class='ident'>upgrade</span>())
+                .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>r</span><span class='op'>|</span> <span class='ident'>r</span>.<span class='ident'>borrow</span>().<span class='ident'>window</span>) {
             <span class='kw'>let</span> <span class='ident'>current_index</span> <span class='op'>=</span> <span class='ident'>clients</span>
                 .<span class='ident'>iter</span>()
                 .<span class='ident'>position</span>(<span class='op'>|</span><span class='ident'>client</span><span class='op'>|</span> <span class='ident'>client</span>
@@ -1330,8 +1314,7 @@
                     .<span class='ident'>map_or</span>(<span class='bool-val'>false</span>, <span class='op'>|</span><span class='ident'>r</span><span class='op'>|</span> <span class='ident'>r</span>.<span class='ident'>borrow</span>().<span class='ident'>window</span> <span class='op'>==</span> <span class='ident'>current_window</span>)
                 )
                 .<span class='ident'>unwrap</span>();
-            <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>new_index</span>) <span class='op'>=</span>
-                <span class='ident'>focus_func</span>(<span class='ident'>current_index</span>, <span class='ident'>clients</span>.<span class='ident'>len</span>() <span class='op'>-</span> <span class='number'>1</span>) {
+            <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>new_index</span>) <span class='op'>=</span> <span class='ident'>focus_func</span>(<span class='ident'>current_index</span>, <span class='ident'>clients</span>.<span class='ident'>len</span>() <span class='op'>-</span> <span class='number'>1</span>) {
                 <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>new_client</span>) <span class='op'>=</span> <span class='ident'>clients</span>.<span class='ident'>get</span>(<span class='ident'>new_index</span>) {
                     <span class='op'>*</span><span class='ident'>current</span> <span class='op'>=</span> <span class='prelude-val'>Some</span>(<span class='ident'>new_client</span>.<span class='ident'>clone</span>());
                     <span class='kw'>return</span> <span class='bool-val'>true</span>;
@@ -1344,7 +1327,7 @@
     <span class='doccomment'>/// Swap with window on a set of tags relative to the current by direction,</span>
     <span class='doccomment'>/// returning whether changes have been made.</span>
     <span class='kw'>fn</span> <span class='ident'>swap_direction</span><span class='op'>&lt;</span><span class='ident'>F</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>tags</span>: <span class='kw-2'>&amp;</span><span class='ident'>BTreeSet</span><span class='op'>&lt;</span><span class='ident'>Tag</span><span class='op'>&gt;</span>, <span class='ident'>focus_func</span>: <span class='ident'>F</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span>
-        <span class='kw'>where</span> <span class='ident'>F</span>: <span class='ident'>Fn</span>(<span class='ident'>usize</span>, <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span> {
+            <span class='kw'>where</span> <span class='ident'>F</span>: <span class='ident'>Fn</span>(<span class='ident'>usize</span>, <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span> {
         <span class='kw'>let</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> (<span class='kw-2'>ref</span> <span class='ident'>current</span>, <span class='kw-2'>ref</span> <span class='kw-2'>mut</span> <span class='ident'>clients</span>) <span class='op'>=</span>
             <span class='self'>self</span>.<span class='ident'>get_order_or_insert</span>(<span class='ident'>tags</span>);
         <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>current_window</span>) <span class='op'>=</span> <span class='ident'>current</span>
@@ -1358,8 +1341,7 @@
                     .<span class='ident'>map_or</span>(<span class='bool-val'>false</span>, <span class='op'>|</span><span class='ident'>r</span><span class='op'>|</span> <span class='ident'>r</span>.<span class='ident'>borrow</span>().<span class='ident'>window</span> <span class='op'>==</span> <span class='ident'>current_window</span>)
                 )
                 .<span class='ident'>unwrap</span>();
-            <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>new_index</span>) <span class='op'>=</span>
-                <span class='ident'>focus_func</span>(<span class='ident'>current_index</span>, <span class='ident'>clients</span>.<span class='ident'>len</span>() <span class='op'>-</span> <span class='number'>1</span>) {
+            <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>new_index</span>) <span class='op'>=</span> <span class='ident'>focus_func</span>(<span class='ident'>current_index</span>, <span class='ident'>clients</span>.<span class='ident'>len</span>() <span class='op'>-</span> <span class='number'>1</span>) {
                 <span class='kw'>if</span> <span class='ident'>new_index</span> <span class='op'>!=</span> <span class='ident'>current_index</span> <span class='op'>&amp;&amp;</span> <span class='ident'>new_index</span> <span class='op'>&lt;</span> <span class='ident'>clients</span>.<span class='ident'>len</span>() {
                     <span class='ident'>clients</span>.<span class='ident'>swap</span>(<span class='ident'>current_index</span>, <span class='ident'>new_index</span>);
                     <span class='kw'>return</span> <span class='bool-val'>true</span>;
@@ -1372,55 +1354,47 @@
     <span class='doccomment'>/// Focus the window to the right, returning whether changes have been</span>
     <span class='doccomment'>/// made.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>focus_right</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>tagset</span>: <span class='kw-2'>&amp;</span><span class='ident'>TagSet</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-        <span class='self'>self</span>.<span class='ident'>focus_direction</span>(<span class='kw-2'>&amp;</span><span class='ident'>tagset</span>.<span class='ident'>tags</span>,
-                             <span class='op'>|</span><span class='ident'>i</span>, <span class='ident'>m</span><span class='op'>|</span> <span class='ident'>tagset</span>.<span class='ident'>layout</span>.<span class='ident'>right_window</span>(<span class='ident'>i</span>, <span class='ident'>m</span>))
+        <span class='self'>self</span>.<span class='ident'>focus_direction</span>(<span class='kw-2'>&amp;</span><span class='ident'>tagset</span>.<span class='ident'>tags</span>, <span class='op'>|</span><span class='ident'>i</span>, <span class='ident'>m</span><span class='op'>|</span> <span class='ident'>tagset</span>.<span class='ident'>layout</span>.<span class='ident'>right_window</span>(<span class='ident'>i</span>, <span class='ident'>m</span>))
     }
 
     <span class='doccomment'>/// Swap with the window to the right, returning whether changes have been</span>
     <span class='doccomment'>/// made.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>swap_right</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>tagset</span>: <span class='kw-2'>&amp;</span><span class='ident'>TagSet</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-        <span class='self'>self</span>.<span class='ident'>swap_direction</span>(<span class='kw-2'>&amp;</span><span class='ident'>tagset</span>.<span class='ident'>tags</span>,
-                            <span class='op'>|</span><span class='ident'>i</span>, <span class='ident'>m</span><span class='op'>|</span> <span class='ident'>tagset</span>.<span class='ident'>layout</span>.<span class='ident'>right_window</span>(<span class='ident'>i</span>, <span class='ident'>m</span>))
+        <span class='self'>self</span>.<span class='ident'>swap_direction</span>(<span class='kw-2'>&amp;</span><span class='ident'>tagset</span>.<span class='ident'>tags</span>, <span class='op'>|</span><span class='ident'>i</span>, <span class='ident'>m</span><span class='op'>|</span> <span class='ident'>tagset</span>.<span class='ident'>layout</span>.<span class='ident'>right_window</span>(<span class='ident'>i</span>, <span class='ident'>m</span>))
     }
 
     <span class='doccomment'>/// Focus the window to the left, returning whether changes have been made.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>focus_left</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>tagset</span>: <span class='kw-2'>&amp;</span><span class='ident'>TagSet</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-        <span class='self'>self</span>.<span class='ident'>focus_direction</span>(<span class='kw-2'>&amp;</span><span class='ident'>tagset</span>.<span class='ident'>tags</span>,
-                             <span class='op'>|</span><span class='ident'>i</span>, <span class='ident'>m</span><span class='op'>|</span> <span class='ident'>tagset</span>.<span class='ident'>layout</span>.<span class='ident'>left_window</span>(<span class='ident'>i</span>, <span class='ident'>m</span>))
+        <span class='self'>self</span>.<span class='ident'>focus_direction</span>(<span class='kw-2'>&amp;</span><span class='ident'>tagset</span>.<span class='ident'>tags</span>, <span class='op'>|</span><span class='ident'>i</span>, <span class='ident'>m</span><span class='op'>|</span> <span class='ident'>tagset</span>.<span class='ident'>layout</span>.<span class='ident'>left_window</span>(<span class='ident'>i</span>, <span class='ident'>m</span>))
     }
 
     <span class='doccomment'>/// Swap with the window to the left, returning whether changes have been</span>
     <span class='doccomment'>/// made.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>swap_left</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>tagset</span>: <span class='kw-2'>&amp;</span><span class='ident'>TagSet</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-        <span class='self'>self</span>.<span class='ident'>swap_direction</span>(<span class='kw-2'>&amp;</span><span class='ident'>tagset</span>.<span class='ident'>tags</span>,
-                            <span class='op'>|</span><span class='ident'>i</span>, <span class='ident'>m</span><span class='op'>|</span> <span class='ident'>tagset</span>.<span class='ident'>layout</span>.<span class='ident'>left_window</span>(<span class='ident'>i</span>, <span class='ident'>m</span>))
+        <span class='self'>self</span>.<span class='ident'>swap_direction</span>(<span class='kw-2'>&amp;</span><span class='ident'>tagset</span>.<span class='ident'>tags</span>, <span class='op'>|</span><span class='ident'>i</span>, <span class='ident'>m</span><span class='op'>|</span> <span class='ident'>tagset</span>.<span class='ident'>layout</span>.<span class='ident'>left_window</span>(<span class='ident'>i</span>, <span class='ident'>m</span>))
     }
 
     <span class='doccomment'>/// Focus the window to the top, returning whether changes have been made.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>focus_top</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>tagset</span>: <span class='kw-2'>&amp;</span><span class='ident'>TagSet</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-        <span class='self'>self</span>.<span class='ident'>focus_direction</span>(<span class='kw-2'>&amp;</span><span class='ident'>tagset</span>.<span class='ident'>tags</span>,
-                             <span class='op'>|</span><span class='ident'>i</span>, <span class='ident'>m</span><span class='op'>|</span> <span class='ident'>tagset</span>.<span class='ident'>layout</span>.<span class='ident'>top_window</span>(<span class='ident'>i</span>, <span class='ident'>m</span>))
+        <span class='self'>self</span>.<span class='ident'>focus_direction</span>(<span class='kw-2'>&amp;</span><span class='ident'>tagset</span>.<span class='ident'>tags</span>, <span class='op'>|</span><span class='ident'>i</span>, <span class='ident'>m</span><span class='op'>|</span> <span class='ident'>tagset</span>.<span class='ident'>layout</span>.<span class='ident'>top_window</span>(<span class='ident'>i</span>, <span class='ident'>m</span>))
     }
 
     <span class='doccomment'>/// Swap with the window to the left, returning whether changes have been</span>
     <span class='doccomment'>/// made.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>swap_top</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>tagset</span>: <span class='kw-2'>&amp;</span><span class='ident'>TagSet</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-        <span class='self'>self</span>.<span class='ident'>swap_direction</span>(<span class='kw-2'>&amp;</span><span class='ident'>tagset</span>.<span class='ident'>tags</span>,
-                            <span class='op'>|</span><span class='ident'>i</span>, <span class='ident'>m</span><span class='op'>|</span> <span class='ident'>tagset</span>.<span class='ident'>layout</span>.<span class='ident'>top_window</span>(<span class='ident'>i</span>, <span class='ident'>m</span>))
+        <span class='self'>self</span>.<span class='ident'>swap_direction</span>(<span class='kw-2'>&amp;</span><span class='ident'>tagset</span>.<span class='ident'>tags</span>, <span class='op'>|</span><span class='ident'>i</span>, <span class='ident'>m</span><span class='op'>|</span> <span class='ident'>tagset</span>.<span class='ident'>layout</span>.<span class='ident'>top_window</span>(<span class='ident'>i</span>, <span class='ident'>m</span>))
     }
 
     <span class='doccomment'>/// Focus the window to the bottom, returning whether changes have been</span>
     <span class='doccomment'>/// made.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>focus_bottom</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>tagset</span>: <span class='kw-2'>&amp;</span><span class='ident'>TagSet</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-        <span class='self'>self</span>.<span class='ident'>focus_direction</span>(<span class='kw-2'>&amp;</span><span class='ident'>tagset</span>.<span class='ident'>tags</span>,
-                             <span class='op'>|</span><span class='ident'>i</span>, <span class='ident'>m</span><span class='op'>|</span> <span class='ident'>tagset</span>.<span class='ident'>layout</span>.<span class='ident'>bottom_window</span>(<span class='ident'>i</span>, <span class='ident'>m</span>))
+        <span class='self'>self</span>.<span class='ident'>focus_direction</span>(<span class='kw-2'>&amp;</span><span class='ident'>tagset</span>.<span class='ident'>tags</span>, <span class='op'>|</span><span class='ident'>i</span>, <span class='ident'>m</span><span class='op'>|</span> <span class='ident'>tagset</span>.<span class='ident'>layout</span>.<span class='ident'>bottom_window</span>(<span class='ident'>i</span>, <span class='ident'>m</span>))
     }
 
     <span class='doccomment'>/// Swap with the window to the left, returning whether changes have been</span>
     <span class='doccomment'>/// made.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>swap_bottom</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>tagset</span>: <span class='kw-2'>&amp;</span><span class='ident'>TagSet</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-        <span class='self'>self</span>.<span class='ident'>swap_direction</span>(<span class='kw-2'>&amp;</span><span class='ident'>tagset</span>.<span class='ident'>tags</span>,
-                            <span class='op'>|</span><span class='ident'>i</span>, <span class='ident'>m</span><span class='op'>|</span> <span class='ident'>tagset</span>.<span class='ident'>layout</span>.<span class='ident'>bottom_window</span>(<span class='ident'>i</span>, <span class='ident'>m</span>))
+        <span class='self'>self</span>.<span class='ident'>swap_direction</span>(<span class='kw-2'>&amp;</span><span class='ident'>tagset</span>.<span class='ident'>tags</span>, <span class='op'>|</span><span class='ident'>i</span>, <span class='ident'>m</span><span class='op'>|</span> <span class='ident'>tagset</span>.<span class='ident'>layout</span>.<span class='ident'>bottom_window</span>(<span class='ident'>i</span>, <span class='ident'>m</span>))
     }
 
     <span class='doccomment'>/// Swap with the master window, returning whether changes have been made.</span>
@@ -1519,6 +1493,7 @@
         } <span class='kw'>else</span> {
             <span class='ident'>Vec</span>::<span class='ident'>new</span>()
         };
+
         <span class='ident'>TagStack</span> {
             <span class='ident'>tagsets</span>: <span class='ident'>tagsets</span>,
             <span class='ident'>hidden</span>: <span class='ident'>BTreeSet</span>::<span class='ident'>new</span>(),
@@ -1546,8 +1521,7 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Returns `None` if the history stack is empty</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>current_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>TagSet</span><span class='op'>&gt;</span> {
-        <span class='kw'>let</span> <span class='ident'>index</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>history</span>.<span class='ident'>last</span>();
-        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>i</span>) <span class='op'>=</span> <span class='ident'>index</span> {
+        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>i</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>history</span>.<span class='ident'>last</span>() {
             <span class='self'>self</span>.<span class='ident'>tagsets</span>.<span class='ident'>get_mut</span>(<span class='ident'>i</span>)
         } <span class='kw'>else</span> {
             <span class='prelude-val'>None</span>

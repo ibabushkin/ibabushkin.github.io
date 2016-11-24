@@ -48,7 +48,8 @@
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a id='src-3687' class='srclink' href='../src/libc/macros.rs.html#42' title='goto source code'>[src]</a></span></h1>
-<pre class='rust struct'>pub struct _libc_fpxreg {
+<pre class='rust struct'><div class="docblock attributes">#[repr(C)]
+</div>pub struct _libc_fpxreg {
     pub significand: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 4]</a>,
     pub exponent: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>,
     // some fields omitted

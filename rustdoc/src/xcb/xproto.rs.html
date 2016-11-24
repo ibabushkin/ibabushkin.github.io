@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/twk/.multirust/toolchains/nightly/cargo/registry/src/github.com-1ecc6299db9ec823/xcb-0.7.6/src/xproto.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/twk/.cargo/registry/src/github.com-1ecc6299db9ec823/xcb-0.7.6/src/xproto.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>xproto.rs.html -- source</title>
@@ -13333,7 +13333,7 @@
 <span id="13289">13289</span>
 <span id="13290">13290</span>
 </pre><pre class='rust '>
-<span class='comment'>// Generated automatically from xproto.xml by rs_client.py on Mon Nov 14 19:55:29 2016.</span>
+<span class='comment'>// Generated automatically from xproto.xml by rs_client.py on Thu Dec  1 16:59:58 2016.</span>
 <span class='comment'>// Do not edit!</span>
 
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allow</span>(<span class='ident'>unused_unsafe</span>)]</span>
@@ -15108,8 +15108,8 @@
     }
     <span class='doccomment'>/// Constructs a new KeyPressEvent</span>
     <span class='doccomment'>/// `response_type` must be set to one of:</span>
-    <span class='doccomment'>///     - `KEY_PRESS`</span>
     <span class='doccomment'>///     - `KEY_RELEASE`</span>
+    <span class='doccomment'>///     - `KEY_PRESS`</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>response_type</span>: <span class='ident'>u8</span>,
                <span class='ident'>detail</span>: <span class='ident'>Keycode</span>,
                <span class='ident'>time</span>: <span class='ident'>Timestamp</span>,
@@ -15125,8 +15125,8 @@
             <span class='op'>-&gt;</span> <span class='ident'>KeyPressEvent</span> {
         <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>raw</span> <span class='op'>=</span> <span class='ident'>libc</span>::<span class='ident'>malloc</span>(<span class='number'>32</span> <span class='kw'>as</span> <span class='ident'>usize</span>) <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_key_press_event_t</span>;
-            <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>KEY_PRESS</span> <span class='op'>||</span>
-                    <span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>KEY_RELEASE</span>,
+            <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>KEY_RELEASE</span> <span class='op'>||</span>
+                    <span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>KEY_PRESS</span>,
                     <span class='string'>&quot;wrong response_type supplied to KeyPressEvent::new&quot;</span>);
             (<span class='op'>*</span><span class='ident'>raw</span>).<span class='ident'>response_type</span> <span class='op'>=</span> <span class='ident'>response_type</span>;
             (<span class='op'>*</span><span class='ident'>raw</span>).<span class='ident'>detail</span> <span class='op'>=</span> <span class='ident'>detail</span>;
@@ -15230,8 +15230,8 @@
     }
     <span class='doccomment'>/// Constructs a new ButtonPressEvent</span>
     <span class='doccomment'>/// `response_type` must be set to one of:</span>
-    <span class='doccomment'>///     - `BUTTON_PRESS`</span>
     <span class='doccomment'>///     - `BUTTON_RELEASE`</span>
+    <span class='doccomment'>///     - `BUTTON_PRESS`</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>response_type</span>: <span class='ident'>u8</span>,
                <span class='ident'>detail</span>: <span class='ident'>Button</span>,
                <span class='ident'>time</span>: <span class='ident'>Timestamp</span>,
@@ -15247,8 +15247,8 @@
             <span class='op'>-&gt;</span> <span class='ident'>ButtonPressEvent</span> {
         <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>raw</span> <span class='op'>=</span> <span class='ident'>libc</span>::<span class='ident'>malloc</span>(<span class='number'>32</span> <span class='kw'>as</span> <span class='ident'>usize</span>) <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_button_press_event_t</span>;
-            <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>BUTTON_PRESS</span> <span class='op'>||</span>
-                    <span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>BUTTON_RELEASE</span>,
+            <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>BUTTON_RELEASE</span> <span class='op'>||</span>
+                    <span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>BUTTON_PRESS</span>,
                     <span class='string'>&quot;wrong response_type supplied to ButtonPressEvent::new&quot;</span>);
             (<span class='op'>*</span><span class='ident'>raw</span>).<span class='ident'>response_type</span> <span class='op'>=</span> <span class='ident'>response_type</span>;
             (<span class='op'>*</span><span class='ident'>raw</span>).<span class='ident'>detail</span> <span class='op'>=</span> <span class='ident'>detail</span>;
@@ -16397,8 +16397,8 @@
     }
     <span class='doccomment'>/// Constructs a new CirculateNotifyEvent</span>
     <span class='doccomment'>/// `response_type` must be set to one of:</span>
-    <span class='doccomment'>///     - `CIRCULATE_NOTIFY`</span>
     <span class='doccomment'>///     - `CIRCULATE_REQUEST`</span>
+    <span class='doccomment'>///     - `CIRCULATE_NOTIFY`</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>response_type</span>: <span class='ident'>u8</span>,
                <span class='ident'>event</span>: <span class='ident'>Window</span>,
                <span class='ident'>window</span>: <span class='ident'>Window</span>,
@@ -16406,8 +16406,8 @@
             <span class='op'>-&gt;</span> <span class='ident'>CirculateNotifyEvent</span> {
         <span class='kw'>unsafe</span> {
             <span class='kw'>let</span> <span class='ident'>raw</span> <span class='op'>=</span> <span class='ident'>libc</span>::<span class='ident'>malloc</span>(<span class='number'>32</span> <span class='kw'>as</span> <span class='ident'>usize</span>) <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_circulate_notify_event_t</span>;
-            <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>CIRCULATE_NOTIFY</span> <span class='op'>||</span>
-                    <span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>CIRCULATE_REQUEST</span>,
+            <span class='macro'>assert</span><span class='macro'>!</span>(<span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>CIRCULATE_REQUEST</span> <span class='op'>||</span>
+                    <span class='ident'>response_type</span> <span class='op'>==</span> <span class='ident'>CIRCULATE_NOTIFY</span>,
                     <span class='string'>&quot;wrong response_type supplied to CirculateNotifyEvent::new&quot;</span>);
             (<span class='op'>*</span><span class='ident'>raw</span>).<span class='ident'>response_type</span> <span class='op'>=</span> <span class='ident'>response_type</span>;
             (<span class='op'>*</span><span class='ident'>raw</span>).<span class='ident'>event</span> <span class='op'>=</span> <span class='ident'>event</span>;
