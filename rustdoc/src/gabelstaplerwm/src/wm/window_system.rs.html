@@ -1665,16 +1665,16 @@
                     .<span class='ident'>position</span>(<span class='op'>|</span><span class='ident'>win</span><span class='op'>|</span> <span class='op'>*</span><span class='ident'>win</span> <span class='op'>==</span> <span class='ident'>window</span>) {
                 <span class='self'>self</span>.<span class='ident'>visible_windows</span>.<span class='ident'>swap_remove</span>(<span class='ident'>index</span>);
                 <span class='self'>self</span>.<span class='ident'>arrange_windows</span>();
-                <span class='self'>self</span>.<span class='ident'>reset_focus</span>(<span class='bool-val'>true</span>);
-            } <span class='kw'>else</span> {
-                <span class='self'>self</span>.<span class='ident'>reset_focus</span>(<span class='bool-val'>true</span>);
             }
+            <span class='self'>self</span>.<span class='ident'>reset_focus</span>(<span class='bool-val'>true</span>);
         } <span class='kw'>else</span> <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Some</span>(<span class='ident'>index</span>) <span class='op'>=</span> <span class='self'>self</span>
                 .<span class='ident'>unmanaged_windows</span>
                 .<span class='ident'>iter</span>()
                 .<span class='ident'>position</span>(<span class='op'>|</span><span class='ident'>win</span><span class='op'>|</span> <span class='op'>*</span><span class='ident'>win</span> <span class='op'>==</span> <span class='ident'>window</span>) {
             <span class='self'>self</span>.<span class='ident'>unmanaged_windows</span>.<span class='ident'>swap_remove</span>(<span class='ident'>index</span>);
             <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;unregistered unmanaged window&quot;</span>);
+            <span class='self'>self</span>.<span class='ident'>reset_focus</span>(<span class='bool-val'>false</span>);
+        } <span class='kw'>else</span> {
             <span class='self'>self</span>.<span class='ident'>reset_focus</span>(<span class='bool-val'>false</span>);
         }
     }
