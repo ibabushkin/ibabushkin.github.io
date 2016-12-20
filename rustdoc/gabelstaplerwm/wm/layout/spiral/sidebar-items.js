@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Spiral",""]]});
+initSidebarItems({"struct":[["Spiral","Spiral layout."]]});

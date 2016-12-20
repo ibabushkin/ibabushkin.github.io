@@ -50,6 +50,7 @@
                </span><a class='srclink' href='../../../src/gabelstaplerwm/wm/client.rs.html#73-80' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Client {
     pub window: <a class='type' href='../../../xcb/xproto/type.Window.html' title='xcb::xproto::Window'>Window</a>,
+    pub props: <a class='struct' href='../../../gabelstaplerwm/wm/client/struct.ClientProps.html' title='gabelstaplerwm::wm::client::ClientProps'>ClientProps</a>,
     // some fields omitted
 }</pre><div class='docblock'><p>A client wrapping a window.</p>
 
@@ -65,6 +66,10 @@ an interpreting layer for the window manager.</p>
                            <span id='window.v' class='invisible'>
                            <code>window: <a class='type' href='../../../xcb/xproto/type.Window.html' title='xcb::xproto::Window'>Window</a></code>
                            </span></span><span class='stab '></span><div class='docblock'><p>the window (a direct child of root)</p>
+</div><span id='structfield.props' class='structfield'>
+                           <span id='props.v' class='invisible'>
+                           <code>props: <a class='struct' href='../../../gabelstaplerwm/wm/client/struct.ClientProps.html' title='gabelstaplerwm::wm::client::ClientProps'>ClientProps</a></code>
+                           </span></span><span class='stab '></span><div class='docblock'><p>client properties</p>
 </div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../../../gabelstaplerwm/wm/client/struct.Client.html' title='gabelstaplerwm::wm::client::Client'>Client</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/gabelstaplerwm/wm/client.rs.html#82-125' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.new' class='method'><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>(window: <a class='type' href='../../../xcb/xproto/type.Window.html' title='xcb::xproto::Window'>Window</a>, tags: <a class='struct' href='https://doc.rust-lang.org/nightly/collections/btree/set/struct.BTreeSet.html' title='collections::btree::set::BTreeSet'>BTreeSet</a>&lt;<a class='enum' href='../../../gabelstaplerwm/wm/config/enum.Tag.html' title='gabelstaplerwm::wm::config::Tag'>Tag</a>&gt;, props: <a class='struct' href='../../../gabelstaplerwm/wm/client/struct.ClientProps.html' title='gabelstaplerwm::wm::client::ClientProps'>ClientProps</a>) -&gt; <a class='struct' href='../../../gabelstaplerwm/wm/client/struct.Client.html' title='gabelstaplerwm::wm::client::Client'>Client</a></code></span></h4>
 <div class='docblock'><p>Setup a new client for a specific window, on a set of tags
