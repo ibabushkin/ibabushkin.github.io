@@ -50,3 +50,8 @@ EndSection
 ```
 And - oh wonder - it works. It works not. You know what I mean, right?
 That's it for now - useless article on trivial stuff over.
+
+## Update (January 2017) 
+Since Arch Linux seemingly replaced `evdev` with `libinput` in all cases, you need
+to adjust the instructions above for a config file with similar content and `libinput`
+in it's name. The syntax and semantics remain the same, however.
