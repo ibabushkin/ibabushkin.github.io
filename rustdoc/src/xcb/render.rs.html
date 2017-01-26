@@ -2817,9 +2817,9 @@
 
 <span class='kw'>use</span> <span class='ident'>base</span>;
 <span class='kw'>use</span> <span class='ident'>xproto</span>;
-<span class='kw'>use</span> <span class='ident'>ffi</span>::<span class='ident'>base</span>::<span class='op'>*</span>;
-<span class='kw'>use</span> <span class='ident'>ffi</span>::<span class='ident'>render</span>::<span class='op'>*</span>;
-<span class='kw'>use</span> <span class='ident'>ffi</span>::<span class='ident'>xproto</span>::<span class='op'>*</span>;
+<span class='kw'>use</span> <span class='ident'>ffi</span>::<span class='ident'>base</span>::<span class='kw-2'>*</span>;
+<span class='kw'>use</span> <span class='ident'>ffi</span>::<span class='ident'>render</span>::<span class='kw-2'>*</span>;
+<span class='kw'>use</span> <span class='ident'>ffi</span>::<span class='ident'>xproto</span>::<span class='kw-2'>*</span>;
 <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='self'>self</span>, <span class='ident'>c_char</span>, <span class='ident'>c_int</span>, <span class='ident'>c_uint</span>, <span class='ident'>c_void</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>iter</span>::<span class='ident'>Iterator</span>;
@@ -3056,10 +3056,10 @@
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>rem</span> <span class='op'>==</span> <span class='number'>0</span> { <span class='prelude-val'>None</span> }
         <span class='kw'>else</span> {
             <span class='kw'>unsafe</span> {
-                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_directformat_iterator_t</span>;
-                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='op'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
+                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_directformat_iterator_t</span>;
+                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='kw-2'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
                 <span class='ident'>xcb_render_directformat_next</span>(<span class='ident'>iter</span>);
-                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='op'>*</span><span class='ident'>data</span>))
+                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='kw-2'>*</span><span class='ident'>data</span>))
             }
         }
     }
@@ -3126,10 +3126,10 @@
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>rem</span> <span class='op'>==</span> <span class='number'>0</span> { <span class='prelude-val'>None</span> }
         <span class='kw'>else</span> {
             <span class='kw'>unsafe</span> {
-                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictforminfo_iterator_t</span>;
-                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='op'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
+                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictforminfo_iterator_t</span>;
+                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='kw-2'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
                 <span class='ident'>xcb_render_pictforminfo_next</span>(<span class='ident'>iter</span>);
-                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='op'>*</span><span class='ident'>data</span>))
+                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='kw-2'>*</span><span class='ident'>data</span>))
             }
         }
     }
@@ -3174,10 +3174,10 @@
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>rem</span> <span class='op'>==</span> <span class='number'>0</span> { <span class='prelude-val'>None</span> }
         <span class='kw'>else</span> {
             <span class='kw'>unsafe</span> {
-                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictvisual_iterator_t</span>;
-                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='op'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
+                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictvisual_iterator_t</span>;
+                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='kw-2'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
                 <span class='ident'>xcb_render_pictvisual_next</span>(<span class='ident'>iter</span>);
-                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='op'>*</span><span class='ident'>data</span>))
+                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='kw-2'>*</span><span class='ident'>data</span>))
             }
         }
     }
@@ -3188,12 +3188,12 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Pictdepth</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>depth</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u8</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>depth</span>
+            (<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>depth</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>num_visuals</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u16</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>num_visuals</span>
+            (<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>num_visuals</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>visuals</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>PictvisualIterator</span> {
@@ -3211,8 +3211,8 @@
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>rem</span> <span class='op'>==</span> <span class='number'>0</span> { <span class='prelude-val'>None</span> }
         <span class='kw'>else</span> {
             <span class='kw'>unsafe</span> {
-                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictdepth_iterator_t</span>;
-                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='op'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
+                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictdepth_iterator_t</span>;
+                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='kw-2'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
                 <span class='ident'>xcb_render_pictdepth_next</span>(<span class='ident'>iter</span>);
                 <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='ident'>data</span>))
             }
@@ -3225,12 +3225,12 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>Pictscreen</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>num_depths</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u32</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>num_depths</span>
+            (<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>num_depths</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>fallback</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Pictformat</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>fallback</span>
+            (<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>fallback</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>depths</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>PictdepthIterator</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
@@ -3248,8 +3248,8 @@
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>rem</span> <span class='op'>==</span> <span class='number'>0</span> { <span class='prelude-val'>None</span> }
         <span class='kw'>else</span> {
             <span class='kw'>unsafe</span> {
-                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictscreen_iterator_t</span>;
-                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='op'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
+                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictscreen_iterator_t</span>;
+                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='kw-2'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
                 <span class='ident'>xcb_render_pictscreen_next</span>(<span class='ident'>iter</span>);
                 <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='ident'>data</span>))
             }
@@ -3317,10 +3317,10 @@
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>rem</span> <span class='op'>==</span> <span class='number'>0</span> { <span class='prelude-val'>None</span> }
         <span class='kw'>else</span> {
             <span class='kw'>unsafe</span> {
-                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_indexvalue_iterator_t</span>;
-                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='op'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
+                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_indexvalue_iterator_t</span>;
+                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='kw-2'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
                 <span class='ident'>xcb_render_indexvalue_next</span>(<span class='ident'>iter</span>);
-                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='op'>*</span><span class='ident'>data</span>))
+                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='kw-2'>*</span><span class='ident'>data</span>))
             }
         }
     }
@@ -3379,10 +3379,10 @@
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>rem</span> <span class='op'>==</span> <span class='number'>0</span> { <span class='prelude-val'>None</span> }
         <span class='kw'>else</span> {
             <span class='kw'>unsafe</span> {
-                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_color_iterator_t</span>;
-                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='op'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
+                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_color_iterator_t</span>;
+                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='kw-2'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
                 <span class='ident'>xcb_render_color_next</span>(<span class='ident'>iter</span>);
-                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='op'>*</span><span class='ident'>data</span>))
+                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='kw-2'>*</span><span class='ident'>data</span>))
             }
         }
     }
@@ -3427,10 +3427,10 @@
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>rem</span> <span class='op'>==</span> <span class='number'>0</span> { <span class='prelude-val'>None</span> }
         <span class='kw'>else</span> {
             <span class='kw'>unsafe</span> {
-                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pointfix_iterator_t</span>;
-                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='op'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
+                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pointfix_iterator_t</span>;
+                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='kw-2'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
                 <span class='ident'>xcb_render_pointfix_next</span>(<span class='ident'>iter</span>);
-                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='op'>*</span><span class='ident'>data</span>))
+                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='kw-2'>*</span><span class='ident'>data</span>))
             }
         }
     }
@@ -3475,10 +3475,10 @@
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>rem</span> <span class='op'>==</span> <span class='number'>0</span> { <span class='prelude-val'>None</span> }
         <span class='kw'>else</span> {
             <span class='kw'>unsafe</span> {
-                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_linefix_iterator_t</span>;
-                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='op'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
+                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_linefix_iterator_t</span>;
+                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='kw-2'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
                 <span class='ident'>xcb_render_linefix_next</span>(<span class='ident'>iter</span>);
-                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='op'>*</span><span class='ident'>data</span>))
+                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='kw-2'>*</span><span class='ident'>data</span>))
             }
         }
     }
@@ -3530,10 +3530,10 @@
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>rem</span> <span class='op'>==</span> <span class='number'>0</span> { <span class='prelude-val'>None</span> }
         <span class='kw'>else</span> {
             <span class='kw'>unsafe</span> {
-                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_triangle_iterator_t</span>;
-                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='op'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
+                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_triangle_iterator_t</span>;
+                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='kw-2'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
                 <span class='ident'>xcb_render_triangle_next</span>(<span class='ident'>iter</span>);
-                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='op'>*</span><span class='ident'>data</span>))
+                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='kw-2'>*</span><span class='ident'>data</span>))
             }
         }
     }
@@ -3592,10 +3592,10 @@
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>rem</span> <span class='op'>==</span> <span class='number'>0</span> { <span class='prelude-val'>None</span> }
         <span class='kw'>else</span> {
             <span class='kw'>unsafe</span> {
-                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_trapezoid_iterator_t</span>;
-                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='op'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
+                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_trapezoid_iterator_t</span>;
+                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='kw-2'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
                 <span class='ident'>xcb_render_trapezoid_next</span>(<span class='ident'>iter</span>);
-                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='op'>*</span><span class='ident'>data</span>))
+                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='kw-2'>*</span><span class='ident'>data</span>))
             }
         }
     }
@@ -3668,10 +3668,10 @@
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>rem</span> <span class='op'>==</span> <span class='number'>0</span> { <span class='prelude-val'>None</span> }
         <span class='kw'>else</span> {
             <span class='kw'>unsafe</span> {
-                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_glyphinfo_iterator_t</span>;
-                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='op'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
+                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_glyphinfo_iterator_t</span>;
+                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='kw-2'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
                 <span class='ident'>xcb_render_glyphinfo_next</span>(<span class='ident'>iter</span>);
-                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='op'>*</span><span class='ident'>data</span>))
+                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='kw-2'>*</span><span class='ident'>data</span>))
             }
         }
     }
@@ -3685,7 +3685,7 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_reply</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>QueryVersionReply</span>, <span class='ident'>base</span>::<span class='ident'>GenericError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
             <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>checked</span> {
-                <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>err</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span> <span class='op'>=</span> <span class='ident'>std</span>::<span class='ident'>ptr</span>::<span class='ident'>null_mut</span>();
+                <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>err</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span> <span class='op'>=</span> <span class='ident'>std</span>::<span class='ident'>ptr</span>::<span class='ident'>null_mut</span>();
                 <span class='kw'>let</span> <span class='ident'>reply</span> <span class='op'>=</span> <span class='ident'>QueryVersionReply</span> {
                     <span class='ident'>ptr</span>: <span class='ident'>xcb_render_query_version_reply</span> (<span class='self'>self</span>.<span class='ident'>conn</span>.<span class='ident'>get_raw_conn</span>(), <span class='self'>self</span>.<span class='ident'>cookie</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>err</span>)
                 };
@@ -3706,12 +3706,12 @@
 <span class='kw'>impl</span> <span class='ident'>QueryVersionReply</span> {
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>major_version</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u32</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>major_version</span>
+            (<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>major_version</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>minor_version</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u32</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>minor_version</span>
+            (<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>minor_version</span>
         }
     }
 }
@@ -3756,7 +3756,7 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_reply</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>QueryPictFormatsReply</span>, <span class='ident'>base</span>::<span class='ident'>GenericError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
             <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>checked</span> {
-                <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>err</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span> <span class='op'>=</span> <span class='ident'>std</span>::<span class='ident'>ptr</span>::<span class='ident'>null_mut</span>();
+                <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>err</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span> <span class='op'>=</span> <span class='ident'>std</span>::<span class='ident'>ptr</span>::<span class='ident'>null_mut</span>();
                 <span class='kw'>let</span> <span class='ident'>reply</span> <span class='op'>=</span> <span class='ident'>QueryPictFormatsReply</span> {
                     <span class='ident'>ptr</span>: <span class='ident'>xcb_render_query_pict_formats_reply</span> (<span class='self'>self</span>.<span class='ident'>conn</span>.<span class='ident'>get_raw_conn</span>(), <span class='self'>self</span>.<span class='ident'>cookie</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>err</span>)
                 };
@@ -3777,27 +3777,27 @@
 <span class='kw'>impl</span> <span class='ident'>QueryPictFormatsReply</span> {
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>num_formats</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u32</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>num_formats</span>
+            (<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>num_formats</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>num_screens</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u32</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>num_screens</span>
+            (<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>num_screens</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>num_depths</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u32</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>num_depths</span>
+            (<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>num_depths</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>num_visuals</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u32</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>num_visuals</span>
+            (<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>num_visuals</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>num_subpixel</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u32</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>num_subpixel</span>
+            (<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>num_subpixel</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>formats</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>PictforminfoIterator</span> {
@@ -3852,7 +3852,7 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_reply</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>QueryPictIndexValuesReply</span>, <span class='ident'>base</span>::<span class='ident'>GenericError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
             <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>checked</span> {
-                <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>err</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span> <span class='op'>=</span> <span class='ident'>std</span>::<span class='ident'>ptr</span>::<span class='ident'>null_mut</span>();
+                <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>err</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span> <span class='op'>=</span> <span class='ident'>std</span>::<span class='ident'>ptr</span>::<span class='ident'>null_mut</span>();
                 <span class='kw'>let</span> <span class='ident'>reply</span> <span class='op'>=</span> <span class='ident'>QueryPictIndexValuesReply</span> {
                     <span class='ident'>ptr</span>: <span class='ident'>xcb_render_query_pict_index_values_reply</span> (<span class='self'>self</span>.<span class='ident'>conn</span>.<span class='ident'>get_raw_conn</span>(), <span class='self'>self</span>.<span class='ident'>cookie</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>err</span>)
                 };
@@ -3873,7 +3873,7 @@
 <span class='kw'>impl</span> <span class='ident'>QueryPictIndexValuesReply</span> {
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>num_values</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u32</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>num_values</span>
+            (<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>num_values</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>values</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>IndexvalueIterator</span> {
@@ -3928,7 +3928,7 @@
                                                <span class='ident'>drawable</span> <span class='kw'>as</span> <span class='ident'>xcb_drawable_t</span>,  <span class='comment'>// 1</span>
                                                <span class='ident'>format</span> <span class='kw'>as</span> <span class='ident'>xcb_render_pictformat_t</span>,  <span class='comment'>// 2</span>
                                                <span class='ident'>value_list_mask</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 3</span>
-                                               <span class='ident'>value_list_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>);  <span class='comment'>// 4</span>
+                                               <span class='ident'>value_list_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>);  <span class='comment'>// 4</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -3952,7 +3952,7 @@
                                                        <span class='ident'>drawable</span> <span class='kw'>as</span> <span class='ident'>xcb_drawable_t</span>,  <span class='comment'>// 1</span>
                                                        <span class='ident'>format</span> <span class='kw'>as</span> <span class='ident'>xcb_render_pictformat_t</span>,  <span class='comment'>// 2</span>
                                                        <span class='ident'>value_list_mask</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 3</span>
-                                                       <span class='ident'>value_list_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>);  <span class='comment'>// 4</span>
+                                                       <span class='ident'>value_list_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>);  <span class='comment'>// 4</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -3974,7 +3974,7 @@
         <span class='kw'>let</span> <span class='ident'>cookie</span> <span class='op'>=</span> <span class='ident'>xcb_render_change_picture</span>(<span class='ident'>c</span>.<span class='ident'>get_raw_conn</span>(),
                                                <span class='ident'>picture</span> <span class='kw'>as</span> <span class='ident'>xcb_render_picture_t</span>,  <span class='comment'>// 0</span>
                                                <span class='ident'>value_list_mask</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 1</span>
-                                               <span class='ident'>value_list_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>);  <span class='comment'>// 2</span>
+                                               <span class='ident'>value_list_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>);  <span class='comment'>// 2</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -3994,7 +3994,7 @@
         <span class='kw'>let</span> <span class='ident'>cookie</span> <span class='op'>=</span> <span class='ident'>xcb_render_change_picture_checked</span>(<span class='ident'>c</span>.<span class='ident'>get_raw_conn</span>(),
                                                        <span class='ident'>picture</span> <span class='kw'>as</span> <span class='ident'>xcb_render_picture_t</span>,  <span class='comment'>// 0</span>
                                                        <span class='ident'>value_list_mask</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 1</span>
-                                                       <span class='ident'>value_list_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>);  <span class='comment'>// 2</span>
+                                                       <span class='ident'>value_list_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>);  <span class='comment'>// 2</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4019,7 +4019,7 @@
                                                             <span class='ident'>clip_x_origin</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 1</span>
                                                             <span class='ident'>clip_y_origin</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 2</span>
                                                             <span class='ident'>rectangles_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 3</span>
-                                                            <span class='ident'>rectangles_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_rectangle_t</span>);  <span class='comment'>// 4</span>
+                                                            <span class='ident'>rectangles_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_rectangle_t</span>);  <span class='comment'>// 4</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4042,7 +4042,7 @@
                                                                     <span class='ident'>clip_x_origin</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 1</span>
                                                                     <span class='ident'>clip_y_origin</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 2</span>
                                                                     <span class='ident'>rectangles_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 3</span>
-                                                                    <span class='ident'>rectangles_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_rectangle_t</span>);  <span class='comment'>// 4</span>
+                                                                    <span class='ident'>rectangles_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_rectangle_t</span>);  <span class='comment'>// 4</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4177,7 +4177,7 @@
                                            <span class='ident'>src_x</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 4</span>
                                            <span class='ident'>src_y</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 5</span>
                                            <span class='ident'>traps_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 6</span>
-                                           <span class='ident'>traps_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_trapezoid_t</span>);  <span class='comment'>// 7</span>
+                                           <span class='ident'>traps_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_trapezoid_t</span>);  <span class='comment'>// 7</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4206,7 +4206,7 @@
                                                    <span class='ident'>src_x</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 4</span>
                                                    <span class='ident'>src_y</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 5</span>
                                                    <span class='ident'>traps_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 6</span>
-                                                   <span class='ident'>traps_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_trapezoid_t</span>);  <span class='comment'>// 7</span>
+                                                   <span class='ident'>traps_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_trapezoid_t</span>);  <span class='comment'>// 7</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4237,7 +4237,7 @@
                                           <span class='ident'>src_x</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 4</span>
                                           <span class='ident'>src_y</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 5</span>
                                           <span class='ident'>triangles_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 6</span>
-                                          <span class='ident'>triangles_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_triangle_t</span>);  <span class='comment'>// 7</span>
+                                          <span class='ident'>triangles_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_triangle_t</span>);  <span class='comment'>// 7</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4266,7 +4266,7 @@
                                                   <span class='ident'>src_x</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 4</span>
                                                   <span class='ident'>src_y</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 5</span>
                                                   <span class='ident'>triangles_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 6</span>
-                                                  <span class='ident'>triangles_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_triangle_t</span>);  <span class='comment'>// 7</span>
+                                                  <span class='ident'>triangles_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_triangle_t</span>);  <span class='comment'>// 7</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4297,7 +4297,7 @@
                                           <span class='ident'>src_x</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 4</span>
                                           <span class='ident'>src_y</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 5</span>
                                           <span class='ident'>points_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 6</span>
-                                          <span class='ident'>points_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pointfix_t</span>);  <span class='comment'>// 7</span>
+                                          <span class='ident'>points_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pointfix_t</span>);  <span class='comment'>// 7</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4326,7 +4326,7 @@
                                                   <span class='ident'>src_x</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 4</span>
                                                   <span class='ident'>src_y</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 5</span>
                                                   <span class='ident'>points_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 6</span>
-                                                  <span class='ident'>points_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pointfix_t</span>);  <span class='comment'>// 7</span>
+                                                  <span class='ident'>points_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pointfix_t</span>);  <span class='comment'>// 7</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4357,7 +4357,7 @@
                                         <span class='ident'>src_x</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 4</span>
                                         <span class='ident'>src_y</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 5</span>
                                         <span class='ident'>points_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 6</span>
-                                        <span class='ident'>points_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pointfix_t</span>);  <span class='comment'>// 7</span>
+                                        <span class='ident'>points_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pointfix_t</span>);  <span class='comment'>// 7</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4386,7 +4386,7 @@
                                                 <span class='ident'>src_x</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 4</span>
                                                 <span class='ident'>src_y</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 5</span>
                                                 <span class='ident'>points_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 6</span>
-                                                <span class='ident'>points_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pointfix_t</span>);  <span class='comment'>// 7</span>
+                                                <span class='ident'>points_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pointfix_t</span>);  <span class='comment'>// 7</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4510,10 +4510,10 @@
         <span class='kw'>let</span> <span class='ident'>cookie</span> <span class='op'>=</span> <span class='ident'>xcb_render_add_glyphs</span>(<span class='ident'>c</span>.<span class='ident'>get_raw_conn</span>(),
                                            <span class='ident'>glyphset</span> <span class='kw'>as</span> <span class='ident'>xcb_render_glyphset_t</span>,  <span class='comment'>// 0</span>
                                            <span class='ident'>glyphids_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 1</span>
-                                           <span class='ident'>glyphids_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>,  <span class='comment'>// 2</span>
-                                           <span class='ident'>glyphs_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_glyphinfo_t</span>,  <span class='comment'>// 3</span>
+                                           <span class='ident'>glyphids_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>,  <span class='comment'>// 2</span>
+                                           <span class='ident'>glyphs_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_glyphinfo_t</span>,  <span class='comment'>// 3</span>
                                            <span class='ident'>data_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 4</span>
-                                           <span class='ident'>data_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>);  <span class='comment'>// 5</span>
+                                           <span class='ident'>data_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>);  <span class='comment'>// 5</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4537,10 +4537,10 @@
         <span class='kw'>let</span> <span class='ident'>cookie</span> <span class='op'>=</span> <span class='ident'>xcb_render_add_glyphs_checked</span>(<span class='ident'>c</span>.<span class='ident'>get_raw_conn</span>(),
                                                    <span class='ident'>glyphset</span> <span class='kw'>as</span> <span class='ident'>xcb_render_glyphset_t</span>,  <span class='comment'>// 0</span>
                                                    <span class='ident'>glyphids_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 1</span>
-                                                   <span class='ident'>glyphids_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>,  <span class='comment'>// 2</span>
-                                                   <span class='ident'>glyphs_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_glyphinfo_t</span>,  <span class='comment'>// 3</span>
+                                                   <span class='ident'>glyphids_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>,  <span class='comment'>// 2</span>
+                                                   <span class='ident'>glyphs_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_glyphinfo_t</span>,  <span class='comment'>// 3</span>
                                                    <span class='ident'>data_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 4</span>
-                                                   <span class='ident'>data_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>);  <span class='comment'>// 5</span>
+                                                   <span class='ident'>data_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>);  <span class='comment'>// 5</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4561,7 +4561,7 @@
         <span class='kw'>let</span> <span class='ident'>cookie</span> <span class='op'>=</span> <span class='ident'>xcb_render_free_glyphs</span>(<span class='ident'>c</span>.<span class='ident'>get_raw_conn</span>(),
                                             <span class='ident'>glyphset</span> <span class='kw'>as</span> <span class='ident'>xcb_render_glyphset_t</span>,  <span class='comment'>// 0</span>
                                             <span class='ident'>glyphs_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 1</span>
-                                            <span class='ident'>glyphs_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_glyph_t</span>);  <span class='comment'>// 2</span>
+                                            <span class='ident'>glyphs_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_glyph_t</span>);  <span class='comment'>// 2</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4580,7 +4580,7 @@
         <span class='kw'>let</span> <span class='ident'>cookie</span> <span class='op'>=</span> <span class='ident'>xcb_render_free_glyphs_checked</span>(<span class='ident'>c</span>.<span class='ident'>get_raw_conn</span>(),
                                                     <span class='ident'>glyphset</span> <span class='kw'>as</span> <span class='ident'>xcb_render_glyphset_t</span>,  <span class='comment'>// 0</span>
                                                     <span class='ident'>glyphs_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 1</span>
-                                                    <span class='ident'>glyphs_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_glyph_t</span>);  <span class='comment'>// 2</span>
+                                                    <span class='ident'>glyphs_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_glyph_t</span>);  <span class='comment'>// 2</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4613,7 +4613,7 @@
                                                    <span class='ident'>src_x</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 5</span>
                                                    <span class='ident'>src_y</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 6</span>
                                                    <span class='ident'>glyphcmds_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 7</span>
-                                                   <span class='ident'>glyphcmds_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>);  <span class='comment'>// 8</span>
+                                                   <span class='ident'>glyphcmds_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>);  <span class='comment'>// 8</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4644,7 +4644,7 @@
                                                            <span class='ident'>src_x</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 5</span>
                                                            <span class='ident'>src_y</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 6</span>
                                                            <span class='ident'>glyphcmds_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 7</span>
-                                                           <span class='ident'>glyphcmds_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>);  <span class='comment'>// 8</span>
+                                                           <span class='ident'>glyphcmds_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>);  <span class='comment'>// 8</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4677,7 +4677,7 @@
                                                     <span class='ident'>src_x</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 5</span>
                                                     <span class='ident'>src_y</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 6</span>
                                                     <span class='ident'>glyphcmds_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 7</span>
-                                                    <span class='ident'>glyphcmds_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>);  <span class='comment'>// 8</span>
+                                                    <span class='ident'>glyphcmds_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>);  <span class='comment'>// 8</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4708,7 +4708,7 @@
                                                             <span class='ident'>src_x</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 5</span>
                                                             <span class='ident'>src_y</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 6</span>
                                                             <span class='ident'>glyphcmds_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 7</span>
-                                                            <span class='ident'>glyphcmds_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>);  <span class='comment'>// 8</span>
+                                                            <span class='ident'>glyphcmds_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>);  <span class='comment'>// 8</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4741,7 +4741,7 @@
                                                     <span class='ident'>src_x</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 5</span>
                                                     <span class='ident'>src_y</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 6</span>
                                                     <span class='ident'>glyphcmds_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 7</span>
-                                                    <span class='ident'>glyphcmds_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>);  <span class='comment'>// 8</span>
+                                                    <span class='ident'>glyphcmds_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>);  <span class='comment'>// 8</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4772,7 +4772,7 @@
                                                             <span class='ident'>src_x</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 5</span>
                                                             <span class='ident'>src_y</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 6</span>
                                                             <span class='ident'>glyphcmds_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 7</span>
-                                                            <span class='ident'>glyphcmds_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>);  <span class='comment'>// 8</span>
+                                                            <span class='ident'>glyphcmds_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>);  <span class='comment'>// 8</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4797,7 +4797,7 @@
                                                 <span class='ident'>dst</span> <span class='kw'>as</span> <span class='ident'>xcb_render_picture_t</span>,  <span class='comment'>// 1</span>
                                                 <span class='ident'>color</span>.<span class='ident'>base</span>,  <span class='comment'>// 2</span>
                                                 <span class='ident'>rects_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 3</span>
-                                                <span class='ident'>rects_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_rectangle_t</span>);  <span class='comment'>// 4</span>
+                                                <span class='ident'>rects_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_rectangle_t</span>);  <span class='comment'>// 4</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4820,7 +4820,7 @@
                                                         <span class='ident'>dst</span> <span class='kw'>as</span> <span class='ident'>xcb_render_picture_t</span>,  <span class='comment'>// 1</span>
                                                         <span class='ident'>color</span>.<span class='ident'>base</span>,  <span class='comment'>// 2</span>
                                                         <span class='ident'>rects_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 3</span>
-                                                        <span class='ident'>rects_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_rectangle_t</span>);  <span class='comment'>// 4</span>
+                                                        <span class='ident'>rects_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_rectangle_t</span>);  <span class='comment'>// 4</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -4959,10 +4959,10 @@
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>rem</span> <span class='op'>==</span> <span class='number'>0</span> { <span class='prelude-val'>None</span> }
         <span class='kw'>else</span> {
             <span class='kw'>unsafe</span> {
-                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_transform_iterator_t</span>;
-                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='op'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
+                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_transform_iterator_t</span>;
+                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='kw-2'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
                 <span class='ident'>xcb_render_transform_next</span>(<span class='ident'>iter</span>);
-                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='op'>*</span><span class='ident'>data</span>))
+                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='kw-2'>*</span><span class='ident'>data</span>))
             }
         }
     }
@@ -5010,7 +5010,7 @@
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_reply</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>QueryFiltersReply</span>, <span class='ident'>base</span>::<span class='ident'>GenericError</span><span class='op'>&gt;</span> {
         <span class='kw'>unsafe</span> {
             <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>checked</span> {
-                <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>err</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span> <span class='op'>=</span> <span class='ident'>std</span>::<span class='ident'>ptr</span>::<span class='ident'>null_mut</span>();
+                <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>err</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span> <span class='op'>=</span> <span class='ident'>std</span>::<span class='ident'>ptr</span>::<span class='ident'>null_mut</span>();
                 <span class='kw'>let</span> <span class='ident'>reply</span> <span class='op'>=</span> <span class='ident'>QueryFiltersReply</span> {
                     <span class='ident'>ptr</span>: <span class='ident'>xcb_render_query_filters_reply</span> (<span class='self'>self</span>.<span class='ident'>conn</span>.<span class='ident'>get_raw_conn</span>(), <span class='self'>self</span>.<span class='ident'>cookie</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>err</span>)
                 };
@@ -5031,12 +5031,12 @@
 <span class='kw'>impl</span> <span class='ident'>QueryFiltersReply</span> {
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>num_aliases</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u32</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>num_aliases</span>
+            (<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>num_aliases</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>num_filters</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u32</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>num_filters</span>
+            (<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>num_filters</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>aliases</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span>[<span class='ident'>u16</span>] {
@@ -5098,9 +5098,9 @@
         <span class='kw'>let</span> <span class='ident'>cookie</span> <span class='op'>=</span> <span class='ident'>xcb_render_set_picture_filter</span>(<span class='ident'>c</span>.<span class='ident'>get_raw_conn</span>(),
                                                    <span class='ident'>picture</span> <span class='kw'>as</span> <span class='ident'>xcb_render_picture_t</span>,  <span class='comment'>// 0</span>
                                                    <span class='ident'>filter_len</span> <span class='kw'>as</span> <span class='ident'>u16</span>,  <span class='comment'>// 1</span>
-                                                   <span class='ident'>filter_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,  <span class='comment'>// 2</span>
+                                                   <span class='ident'>filter_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,  <span class='comment'>// 2</span>
                                                    <span class='ident'>values_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 3</span>
-                                                   <span class='ident'>values_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>);  <span class='comment'>// 4</span>
+                                                   <span class='ident'>values_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>);  <span class='comment'>// 4</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -5123,9 +5123,9 @@
         <span class='kw'>let</span> <span class='ident'>cookie</span> <span class='op'>=</span> <span class='ident'>xcb_render_set_picture_filter_checked</span>(<span class='ident'>c</span>.<span class='ident'>get_raw_conn</span>(),
                                                            <span class='ident'>picture</span> <span class='kw'>as</span> <span class='ident'>xcb_render_picture_t</span>,  <span class='comment'>// 0</span>
                                                            <span class='ident'>filter_len</span> <span class='kw'>as</span> <span class='ident'>u16</span>,  <span class='comment'>// 1</span>
-                                                           <span class='ident'>filter_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,  <span class='comment'>// 2</span>
+                                                           <span class='ident'>filter_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,  <span class='comment'>// 2</span>
                                                            <span class='ident'>values_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 3</span>
-                                                           <span class='ident'>values_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>);  <span class='comment'>// 4</span>
+                                                           <span class='ident'>values_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>);  <span class='comment'>// 4</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -5173,10 +5173,10 @@
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>rem</span> <span class='op'>==</span> <span class='number'>0</span> { <span class='prelude-val'>None</span> }
         <span class='kw'>else</span> {
             <span class='kw'>unsafe</span> {
-                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_animcursorelt_iterator_t</span>;
-                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='op'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
+                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_animcursorelt_iterator_t</span>;
+                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='kw-2'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
                 <span class='ident'>xcb_render_animcursorelt_next</span>(<span class='ident'>iter</span>);
-                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='op'>*</span><span class='ident'>data</span>))
+                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='kw-2'>*</span><span class='ident'>data</span>))
             }
         }
     }
@@ -5194,7 +5194,7 @@
         <span class='kw'>let</span> <span class='ident'>cookie</span> <span class='op'>=</span> <span class='ident'>xcb_render_create_anim_cursor</span>(<span class='ident'>c</span>.<span class='ident'>get_raw_conn</span>(),
                                                    <span class='ident'>cid</span> <span class='kw'>as</span> <span class='ident'>xcb_cursor_t</span>,  <span class='comment'>// 0</span>
                                                    <span class='ident'>cursors_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 1</span>
-                                                   <span class='ident'>cursors_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_animcursorelt_t</span>);  <span class='comment'>// 2</span>
+                                                   <span class='ident'>cursors_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_animcursorelt_t</span>);  <span class='comment'>// 2</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -5213,7 +5213,7 @@
         <span class='kw'>let</span> <span class='ident'>cookie</span> <span class='op'>=</span> <span class='ident'>xcb_render_create_anim_cursor_checked</span>(<span class='ident'>c</span>.<span class='ident'>get_raw_conn</span>(),
                                                            <span class='ident'>cid</span> <span class='kw'>as</span> <span class='ident'>xcb_cursor_t</span>,  <span class='comment'>// 0</span>
                                                            <span class='ident'>cursors_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 1</span>
-                                                           <span class='ident'>cursors_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_animcursorelt_t</span>);  <span class='comment'>// 2</span>
+                                                           <span class='ident'>cursors_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_animcursorelt_t</span>);  <span class='comment'>// 2</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -5268,10 +5268,10 @@
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>rem</span> <span class='op'>==</span> <span class='number'>0</span> { <span class='prelude-val'>None</span> }
         <span class='kw'>else</span> {
             <span class='kw'>unsafe</span> {
-                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_spanfix_iterator_t</span>;
-                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='op'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
+                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_spanfix_iterator_t</span>;
+                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='kw-2'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
                 <span class='ident'>xcb_render_spanfix_next</span>(<span class='ident'>iter</span>);
-                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='op'>*</span><span class='ident'>data</span>))
+                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='kw-2'>*</span><span class='ident'>data</span>))
             }
         }
     }
@@ -5316,10 +5316,10 @@
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>rem</span> <span class='op'>==</span> <span class='number'>0</span> { <span class='prelude-val'>None</span> }
         <span class='kw'>else</span> {
             <span class='kw'>unsafe</span> {
-                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_trap_iterator_t</span>;
-                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='op'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
+                <span class='kw'>let</span> <span class='ident'>iter</span> <span class='op'>=</span> <span class='self'>self</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_trap_iterator_t</span>;
+                <span class='kw'>let</span> <span class='ident'>data</span> <span class='op'>=</span> (<span class='kw-2'>*</span><span class='ident'>iter</span>).<span class='ident'>data</span>;
                 <span class='ident'>xcb_render_trap_next</span>(<span class='ident'>iter</span>);
-                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='op'>*</span><span class='ident'>data</span>))
+                <span class='prelude-val'>Some</span>(<span class='ident'>std</span>::<span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='kw-2'>*</span><span class='ident'>data</span>))
             }
         }
     }
@@ -5341,7 +5341,7 @@
                                           <span class='ident'>x_off</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 1</span>
                                           <span class='ident'>y_off</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 2</span>
                                           <span class='ident'>traps_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 3</span>
-                                          <span class='ident'>traps_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_trap_t</span>);  <span class='comment'>// 4</span>
+                                          <span class='ident'>traps_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_trap_t</span>);  <span class='comment'>// 4</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -5364,7 +5364,7 @@
                                                   <span class='ident'>x_off</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 1</span>
                                                   <span class='ident'>y_off</span> <span class='kw'>as</span> <span class='ident'>i16</span>,  <span class='comment'>// 2</span>
                                                   <span class='ident'>traps_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 3</span>
-                                                  <span class='ident'>traps_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_trap_t</span>);  <span class='comment'>// 4</span>
+                                                  <span class='ident'>traps_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_trap_t</span>);  <span class='comment'>// 4</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -5425,8 +5425,8 @@
                                                        <span class='ident'>p1</span>.<span class='ident'>base</span>,  <span class='comment'>// 1</span>
                                                        <span class='ident'>p2</span>.<span class='ident'>base</span>,  <span class='comment'>// 2</span>
                                                        <span class='ident'>stops_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 3</span>
-                                                       <span class='ident'>stops_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,  <span class='comment'>// 4</span>
-                                                       <span class='ident'>colors_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>);  <span class='comment'>// 5</span>
+                                                       <span class='ident'>stops_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,  <span class='comment'>// 4</span>
+                                                       <span class='ident'>colors_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>);  <span class='comment'>// 5</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -5451,8 +5451,8 @@
                                                                <span class='ident'>p1</span>.<span class='ident'>base</span>,  <span class='comment'>// 1</span>
                                                                <span class='ident'>p2</span>.<span class='ident'>base</span>,  <span class='comment'>// 2</span>
                                                                <span class='ident'>stops_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 3</span>
-                                                               <span class='ident'>stops_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,  <span class='comment'>// 4</span>
-                                                               <span class='ident'>colors_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>);  <span class='comment'>// 5</span>
+                                                               <span class='ident'>stops_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,  <span class='comment'>// 4</span>
+                                                               <span class='ident'>colors_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>);  <span class='comment'>// 5</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -5483,8 +5483,8 @@
                                                        <span class='ident'>inner_radius</span> <span class='kw'>as</span> <span class='ident'>xcb_render_fixed_t</span>,  <span class='comment'>// 3</span>
                                                        <span class='ident'>outer_radius</span> <span class='kw'>as</span> <span class='ident'>xcb_render_fixed_t</span>,  <span class='comment'>// 4</span>
                                                        <span class='ident'>stops_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 5</span>
-                                                       <span class='ident'>stops_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,  <span class='comment'>// 6</span>
-                                                       <span class='ident'>colors_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>);  <span class='comment'>// 7</span>
+                                                       <span class='ident'>stops_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,  <span class='comment'>// 6</span>
+                                                       <span class='ident'>colors_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>);  <span class='comment'>// 7</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -5513,8 +5513,8 @@
                                                                <span class='ident'>inner_radius</span> <span class='kw'>as</span> <span class='ident'>xcb_render_fixed_t</span>,  <span class='comment'>// 3</span>
                                                                <span class='ident'>outer_radius</span> <span class='kw'>as</span> <span class='ident'>xcb_render_fixed_t</span>,  <span class='comment'>// 4</span>
                                                                <span class='ident'>stops_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 5</span>
-                                                               <span class='ident'>stops_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,  <span class='comment'>// 6</span>
-                                                               <span class='ident'>colors_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>);  <span class='comment'>// 7</span>
+                                                               <span class='ident'>stops_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,  <span class='comment'>// 6</span>
+                                                               <span class='ident'>colors_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>);  <span class='comment'>// 7</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -5541,8 +5541,8 @@
                                                         <span class='ident'>center</span>.<span class='ident'>base</span>,  <span class='comment'>// 1</span>
                                                         <span class='ident'>angle</span> <span class='kw'>as</span> <span class='ident'>xcb_render_fixed_t</span>,  <span class='comment'>// 2</span>
                                                         <span class='ident'>stops_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 3</span>
-                                                        <span class='ident'>stops_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,  <span class='comment'>// 4</span>
-                                                        <span class='ident'>colors_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>);  <span class='comment'>// 5</span>
+                                                        <span class='ident'>stops_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,  <span class='comment'>// 4</span>
+                                                        <span class='ident'>colors_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>);  <span class='comment'>// 5</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,
@@ -5567,8 +5567,8 @@
                                                                 <span class='ident'>center</span>.<span class='ident'>base</span>,  <span class='comment'>// 1</span>
                                                                 <span class='ident'>angle</span> <span class='kw'>as</span> <span class='ident'>xcb_render_fixed_t</span>,  <span class='comment'>// 2</span>
                                                                 <span class='ident'>stops_len</span> <span class='kw'>as</span> <span class='ident'>u32</span>,  <span class='comment'>// 3</span>
-                                                                <span class='ident'>stops_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,  <span class='comment'>// 4</span>
-                                                                <span class='ident'>colors_ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>);  <span class='comment'>// 5</span>
+                                                                <span class='ident'>stops_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,  <span class='comment'>// 4</span>
+                                                                <span class='ident'>colors_ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>);  <span class='comment'>// 5</span>
         <span class='ident'>base</span>::<span class='ident'>VoidCookie</span> {
             <span class='ident'>cookie</span>:  <span class='ident'>cookie</span>,
             <span class='ident'>conn</span>:    <span class='ident'>c</span>,

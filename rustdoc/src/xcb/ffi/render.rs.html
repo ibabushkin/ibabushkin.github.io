@@ -1809,8 +1809,8 @@
 
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allow</span>(<span class='ident'>improper_ctypes</span>)]</span>
 
-<span class='kw'>use</span> <span class='ident'>ffi</span>::<span class='ident'>base</span>::<span class='op'>*</span>;
-<span class='kw'>use</span> <span class='ident'>ffi</span>::<span class='ident'>xproto</span>::<span class='op'>*</span>;
+<span class='kw'>use</span> <span class='ident'>ffi</span>::<span class='ident'>base</span>::<span class='kw-2'>*</span>;
+<span class='kw'>use</span> <span class='ident'>ffi</span>::<span class='ident'>xproto</span>::<span class='kw-2'>*</span>;
 
 <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_char</span>, <span class='ident'>c_int</span>, <span class='ident'>c_uint</span>, <span class='ident'>c_void</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>;
@@ -1922,7 +1922,7 @@
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_render_glyph_iterator_t</span> {
-    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_glyph_t</span>,
+    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_glyph_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
 }
@@ -1931,7 +1931,7 @@
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_render_glyphset_iterator_t</span> {
-    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_glyphset_t</span>,
+    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_glyphset_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
 }
@@ -1940,7 +1940,7 @@
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_render_picture_iterator_t</span> {
-    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_picture_t</span>,
+    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_picture_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
 }
@@ -1949,7 +1949,7 @@
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_render_pictformat_iterator_t</span> {
-    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictformat_t</span>,
+    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictformat_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
 }
@@ -1958,7 +1958,7 @@
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_render_fixed_iterator_t</span> {
-    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_fixed_t</span>,
+    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_fixed_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
 }
@@ -1974,7 +1974,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_pict_format_error_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_pict_format_error_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_pict_format_error_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_pict_format_error_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>XCB_RENDER_PICTURE</span>: <span class='ident'>u8</span> <span class='op'>=</span> <span class='number'>1</span>;
@@ -1988,7 +1988,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_picture_error_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_picture_error_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_picture_error_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_picture_error_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>XCB_RENDER_PICT_OP</span>: <span class='ident'>u8</span> <span class='op'>=</span> <span class='number'>2</span>;
@@ -2002,7 +2002,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_pict_op_error_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_pict_op_error_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_pict_op_error_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_pict_op_error_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>XCB_RENDER_GLYPH_SET</span>: <span class='ident'>u8</span> <span class='op'>=</span> <span class='number'>3</span>;
@@ -2016,7 +2016,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_glyph_set_error_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_glyph_set_error_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_glyph_set_error_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_glyph_set_error_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>XCB_RENDER_GLYPH</span>: <span class='ident'>u8</span> <span class='op'>=</span> <span class='number'>4</span>;
@@ -2030,7 +2030,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_glyph_error_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_glyph_error_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_glyph_error_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_glyph_error_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -2047,12 +2047,12 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_directformat_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_directformat_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_directformat_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_directformat_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_render_directformat_iterator_t</span> {
-    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_directformat_t</span>,
+    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_directformat_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
 }
@@ -2069,12 +2069,12 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_pictforminfo_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_pictforminfo_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_pictforminfo_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_pictforminfo_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_render_pictforminfo_iterator_t</span> {
-    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictforminfo_t</span>,
+    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictforminfo_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
 }
@@ -2087,12 +2087,12 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_pictvisual_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_pictvisual_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_pictvisual_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_pictvisual_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_render_pictvisual_iterator_t</span> {
-    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictvisual_t</span>,
+    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictvisual_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
 }
@@ -2107,7 +2107,7 @@
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_render_pictdepth_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
-    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictdepth_t</span>,
+    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictdepth_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
     <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_render_pictdepth_t</span><span class='op'>&gt;</span>,
@@ -2121,7 +2121,7 @@
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_render_pictscreen_iterator_t</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
-    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictscreen_t</span>,
+    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictscreen_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
     <span class='ident'>_phantom</span>:  <span class='ident'>std</span>::<span class='ident'>marker</span>::<span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>xcb_render_pictscreen_t</span><span class='op'>&gt;</span>,
@@ -2138,12 +2138,12 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_indexvalue_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_indexvalue_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_indexvalue_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_indexvalue_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_render_indexvalue_iterator_t</span> {
-    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_indexvalue_t</span>,
+    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_indexvalue_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
 }
@@ -2158,12 +2158,12 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_color_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_color_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_color_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_color_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_render_color_iterator_t</span> {
-    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_color_t</span>,
+    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_color_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
 }
@@ -2176,12 +2176,12 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_pointfix_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_pointfix_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_pointfix_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_pointfix_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_render_pointfix_iterator_t</span> {
-    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pointfix_t</span>,
+    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pointfix_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
 }
@@ -2194,12 +2194,12 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_linefix_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_linefix_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_linefix_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_linefix_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_render_linefix_iterator_t</span> {
-    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_linefix_t</span>,
+    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_linefix_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
 }
@@ -2213,12 +2213,12 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_triangle_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_triangle_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_triangle_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_triangle_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_render_triangle_iterator_t</span> {
-    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_triangle_t</span>,
+    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_triangle_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
 }
@@ -2233,12 +2233,12 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_trapezoid_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_trapezoid_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_trapezoid_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_trapezoid_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_render_trapezoid_iterator_t</span> {
-    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_trapezoid_t</span>,
+    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_trapezoid_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
 }
@@ -2255,12 +2255,12 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_glyphinfo_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_glyphinfo_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_glyphinfo_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_glyphinfo_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_render_glyphinfo_iterator_t</span> {
-    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_glyphinfo_t</span>,
+    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_glyphinfo_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
 }
@@ -2278,7 +2278,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_query_version_request_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_query_version_request_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_query_version_request_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_query_version_request_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
@@ -2300,7 +2300,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_query_version_reply_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_query_version_reply_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_query_version_reply_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_query_version_reply_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>XCB_RENDER_QUERY_PICT_FORMATS</span>: <span class='ident'>u8</span> <span class='op'>=</span> <span class='number'>1</span>;
@@ -2314,7 +2314,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_query_pict_formats_request_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_query_pict_formats_request_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_query_pict_formats_request_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_query_pict_formats_request_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
@@ -2349,7 +2349,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_query_pict_index_values_request_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_query_pict_index_values_request_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_query_pict_index_values_request_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_query_pict_index_values_request_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
@@ -2416,7 +2416,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_free_picture_request_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_free_picture_request_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_free_picture_request_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_free_picture_request_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>XCB_RENDER_COMPOSITE</span>: <span class='ident'>u8</span> <span class='op'>=</span> <span class='number'>8</span>;
@@ -2443,7 +2443,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_composite_request_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_composite_request_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_composite_request_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_composite_request_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>XCB_RENDER_TRAPEZOIDS</span>: <span class='ident'>u8</span> <span class='op'>=</span> <span class='number'>10</span>;
@@ -2523,7 +2523,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_create_glyph_set_request_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_create_glyph_set_request_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_create_glyph_set_request_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_create_glyph_set_request_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>XCB_RENDER_REFERENCE_GLYPH_SET</span>: <span class='ident'>u8</span> <span class='op'>=</span> <span class='number'>18</span>;
@@ -2539,7 +2539,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_reference_glyph_set_request_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_reference_glyph_set_request_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_reference_glyph_set_request_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_reference_glyph_set_request_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>XCB_RENDER_FREE_GLYPH_SET</span>: <span class='ident'>u8</span> <span class='op'>=</span> <span class='number'>19</span>;
@@ -2554,7 +2554,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_free_glyph_set_request_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_free_glyph_set_request_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_free_glyph_set_request_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_free_glyph_set_request_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>XCB_RENDER_ADD_GLYPHS</span>: <span class='ident'>u8</span> <span class='op'>=</span> <span class='number'>20</span>;
@@ -2657,7 +2657,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_create_cursor_request_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_create_cursor_request_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_create_cursor_request_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_create_cursor_request_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
@@ -2675,12 +2675,12 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_transform_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_transform_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_transform_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_transform_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_render_transform_iterator_t</span> {
-    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_transform_t</span>,
+    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_transform_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
 }
@@ -2698,7 +2698,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_set_picture_transform_request_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_set_picture_transform_request_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_set_picture_transform_request_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_set_picture_transform_request_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>XCB_RENDER_QUERY_FILTERS</span>: <span class='ident'>u8</span> <span class='op'>=</span> <span class='number'>29</span>;
@@ -2713,7 +2713,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_query_filters_request_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_query_filters_request_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_query_filters_request_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_query_filters_request_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
@@ -2753,12 +2753,12 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_animcursorelt_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_animcursorelt_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_animcursorelt_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_animcursorelt_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_render_animcursorelt_iterator_t</span> {
-    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_animcursorelt_t</span>,
+    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_animcursorelt_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
 }
@@ -2782,12 +2782,12 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_spanfix_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_spanfix_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_spanfix_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_spanfix_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_render_spanfix_iterator_t</span> {
-    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_spanfix_t</span>,
+    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_spanfix_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
 }
@@ -2800,12 +2800,12 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_trap_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_trap_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_trap_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_trap_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>C</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>xcb_render_trap_iterator_t</span> {
-    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_trap_t</span>,
+    <span class='kw'>pub</span> <span class='ident'>data</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_trap_t</span>,
     <span class='kw'>pub</span> <span class='ident'>rem</span>:   <span class='ident'>c_int</span>,
     <span class='kw'>pub</span> <span class='ident'>index</span>: <span class='ident'>c_int</span>,
 }
@@ -2835,7 +2835,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_render_create_solid_fill_request_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_render_create_solid_fill_request_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_create_solid_fill_request_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_render_create_solid_fill_request_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>XCB_RENDER_CREATE_LINEAR_GRADIENT</span>: <span class='ident'>u8</span> <span class='op'>=</span> <span class='number'>34</span>;
@@ -2885,234 +2885,234 @@
 
     <span class='kw'>pub</span> <span class='kw'>static</span> <span class='kw-2'>mut</span> <span class='ident'>xcb_render_id</span>: <span class='ident'>xcb_extension_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_glyph_next</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_glyph_iterator_t</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_glyph_next</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_glyph_iterator_t</span>);
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_glyph_end</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_glyph_iterator_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_glyph_end</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_glyph_iterator_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_glyphset_next</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_glyphset_iterator_t</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_glyphset_next</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_glyphset_iterator_t</span>);
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_glyphset_end</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_glyphset_iterator_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_glyphset_end</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_glyphset_iterator_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_picture_next</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_picture_iterator_t</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_picture_next</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_picture_iterator_t</span>);
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_picture_end</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_picture_iterator_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_picture_end</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_picture_iterator_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictformat_next</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictformat_iterator_t</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictformat_next</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictformat_iterator_t</span>);
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictformat_end</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictformat_iterator_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictformat_end</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictformat_iterator_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_fixed_next</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_fixed_iterator_t</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_fixed_next</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_fixed_iterator_t</span>);
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_fixed_end</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_fixed_iterator_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_fixed_end</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_fixed_iterator_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_directformat_next</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_directformat_iterator_t</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_directformat_next</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_directformat_iterator_t</span>);
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_directformat_end</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_directformat_iterator_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_directformat_end</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_directformat_iterator_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictforminfo_next</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictforminfo_iterator_t</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictforminfo_next</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictforminfo_iterator_t</span>);
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictforminfo_end</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictforminfo_iterator_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictforminfo_end</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictforminfo_iterator_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictvisual_next</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictvisual_iterator_t</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictvisual_next</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictvisual_iterator_t</span>);
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictvisual_end</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictvisual_iterator_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictvisual_end</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictvisual_iterator_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictdepth_visuals</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pictdepth_t</span>)
-            <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictvisual_t</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictdepth_visuals</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pictdepth_t</span>)
+            <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictvisual_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictdepth_visuals_length</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pictdepth_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictdepth_visuals_length</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pictdepth_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictdepth_visuals_iterator</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pictdepth_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictdepth_visuals_iterator</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pictdepth_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_render_pictvisual_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictdepth_next</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictdepth_iterator_t</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictdepth_next</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictdepth_iterator_t</span>);
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictdepth_end</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictdepth_iterator_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictdepth_end</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictdepth_iterator_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictscreen_depths_length</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pictscreen_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictscreen_depths_length</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pictscreen_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictscreen_depths_iterator</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pictscreen_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictscreen_depths_iterator</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pictscreen_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_render_pictdepth_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictscreen_next</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictscreen_iterator_t</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictscreen_next</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictscreen_iterator_t</span>);
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictscreen_end</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictscreen_iterator_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pictscreen_end</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictscreen_iterator_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_indexvalue_next</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_indexvalue_iterator_t</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_indexvalue_next</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_indexvalue_iterator_t</span>);
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_indexvalue_end</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_indexvalue_iterator_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_indexvalue_end</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_indexvalue_iterator_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_color_next</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_color_iterator_t</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_color_next</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_color_iterator_t</span>);
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_color_end</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_color_iterator_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_color_end</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_color_iterator_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pointfix_next</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pointfix_iterator_t</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pointfix_next</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pointfix_iterator_t</span>);
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pointfix_end</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pointfix_iterator_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_pointfix_end</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pointfix_iterator_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_linefix_next</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_linefix_iterator_t</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_linefix_next</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_linefix_iterator_t</span>);
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_linefix_end</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_linefix_iterator_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_linefix_end</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_linefix_iterator_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_triangle_next</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_triangle_iterator_t</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_triangle_next</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_triangle_iterator_t</span>);
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_triangle_end</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_triangle_iterator_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_triangle_end</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_triangle_iterator_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_trapezoid_next</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_trapezoid_iterator_t</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_trapezoid_next</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_trapezoid_iterator_t</span>);
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_trapezoid_end</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_trapezoid_iterator_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_trapezoid_end</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_trapezoid_iterator_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_glyphinfo_next</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_glyphinfo_iterator_t</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_glyphinfo_next</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_glyphinfo_iterator_t</span>);
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_glyphinfo_end</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_glyphinfo_iterator_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_glyphinfo_end</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_glyphinfo_iterator_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
     <span class='doccomment'>/// the returned value must be freed by the caller using libc::free().</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_version_reply</span> (<span class='ident'>c</span>:      <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_version_reply</span> (<span class='ident'>c</span>:      <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                            <span class='ident'>cookie</span>: <span class='ident'>xcb_render_query_version_cookie_t</span>,
-                                           <span class='ident'>error</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span>)
-            <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_query_version_reply_t</span>;
+                                           <span class='ident'>error</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span>)
+            <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_query_version_reply_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_version</span> (<span class='ident'>c</span>:                    <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_version</span> (<span class='ident'>c</span>:                    <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                      <span class='ident'>client_major_version</span>: <span class='ident'>u32</span>,
                                      <span class='ident'>client_minor_version</span>: <span class='ident'>u32</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_render_query_version_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_version_unchecked</span> (<span class='ident'>c</span>:                    <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_version_unchecked</span> (<span class='ident'>c</span>:                    <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                <span class='ident'>client_major_version</span>: <span class='ident'>u32</span>,
                                                <span class='ident'>client_minor_version</span>: <span class='ident'>u32</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_render_query_version_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_formats_formats</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_pict_formats_reply_t</span>)
-            <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictforminfo_t</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_formats_formats</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_pict_formats_reply_t</span>)
+            <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_pictforminfo_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_formats_formats_length</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_pict_formats_reply_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_formats_formats_length</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_pict_formats_reply_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_formats_formats_iterator</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_pict_formats_reply_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_formats_formats_iterator</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_pict_formats_reply_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_render_pictforminfo_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_formats_screens_length</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_pict_formats_reply_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_formats_screens_length</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_pict_formats_reply_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_formats_screens_iterator</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_pict_formats_reply_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_formats_screens_iterator</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_pict_formats_reply_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_render_pictscreen_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_formats_subpixels</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_pict_formats_reply_t</span>)
-            <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u32</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_formats_subpixels</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_pict_formats_reply_t</span>)
+            <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>u32</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_formats_subpixels_length</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_pict_formats_reply_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_formats_subpixels_length</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_pict_formats_reply_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_formats_subpixels_end</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_pict_formats_reply_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_formats_subpixels_end</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_pict_formats_reply_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
     <span class='doccomment'>/// the returned value must be freed by the caller using libc::free().</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_formats_reply</span> (<span class='ident'>c</span>:      <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_formats_reply</span> (<span class='ident'>c</span>:      <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                 <span class='ident'>cookie</span>: <span class='ident'>xcb_render_query_pict_formats_cookie_t</span>,
-                                                <span class='ident'>error</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span>)
-            <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_query_pict_formats_reply_t</span>;
+                                                <span class='ident'>error</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span>)
+            <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_query_pict_formats_reply_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_formats</span> (<span class='ident'>c</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_formats</span> (<span class='ident'>c</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_render_query_pict_formats_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_formats_unchecked</span> (<span class='ident'>c</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_formats_unchecked</span> (<span class='ident'>c</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_render_query_pict_formats_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_index_values_values</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_pict_index_values_reply_t</span>)
-            <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_indexvalue_t</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_index_values_values</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_pict_index_values_reply_t</span>)
+            <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_indexvalue_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_index_values_values_length</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_pict_index_values_reply_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_index_values_values_length</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_pict_index_values_reply_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_index_values_values_iterator</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_pict_index_values_reply_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_index_values_values_iterator</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_pict_index_values_reply_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_render_indexvalue_iterator_t</span>;
 
     <span class='doccomment'>/// the returned value must be freed by the caller using libc::free().</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_index_values_reply</span> (<span class='ident'>c</span>:      <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_index_values_reply</span> (<span class='ident'>c</span>:      <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                      <span class='ident'>cookie</span>: <span class='ident'>xcb_render_query_pict_index_values_cookie_t</span>,
-                                                     <span class='ident'>error</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span>)
-            <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_query_pict_index_values_reply_t</span>;
+                                                     <span class='ident'>error</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span>)
+            <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_query_pict_index_values_reply_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_index_values</span> (<span class='ident'>c</span>:      <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_index_values</span> (<span class='ident'>c</span>:      <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                <span class='ident'>format</span>: <span class='ident'>xcb_render_pictformat_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_render_query_pict_index_values_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_index_values_unchecked</span> (<span class='ident'>c</span>:      <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_pict_index_values_unchecked</span> (<span class='ident'>c</span>:      <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                          <span class='ident'>format</span>: <span class='ident'>xcb_render_pictformat_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_render_query_pict_index_values_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_picture</span> (<span class='ident'>c</span>:          <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_picture</span> (<span class='ident'>c</span>:          <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                       <span class='ident'>pid</span>:        <span class='ident'>xcb_render_picture_t</span>,
                                       <span class='ident'>drawable</span>:   <span class='ident'>xcb_drawable_t</span>,
                                       <span class='ident'>format</span>:     <span class='ident'>xcb_render_pictformat_t</span>,
                                       <span class='ident'>value_mask</span>: <span class='ident'>u32</span>,
-                                      <span class='ident'>value_list</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>)
+                                      <span class='ident'>value_list</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_picture_checked</span> (<span class='ident'>c</span>:          <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_picture_checked</span> (<span class='ident'>c</span>:          <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                               <span class='ident'>pid</span>:        <span class='ident'>xcb_render_picture_t</span>,
                                               <span class='ident'>drawable</span>:   <span class='ident'>xcb_drawable_t</span>,
                                               <span class='ident'>format</span>:     <span class='ident'>xcb_render_pictformat_t</span>,
                                               <span class='ident'>value_mask</span>: <span class='ident'>u32</span>,
-                                              <span class='ident'>value_list</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>)
+                                              <span class='ident'>value_list</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_change_picture</span> (<span class='ident'>c</span>:          <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_change_picture</span> (<span class='ident'>c</span>:          <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                       <span class='ident'>picture</span>:    <span class='ident'>xcb_render_picture_t</span>,
                                       <span class='ident'>value_mask</span>: <span class='ident'>u32</span>,
-                                      <span class='ident'>value_list</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>)
+                                      <span class='ident'>value_list</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_change_picture_checked</span> (<span class='ident'>c</span>:          <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_change_picture_checked</span> (<span class='ident'>c</span>:          <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                               <span class='ident'>picture</span>:    <span class='ident'>xcb_render_picture_t</span>,
                                               <span class='ident'>value_mask</span>: <span class='ident'>u32</span>,
-                                              <span class='ident'>value_list</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>)
+                                              <span class='ident'>value_list</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_set_picture_clip_rectangles</span> (<span class='ident'>c</span>:              <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_set_picture_clip_rectangles</span> (<span class='ident'>c</span>:              <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                    <span class='ident'>picture</span>:        <span class='ident'>xcb_render_picture_t</span>,
                                                    <span class='ident'>clip_x_origin</span>:  <span class='ident'>i16</span>,
                                                    <span class='ident'>clip_y_origin</span>:  <span class='ident'>i16</span>,
                                                    <span class='ident'>rectangles_len</span>: <span class='ident'>u32</span>,
-                                                   <span class='ident'>rectangles</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_rectangle_t</span>)
+                                                   <span class='ident'>rectangles</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_rectangle_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_set_picture_clip_rectangles_checked</span> (<span class='ident'>c</span>:              <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_set_picture_clip_rectangles_checked</span> (<span class='ident'>c</span>:              <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                            <span class='ident'>picture</span>:        <span class='ident'>xcb_render_picture_t</span>,
                                                            <span class='ident'>clip_x_origin</span>:  <span class='ident'>i16</span>,
                                                            <span class='ident'>clip_y_origin</span>:  <span class='ident'>i16</span>,
                                                            <span class='ident'>rectangles_len</span>: <span class='ident'>u32</span>,
-                                                           <span class='ident'>rectangles</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_rectangle_t</span>)
+                                                           <span class='ident'>rectangles</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_rectangle_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_free_picture</span> (<span class='ident'>c</span>:       <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_free_picture</span> (<span class='ident'>c</span>:       <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                     <span class='ident'>picture</span>: <span class='ident'>xcb_render_picture_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_free_picture_checked</span> (<span class='ident'>c</span>:       <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_free_picture_checked</span> (<span class='ident'>c</span>:       <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                             <span class='ident'>picture</span>: <span class='ident'>xcb_render_picture_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_composite</span> (<span class='ident'>c</span>:      <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_composite</span> (<span class='ident'>c</span>:      <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                  <span class='ident'>op</span>:     <span class='ident'>u8</span>,
                                  <span class='ident'>src</span>:    <span class='ident'>xcb_render_picture_t</span>,
                                  <span class='ident'>mask</span>:   <span class='ident'>xcb_render_picture_t</span>,
@@ -3127,7 +3127,7 @@
                                  <span class='ident'>height</span>: <span class='ident'>u16</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_composite_checked</span> (<span class='ident'>c</span>:      <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_composite_checked</span> (<span class='ident'>c</span>:      <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                          <span class='ident'>op</span>:     <span class='ident'>u8</span>,
                                          <span class='ident'>src</span>:    <span class='ident'>xcb_render_picture_t</span>,
                                          <span class='ident'>mask</span>:   <span class='ident'>xcb_render_picture_t</span>,
@@ -3142,7 +3142,7 @@
                                          <span class='ident'>height</span>: <span class='ident'>u16</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_trapezoids</span> (<span class='ident'>c</span>:           <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_trapezoids</span> (<span class='ident'>c</span>:           <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                   <span class='ident'>op</span>:          <span class='ident'>u8</span>,
                                   <span class='ident'>src</span>:         <span class='ident'>xcb_render_picture_t</span>,
                                   <span class='ident'>dst</span>:         <span class='ident'>xcb_render_picture_t</span>,
@@ -3150,10 +3150,10 @@
                                   <span class='ident'>src_x</span>:       <span class='ident'>i16</span>,
                                   <span class='ident'>src_y</span>:       <span class='ident'>i16</span>,
                                   <span class='ident'>traps_len</span>:   <span class='ident'>u32</span>,
-                                  <span class='ident'>traps</span>:       <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_trapezoid_t</span>)
+                                  <span class='ident'>traps</span>:       <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_trapezoid_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_trapezoids_checked</span> (<span class='ident'>c</span>:           <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_trapezoids_checked</span> (<span class='ident'>c</span>:           <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                           <span class='ident'>op</span>:          <span class='ident'>u8</span>,
                                           <span class='ident'>src</span>:         <span class='ident'>xcb_render_picture_t</span>,
                                           <span class='ident'>dst</span>:         <span class='ident'>xcb_render_picture_t</span>,
@@ -3161,10 +3161,10 @@
                                           <span class='ident'>src_x</span>:       <span class='ident'>i16</span>,
                                           <span class='ident'>src_y</span>:       <span class='ident'>i16</span>,
                                           <span class='ident'>traps_len</span>:   <span class='ident'>u32</span>,
-                                          <span class='ident'>traps</span>:       <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_trapezoid_t</span>)
+                                          <span class='ident'>traps</span>:       <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_trapezoid_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_triangles</span> (<span class='ident'>c</span>:             <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_triangles</span> (<span class='ident'>c</span>:             <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                  <span class='ident'>op</span>:            <span class='ident'>u8</span>,
                                  <span class='ident'>src</span>:           <span class='ident'>xcb_render_picture_t</span>,
                                  <span class='ident'>dst</span>:           <span class='ident'>xcb_render_picture_t</span>,
@@ -3172,10 +3172,10 @@
                                  <span class='ident'>src_x</span>:         <span class='ident'>i16</span>,
                                  <span class='ident'>src_y</span>:         <span class='ident'>i16</span>,
                                  <span class='ident'>triangles_len</span>: <span class='ident'>u32</span>,
-                                 <span class='ident'>triangles</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_triangle_t</span>)
+                                 <span class='ident'>triangles</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_triangle_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_triangles_checked</span> (<span class='ident'>c</span>:             <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_triangles_checked</span> (<span class='ident'>c</span>:             <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                          <span class='ident'>op</span>:            <span class='ident'>u8</span>,
                                          <span class='ident'>src</span>:           <span class='ident'>xcb_render_picture_t</span>,
                                          <span class='ident'>dst</span>:           <span class='ident'>xcb_render_picture_t</span>,
@@ -3183,10 +3183,10 @@
                                          <span class='ident'>src_x</span>:         <span class='ident'>i16</span>,
                                          <span class='ident'>src_y</span>:         <span class='ident'>i16</span>,
                                          <span class='ident'>triangles_len</span>: <span class='ident'>u32</span>,
-                                         <span class='ident'>triangles</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_triangle_t</span>)
+                                         <span class='ident'>triangles</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_triangle_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_tri_strip</span> (<span class='ident'>c</span>:           <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_tri_strip</span> (<span class='ident'>c</span>:           <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                  <span class='ident'>op</span>:          <span class='ident'>u8</span>,
                                  <span class='ident'>src</span>:         <span class='ident'>xcb_render_picture_t</span>,
                                  <span class='ident'>dst</span>:         <span class='ident'>xcb_render_picture_t</span>,
@@ -3194,10 +3194,10 @@
                                  <span class='ident'>src_x</span>:       <span class='ident'>i16</span>,
                                  <span class='ident'>src_y</span>:       <span class='ident'>i16</span>,
                                  <span class='ident'>points_len</span>:  <span class='ident'>u32</span>,
-                                 <span class='ident'>points</span>:      <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pointfix_t</span>)
+                                 <span class='ident'>points</span>:      <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pointfix_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_tri_strip_checked</span> (<span class='ident'>c</span>:           <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_tri_strip_checked</span> (<span class='ident'>c</span>:           <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                          <span class='ident'>op</span>:          <span class='ident'>u8</span>,
                                          <span class='ident'>src</span>:         <span class='ident'>xcb_render_picture_t</span>,
                                          <span class='ident'>dst</span>:         <span class='ident'>xcb_render_picture_t</span>,
@@ -3205,10 +3205,10 @@
                                          <span class='ident'>src_x</span>:       <span class='ident'>i16</span>,
                                          <span class='ident'>src_y</span>:       <span class='ident'>i16</span>,
                                          <span class='ident'>points_len</span>:  <span class='ident'>u32</span>,
-                                         <span class='ident'>points</span>:      <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pointfix_t</span>)
+                                         <span class='ident'>points</span>:      <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pointfix_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_tri_fan</span> (<span class='ident'>c</span>:           <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_tri_fan</span> (<span class='ident'>c</span>:           <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                <span class='ident'>op</span>:          <span class='ident'>u8</span>,
                                <span class='ident'>src</span>:         <span class='ident'>xcb_render_picture_t</span>,
                                <span class='ident'>dst</span>:         <span class='ident'>xcb_render_picture_t</span>,
@@ -3216,10 +3216,10 @@
                                <span class='ident'>src_x</span>:       <span class='ident'>i16</span>,
                                <span class='ident'>src_y</span>:       <span class='ident'>i16</span>,
                                <span class='ident'>points_len</span>:  <span class='ident'>u32</span>,
-                               <span class='ident'>points</span>:      <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pointfix_t</span>)
+                               <span class='ident'>points</span>:      <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pointfix_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_tri_fan_checked</span> (<span class='ident'>c</span>:           <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_tri_fan_checked</span> (<span class='ident'>c</span>:           <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                        <span class='ident'>op</span>:          <span class='ident'>u8</span>,
                                        <span class='ident'>src</span>:         <span class='ident'>xcb_render_picture_t</span>,
                                        <span class='ident'>dst</span>:         <span class='ident'>xcb_render_picture_t</span>,
@@ -3227,68 +3227,68 @@
                                        <span class='ident'>src_x</span>:       <span class='ident'>i16</span>,
                                        <span class='ident'>src_y</span>:       <span class='ident'>i16</span>,
                                        <span class='ident'>points_len</span>:  <span class='ident'>u32</span>,
-                                       <span class='ident'>points</span>:      <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pointfix_t</span>)
+                                       <span class='ident'>points</span>:      <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_pointfix_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_glyph_set</span> (<span class='ident'>c</span>:      <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_glyph_set</span> (<span class='ident'>c</span>:      <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                         <span class='ident'>gsid</span>:   <span class='ident'>xcb_render_glyphset_t</span>,
                                         <span class='ident'>format</span>: <span class='ident'>xcb_render_pictformat_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_glyph_set_checked</span> (<span class='ident'>c</span>:      <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_glyph_set_checked</span> (<span class='ident'>c</span>:      <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                 <span class='ident'>gsid</span>:   <span class='ident'>xcb_render_glyphset_t</span>,
                                                 <span class='ident'>format</span>: <span class='ident'>xcb_render_pictformat_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_reference_glyph_set</span> (<span class='ident'>c</span>:        <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_reference_glyph_set</span> (<span class='ident'>c</span>:        <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                            <span class='ident'>gsid</span>:     <span class='ident'>xcb_render_glyphset_t</span>,
                                            <span class='ident'>existing</span>: <span class='ident'>xcb_render_glyphset_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_reference_glyph_set_checked</span> (<span class='ident'>c</span>:        <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_reference_glyph_set_checked</span> (<span class='ident'>c</span>:        <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                    <span class='ident'>gsid</span>:     <span class='ident'>xcb_render_glyphset_t</span>,
                                                    <span class='ident'>existing</span>: <span class='ident'>xcb_render_glyphset_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_free_glyph_set</span> (<span class='ident'>c</span>:        <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_free_glyph_set</span> (<span class='ident'>c</span>:        <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                       <span class='ident'>glyphset</span>: <span class='ident'>xcb_render_glyphset_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_free_glyph_set_checked</span> (<span class='ident'>c</span>:        <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_free_glyph_set_checked</span> (<span class='ident'>c</span>:        <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                               <span class='ident'>glyphset</span>: <span class='ident'>xcb_render_glyphset_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_add_glyphs</span> (<span class='ident'>c</span>:          <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_add_glyphs</span> (<span class='ident'>c</span>:          <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                   <span class='ident'>glyphset</span>:   <span class='ident'>xcb_render_glyphset_t</span>,
                                   <span class='ident'>glyphs_len</span>: <span class='ident'>u32</span>,
-                                  <span class='ident'>glyphids</span>:   <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>,
-                                  <span class='ident'>glyphs</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_glyphinfo_t</span>,
+                                  <span class='ident'>glyphids</span>:   <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>,
+                                  <span class='ident'>glyphs</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_glyphinfo_t</span>,
                                   <span class='ident'>data_len</span>:   <span class='ident'>u32</span>,
-                                  <span class='ident'>data</span>:       <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>)
+                                  <span class='ident'>data</span>:       <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_add_glyphs_checked</span> (<span class='ident'>c</span>:          <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_add_glyphs_checked</span> (<span class='ident'>c</span>:          <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                           <span class='ident'>glyphset</span>:   <span class='ident'>xcb_render_glyphset_t</span>,
                                           <span class='ident'>glyphs_len</span>: <span class='ident'>u32</span>,
-                                          <span class='ident'>glyphids</span>:   <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>,
-                                          <span class='ident'>glyphs</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_glyphinfo_t</span>,
+                                          <span class='ident'>glyphids</span>:   <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u32</span>,
+                                          <span class='ident'>glyphs</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_glyphinfo_t</span>,
                                           <span class='ident'>data_len</span>:   <span class='ident'>u32</span>,
-                                          <span class='ident'>data</span>:       <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>)
+                                          <span class='ident'>data</span>:       <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_free_glyphs</span> (<span class='ident'>c</span>:          <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_free_glyphs</span> (<span class='ident'>c</span>:          <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                    <span class='ident'>glyphset</span>:   <span class='ident'>xcb_render_glyphset_t</span>,
                                    <span class='ident'>glyphs_len</span>: <span class='ident'>u32</span>,
-                                   <span class='ident'>glyphs</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_glyph_t</span>)
+                                   <span class='ident'>glyphs</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_glyph_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_free_glyphs_checked</span> (<span class='ident'>c</span>:          <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_free_glyphs_checked</span> (<span class='ident'>c</span>:          <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                            <span class='ident'>glyphset</span>:   <span class='ident'>xcb_render_glyphset_t</span>,
                                            <span class='ident'>glyphs_len</span>: <span class='ident'>u32</span>,
-                                           <span class='ident'>glyphs</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_glyph_t</span>)
+                                           <span class='ident'>glyphs</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_glyph_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_composite_glyphs_8</span> (<span class='ident'>c</span>:             <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_composite_glyphs_8</span> (<span class='ident'>c</span>:             <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                           <span class='ident'>op</span>:            <span class='ident'>u8</span>,
                                           <span class='ident'>src</span>:           <span class='ident'>xcb_render_picture_t</span>,
                                           <span class='ident'>dst</span>:           <span class='ident'>xcb_render_picture_t</span>,
@@ -3297,10 +3297,10 @@
                                           <span class='ident'>src_x</span>:         <span class='ident'>i16</span>,
                                           <span class='ident'>src_y</span>:         <span class='ident'>i16</span>,
                                           <span class='ident'>glyphcmds_len</span>: <span class='ident'>u32</span>,
-                                          <span class='ident'>glyphcmds</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>)
+                                          <span class='ident'>glyphcmds</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_composite_glyphs_8_checked</span> (<span class='ident'>c</span>:             <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_composite_glyphs_8_checked</span> (<span class='ident'>c</span>:             <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                   <span class='ident'>op</span>:            <span class='ident'>u8</span>,
                                                   <span class='ident'>src</span>:           <span class='ident'>xcb_render_picture_t</span>,
                                                   <span class='ident'>dst</span>:           <span class='ident'>xcb_render_picture_t</span>,
@@ -3309,10 +3309,10 @@
                                                   <span class='ident'>src_x</span>:         <span class='ident'>i16</span>,
                                                   <span class='ident'>src_y</span>:         <span class='ident'>i16</span>,
                                                   <span class='ident'>glyphcmds_len</span>: <span class='ident'>u32</span>,
-                                                  <span class='ident'>glyphcmds</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>)
+                                                  <span class='ident'>glyphcmds</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_composite_glyphs_16</span> (<span class='ident'>c</span>:             <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_composite_glyphs_16</span> (<span class='ident'>c</span>:             <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                            <span class='ident'>op</span>:            <span class='ident'>u8</span>,
                                            <span class='ident'>src</span>:           <span class='ident'>xcb_render_picture_t</span>,
                                            <span class='ident'>dst</span>:           <span class='ident'>xcb_render_picture_t</span>,
@@ -3321,10 +3321,10 @@
                                            <span class='ident'>src_x</span>:         <span class='ident'>i16</span>,
                                            <span class='ident'>src_y</span>:         <span class='ident'>i16</span>,
                                            <span class='ident'>glyphcmds_len</span>: <span class='ident'>u32</span>,
-                                           <span class='ident'>glyphcmds</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>)
+                                           <span class='ident'>glyphcmds</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_composite_glyphs_16_checked</span> (<span class='ident'>c</span>:             <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_composite_glyphs_16_checked</span> (<span class='ident'>c</span>:             <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                    <span class='ident'>op</span>:            <span class='ident'>u8</span>,
                                                    <span class='ident'>src</span>:           <span class='ident'>xcb_render_picture_t</span>,
                                                    <span class='ident'>dst</span>:           <span class='ident'>xcb_render_picture_t</span>,
@@ -3333,10 +3333,10 @@
                                                    <span class='ident'>src_x</span>:         <span class='ident'>i16</span>,
                                                    <span class='ident'>src_y</span>:         <span class='ident'>i16</span>,
                                                    <span class='ident'>glyphcmds_len</span>: <span class='ident'>u32</span>,
-                                                   <span class='ident'>glyphcmds</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>)
+                                                   <span class='ident'>glyphcmds</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_composite_glyphs_32</span> (<span class='ident'>c</span>:             <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_composite_glyphs_32</span> (<span class='ident'>c</span>:             <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                            <span class='ident'>op</span>:            <span class='ident'>u8</span>,
                                            <span class='ident'>src</span>:           <span class='ident'>xcb_render_picture_t</span>,
                                            <span class='ident'>dst</span>:           <span class='ident'>xcb_render_picture_t</span>,
@@ -3345,10 +3345,10 @@
                                            <span class='ident'>src_x</span>:         <span class='ident'>i16</span>,
                                            <span class='ident'>src_y</span>:         <span class='ident'>i16</span>,
                                            <span class='ident'>glyphcmds_len</span>: <span class='ident'>u32</span>,
-                                           <span class='ident'>glyphcmds</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>)
+                                           <span class='ident'>glyphcmds</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_composite_glyphs_32_checked</span> (<span class='ident'>c</span>:             <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_composite_glyphs_32_checked</span> (<span class='ident'>c</span>:             <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                    <span class='ident'>op</span>:            <span class='ident'>u8</span>,
                                                    <span class='ident'>src</span>:           <span class='ident'>xcb_render_picture_t</span>,
                                                    <span class='ident'>dst</span>:           <span class='ident'>xcb_render_picture_t</span>,
@@ -3357,208 +3357,208 @@
                                                    <span class='ident'>src_x</span>:         <span class='ident'>i16</span>,
                                                    <span class='ident'>src_y</span>:         <span class='ident'>i16</span>,
                                                    <span class='ident'>glyphcmds_len</span>: <span class='ident'>u32</span>,
-                                                   <span class='ident'>glyphcmds</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>)
+                                                   <span class='ident'>glyphcmds</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>u8</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_fill_rectangles</span> (<span class='ident'>c</span>:         <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_fill_rectangles</span> (<span class='ident'>c</span>:         <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                        <span class='ident'>op</span>:        <span class='ident'>u8</span>,
                                        <span class='ident'>dst</span>:       <span class='ident'>xcb_render_picture_t</span>,
                                        <span class='ident'>color</span>:     <span class='ident'>xcb_render_color_t</span>,
                                        <span class='ident'>rects_len</span>: <span class='ident'>u32</span>,
-                                       <span class='ident'>rects</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_rectangle_t</span>)
+                                       <span class='ident'>rects</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_rectangle_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_fill_rectangles_checked</span> (<span class='ident'>c</span>:         <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_fill_rectangles_checked</span> (<span class='ident'>c</span>:         <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                <span class='ident'>op</span>:        <span class='ident'>u8</span>,
                                                <span class='ident'>dst</span>:       <span class='ident'>xcb_render_picture_t</span>,
                                                <span class='ident'>color</span>:     <span class='ident'>xcb_render_color_t</span>,
                                                <span class='ident'>rects_len</span>: <span class='ident'>u32</span>,
-                                               <span class='ident'>rects</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_rectangle_t</span>)
+                                               <span class='ident'>rects</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_rectangle_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_cursor</span> (<span class='ident'>c</span>:      <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_cursor</span> (<span class='ident'>c</span>:      <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                      <span class='ident'>cid</span>:    <span class='ident'>xcb_cursor_t</span>,
                                      <span class='ident'>source</span>: <span class='ident'>xcb_render_picture_t</span>,
                                      <span class='ident'>x</span>:      <span class='ident'>u16</span>,
                                      <span class='ident'>y</span>:      <span class='ident'>u16</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_cursor_checked</span> (<span class='ident'>c</span>:      <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_cursor_checked</span> (<span class='ident'>c</span>:      <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                              <span class='ident'>cid</span>:    <span class='ident'>xcb_cursor_t</span>,
                                              <span class='ident'>source</span>: <span class='ident'>xcb_render_picture_t</span>,
                                              <span class='ident'>x</span>:      <span class='ident'>u16</span>,
                                              <span class='ident'>y</span>:      <span class='ident'>u16</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_transform_next</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_transform_iterator_t</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_transform_next</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_transform_iterator_t</span>);
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_transform_end</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_transform_iterator_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_transform_end</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_transform_iterator_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_set_picture_transform</span> (<span class='ident'>c</span>:         <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_set_picture_transform</span> (<span class='ident'>c</span>:         <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                              <span class='ident'>picture</span>:   <span class='ident'>xcb_render_picture_t</span>,
                                              <span class='ident'>transform</span>: <span class='ident'>xcb_render_transform_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_set_picture_transform_checked</span> (<span class='ident'>c</span>:         <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_set_picture_transform_checked</span> (<span class='ident'>c</span>:         <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                      <span class='ident'>picture</span>:   <span class='ident'>xcb_render_picture_t</span>,
                                                      <span class='ident'>transform</span>: <span class='ident'>xcb_render_transform_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_filters_aliases</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_filters_reply_t</span>)
-            <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u16</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_filters_aliases</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_filters_reply_t</span>)
+            <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>u16</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_filters_aliases_length</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_filters_reply_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_filters_aliases_length</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_filters_reply_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_filters_aliases_end</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_filters_reply_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_filters_aliases_end</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_filters_reply_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_filters_filters_length</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_filters_reply_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_filters_filters_length</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_filters_reply_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_filters_filters_iterator</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_filters_reply_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_filters_filters_iterator</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_query_filters_reply_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_str_iterator_t</span>;
 
     <span class='doccomment'>/// the returned value must be freed by the caller using libc::free().</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_filters_reply</span> (<span class='ident'>c</span>:      <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_filters_reply</span> (<span class='ident'>c</span>:      <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                            <span class='ident'>cookie</span>: <span class='ident'>xcb_render_query_filters_cookie_t</span>,
-                                           <span class='ident'>error</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span>)
-            <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_query_filters_reply_t</span>;
+                                           <span class='ident'>error</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span>)
+            <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_query_filters_reply_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_filters</span> (<span class='ident'>c</span>:        <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_filters</span> (<span class='ident'>c</span>:        <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                      <span class='ident'>drawable</span>: <span class='ident'>xcb_drawable_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_render_query_filters_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_filters_unchecked</span> (<span class='ident'>c</span>:        <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_query_filters_unchecked</span> (<span class='ident'>c</span>:        <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                <span class='ident'>drawable</span>: <span class='ident'>xcb_drawable_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_render_query_filters_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_set_picture_filter</span> (<span class='ident'>c</span>:          <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_set_picture_filter</span> (<span class='ident'>c</span>:          <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                           <span class='ident'>picture</span>:    <span class='ident'>xcb_render_picture_t</span>,
                                           <span class='ident'>filter_len</span>: <span class='ident'>u16</span>,
-                                          <span class='ident'>filter</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,
+                                          <span class='ident'>filter</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,
                                           <span class='ident'>values_len</span>: <span class='ident'>u32</span>,
-                                          <span class='ident'>values</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>)
+                                          <span class='ident'>values</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_set_picture_filter_checked</span> (<span class='ident'>c</span>:          <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_set_picture_filter_checked</span> (<span class='ident'>c</span>:          <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                   <span class='ident'>picture</span>:    <span class='ident'>xcb_render_picture_t</span>,
                                                   <span class='ident'>filter_len</span>: <span class='ident'>u16</span>,
-                                                  <span class='ident'>filter</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,
+                                                  <span class='ident'>filter</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>c_char</span>,
                                                   <span class='ident'>values_len</span>: <span class='ident'>u32</span>,
-                                                  <span class='ident'>values</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>)
+                                                  <span class='ident'>values</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_animcursorelt_next</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_animcursorelt_iterator_t</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_animcursorelt_next</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_animcursorelt_iterator_t</span>);
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_animcursorelt_end</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_animcursorelt_iterator_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_animcursorelt_end</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_animcursorelt_iterator_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_anim_cursor</span> (<span class='ident'>c</span>:           <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_anim_cursor</span> (<span class='ident'>c</span>:           <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                           <span class='ident'>cid</span>:         <span class='ident'>xcb_cursor_t</span>,
                                           <span class='ident'>cursors_len</span>: <span class='ident'>u32</span>,
-                                          <span class='ident'>cursors</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_animcursorelt_t</span>)
+                                          <span class='ident'>cursors</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_animcursorelt_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_anim_cursor_checked</span> (<span class='ident'>c</span>:           <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_anim_cursor_checked</span> (<span class='ident'>c</span>:           <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                   <span class='ident'>cid</span>:         <span class='ident'>xcb_cursor_t</span>,
                                                   <span class='ident'>cursors_len</span>: <span class='ident'>u32</span>,
-                                                  <span class='ident'>cursors</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_animcursorelt_t</span>)
+                                                  <span class='ident'>cursors</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_animcursorelt_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_spanfix_next</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_spanfix_iterator_t</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_spanfix_next</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_spanfix_iterator_t</span>);
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_spanfix_end</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_spanfix_iterator_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_spanfix_end</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_spanfix_iterator_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_trap_next</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_trap_iterator_t</span>);
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_trap_next</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_trap_iterator_t</span>);
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_trap_end</span> (<span class='ident'>i</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_trap_iterator_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_trap_end</span> (<span class='ident'>i</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_render_trap_iterator_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_add_traps</span> (<span class='ident'>c</span>:         <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_add_traps</span> (<span class='ident'>c</span>:         <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                  <span class='ident'>picture</span>:   <span class='ident'>xcb_render_picture_t</span>,
                                  <span class='ident'>x_off</span>:     <span class='ident'>i16</span>,
                                  <span class='ident'>y_off</span>:     <span class='ident'>i16</span>,
                                  <span class='ident'>traps_len</span>: <span class='ident'>u32</span>,
-                                 <span class='ident'>traps</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_trap_t</span>)
+                                 <span class='ident'>traps</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_trap_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_add_traps_checked</span> (<span class='ident'>c</span>:         <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_add_traps_checked</span> (<span class='ident'>c</span>:         <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                          <span class='ident'>picture</span>:   <span class='ident'>xcb_render_picture_t</span>,
                                          <span class='ident'>x_off</span>:     <span class='ident'>i16</span>,
                                          <span class='ident'>y_off</span>:     <span class='ident'>i16</span>,
                                          <span class='ident'>traps_len</span>: <span class='ident'>u32</span>,
-                                         <span class='ident'>traps</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_trap_t</span>)
+                                         <span class='ident'>traps</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_trap_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_solid_fill</span> (<span class='ident'>c</span>:       <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_solid_fill</span> (<span class='ident'>c</span>:       <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                          <span class='ident'>picture</span>: <span class='ident'>xcb_render_picture_t</span>,
                                          <span class='ident'>color</span>:   <span class='ident'>xcb_render_color_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_solid_fill_checked</span> (<span class='ident'>c</span>:       <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_solid_fill_checked</span> (<span class='ident'>c</span>:       <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                  <span class='ident'>picture</span>: <span class='ident'>xcb_render_picture_t</span>,
                                                  <span class='ident'>color</span>:   <span class='ident'>xcb_render_color_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_linear_gradient</span> (<span class='ident'>c</span>:         <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_linear_gradient</span> (<span class='ident'>c</span>:         <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                               <span class='ident'>picture</span>:   <span class='ident'>xcb_render_picture_t</span>,
                                               <span class='ident'>p1</span>:        <span class='ident'>xcb_render_pointfix_t</span>,
                                               <span class='ident'>p2</span>:        <span class='ident'>xcb_render_pointfix_t</span>,
                                               <span class='ident'>num_stops</span>: <span class='ident'>u32</span>,
-                                              <span class='ident'>stops</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,
-                                              <span class='ident'>colors</span>:    <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>)
+                                              <span class='ident'>stops</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,
+                                              <span class='ident'>colors</span>:    <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_linear_gradient_checked</span> (<span class='ident'>c</span>:         <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_linear_gradient_checked</span> (<span class='ident'>c</span>:         <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                       <span class='ident'>picture</span>:   <span class='ident'>xcb_render_picture_t</span>,
                                                       <span class='ident'>p1</span>:        <span class='ident'>xcb_render_pointfix_t</span>,
                                                       <span class='ident'>p2</span>:        <span class='ident'>xcb_render_pointfix_t</span>,
                                                       <span class='ident'>num_stops</span>: <span class='ident'>u32</span>,
-                                                      <span class='ident'>stops</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,
-                                                      <span class='ident'>colors</span>:    <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>)
+                                                      <span class='ident'>stops</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,
+                                                      <span class='ident'>colors</span>:    <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_radial_gradient</span> (<span class='ident'>c</span>:            <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_radial_gradient</span> (<span class='ident'>c</span>:            <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                               <span class='ident'>picture</span>:      <span class='ident'>xcb_render_picture_t</span>,
                                               <span class='ident'>inner</span>:        <span class='ident'>xcb_render_pointfix_t</span>,
                                               <span class='ident'>outer</span>:        <span class='ident'>xcb_render_pointfix_t</span>,
                                               <span class='ident'>inner_radius</span>: <span class='ident'>xcb_render_fixed_t</span>,
                                               <span class='ident'>outer_radius</span>: <span class='ident'>xcb_render_fixed_t</span>,
                                               <span class='ident'>num_stops</span>:    <span class='ident'>u32</span>,
-                                              <span class='ident'>stops</span>:        <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,
-                                              <span class='ident'>colors</span>:       <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>)
+                                              <span class='ident'>stops</span>:        <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,
+                                              <span class='ident'>colors</span>:       <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_radial_gradient_checked</span> (<span class='ident'>c</span>:            <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_radial_gradient_checked</span> (<span class='ident'>c</span>:            <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                       <span class='ident'>picture</span>:      <span class='ident'>xcb_render_picture_t</span>,
                                                       <span class='ident'>inner</span>:        <span class='ident'>xcb_render_pointfix_t</span>,
                                                       <span class='ident'>outer</span>:        <span class='ident'>xcb_render_pointfix_t</span>,
                                                       <span class='ident'>inner_radius</span>: <span class='ident'>xcb_render_fixed_t</span>,
                                                       <span class='ident'>outer_radius</span>: <span class='ident'>xcb_render_fixed_t</span>,
                                                       <span class='ident'>num_stops</span>:    <span class='ident'>u32</span>,
-                                                      <span class='ident'>stops</span>:        <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,
-                                                      <span class='ident'>colors</span>:       <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>)
+                                                      <span class='ident'>stops</span>:        <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,
+                                                      <span class='ident'>colors</span>:       <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_conical_gradient</span> (<span class='ident'>c</span>:         <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_conical_gradient</span> (<span class='ident'>c</span>:         <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                <span class='ident'>picture</span>:   <span class='ident'>xcb_render_picture_t</span>,
                                                <span class='ident'>center</span>:    <span class='ident'>xcb_render_pointfix_t</span>,
                                                <span class='ident'>angle</span>:     <span class='ident'>xcb_render_fixed_t</span>,
                                                <span class='ident'>num_stops</span>: <span class='ident'>u32</span>,
-                                               <span class='ident'>stops</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,
-                                               <span class='ident'>colors</span>:    <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>)
+                                               <span class='ident'>stops</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,
+                                               <span class='ident'>colors</span>:    <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_conical_gradient_checked</span> (<span class='ident'>c</span>:         <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_render_create_conical_gradient_checked</span> (<span class='ident'>c</span>:         <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                        <span class='ident'>picture</span>:   <span class='ident'>xcb_render_picture_t</span>,
                                                        <span class='ident'>center</span>:    <span class='ident'>xcb_render_pointfix_t</span>,
                                                        <span class='ident'>angle</span>:     <span class='ident'>xcb_render_fixed_t</span>,
                                                        <span class='ident'>num_stops</span>: <span class='ident'>u32</span>,
-                                                       <span class='ident'>stops</span>:     <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,
-                                                       <span class='ident'>colors</span>:    <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>)
+                                                       <span class='ident'>stops</span>:     <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_fixed_t</span>,
+                                                       <span class='ident'>colors</span>:    <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_render_color_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_void_cookie_t</span>;
 
 } <span class='comment'>// extern</span>

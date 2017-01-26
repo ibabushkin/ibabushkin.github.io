@@ -48,12 +48,14 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../../src/gabelstaplerwm/wm/layout/mod.rs.html#121-142' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../../src/gabelstaplerwm/wm/layout/mod.rs.html#121-146' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum LayoutMessage {
     MasterFactorAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>),
     MasterFactorRel(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i8.html'>i8</a>),
     FixedAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>),
     FixedRel,
+    InvertedAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>),
+    InvertedRel,
     XOffAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>),
     XOffRel(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>),
     YOffAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>),
@@ -69,7 +71,9 @@ to any subset of the message variants below, or none at all.</p>
 <span id='variant.MasterFactorAbs' class='variant'><span id='MasterFactorAbs.v' class='invisible'><code>MasterFactorAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>)</code></span></span><div class='docblock'><p>Set absolute value of the master factor.</p>
 </div><span id='variant.MasterFactorRel' class='variant'><span id='MasterFactorRel.v' class='invisible'><code>MasterFactorRel(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i8.html'>i8</a>)</code></span></span><div class='docblock'><p>Add an offset to the master factor.</p>
 </div><span id='variant.FixedAbs' class='variant'><span id='FixedAbs.v' class='invisible'><code>FixedAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></span></span><div class='docblock'><p>Set <code>fixed</code> attribute of layout.</p>
-</div><span id='variant.FixedRel' class='variant'><span id='FixedRel.v' class='invisible'><code>FixedRel</code></span></span><div class='docblock'><p>Toggle <code>fixed</code> attrbute of layout.</p>
+</div><span id='variant.FixedRel' class='variant'><span id='FixedRel.v' class='invisible'><code>FixedRel</code></span></span><div class='docblock'><p>Toggle <code>fixed</code> attribute of layout.</p>
+</div><span id='variant.InvertedAbs' class='variant'><span id='InvertedAbs.v' class='invisible'><code>InvertedAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>)</code></span></span><div class='docblock'><p>Set <code>inverted</code> attribute of layout.</p>
+</div><span id='variant.InvertedRel' class='variant'><span id='InvertedRel.v' class='invisible'><code>InvertedRel</code></span></span><div class='docblock'><p>Toggle <code>inverted</code> attribute of layout.</p>
 </div><span id='variant.XOffAbs' class='variant'><span id='XOffAbs.v' class='invisible'><code>XOffAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>)</code></span></span><div class='docblock'><p>Set absolute value of the x offset.</p>
 </div><span id='variant.XOffRel' class='variant'><span id='XOffRel.v' class='invisible'><code>XOffRel(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>)</code></span></span><div class='docblock'><p>Add an offset to the x offset.</p>
 </div><span id='variant.YOffAbs' class='variant'><span id='YOffAbs.v' class='invisible'><code>YOffAbs(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>)</code></span></span><div class='docblock'><p>Set absolute value of the y offset.</p>

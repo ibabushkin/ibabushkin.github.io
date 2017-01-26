@@ -817,11 +817,11 @@
  */</span>
 
 
-<span class='kw'>use</span> <span class='ident'>xproto</span>::<span class='op'>*</span>;
-<span class='kw'>use</span> <span class='ident'>ffi</span>::<span class='ident'>base</span>::<span class='op'>*</span>;
-<span class='kw'>use</span> <span class='ident'>ffi</span>::<span class='ident'>xproto</span>::<span class='op'>*</span>;
+<span class='kw'>use</span> <span class='ident'>xproto</span>::<span class='kw-2'>*</span>;
+<span class='kw'>use</span> <span class='ident'>ffi</span>::<span class='ident'>base</span>::<span class='kw-2'>*</span>;
+<span class='kw'>use</span> <span class='ident'>ffi</span>::<span class='ident'>xproto</span>::<span class='kw-2'>*</span>;
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span><span class='op'>=</span><span class='string'>&quot;xlib_xcb&quot;</span>)]</span>
-<span class='kw'>use</span> <span class='ident'>ffi</span>::<span class='ident'>xlib_xcb</span>::<span class='op'>*</span>;
+<span class='kw'>use</span> <span class='ident'>ffi</span>::<span class='ident'>xlib_xcb</span>::<span class='kw-2'>*</span>;
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span><span class='op'>=</span><span class='string'>&quot;xlib_xcb&quot;</span>)]</span>
 <span class='kw'>use</span> <span class='ident'>x11</span>::<span class='ident'>xlib</span>;
@@ -869,7 +869,7 @@
 <span class='doccomment'>/// that must not be freed</span>
 <span class='doccomment'>/// it is instead bound to the lifetime of its parent that it borrows immutably</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>StructPtr</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span>, <span class='ident'>T</span>: <span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
-    <span class='kw'>pub</span> <span class='ident'>ptr</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>,
+    <span class='kw'>pub</span> <span class='ident'>ptr</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>,
     <span class='ident'>phantom</span>: <span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> <span class='ident'>T</span><span class='op'>&gt;</span>
 }
 
@@ -877,14 +877,14 @@
 <span class='doccomment'>/// `Event` wraps a pointer to `xcb_*_event_t`</span>
 <span class='doccomment'>/// this pointer will be freed when the `Event` goes out of scope</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Event</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
-   <span class='kw'>pub</span> <span class='ident'>ptr</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>
+   <span class='kw'>pub</span> <span class='ident'>ptr</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>
 }
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>Event</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>response_type</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u8</span> {
         <span class='kw'>unsafe</span> {
-            <span class='kw'>let</span> <span class='ident'>gev</span> : <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_event_t</span> <span class='op'>=</span> <span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>.<span class='ident'>ptr</span>);
-            (<span class='op'>*</span><span class='ident'>gev</span>).<span class='ident'>response_type</span>
+            <span class='kw'>let</span> <span class='ident'>gev</span> : <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_event_t</span> <span class='op'>=</span> <span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>.<span class='ident'>ptr</span>);
+            (<span class='kw-2'>*</span><span class='ident'>gev</span>).<span class='ident'>response_type</span>
         }
     }
 }
@@ -892,7 +892,7 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>Drop</span> <span class='kw'>for</span> <span class='ident'>Event</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='kw'>fn</span> <span class='ident'>drop</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
         <span class='kw'>unsafe</span> {
-            <span class='ident'>libc</span>::<span class='ident'>free</span>(<span class='self'>self</span>.<span class='ident'>ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>);
+            <span class='ident'>libc</span>::<span class='ident'>free</span>(<span class='self'>self</span>.<span class='ident'>ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>);
         }
     }
 }
@@ -917,20 +917,20 @@
 <span class='doccomment'>/// this pointer will be freed when the `Error` goes out of scope</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Error</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
-    <span class='kw'>pub</span> <span class='ident'>ptr</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>
+    <span class='kw'>pub</span> <span class='ident'>ptr</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>
 }
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>Error</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>response_type</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u8</span> {
         <span class='kw'>unsafe</span> {
-            <span class='kw'>let</span> <span class='ident'>ger</span> : <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span> <span class='op'>=</span> <span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>.<span class='ident'>ptr</span>);
-            (<span class='op'>*</span><span class='ident'>ger</span>).<span class='ident'>response_type</span>
+            <span class='kw'>let</span> <span class='ident'>ger</span> : <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span> <span class='op'>=</span> <span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>.<span class='ident'>ptr</span>);
+            (<span class='kw-2'>*</span><span class='ident'>ger</span>).<span class='ident'>response_type</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>error_code</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u8</span> {
         <span class='kw'>unsafe</span> {
-            <span class='kw'>let</span> <span class='ident'>ger</span> : <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span> <span class='op'>=</span> <span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>.<span class='ident'>ptr</span>);
-            (<span class='op'>*</span><span class='ident'>ger</span>).<span class='ident'>error_code</span>
+            <span class='kw'>let</span> <span class='ident'>ger</span> : <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span> <span class='op'>=</span> <span class='ident'>mem</span>::<span class='ident'>transmute</span>(<span class='self'>self</span>.<span class='ident'>ptr</span>);
+            (<span class='kw-2'>*</span><span class='ident'>ger</span>).<span class='ident'>error_code</span>
         }
     }
 }
@@ -938,7 +938,7 @@
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>Drop</span> <span class='kw'>for</span> <span class='ident'>Error</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='kw'>fn</span> <span class='ident'>drop</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
         <span class='kw'>unsafe</span> {
-            <span class='ident'>libc</span>::<span class='ident'>free</span>(<span class='self'>self</span>.<span class='ident'>ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>);
+            <span class='ident'>libc</span>::<span class='ident'>free</span>(<span class='self'>self</span>.<span class='ident'>ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>);
         }
     }
 }
@@ -995,13 +995,13 @@
 <span class='doccomment'>/// Wraps a pointer to a `xcb_*_reply_t`</span>
 <span class='doccomment'>/// the pointer is freed when the `Reply` goes out of scope</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Reply</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
-    <span class='kw'>pub</span> <span class='ident'>ptr</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>
+    <span class='kw'>pub</span> <span class='ident'>ptr</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>T</span>
 }
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>Drop</span> <span class='kw'>for</span> <span class='ident'>Reply</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
     <span class='kw'>fn</span> <span class='ident'>drop</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
         <span class='kw'>unsafe</span> {
-            <span class='ident'>libc</span>::<span class='ident'>free</span>(<span class='self'>self</span>.<span class='ident'>ptr</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>);
+            <span class='ident'>libc</span>::<span class='ident'>free</span>(<span class='self'>self</span>.<span class='ident'>ptr</span> <span class='kw'>as</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>c_void</span>);
         }
     }
 }
@@ -1058,9 +1058,9 @@
 <span class='doccomment'>/// It wraps an `xcb_connection_t` object and</span>
 <span class='doccomment'>/// will call `xcb_disconnect` when the `Connection` goes out of scope</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Connection</span> {
-    <span class='ident'>c</span>:   <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='ident'>c</span>:   <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
     <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span><span class='op'>=</span><span class='string'>&quot;xlib_xcb&quot;</span>)]</span>
-    <span class='ident'>dpy</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xlib</span>::<span class='ident'>Display</span>,
+    <span class='ident'>dpy</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xlib</span>::<span class='ident'>Display</span>,
 }
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span><span class='op'>=</span><span class='string'>&quot;thread&quot;</span>)]</span>
@@ -1240,13 +1240,13 @@
     }
 
     <span class='doccomment'>/// Returns the inner ffi `xcb_connection_t` pointer</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_raw_conn</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_raw_conn</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span> {
         <span class='self'>self</span>.<span class='ident'>c</span>
     }
 
     <span class='doccomment'>/// Returns the inner ffi `xlib::Display` pointer.</span>
     <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span><span class='op'>=</span><span class='string'>&quot;xlib_xcb&quot;</span>)]</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_raw_dpy</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xlib</span>::<span class='ident'>Display</span> {
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>get_raw_dpy</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xlib</span>::<span class='ident'>Display</span> {
         <span class='self'>self</span>.<span class='ident'>dpy</span>
     }
 
@@ -1350,7 +1350,7 @@
     <span class='doccomment'>/// wraps a `xlib::Display` and get an XCB connection from an exisiting object</span>
     <span class='doccomment'>/// `xlib::XCloseDisplay` will be called when the returned object is dropped</span>
     <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span><span class='op'>=</span><span class='string'>&quot;xlib_xcb&quot;</span>)]</span>
-    <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>new_from_xlib_display</span>(<span class='ident'>dpy</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xlib</span>::<span class='ident'>Display</span>) <span class='op'>-&gt;</span> <span class='ident'>Connection</span> {
+    <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>new_from_xlib_display</span>(<span class='ident'>dpy</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xlib</span>::<span class='ident'>Display</span>) <span class='op'>-&gt;</span> <span class='ident'>Connection</span> {
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>dpy</span>.<span class='ident'>is_null</span>(), <span class='string'>&quot;attempt connect with null display&quot;</span>);
         <span class='ident'>Connection</span> {
             <span class='ident'>c</span>: <span class='ident'>XGetXCBConnection</span>(<span class='ident'>dpy</span>),
@@ -1395,7 +1395,7 @@
 
     <span class='doccomment'>/// builds a new Connection object from an available connection</span>
     <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>not</span>(<span class='ident'>feature</span><span class='op'>=</span><span class='string'>&quot;xlib_xcb&quot;</span>))]</span>
-    <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>from_raw_conn</span>(<span class='ident'>conn</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>) <span class='op'>-&gt;</span> <span class='ident'>Connection</span> {
+    <span class='kw'>pub</span> <span class='kw'>unsafe</span> <span class='kw'>fn</span> <span class='ident'>from_raw_conn</span>(<span class='ident'>conn</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>) <span class='op'>-&gt;</span> <span class='ident'>Connection</span> {
         <span class='macro'>assert</span><span class='macro'>!</span>(<span class='op'>!</span><span class='ident'>conn</span>.<span class='ident'>is_null</span>());
 
         <span class='ident'>Connection</span> {
@@ -1432,29 +1432,29 @@
 <span class='comment'>// must not be freed.</span>
 <span class='comment'>// Named QueryExtensionData to avoid name collision</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>QueryExtensionData</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
-    <span class='ident'>ptr</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_query_extension_reply_t</span>,
+    <span class='ident'>ptr</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_query_extension_reply_t</span>,
     <span class='ident'>_marker</span>: <span class='ident'>PhantomData</span><span class='op'>&lt;</span><span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> ()<span class='op'>&gt;</span>,
 }
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>QueryExtensionData</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> {
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>present</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>present</span> <span class='op'>!=</span> <span class='number'>0</span>
+            (<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>present</span> <span class='op'>!=</span> <span class='number'>0</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>major_opcode</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u8</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>major_opcode</span>
+            (<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>major_opcode</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>first_event</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u8</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>first_event</span>
+            (<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>first_event</span>
         }
     }
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>first_error</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>u8</span> {
         <span class='kw'>unsafe</span> {
-            (<span class='op'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>first_error</span>
+            (<span class='kw-2'>*</span><span class='self'>self</span>.<span class='ident'>ptr</span>).<span class='ident'>first_error</span>
         }
     }
 }
@@ -1516,7 +1516,7 @@
 
     <span class='kw'>for</span> <span class='ident'>el</span> <span class='kw'>in</span> <span class='ident'>bf</span>.<span class='ident'>iter</span>() {
         <span class='kw'>let</span> <span class='kw-2'>&amp;</span>(<span class='ident'>f</span>, <span class='ident'>v</span>) <span class='op'>=</span> <span class='ident'>el</span>;
-        <span class='kw'>if</span> <span class='ident'>mask</span> <span class='kw-2'>&amp;</span> <span class='ident'>f</span> <span class='op'>&gt;</span> <span class='ident'>T</span>::<span class='ident'>zero</span>() {
+        <span class='kw'>if</span> <span class='ident'>mask</span> <span class='op'>&amp;</span> <span class='ident'>f</span> <span class='op'>&gt;</span> <span class='ident'>T</span>::<span class='ident'>zero</span>() {
             <span class='kw'>continue</span>;
         } <span class='kw'>else</span> {
             <span class='ident'>mask</span> <span class='op'>=</span> <span class='ident'>mask</span><span class='op'>|</span><span class='ident'>f</span>;

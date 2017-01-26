@@ -226,7 +226,7 @@
 
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>allow</span>(<span class='ident'>improper_ctypes</span>)]</span>
 
-<span class='kw'>use</span> <span class='ident'>ffi</span>::<span class='ident'>base</span>::<span class='op'>*</span>;
+<span class='kw'>use</span> <span class='ident'>ffi</span>::<span class='ident'>base</span>::<span class='kw-2'>*</span>;
 
 <span class='kw'>use</span> <span class='ident'>libc</span>::{<span class='ident'>c_char</span>, <span class='ident'>c_int</span>, <span class='ident'>c_uint</span>, <span class='ident'>c_void</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>;
@@ -248,7 +248,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_xc_misc_get_version_request_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_xc_misc_get_version_request_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_xc_misc_get_version_request_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_xc_misc_get_version_request_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
@@ -269,7 +269,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_xc_misc_get_version_reply_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_xc_misc_get_version_reply_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_xc_misc_get_version_reply_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_xc_misc_get_version_reply_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>XCB_XC_MISC_GET_XID_RANGE</span>: <span class='ident'>u8</span> <span class='op'>=</span> <span class='number'>1</span>;
@@ -283,7 +283,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_xc_misc_get_xid_range_request_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_xc_misc_get_xid_range_request_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_xc_misc_get_xid_range_request_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_xc_misc_get_xid_range_request_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
@@ -304,7 +304,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_xc_misc_get_xid_range_reply_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_xc_misc_get_xid_range_reply_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_xc_misc_get_xid_range_reply_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_xc_misc_get_xid_range_reply_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='kw'>pub</span> <span class='kw'>const</span> <span class='ident'>XCB_XC_MISC_GET_XID_LIST</span>: <span class='ident'>u8</span> <span class='op'>=</span> <span class='number'>2</span>;
@@ -319,7 +319,7 @@
 
 <span class='kw'>impl</span> <span class='ident'>Copy</span> <span class='kw'>for</span> <span class='ident'>xcb_xc_misc_get_xid_list_request_t</span> {}
 <span class='kw'>impl</span> <span class='ident'>Clone</span> <span class='kw'>for</span> <span class='ident'>xcb_xc_misc_get_xid_list_request_t</span> {
-    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_xc_misc_get_xid_list_request_t</span> { <span class='op'>*</span><span class='self'>self</span> }
+    <span class='kw'>fn</span> <span class='ident'>clone</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>xcb_xc_misc_get_xid_list_request_t</span> { <span class='kw-2'>*</span><span class='self'>self</span> }
 }
 
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Copy</span>, <span class='ident'>Clone</span>)]</span>
@@ -345,53 +345,53 @@
     <span class='kw'>pub</span> <span class='kw'>static</span> <span class='kw-2'>mut</span> <span class='ident'>xcb_xc_misc_id</span>: <span class='ident'>xcb_extension_t</span>;
 
     <span class='doccomment'>/// the returned value must be freed by the caller using libc::free().</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_version_reply</span> (<span class='ident'>c</span>:      <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_version_reply</span> (<span class='ident'>c</span>:      <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                           <span class='ident'>cookie</span>: <span class='ident'>xcb_xc_misc_get_version_cookie_t</span>,
-                                          <span class='ident'>error</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span>)
-            <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xc_misc_get_version_reply_t</span>;
+                                          <span class='ident'>error</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span>)
+            <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xc_misc_get_version_reply_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_version</span> (<span class='ident'>c</span>:                    <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_version</span> (<span class='ident'>c</span>:                    <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                     <span class='ident'>client_major_version</span>: <span class='ident'>u16</span>,
                                     <span class='ident'>client_minor_version</span>: <span class='ident'>u16</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_xc_misc_get_version_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_version_unchecked</span> (<span class='ident'>c</span>:                    <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_version_unchecked</span> (<span class='ident'>c</span>:                    <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                               <span class='ident'>client_major_version</span>: <span class='ident'>u16</span>,
                                               <span class='ident'>client_minor_version</span>: <span class='ident'>u16</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_xc_misc_get_version_cookie_t</span>;
 
     <span class='doccomment'>/// the returned value must be freed by the caller using libc::free().</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_xid_range_reply</span> (<span class='ident'>c</span>:      <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_xid_range_reply</span> (<span class='ident'>c</span>:      <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                             <span class='ident'>cookie</span>: <span class='ident'>xcb_xc_misc_get_xid_range_cookie_t</span>,
-                                            <span class='ident'>error</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span>)
-            <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xc_misc_get_xid_range_reply_t</span>;
+                                            <span class='ident'>error</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span>)
+            <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xc_misc_get_xid_range_reply_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_xid_range</span> (<span class='ident'>c</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_xid_range</span> (<span class='ident'>c</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_xc_misc_get_xid_range_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_xid_range_unchecked</span> (<span class='ident'>c</span>: <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_xid_range_unchecked</span> (<span class='ident'>c</span>: <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_xc_misc_get_xid_range_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_xid_list_ids</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_xc_misc_get_xid_list_reply_t</span>)
-            <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>u32</span>;
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_xid_list_ids</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_xc_misc_get_xid_list_reply_t</span>)
+            <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>u32</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_xid_list_ids_length</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_xc_misc_get_xid_list_reply_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_xid_list_ids_length</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_xc_misc_get_xid_list_reply_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>c_int</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_xid_list_ids_end</span> (<span class='ident'>R</span>: <span class='op'>*</span><span class='kw'>const</span> <span class='ident'>xcb_xc_misc_get_xid_list_reply_t</span>)
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_xid_list_ids_end</span> (<span class='ident'>R</span>: <span class='kw-2'>*</span><span class='kw'>const</span> <span class='ident'>xcb_xc_misc_get_xid_list_reply_t</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_generic_iterator_t</span>;
 
     <span class='doccomment'>/// the returned value must be freed by the caller using libc::free().</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_xid_list_reply</span> (<span class='ident'>c</span>:      <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_xid_list_reply</span> (<span class='ident'>c</span>:      <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                            <span class='ident'>cookie</span>: <span class='ident'>xcb_xc_misc_get_xid_list_cookie_t</span>,
-                                           <span class='ident'>error</span>:  <span class='op'>*</span><span class='kw-2'>mut</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span>)
-            <span class='op'>-&gt;</span> <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xc_misc_get_xid_list_reply_t</span>;
+                                           <span class='ident'>error</span>:  <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_generic_error_t</span>)
+            <span class='op'>-&gt;</span> <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_xc_misc_get_xid_list_reply_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_xid_list</span> (<span class='ident'>c</span>:     <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_xid_list</span> (<span class='ident'>c</span>:     <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                      <span class='ident'>count</span>: <span class='ident'>u32</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_xc_misc_get_xid_list_cookie_t</span>;
 
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_xid_list_unchecked</span> (<span class='ident'>c</span>:     <span class='op'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>xcb_xc_misc_get_xid_list_unchecked</span> (<span class='ident'>c</span>:     <span class='kw-2'>*</span><span class='kw-2'>mut</span> <span class='ident'>xcb_connection_t</span>,
                                                <span class='ident'>count</span>: <span class='ident'>u32</span>)
             <span class='op'>-&gt;</span> <span class='ident'>xcb_xc_misc_get_xid_list_cookie_t</span>;
 
