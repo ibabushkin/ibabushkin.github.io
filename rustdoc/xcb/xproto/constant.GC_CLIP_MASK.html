@@ -44,12 +44,12 @@
     </nav>
 
     <section id='main' class="content constant">
-<h1 class='fqn'><span class='in-band'>Constant <a href='../index.html'>xcb</a>::<wbr><a href='index.html'>xproto</a>::<wbr><a class='constant' href=''>GC_CLIP_MASK</a></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Constant <a href='../index.html'>xcb</a>::<wbr><a href='index.html'>xproto</a>::<wbr><a class="constant" href=''>GC_CLIP_MASK</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a class='srclink' href='../../src/xcb/xproto.rs.html#707' title='goto source code'>[src]</a></span></h1>
-<pre class='rust const'>pub const GC_CLIP_MASK: <a class='type' href='../../xcb/xproto/type.Gc.html' title='xcb::xproto::Gc'>Gc</a><code> = </code><code>524288</code></pre><div class='docblock'><p>The clip-mask restricts writes to the destination drawable. Only pixels where the clip-mask has
+<pre class='rust const'>pub const GC_CLIP_MASK: <a class="type" href="../../xcb/xproto/type.Gc.html" title="type xcb::xproto::Gc">Gc</a><code> = </code><code>524288</code></pre><div class='docblock'><p>The clip-mask restricts writes to the destination drawable. Only pixels where the clip-mask has
 bits set to 1 are drawn. Pixels are not drawn outside the area covered by the clip-mask or where
 the clip-mask has bits set to 0. The clip-mask affects all graphics requests, but it does not clip
 sources. The clip-mask origin is interpreted relative to the origin of whatever destination drawable is specified in a graphics request. If a pixmap is specified as the clip-mask, it must have

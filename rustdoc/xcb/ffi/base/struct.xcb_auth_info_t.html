@@ -44,36 +44,36 @@
     </nav>
 
     <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>xcb</a>::<wbr><a href='../index.html'>ffi</a>::<wbr><a href='index.html'>base</a>::<wbr><a class='struct' href=''>xcb_auth_info_t</a></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>xcb</a>::<wbr><a href='../index.html'>ffi</a>::<wbr><a href='index.html'>base</a>::<wbr><a class="struct" href=''>xcb_auth_info_t</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a class='srclink' href='../../../src/xcb/ffi/base.rs.html#165-175' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'><div class="docblock attributes">#[repr(C)]
 </div>pub struct xcb_auth_info_t {
-    pub namelen: <a class='type' href='../../../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
-    pub name: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='type' href='../../../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_char</a>,
-    pub datalen: <a class='type' href='../../../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
-    pub data: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='type' href='../../../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_char</a>,
+    pub namelen: <a class="type" href="../../../libc/type.c_int.html" title="type libc::c_int">c_int</a>,
+    pub name: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="type" href="../../../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html" title="type libc::unix::notbsd::linux::other::b64::x86_64::c_char">c_char</a>,
+    pub datalen: <a class="type" href="../../../libc/type.c_int.html" title="type libc::c_int">c_int</a>,
+    pub data: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="type" href="../../../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html" title="type libc::unix::notbsd::linux::other::b64::x86_64::c_char">c_char</a>,
 }</pre><div class='docblock'><p>Container for authorization information.
 A container for authorization information to be sent to the X server</p>
-</div><h2 class='fields'>Fields</h2><span id='structfield.namelen' class='structfield'>
+</div><h2 class='fields'>Fields</h2><span id='structfield.namelen' class="structfield">
                            <span id='namelen.v' class='invisible'>
-                           <code>namelen: <a class='type' href='../../../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
-                           </span></span><span class='stab '></span><div class='docblock'><p>length of the string name (as returned by strlen)</p>
-</div><span id='structfield.name' class='structfield'>
+                           <code>namelen: <a class="type" href="../../../libc/type.c_int.html" title="type libc::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>length of the string name (as returned by strlen)</p>
+</div><span id='structfield.name' class="structfield">
                            <span id='name.v' class='invisible'>
-                           <code>name: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='type' href='../../../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_char</a></code>
-                           </span></span><span class='stab '></span><div class='docblock'><p>String containing the authentication protocol name,
+                           <code>name: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="type" href="../../../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html" title="type libc::unix::notbsd::linux::other::b64::x86_64::c_char">c_char</a></code>
+                           </span></span><div class='docblock'><p>String containing the authentication protocol name,
 such as &quot;MIT-MAGIC-COOKIE-1&quot; or &quot;XDM-AUTHORIZATION-1&quot;.</p>
-</div><span id='structfield.datalen' class='structfield'>
+</div><span id='structfield.datalen' class="structfield">
                            <span id='datalen.v' class='invisible'>
-                           <code>datalen: <a class='type' href='../../../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
-                           </span></span><span class='stab '></span><div class='docblock'><p>length of the data member</p>
-</div><span id='structfield.data' class='structfield'>
+                           <code>datalen: <a class="type" href="../../../libc/type.c_int.html" title="type libc::c_int">c_int</a></code>
+                           </span></span><div class='docblock'><p>length of the data member</p>
+</div><span id='structfield.data' class="structfield">
                            <span id='data.v' class='invisible'>
-                           <code>data: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.pointer.html'>*mut </a><a class='type' href='../../../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_char</a></code>
-                           </span></span><span class='stab '></span><div class='docblock'><p>data interpreted in a protocol specific manner</p>
+                           <code>data: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.pointer.html">*mut </a><a class="type" href="../../../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html" title="type libc::unix::notbsd::linux::other::b64::x86_64::c_char">c_char</a></code>
+                           </span></span><div class='docblock'><p>data interpreted in a protocol specific manner</p>
 </div></section>
     <section id='search' class="content hidden"></section>
 

@@ -44,118 +44,118 @@
     </nav>
 
     <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>xcb</a>::<wbr><a href='../index.html'>ffi</a>::<wbr><a href='index.html'>xkb</a>::<wbr><a class='struct' href=''>xcb_xkb_map_notify_event_t</a></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>xcb</a>::<wbr><a href='../index.html'>ffi</a>::<wbr><a href='index.html'>xkb</a>::<wbr><a class="struct" href=''>xcb_xkb_map_notify_event_t</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a class='srclink' href='../../../src/xcb/ffi/xkb.rs.html#2713-2739' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'><div class="docblock attributes">#[repr(C)]
 </div>pub struct xcb_xkb_map_notify_event_t {
-    pub response_type: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub xkbType: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub sequence: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>,
-    pub time: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_timestamp_t.html' title='xcb::ffi::xproto::xcb_timestamp_t'>xcb_timestamp_t</a>,
-    pub deviceID: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub ptrBtnActions: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub changed: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>,
-    pub minKeyCode: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a>,
-    pub maxKeyCode: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a>,
-    pub firstType: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub nTypes: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub firstKeySym: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a>,
-    pub nKeySyms: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub firstKeyAct: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a>,
-    pub nKeyActs: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub firstKeyBehavior: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a>,
-    pub nKeyBehavior: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub firstKeyExplicit: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a>,
-    pub nKeyExplicit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub firstModMapKey: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a>,
-    pub nModMapKeys: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub firstVModMapKey: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a>,
-    pub nVModMapKeys: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub virtualMods: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>,
-    pub pad0: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 2]</a>,
-}</pre><h2 class='fields'>Fields</h2><span id='structfield.response_type' class='structfield'>
+    pub response_type: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub xkbType: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub sequence: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u16.html">u16</a>,
+    pub time: <a class="type" href="../../../xcb/ffi/xproto/type.xcb_timestamp_t.html" title="type xcb::ffi::xproto::xcb_timestamp_t">xcb_timestamp_t</a>,
+    pub deviceID: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub ptrBtnActions: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub changed: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u16.html">u16</a>,
+    pub minKeyCode: <a class="type" href="../../../xcb/ffi/xproto/type.xcb_keycode_t.html" title="type xcb::ffi::xproto::xcb_keycode_t">xcb_keycode_t</a>,
+    pub maxKeyCode: <a class="type" href="../../../xcb/ffi/xproto/type.xcb_keycode_t.html" title="type xcb::ffi::xproto::xcb_keycode_t">xcb_keycode_t</a>,
+    pub firstType: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub nTypes: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub firstKeySym: <a class="type" href="../../../xcb/ffi/xproto/type.xcb_keycode_t.html" title="type xcb::ffi::xproto::xcb_keycode_t">xcb_keycode_t</a>,
+    pub nKeySyms: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub firstKeyAct: <a class="type" href="../../../xcb/ffi/xproto/type.xcb_keycode_t.html" title="type xcb::ffi::xproto::xcb_keycode_t">xcb_keycode_t</a>,
+    pub nKeyActs: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub firstKeyBehavior: <a class="type" href="../../../xcb/ffi/xproto/type.xcb_keycode_t.html" title="type xcb::ffi::xproto::xcb_keycode_t">xcb_keycode_t</a>,
+    pub nKeyBehavior: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub firstKeyExplicit: <a class="type" href="../../../xcb/ffi/xproto/type.xcb_keycode_t.html" title="type xcb::ffi::xproto::xcb_keycode_t">xcb_keycode_t</a>,
+    pub nKeyExplicit: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub firstModMapKey: <a class="type" href="../../../xcb/ffi/xproto/type.xcb_keycode_t.html" title="type xcb::ffi::xproto::xcb_keycode_t">xcb_keycode_t</a>,
+    pub nModMapKeys: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub firstVModMapKey: <a class="type" href="../../../xcb/ffi/xproto/type.xcb_keycode_t.html" title="type xcb::ffi::xproto::xcb_keycode_t">xcb_keycode_t</a>,
+    pub nVModMapKeys: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub virtualMods: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u16.html">u16</a>,
+    pub pad0: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">[</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">; 2]</a>,
+}</pre><h2 class='fields'>Fields</h2><span id='structfield.response_type' class="structfield">
                            <span id='response_type.v' class='invisible'>
-                           <code>response_type: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.xkbType' class='structfield'>
+                           <code>response_type: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.xkbType' class="structfield">
                            <span id='xkbType.v' class='invisible'>
-                           <code>xkbType: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.sequence' class='structfield'>
+                           <code>xkbType: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.sequence' class="structfield">
                            <span id='sequence.v' class='invisible'>
-                           <code>sequence: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.time' class='structfield'>
+                           <code>sequence: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u16.html">u16</a></code>
+                           </span></span><span id='structfield.time' class="structfield">
                            <span id='time.v' class='invisible'>
-                           <code>time: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_timestamp_t.html' title='xcb::ffi::xproto::xcb_timestamp_t'>xcb_timestamp_t</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.deviceID' class='structfield'>
+                           <code>time: <a class="type" href="../../../xcb/ffi/xproto/type.xcb_timestamp_t.html" title="type xcb::ffi::xproto::xcb_timestamp_t">xcb_timestamp_t</a></code>
+                           </span></span><span id='structfield.deviceID' class="structfield">
                            <span id='deviceID.v' class='invisible'>
-                           <code>deviceID: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.ptrBtnActions' class='structfield'>
+                           <code>deviceID: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.ptrBtnActions' class="structfield">
                            <span id='ptrBtnActions.v' class='invisible'>
-                           <code>ptrBtnActions: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.changed' class='structfield'>
+                           <code>ptrBtnActions: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.changed' class="structfield">
                            <span id='changed.v' class='invisible'>
-                           <code>changed: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.minKeyCode' class='structfield'>
+                           <code>changed: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u16.html">u16</a></code>
+                           </span></span><span id='structfield.minKeyCode' class="structfield">
                            <span id='minKeyCode.v' class='invisible'>
-                           <code>minKeyCode: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.maxKeyCode' class='structfield'>
+                           <code>minKeyCode: <a class="type" href="../../../xcb/ffi/xproto/type.xcb_keycode_t.html" title="type xcb::ffi::xproto::xcb_keycode_t">xcb_keycode_t</a></code>
+                           </span></span><span id='structfield.maxKeyCode' class="structfield">
                            <span id='maxKeyCode.v' class='invisible'>
-                           <code>maxKeyCode: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.firstType' class='structfield'>
+                           <code>maxKeyCode: <a class="type" href="../../../xcb/ffi/xproto/type.xcb_keycode_t.html" title="type xcb::ffi::xproto::xcb_keycode_t">xcb_keycode_t</a></code>
+                           </span></span><span id='structfield.firstType' class="structfield">
                            <span id='firstType.v' class='invisible'>
-                           <code>firstType: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.nTypes' class='structfield'>
+                           <code>firstType: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.nTypes' class="structfield">
                            <span id='nTypes.v' class='invisible'>
-                           <code>nTypes: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.firstKeySym' class='structfield'>
+                           <code>nTypes: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.firstKeySym' class="structfield">
                            <span id='firstKeySym.v' class='invisible'>
-                           <code>firstKeySym: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.nKeySyms' class='structfield'>
+                           <code>firstKeySym: <a class="type" href="../../../xcb/ffi/xproto/type.xcb_keycode_t.html" title="type xcb::ffi::xproto::xcb_keycode_t">xcb_keycode_t</a></code>
+                           </span></span><span id='structfield.nKeySyms' class="structfield">
                            <span id='nKeySyms.v' class='invisible'>
-                           <code>nKeySyms: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.firstKeyAct' class='structfield'>
+                           <code>nKeySyms: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.firstKeyAct' class="structfield">
                            <span id='firstKeyAct.v' class='invisible'>
-                           <code>firstKeyAct: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.nKeyActs' class='structfield'>
+                           <code>firstKeyAct: <a class="type" href="../../../xcb/ffi/xproto/type.xcb_keycode_t.html" title="type xcb::ffi::xproto::xcb_keycode_t">xcb_keycode_t</a></code>
+                           </span></span><span id='structfield.nKeyActs' class="structfield">
                            <span id='nKeyActs.v' class='invisible'>
-                           <code>nKeyActs: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.firstKeyBehavior' class='structfield'>
+                           <code>nKeyActs: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.firstKeyBehavior' class="structfield">
                            <span id='firstKeyBehavior.v' class='invisible'>
-                           <code>firstKeyBehavior: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.nKeyBehavior' class='structfield'>
+                           <code>firstKeyBehavior: <a class="type" href="../../../xcb/ffi/xproto/type.xcb_keycode_t.html" title="type xcb::ffi::xproto::xcb_keycode_t">xcb_keycode_t</a></code>
+                           </span></span><span id='structfield.nKeyBehavior' class="structfield">
                            <span id='nKeyBehavior.v' class='invisible'>
-                           <code>nKeyBehavior: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.firstKeyExplicit' class='structfield'>
+                           <code>nKeyBehavior: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.firstKeyExplicit' class="structfield">
                            <span id='firstKeyExplicit.v' class='invisible'>
-                           <code>firstKeyExplicit: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.nKeyExplicit' class='structfield'>
+                           <code>firstKeyExplicit: <a class="type" href="../../../xcb/ffi/xproto/type.xcb_keycode_t.html" title="type xcb::ffi::xproto::xcb_keycode_t">xcb_keycode_t</a></code>
+                           </span></span><span id='structfield.nKeyExplicit' class="structfield">
                            <span id='nKeyExplicit.v' class='invisible'>
-                           <code>nKeyExplicit: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.firstModMapKey' class='structfield'>
+                           <code>nKeyExplicit: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.firstModMapKey' class="structfield">
                            <span id='firstModMapKey.v' class='invisible'>
-                           <code>firstModMapKey: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.nModMapKeys' class='structfield'>
+                           <code>firstModMapKey: <a class="type" href="../../../xcb/ffi/xproto/type.xcb_keycode_t.html" title="type xcb::ffi::xproto::xcb_keycode_t">xcb_keycode_t</a></code>
+                           </span></span><span id='structfield.nModMapKeys' class="structfield">
                            <span id='nModMapKeys.v' class='invisible'>
-                           <code>nModMapKeys: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.firstVModMapKey' class='structfield'>
+                           <code>nModMapKeys: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.firstVModMapKey' class="structfield">
                            <span id='firstVModMapKey.v' class='invisible'>
-                           <code>firstVModMapKey: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_keycode_t.html' title='xcb::ffi::xproto::xcb_keycode_t'>xcb_keycode_t</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.nVModMapKeys' class='structfield'>
+                           <code>firstVModMapKey: <a class="type" href="../../../xcb/ffi/xproto/type.xcb_keycode_t.html" title="type xcb::ffi::xproto::xcb_keycode_t">xcb_keycode_t</a></code>
+                           </span></span><span id='structfield.nVModMapKeys' class="structfield">
                            <span id='nVModMapKeys.v' class='invisible'>
-                           <code>nVModMapKeys: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.virtualMods' class='structfield'>
+                           <code>nVModMapKeys: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.virtualMods' class="structfield">
                            <span id='virtualMods.v' class='invisible'>
-                           <code>virtualMods: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.pad0' class='structfield'>
+                           <code>virtualMods: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u16.html">u16</a></code>
+                           </span></span><span id='structfield.pad0' class="structfield">
                            <span id='pad0.v' class='invisible'>
-                           <code>pad0: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 2]</a></code>
-                           </span></span><span class='stab '></span><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='struct' href='../../../xcb/ffi/xkb/struct.xcb_xkb_map_notify_event_t.html' title='xcb::ffi::xkb::xcb_xkb_map_notify_event_t'>xcb_xkb_map_notify_event_t</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/xcb/ffi/xkb.rs.html#2741' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../../../xcb/ffi/xkb/struct.xcb_xkb_map_notify_event_t.html' title='xcb::ffi::xkb::xcb_xkb_map_notify_event_t'>xcb_xkb_map_notify_event_t</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/xcb/ffi/xkb.rs.html#2742-2744' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.clone' class='method'><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../../../xcb/ffi/xkb/struct.xcb_xkb_map_notify_event_t.html' title='xcb::ffi::xkb::xcb_xkb_map_notify_event_t'>xcb_xkb_map_notify_event_t</a></code></span></h4>
+                           <code>pad0: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">[</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">; 2]</a></code>
+                           </span></span><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html" title="trait core::marker::Copy">Copy</a> for <a class="struct" href="../../../xcb/ffi/xkb/struct.xcb_xkb_map_notify_event_t.html" title="struct xcb::ffi::xkb::xcb_xkb_map_notify_event_t">xcb_xkb_map_notify_event_t</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/xcb/ffi/xkb.rs.html#2741' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="struct" href="../../../xcb/ffi/xkb/struct.xcb_xkb_map_notify_event_t.html" title="struct xcb::ffi::xkb::xcb_xkb_map_notify_event_t">xcb_xkb_map_notify_event_t</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/xcb/ffi/xkb.rs.html#2742-2744' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class="method"><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class="struct" href="../../../xcb/ffi/xkb/struct.xcb_xkb_map_notify_event_t.html" title="struct xcb::ffi::xkb::xcb_xkb_map_notify_event_t">xcb_xkb_map_notify_event_t</a></code></span></h4>
 <div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
-</div><h4 id='method.clone_from' class='method'><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
+</div><h4 id='method.clone_from' class="method"><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
 <div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
 </div></div></section>
     <section id='search' class="content hidden"></section>

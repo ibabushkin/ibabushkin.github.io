@@ -44,30 +44,30 @@
     </nav>
 
     <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>env_logger</a></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Crate <a class="mod" href=''>env_logger</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../src/env_logger/lib.rs.html#11-623' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../src/env_logger/lib.rs.html#11-628' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>A logger configured via an environment variable which writes to standard
 error.</p>
 
 <h2 id='example' class='section-header'><a href='#example'>Example</a></h2>
-<pre class='rust rust-example-rendered'>
-<span class='attribute'>#[<span class='ident'>macro_use</span>]</span> <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>log</span>;
-<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>env_logger</span>;
+<pre class="rust rust-example-rendered">
+<span class="attribute">#[<span class="ident">macro_use</span>]</span> <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">log</span>;
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">env_logger</span>;
 
-<span class='kw'>use</span> <span class='ident'>log</span>::<span class='ident'>LogLevel</span>;
+<span class="kw">use</span> <span class="ident">log</span>::<span class="ident">LogLevel</span>;
 
-<span class='kw'>fn</span> <span class='ident'>main</span>() {
-    <span class='ident'>env_logger</span>::<span class='ident'>init</span>().<span class='ident'>unwrap</span>();
+<span class="kw">fn</span> <span class="ident">main</span>() {
+    <span class="ident">env_logger</span>::<span class="ident">init</span>().<span class="ident">unwrap</span>();
 
-    <span class='macro'>debug</span><span class='macro'>!</span>(<span class='string'>&quot;this is a debug {}&quot;</span>, <span class='string'>&quot;message&quot;</span>);
-    <span class='macro'>error</span><span class='macro'>!</span>(<span class='string'>&quot;this is printed by default&quot;</span>);
+    <span class="macro">debug</span><span class="macro">!</span>(<span class="string">&quot;this is a debug {}&quot;</span>, <span class="string">&quot;message&quot;</span>);
+    <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;this is printed by default&quot;</span>);
 
-    <span class='kw'>if</span> <span class='macro'>log_enabled</span><span class='macro'>!</span>(<span class='ident'>LogLevel</span>::<span class='ident'>Info</span>) {
-        <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>3</span> <span class='op'>*</span> <span class='number'>4</span>; <span class='comment'>// expensive computation</span>
-        <span class='macro'>info</span><span class='macro'>!</span>(<span class='string'>&quot;the answer was: {}&quot;</span>, <span class='ident'>x</span>);
+    <span class="kw">if</span> <span class="macro">log_enabled</span><span class="macro">!</span>(<span class="ident">LogLevel</span>::<span class="ident">Info</span>) {
+        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="number">3</span> <span class="op">*</span> <span class="number">4</span>; <span class="comment">// expensive computation</span>
+        <span class="macro">info</span><span class="macro">!</span>(<span class="string">&quot;the answer was: {}&quot;</span>, <span class="ident">x</span>);
     }
 }</pre>
 
@@ -162,8 +162,8 @@ number followed by &#39;scopes&#39;.</li>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.LogBuilder.html'
-                                  title='env_logger::LogBuilder'>LogBuilder</a></td>
+                           <td><a class="struct" href="struct.LogBuilder.html"
+                                  title='struct env_logger::LogBuilder'>LogBuilder</a></td>
                            <td class='docblock-short'>
                                 <p>LogBuilder acts as builder for initializing the Logger.
 It can be used to customize the log format, change the enviromental variable used
@@ -171,16 +171,16 @@ to provide the logging directives and also set the default log level filter.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
-                           <td><a class='struct' href='struct.Logger.html'
-                                  title='env_logger::Logger'>Logger</a></td>
+                           <td><a class="struct" href="struct.Logger.html"
+                                  title='struct env_logger::Logger'>Logger</a></td>
                            <td class='docblock-short'>
                                 <p>The logger.</p>
                            </td>
                        </tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
                        <tr class=' module-item'>
-                           <td><a class='fn' href='fn.init.html'
-                                  title='env_logger::init'>init</a></td>
+                           <td><a class="fn" href="fn.init.html"
+                                  title='fn env_logger::init'>init</a></td>
                            <td class='docblock-short'>
                                 <p>Initializes the global logger with an env logger.</p>
                            </td>

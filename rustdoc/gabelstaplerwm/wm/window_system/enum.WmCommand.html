@@ -44,7 +44,7 @@
     </nav>
 
     <section id='main' class="content enum">
-<h1 class='fqn'><span class='in-band'>Enum <a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>window_system</a>::<wbr><a class='enum' href=''>WmCommand</a></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Enum <a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>window_system</a>::<wbr><a class="enum" href=''>WmCommand</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
@@ -52,10 +52,10 @@
 <pre class='rust enum'>pub enum WmCommand {
     Redraw,
     Focus,
-    Kill(<a class='type' href='../../../xcb/xproto/type.Window.html' title='xcb::xproto::Window'>Window</a>),
-    ModeSwitch(<a class='enum' href='../../../gabelstaplerwm/wm/config/enum.Mode.html' title='gabelstaplerwm::wm::config::Mode'>Mode</a>),
-    LayoutMsg(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='enum' href='../../../gabelstaplerwm/wm/layout/enum.LayoutMessage.html' title='gabelstaplerwm::wm::layout::LayoutMessage'>LayoutMessage</a>&gt;),
-    LayoutSwitch(<a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../../gabelstaplerwm/wm/layout/trait.Layout.html' title='gabelstaplerwm::wm::layout::Layout'>Layout</a>&gt;),
+    Kill(<a class="type" href="../../../xcb/xproto/type.Window.html" title="type xcb::xproto::Window">Window</a>),
+    ModeSwitch(<a class="enum" href="../../../gabelstaplerwm/wm/config/enum.Mode.html" title="enum gabelstaplerwm::wm::config::Mode">Mode</a>),
+    LayoutMsg(<a class="struct" href="https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html" title="struct collections::vec::Vec">Vec</a>&lt;<a class="enum" href="../../../gabelstaplerwm/wm/layout/enum.LayoutMessage.html" title="enum gabelstaplerwm::wm::layout::LayoutMessage">LayoutMessage</a>&gt;),
+    LayoutSwitch(<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html" title="struct alloc::boxed::Box">Box</a>&lt;<a class="trait" href="../../../gabelstaplerwm/wm/layout/trait.Layout.html" title="trait gabelstaplerwm::wm::layout::Layout">Layout</a>&gt;),
     Quit,
     NoCommand,
 }</pre><div class='docblock'><p>Enumeration type of commands executed by the window manager.</p>
@@ -65,14 +65,14 @@ gets interpreted to take necessary actions.</p>
 </div><h2 class='variants'>Variants</h2>
 <span id='variant.Redraw' class='variant'><span id='Redraw.v' class='invisible'><code>Redraw</code></span></span><div class='docblock'><p>redraw everything</p>
 </div><span id='variant.Focus' class='variant'><span id='Focus.v' class='invisible'><code>Focus</code></span></span><div class='docblock'><p>reset focus</p>
-</div><span id='variant.Kill' class='variant'><span id='Kill.v' class='invisible'><code>Kill(<a class='type' href='../../../xcb/xproto/type.Window.html' title='xcb::xproto::Window'>Window</a>)</code></span></span><div class='docblock'><p>kill the client associated with the window</p>
-</div><span id='variant.ModeSwitch' class='variant'><span id='ModeSwitch.v' class='invisible'><code>ModeSwitch(<a class='enum' href='../../../gabelstaplerwm/wm/config/enum.Mode.html' title='gabelstaplerwm::wm::config::Mode'>Mode</a>)</code></span></span><div class='docblock'><p>switch keyboard mode</p>
-</div><span id='variant.LayoutMsg' class='variant'><span id='LayoutMsg.v' class='invisible'><code>LayoutMsg(<a class='struct' href='https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='enum' href='../../../gabelstaplerwm/wm/layout/enum.LayoutMessage.html' title='gabelstaplerwm::wm::layout::LayoutMessage'>LayoutMessage</a>&gt;)</code></span></span><div class='docblock'><p>change the current tagset&#39;s layout</p>
-</div><span id='variant.LayoutSwitch' class='variant'><span id='LayoutSwitch.v' class='invisible'><code>LayoutSwitch(<a class='struct' href='https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html' title='alloc::boxed::Box'>Box</a>&lt;<a class='trait' href='../../../gabelstaplerwm/wm/layout/trait.Layout.html' title='gabelstaplerwm::wm::layout::Layout'>Layout</a>&gt;)</code></span></span><div class='docblock'><p>replace the current tagset&#39;s layout</p>
+</div><span id='variant.Kill' class='variant'><span id='Kill.v' class='invisible'><code>Kill(<a class="type" href="../../../xcb/xproto/type.Window.html" title="type xcb::xproto::Window">Window</a>)</code></span></span><div class='docblock'><p>kill the client associated with the window</p>
+</div><span id='variant.ModeSwitch' class='variant'><span id='ModeSwitch.v' class='invisible'><code>ModeSwitch(<a class="enum" href="../../../gabelstaplerwm/wm/config/enum.Mode.html" title="enum gabelstaplerwm::wm::config::Mode">Mode</a>)</code></span></span><div class='docblock'><p>switch keyboard mode</p>
+</div><span id='variant.LayoutMsg' class='variant'><span id='LayoutMsg.v' class='invisible'><code>LayoutMsg(<a class="struct" href="https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html" title="struct collections::vec::Vec">Vec</a>&lt;<a class="enum" href="../../../gabelstaplerwm/wm/layout/enum.LayoutMessage.html" title="enum gabelstaplerwm::wm::layout::LayoutMessage">LayoutMessage</a>&gt;)</code></span></span><div class='docblock'><p>change the current tagset&#39;s layout</p>
+</div><span id='variant.LayoutSwitch' class='variant'><span id='LayoutSwitch.v' class='invisible'><code>LayoutSwitch(<a class="struct" href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html" title="struct alloc::boxed::Box">Box</a>&lt;<a class="trait" href="../../../gabelstaplerwm/wm/layout/trait.Layout.html" title="trait gabelstaplerwm::wm::layout::Layout">Layout</a>&gt;)</code></span></span><div class='docblock'><p>replace the current tagset&#39;s layout</p>
 </div><span id='variant.Quit' class='variant'><span id='Quit.v' class='invisible'><code>Quit</code></span></span><div class='docblock'><p>quit window manager</p>
 </div><span id='variant.NoCommand' class='variant'><span id='NoCommand.v' class='invisible'><code>NoCommand</code></span></span><div class='docblock'><p>don&#39;t do anything, no action is needed</p>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../../../gabelstaplerwm/wm/window_system/enum.WmCommand.html' title='gabelstaplerwm::wm::window_system::WmCommand'>WmCommand</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/gabelstaplerwm/wm/window_system.rs.html#50' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.fmt' class='method'><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></span></h4>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html" title="trait core::fmt::Debug">Debug</a> for <a class="enum" href="../../../gabelstaplerwm/wm/window_system/enum.WmCommand.html" title="enum gabelstaplerwm::wm::window_system::WmCommand">WmCommand</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/gabelstaplerwm/wm/window_system.rs.html#50' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>
 </div></div></section>
     <section id='search' class="content hidden"></section>

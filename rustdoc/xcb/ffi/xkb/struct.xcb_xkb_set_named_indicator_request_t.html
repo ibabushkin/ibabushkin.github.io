@@ -44,98 +44,98 @@
     </nav>
 
     <section id='main' class="content struct">
-<h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>xcb</a>::<wbr><a href='../index.html'>ffi</a>::<wbr><a href='index.html'>xkb</a>::<wbr><a class='struct' href=''>xcb_xkb_set_named_indicator_request_t</a></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>xcb</a>::<wbr><a href='../index.html'>ffi</a>::<wbr><a href='index.html'>xkb</a>::<wbr><a class="struct" href=''>xcb_xkb_set_named_indicator_request_t</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a class='srclink' href='../../../src/xcb/ffi/xkb.rs.html#2173-2194' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'><div class="docblock attributes">#[repr(C)]
 </div>pub struct xcb_xkb_set_named_indicator_request_t {
-    pub major_opcode: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub minor_opcode: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub length: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>,
-    pub deviceSpec: <a class='type' href='../../../xcb/ffi/xkb/type.xcb_xkb_device_spec_t.html' title='xcb::ffi::xkb::xcb_xkb_device_spec_t'>xcb_xkb_device_spec_t</a>,
-    pub ledClass: <a class='type' href='../../../xcb/ffi/xkb/type.xcb_xkb_led_class_spec_t.html' title='xcb::ffi::xkb::xcb_xkb_led_class_spec_t'>xcb_xkb_led_class_spec_t</a>,
-    pub ledID: <a class='type' href='../../../xcb/ffi/xkb/type.xcb_xkb_id_spec_t.html' title='xcb::ffi::xkb::xcb_xkb_id_spec_t'>xcb_xkb_id_spec_t</a>,
-    pub pad0: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 2]</a>,
-    pub indicator: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_atom_t.html' title='xcb::ffi::xproto::xcb_atom_t'>xcb_atom_t</a>,
-    pub setState: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub on: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub setMap: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub createMap: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub pad1: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub map_flags: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub map_whichGroups: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub map_groups: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub map_whichMods: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub map_realMods: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>,
-    pub map_vmods: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>,
-    pub map_ctrls: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a>,
-}</pre><h2 class='fields'>Fields</h2><span id='structfield.major_opcode' class='structfield'>
+    pub major_opcode: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub minor_opcode: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub length: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u16.html">u16</a>,
+    pub deviceSpec: <a class="type" href="../../../xcb/ffi/xkb/type.xcb_xkb_device_spec_t.html" title="type xcb::ffi::xkb::xcb_xkb_device_spec_t">xcb_xkb_device_spec_t</a>,
+    pub ledClass: <a class="type" href="../../../xcb/ffi/xkb/type.xcb_xkb_led_class_spec_t.html" title="type xcb::ffi::xkb::xcb_xkb_led_class_spec_t">xcb_xkb_led_class_spec_t</a>,
+    pub ledID: <a class="type" href="../../../xcb/ffi/xkb/type.xcb_xkb_id_spec_t.html" title="type xcb::ffi::xkb::xcb_xkb_id_spec_t">xcb_xkb_id_spec_t</a>,
+    pub pad0: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">[</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">; 2]</a>,
+    pub indicator: <a class="type" href="../../../xcb/ffi/xproto/type.xcb_atom_t.html" title="type xcb::ffi::xproto::xcb_atom_t">xcb_atom_t</a>,
+    pub setState: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub on: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub setMap: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub createMap: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub pad1: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub map_flags: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub map_whichGroups: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub map_groups: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub map_whichMods: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub map_realMods: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>,
+    pub map_vmods: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u16.html">u16</a>,
+    pub map_ctrls: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a>,
+}</pre><h2 class='fields'>Fields</h2><span id='structfield.major_opcode' class="structfield">
                            <span id='major_opcode.v' class='invisible'>
-                           <code>major_opcode: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.minor_opcode' class='structfield'>
+                           <code>major_opcode: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.minor_opcode' class="structfield">
                            <span id='minor_opcode.v' class='invisible'>
-                           <code>minor_opcode: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.length' class='structfield'>
+                           <code>minor_opcode: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.length' class="structfield">
                            <span id='length.v' class='invisible'>
-                           <code>length: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.deviceSpec' class='structfield'>
+                           <code>length: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u16.html">u16</a></code>
+                           </span></span><span id='structfield.deviceSpec' class="structfield">
                            <span id='deviceSpec.v' class='invisible'>
-                           <code>deviceSpec: <a class='type' href='../../../xcb/ffi/xkb/type.xcb_xkb_device_spec_t.html' title='xcb::ffi::xkb::xcb_xkb_device_spec_t'>xcb_xkb_device_spec_t</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.ledClass' class='structfield'>
+                           <code>deviceSpec: <a class="type" href="../../../xcb/ffi/xkb/type.xcb_xkb_device_spec_t.html" title="type xcb::ffi::xkb::xcb_xkb_device_spec_t">xcb_xkb_device_spec_t</a></code>
+                           </span></span><span id='structfield.ledClass' class="structfield">
                            <span id='ledClass.v' class='invisible'>
-                           <code>ledClass: <a class='type' href='../../../xcb/ffi/xkb/type.xcb_xkb_led_class_spec_t.html' title='xcb::ffi::xkb::xcb_xkb_led_class_spec_t'>xcb_xkb_led_class_spec_t</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.ledID' class='structfield'>
+                           <code>ledClass: <a class="type" href="../../../xcb/ffi/xkb/type.xcb_xkb_led_class_spec_t.html" title="type xcb::ffi::xkb::xcb_xkb_led_class_spec_t">xcb_xkb_led_class_spec_t</a></code>
+                           </span></span><span id='structfield.ledID' class="structfield">
                            <span id='ledID.v' class='invisible'>
-                           <code>ledID: <a class='type' href='../../../xcb/ffi/xkb/type.xcb_xkb_id_spec_t.html' title='xcb::ffi::xkb::xcb_xkb_id_spec_t'>xcb_xkb_id_spec_t</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.pad0' class='structfield'>
+                           <code>ledID: <a class="type" href="../../../xcb/ffi/xkb/type.xcb_xkb_id_spec_t.html" title="type xcb::ffi::xkb::xcb_xkb_id_spec_t">xcb_xkb_id_spec_t</a></code>
+                           </span></span><span id='structfield.pad0' class="structfield">
                            <span id='pad0.v' class='invisible'>
-                           <code>pad0: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 2]</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.indicator' class='structfield'>
+                           <code>pad0: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">[</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.array.html">; 2]</a></code>
+                           </span></span><span id='structfield.indicator' class="structfield">
                            <span id='indicator.v' class='invisible'>
-                           <code>indicator: <a class='type' href='../../../xcb/ffi/xproto/type.xcb_atom_t.html' title='xcb::ffi::xproto::xcb_atom_t'>xcb_atom_t</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.setState' class='structfield'>
+                           <code>indicator: <a class="type" href="../../../xcb/ffi/xproto/type.xcb_atom_t.html" title="type xcb::ffi::xproto::xcb_atom_t">xcb_atom_t</a></code>
+                           </span></span><span id='structfield.setState' class="structfield">
                            <span id='setState.v' class='invisible'>
-                           <code>setState: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.on' class='structfield'>
+                           <code>setState: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.on' class="structfield">
                            <span id='on.v' class='invisible'>
-                           <code>on: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.setMap' class='structfield'>
+                           <code>on: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.setMap' class="structfield">
                            <span id='setMap.v' class='invisible'>
-                           <code>setMap: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.createMap' class='structfield'>
+                           <code>setMap: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.createMap' class="structfield">
                            <span id='createMap.v' class='invisible'>
-                           <code>createMap: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.pad1' class='structfield'>
+                           <code>createMap: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.pad1' class="structfield">
                            <span id='pad1.v' class='invisible'>
-                           <code>pad1: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.map_flags' class='structfield'>
+                           <code>pad1: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.map_flags' class="structfield">
                            <span id='map_flags.v' class='invisible'>
-                           <code>map_flags: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.map_whichGroups' class='structfield'>
+                           <code>map_flags: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.map_whichGroups' class="structfield">
                            <span id='map_whichGroups.v' class='invisible'>
-                           <code>map_whichGroups: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.map_groups' class='structfield'>
+                           <code>map_whichGroups: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.map_groups' class="structfield">
                            <span id='map_groups.v' class='invisible'>
-                           <code>map_groups: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.map_whichMods' class='structfield'>
+                           <code>map_groups: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.map_whichMods' class="structfield">
                            <span id='map_whichMods.v' class='invisible'>
-                           <code>map_whichMods: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.map_realMods' class='structfield'>
+                           <code>map_whichMods: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.map_realMods' class="structfield">
                            <span id='map_realMods.v' class='invisible'>
-                           <code>map_realMods: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.map_vmods' class='structfield'>
+                           <code>map_realMods: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a></code>
+                           </span></span><span id='structfield.map_vmods' class="structfield">
                            <span id='map_vmods.v' class='invisible'>
-                           <code>map_vmods: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code>
-                           </span></span><span class='stab '></span><span id='structfield.map_ctrls' class='structfield'>
+                           <code>map_vmods: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u16.html">u16</a></code>
+                           </span></span><span id='structfield.map_ctrls' class="structfield">
                            <span id='map_ctrls.v' class='invisible'>
-                           <code>map_ctrls: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u32.html'>u32</a></code>
-                           </span></span><span class='stab '></span><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='struct' href='../../../xcb/ffi/xkb/struct.xcb_xkb_set_named_indicator_request_t.html' title='xcb::ffi::xkb::xcb_xkb_set_named_indicator_request_t'>xcb_xkb_set_named_indicator_request_t</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/xcb/ffi/xkb.rs.html#2196' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../../../xcb/ffi/xkb/struct.xcb_xkb_set_named_indicator_request_t.html' title='xcb::ffi::xkb::xcb_xkb_set_named_indicator_request_t'>xcb_xkb_set_named_indicator_request_t</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/xcb/ffi/xkb.rs.html#2197-2199' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.clone' class='method'><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../../../xcb/ffi/xkb/struct.xcb_xkb_set_named_indicator_request_t.html' title='xcb::ffi::xkb::xcb_xkb_set_named_indicator_request_t'>xcb_xkb_set_named_indicator_request_t</a></code></span></h4>
+                           <code>map_ctrls: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u32.html">u32</a></code>
+                           </span></span><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html" title="trait core::marker::Copy">Copy</a> for <a class="struct" href="../../../xcb/ffi/xkb/struct.xcb_xkb_set_named_indicator_request_t.html" title="struct xcb::ffi::xkb::xcb_xkb_set_named_indicator_request_t">xcb_xkb_set_named_indicator_request_t</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/xcb/ffi/xkb.rs.html#2196' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> for <a class="struct" href="../../../xcb/ffi/xkb/struct.xcb_xkb_set_named_indicator_request_t.html" title="struct xcb::ffi::xkb::xcb_xkb_set_named_indicator_request_t">xcb_xkb_set_named_indicator_request_t</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/xcb/ffi/xkb.rs.html#2197-2199' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class="method"><span id='clone.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class="struct" href="../../../xcb/ffi/xkb/struct.xcb_xkb_set_named_indicator_request_t.html" title="struct xcb::ffi::xkb::xcb_xkb_set_named_indicator_request_t">xcb_xkb_set_named_indicator_request_t</a></code></span></h4>
 <div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
-</div><h4 id='method.clone_from' class='method'><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
+</div><h4 id='method.clone_from' class="method"><span id='clone_from.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></span></h4>
 <div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
 </div></div></section>
     <section id='search' class="content hidden"></section>
