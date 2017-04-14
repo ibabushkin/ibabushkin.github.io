@@ -155,7 +155,7 @@ bit is viewing and managing mail. We use `mutt` for that.
 
 Configuring `mutt` is a pretty broad topic, so I will only reproduce the most important
 bits of my setup here. We point `mutt` at our maildir, and tell it how to send mail:
-```
+```mutt
 set folder = $HOME/mail
 set mbox_type = Maildir
 set sendmail = "/usr/bin/msmtp"
@@ -167,7 +167,7 @@ set postponed = "+drafts"
 ```
 
 Now we get virtual mailboxes from `notmuch`
-```
+```mutt
 # get our virtual mailboxes from notmuch
 mailboxes "+drafts" "+inbox" "+sent"
 set nm_default_uri = "notmuch:///home/yourusername/mail/"
@@ -182,14 +182,14 @@ virtual-mailboxes \
 
 Other accounts get their own tags, of course (don't forget to make the fetch script tag
 incoming mail accordingly). To set up account switching from the sender side, I use this:
-```
+```mutt
 # work account
 source ~/.mutt/work
 folder-hook work "source ~/.mutt/work"
 ```
 
 And in `~/.mutt/work`:
-```
+```mutt
 set realname = "My Name Here"
 set from = "me@workplace.tld"
 ```
@@ -202,7 +202,7 @@ This is the basics I use to send mail from mutt (modulo GPG, which is easy to fa
 here).
 
 To fetch mail, I have a simple binding:
-```
+```mutt
 macro index o "<shell-escape>/path/to/fetch.sh<enter>" "run rsync to fetch all mail"
 ```
 
@@ -216,7 +216,7 @@ screen locking to reduce the risk of my secrets getting leaked. Have fun experim
 with this.
 
 `~/.muttrc`:
-```
+```mutt
 # where to find stuff
 set alias_file = ~/.mutt/alias
 set certificate_file = ~/.mutt/certs

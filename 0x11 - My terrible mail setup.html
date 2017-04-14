@@ -147,7 +147,7 @@ account default : personal</code></pre>
 <h3 id="fitting-it-all-together">Fitting it all together</h3>
 <p>Now we have a running mail server, and facilities to send and fetch mail. The only missing bit is viewing and managing mail. We use <code>mutt</code> for that.</p>
 <p>Configuring <code>mutt</code> is a pretty broad topic, so I will only reproduce the most important bits of my setup here. We point <code>mutt</code> at our maildir, and tell it how to send mail:</p>
-<pre><code>set folder = $HOME/mail
+<pre class="mutt"><code>set folder = $HOME/mail
 set mbox_type = Maildir
 set sendmail = &quot;/usr/bin/msmtp&quot;
 set envelope_from = yes
@@ -156,7 +156,7 @@ set spoolfile = &quot;+inbox&quot;
 set record = &quot;+sent&quot;
 set postponed = &quot;+drafts&quot;</code></pre>
 <p>Now we get virtual mailboxes from <code>notmuch</code></p>
-<pre><code># get our virtual mailboxes from notmuch
+<pre class="mutt"><code># get our virtual mailboxes from notmuch
 mailboxes &quot;+drafts&quot; &quot;+inbox&quot; &quot;+sent&quot;
 set nm_default_uri = &quot;notmuch:///home/yourusername/mail/&quot;
 set virtual_spoolfile = yes
@@ -167,19 +167,19 @@ virtual-mailboxes \
     &quot;openbsd&quot; &quot;notmuch://?query=tag:openbsd&quot; \
     &quot;opensmtpd&quot; &quot;notmuch://?query=tag:opensmtpd&quot;</code></pre>
 <p>Other accounts get their own tags, of course (don't forget to make the fetch script tag incoming mail accordingly). To set up account switching from the sender side, I use this:</p>
-<pre><code># work account
+<pre class="mutt"><code># work account
 source ~/.mutt/work
 folder-hook work &quot;source ~/.mutt/work&quot;</code></pre>
 <p>And in <code>~/.mutt/work</code>:</p>
-<pre><code>set realname = &quot;My Name Here&quot;
+<pre class="mutt"><code>set realname = &quot;My Name Here&quot;
 set from = &quot;me@workplace.tld&quot;</code></pre>
 <p>Now, we use such a snippet for every account we use. Also make sure you add a folder hook to every virtual mailbox you use, so that switching from any mailbox to any mailbox works correctly.</p>
 <p>This is the basics I use to send mail from mutt (modulo GPG, which is easy to factor in here).</p>
 <p>To fetch mail, I have a simple binding:</p>
-<pre><code>macro index o &quot;&lt;shell-escape&gt;/path/to/fetch.sh&lt;enter&gt;&quot; &quot;run rsync to fetch all mail&quot;</code></pre>
+<pre class="mutt"><code>macro index o &quot;&lt;shell-escape&gt;/path/to/fetch.sh&lt;enter&gt;&quot; &quot;run rsync to fetch all mail&quot;</code></pre>
 <p>This is the basic situation. My complete <code>.muttrc</code> can be found below, it includes some other configuration as well. However, I don't recommend copying it verbatim. Instead, write your own while tinkering with the components involved. That way you'll gain a proper understanding of what is being done and why you want it. In this case, the focus was to build a setup that gets me my mail when I ask for it and integrates said process with <code>pass</code>. This is especially important to me, since I kill <code>gpg-agent</code> on every suspend or screen locking to reduce the risk of my secrets getting leaked. Have fun experimenting with this.</p>
 <p><code>~/.muttrc</code>:</p>
-<pre><code># where to find stuff
+<pre class="mutt"><code># where to find stuff
 set alias_file = ~/.mutt/alias
 set certificate_file = ~/.mutt/certs
 set mailcap_path = ~/.mutt/mailcap
