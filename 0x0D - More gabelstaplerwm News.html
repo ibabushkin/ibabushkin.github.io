@@ -60,15 +60,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode rust"><code class="sourceCode rust"><span class="co">/// View a tagset by pushing it by index on the history stack.</span>
 <span class="co">///</span>
 <span class="co">/// Returns a closure for use with `bind!`.</span>
-<span class="pp">macro_rules!</span> push_tagset {
-    ($index:expr $(; $print:expr)*) =&gt; {
-        |_, s| {
+<span class="pp">macro_rules!</span> push_tagset <span class="op">{</span>
+    ($index:expr $(; $print:expr)*) =&gt; <span class="op">{</span>
+        |_, s| <span class="op">{</span>
             s.push($index);
             $( <span class="pp">println!</span>(<span class="st">&quot;{}&quot;</span>, $print); )*
             WmCommand::Redraw
-        }
-    }
-}</code></pre></div>
+        <span class="op">}</span>
+    <span class="op">}</span>
+<span class="op">}</span></code></pre></div>
 <p>This is simple, convenient to use, and produces no overhead when inactive. It is also extensible to the maximum and adds only a minimal amount of code (16 lines) to the sources.</p>
 <p>I'd say this is a win.</p>
 <h2 id="new-layouts-and-some-rearrangements">New layouts and some rearrangements</h2>

@@ -59,7 +59,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode rust"><code class="sourceCode rust"><span class="co">/// get a set of properties for a window, in parallel</span>
 <span class="kw">fn</span> get_property_set(&amp;<span class="kw">self</span>, window: xproto::Window,
                     atom_response_pairs: <span class="dt">Vec</span>&lt;(xproto::Atom, xproto::Atom)&gt;)
-    -&gt; <span class="dt">Vec</span>&lt;ClientProp&gt; {
+    -&gt; <span class="dt">Vec</span>&lt;ClientProp&gt; <span class="op">{</span>
     <span class="kw">let</span> <span class="kw">mut</span> cookies: <span class="dt">Vec</span>&lt;_&gt; = atom_response_pairs
         .iter()
         .map(|&amp;(atom, response_type)|
@@ -72,40 +72,40 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         .drain(..)
         .zip(atom_response_pairs.iter())
         .map(|(cookie, &amp;(_, response_type))|
-            <span class="kw">match</span> response_type {
-                xproto::ATOM_ATOM =&gt; <span class="kw">if</span> <span class="kw">let</span> <span class="cn">Ok</span>(r) = cookie.get_reply() {
-                    <span class="kw">let</span> atoms: &amp;[xproto::Atom] = r.value();
-                    <span class="kw">if</span> atoms.len() == <span class="dv">0</span> {
+            <span class="kw">match</span> response_type <span class="op">{</span>
+                xproto::ATOM_ATOM =&gt; <span class="kw">if</span> <span class="kw">let</span> <span class="cn">Ok</span>(r) = cookie.get_reply() <span class="op">{</span>
+                    <span class="kw">let</span> atoms: &amp;<span class="op">[</span>xproto::Atom<span class="op">]</span> = r.value();
+                    <span class="kw">if</span> atoms.len() == <span class="dv">0</span> <span class="op">{</span>
                         ClientProp::NoProp
-                    } <span class="kw">else</span> {
-                        ClientProp::PropAtom(atoms[<span class="dv">0</span>])
-                    }
-                } <span class="kw">else</span> {
+                    <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
+                        ClientProp::PropAtom(atoms<span class="op">[</span><span class="dv">0</span><span class="op">]</span>)
+                    <span class="op">}</span>
+                <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
                     ClientProp::NoProp
-                },
-                xproto::ATOM_STRING =&gt; <span class="kw">if</span> <span class="kw">let</span> <span class="cn">Ok</span>(r) = cookie.get_reply() {
-                    <span class="kw">let</span> raw: &amp;[<span class="dt">c_char</span>] = r.value();
+                <span class="op">}</span>,
+                xproto::ATOM_STRING =&gt; <span class="kw">if</span> <span class="kw">let</span> <span class="cn">Ok</span>(r) = cookie.get_reply() <span class="op">{</span>
+                    <span class="kw">let</span> raw: &amp;<span class="op">[</span><span class="dt">c_char</span><span class="op">]</span> = r.value();
                     <span class="kw">let</span> <span class="kw">mut</span> res = <span class="dt">Vec</span>::new();
-                    <span class="kw">for</span> c <span class="kw">in</span> raw.split(|ch| *ch == <span class="dv">0</span>) {
-                        <span class="kw">if</span> c.len() &gt; <span class="dv">0</span> {
-                            <span class="kw">unsafe</span> {
+                    <span class="kw">for</span> c <span class="kw">in</span> raw.split(|ch| *ch == <span class="dv">0</span>) <span class="op">{</span>
+                        <span class="kw">if</span> c.len() &gt; <span class="dv">0</span> <span class="op">{</span>
+                            <span class="kw">unsafe</span> <span class="op">{</span>
                                 <span class="kw">if</span> <span class="kw">let</span> <span class="cn">Ok</span>(cl) = <span class="dt">str</span>::from_utf8(
-                                    CStr::from_ptr(c.as_ptr()).to_bytes()) {
+                                    CStr::from_ptr(c.as_ptr()).to_bytes()) <span class="op">{</span>
                                     res.push(cl.to_owned());
-                                }
-                            }
-                        }
-                    }
+                                <span class="op">}</span>
+                            <span class="op">}</span>
+                        <span class="op">}</span>
+                    <span class="op">}</span>
                     ClientProp::PropString(res)
-                } <span class="kw">else</span> {
+                <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
                     ClientProp::NoProp
-                },
+                <span class="op">}</span>,
                 _ =&gt; ClientProp::NoProp,
-            }
+            <span class="op">}</span>
         )
         .collect();
     res
-}</code></pre></div>
+<span class="op">}</span></code></pre></div>
 <p>This approach essentially lets me pull multiple properties with interleaved requests and takes care of all the heavy lifting and datatype wrapping. It is surely not the holy grail of elegant Rust code, but it does it's job reasonably well, making property lookup for new clients pretty straightforward.</p>
 <h2 id="act-iii-firefox-unable-to-display-some-dialog-boxes">Act III: Firefox unable to display some dialog boxes</h2>
 <p>This issue is still unresolved and needs more work from my side. Just thought I'd mention it's existence for an ironic effect.</p>

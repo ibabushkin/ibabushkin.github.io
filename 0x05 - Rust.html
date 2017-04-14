@@ -54,9 +54,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Given that, I picked up a few resources and started my most recent run with Rust. So far it has been very entertaining and a pretty good experience. The only <em>real</em> annoyance is the weird versioning system that restricts people using Rust stable, which makes me wonder why it is even available in parallel to the nightlies. Other things that made me go &quot;hm?&quot; included the special way Rust treats iterators. They are indeed a very powerful tool for a more low-level approach to functional programming, but their vast amount is a bit overwhelming, especially if you are new to the language (and libraries) and every iterator has it's own corner-cases.</p>
 <p>Example: I want to iterate over the substrings of a <code>String</code> that are the result of a call to split, but I want to do that in a separate function, so I'd like to do the following</p>
 <div class="sourceCode"><pre class="sourceCode rust"><code class="sourceCode rust"><span class="co">// define our function</span>
-<span class="kw">fn</span> do_something(arg: <span class="dt">Vec</span>&lt;<span class="dt">String</span>&gt;) -&gt; SomeResultType {
+<span class="kw">fn</span> do_something(arg: <span class="dt">Vec</span>&lt;<span class="dt">String</span>&gt;) -&gt; SomeResultType <span class="op">{</span>
     <span class="co">// do stuff with the vector</span>
-}
+<span class="op">}</span>
 <span class="co">// and call it like this:</span>
 <span class="co">// do_something(some_string.split(&quot;bla&quot;).collect());</span></code></pre></div>
 <p>But I can't, because the corresponding Trait needed for the call to <code>collect()</code> isn't implemented for <code>Vec&lt;a&gt;</code>. Okay. I'd love to know why. I probably miss some important bit here, but this is a bit frustrating. I probably could just pass the <code>Split</code>-iterator to my function, but this requires more interaction with lifetimes, and I don't see a reason for that here, as the usecase should be fairly simple.</p>

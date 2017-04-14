@@ -1,0 +1,318 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">body{margin:40px auto;max-width:700px;text-align:justify;line-height:1.6;font-size:16px;color:#444;padding:0 10px}h1,h2,h3{line-height:1.2}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+</head>
+<body>
+<a href="index">back home</a>
+<h1>/dev/thoughtbin</h1>
+<h1 id="my-terrible-mail-setup">My terrible mail setup</h1>
+<p>Whew, the last post was a long time ago. Quite a lot of things were done with regards to the topics discussed back then. However, this small writeup focuses on something different, as the title already suggests. Let's dive straight in.</p>
+<h2 id="what-and-why">What? And why?</h2>
+<p>We're talking about how I manage my email. So let's describe what exactly I do and why I decided to pick that path.</p>
+<p>All my mails, delivered to a multitude of accounts, get forwarded to my own mail server running <code>OpenSMTPD</code>. Said server drops those mails in a maildir which I then p{u,o}ll using <code>rsync</code> and view using <code>neomutt</code>. Tagging is done using <code>notmuch</code>. When sending mail, I connect to the corresponding SMTP server using <code>msmtp</code> and let mutt figure out what mail account to use for that. All credentials are managed using <code>pass</code> (and thus GPG).</p>
+<p>All this is geared towards having mail stored locally on my only machine I use for, well, mail. Since I don't use other devices for this, the setup is quite simple to what other people do, and by extension differs a bit. So let's document it. The benefits are quite clear to me:</p>
+<ul>
+<li>simple and low-maintenance, we can use only components from a stock install of <code>OpenBSD</code> to handle the mail server.</li>
+<li>works well when you are frequently disconnected from the infamous intertubes.</li>
+<li>proper handling of my credentials and multiple accounts (I prefer not to make <code>mutt</code> do this as I use a centralized setup around <code>pass</code> - more on that later).</li>
+</ul>
+<p>There are obviously some drawbacks (that I don't care about, but you might):</p>
+<ul>
+<li>multidevice support is lacking.</li>
+<li>a bit of a burden to set up as there are <em>many</em> components.</li>
+<li>mediocre support for getting mail pushed to you - I download it manually with a keybinding in <code>mutt</code>.</li>
+</ul>
+<h2 id="how---server-side">How? - server side</h2>
+<p>Now that we have covered <em>what</em> I've set up, and <em>why</em> I chose those solutions, let's elaborate on the concrete details.</p>
+<div class="figure">
+<img src="https://i.giphy.com/13AePrrmDKCeVG.gif" alt="Not that kind of concrete." />
+<p class="caption">Not that kind of concrete.</p>
+</div>
+<p>First, let's look at the server configuration. We're running <code>OpenSMTPD</code> on <code>OpenBSD</code>.</p>
+<p>Assuming your mail server is running on a machine your MX records point to.</p>
+<p>First, let's get some simple aliases into <code>/etc/mail/aliases</code>, mostly for local mail.</p>
+<pre><code>root: yourusername
+manager: root
+dumper: root</code></pre>
+<p>Next, make sure you have a Let's Encrypt SSL certificate (<code>acme-client</code> landed in base from release 6.1 onwards). Based on that, here's my <code>OpenSMTPD</code> configuration in <code>/etc/mail/smtpd.conf</code>:</p>
+<pre><code># pki setup
+pki your.domain key &quot;/etc/ssl/acme/private/privkey.pem&quot; # change the paths if necessary
+pki your.domain certificate &quot;/etc/ssl/acme/fullchain.pem&quot;
+
+# tables
+table aliases file:/etc/mail/aliases
+
+# listening ports
+listen on all port 25 hostname your.domain tls pki your.domain
+listen on all port 587 hostname your.domain tls-require pki your.domain auth mask-source
+
+# allow all incoming mails for our domain
+accept from any for domain &quot;your.domain&quot; alias &lt;aliases&gt; deliver to maildir &quot;~/mail&quot;
+# allow all local mail
+accept for local alias &lt;aliases&gt; deliver to maildir &quot;~/mail&quot;
+accept from local for any relay</code></pre>
+<p>It's quite simple, but <code>smtpd.conf(5)</code> should tell you the rest. Integrating spam assassin or similar things hasn't yet been a priority for me, but can easily be done.</p>
+<p>Now all your mails get dumped in one big maildir.</p>
+<h2 id="how---client-side">How? - client side</h2>
+<h3 id="sending-mail-with-msmtp">Sending mail with <code>msmtp</code></h3>
+<p>Let's start with the easy things: sending mail using SMTP. You can use any SMTP client, my choice is <code>msmtp</code> on Linux. My configuration in <code>~/.msmtprc</code> looks roughly like this:</p>
+<pre><code>defaults
+auth on
+tls on
+tls_certcheck on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+
+account personal
+host mail.your.domain
+port 587
+from yourusername@your.domain
+user yourusername
+passwordeval &quot;/path/to/get_pass.sh personal&quot;
+
+# more accounts here
+
+account default : personal</code></pre>
+<p>Again, the configuration is quite simple, but the manpage - <code>msmtp(1)</code> this time - will provide all the necessary details. The interesting bit is the <code>get_pass.sh</code> script:</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="co">#!/bin/sh</span>
+<span class="kw">case</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span><span class="kw"> in</span>
+    Enter*<span class="kw">)</span>
+        <span class="ex">pass</span> my/ssh/key
+        <span class="kw">;;</span>
+    personal<span class="kw">)</span>
+        <span class="kw">(</span><span class="ex">pass</span> my/mail/server <span class="kw">||</span> <span class="bu">exit</span> 1<span class="kw">)</span> <span class="kw">|</span> <span class="ex">some</span> processing pipeline to get your password
+        <span class="kw">;;</span>
+    *<span class="kw">)</span>
+        <span class="kw">(</span><span class="ex">pass</span> <span class="st">&quot;mail/</span><span class="va">$1</span><span class="st">&quot;</span> <span class="kw">||</span> <span class="bu">exit</span> 1<span class="kw">)</span> <span class="kw">|</span> <span class="ex">another</span> processing pipeline
+        <span class="kw">;;</span>
+<span class="kw">esac</span> <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">&quot;+&quot;</span> <span class="op">&gt;</span> ~/tmp/gpg_status_fifo</code></pre></div>
+<p>Let's break that down. The first case we care about here is rather cryptic. We use that to call the script as a credential provider to <code>rsync</code> (actually <code>ssh</code> in that case), but more on that later. The second case fetches your password for the user account you deliver mails to - used for SMTP access. Finally, when the call to <code>pass</code> succeeds, we echo a character to a FIFO. I use this to signify that a GPG agent is running in the background, it's actually a detail specific to my window manager bar setup - you probably want to remove or replace it.</p>
+<h3 id="pulling-mail-from-our-server">Pulling mail from our server</h3>
+<p>Now we have the groundwork done to send mail from our local machine. We also want to receive mail there, and this is where our <code>fetch.sh</code> script comes in.</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="co">#!/bin/sh</span>
+<span class="bu">export</span> <span class="va">SSH_ASKPASS=</span><span class="st">&quot;/path/to/get_pass.sh&quot;</span>
+
+<span class="co"># pull our mails from our server&#39;s maildir</span>
+<span class="fu">rsync</span> -hzPa --rsh=<span class="st">&quot;setsid ssh&quot;</span> --remove-source-files <span class="st">&#39;yourusername@yourserver:mail/new&#39;</span> ~/mail/inbox
+
+<span class="co"># index new mail</span>
+<span class="ex">notmuch</span> new
+
+<span class="co"># do some notmuch tagging here (example entries)</span>
+<span class="ex">notmuch</span> tag +openbsd -inbox -- from:openbsd.org or to:openbsd.org
+<span class="ex">notmuch</span> tag +opensmtpd -inbox -- from:opensmtpd.org or to:opensmtpd.org</code></pre></div>
+<p>This uses our script to get the credentials from <code>pass</code> and <code>rsync</code>s your maildir into a local directory. The relevant part of the maildir, anyway. The <code>--remove-source-files</code> is optional. Then we tag our incoming mail according to user preference, using <code>notmuch</code>. To set it up, run <code>notmuch setup</code> (and, again, see the manual).</p>
+<h3 id="fitting-it-all-together">Fitting it all together</h3>
+<p>Now we have a running mail server, and facilities to send and fetch mail. The only missing bit is viewing and managing mail. We use <code>mutt</code> for that.</p>
+<p>Configuring <code>mutt</code> is a pretty broad topic, so I will only reproduce the most important bits of my setup here. We point <code>mutt</code> at our maildir, and tell it how to send mail:</p>
+<pre><code>set folder = $HOME/mail
+set mbox_type = Maildir
+set sendmail = &quot;/usr/bin/msmtp&quot;
+set envelope_from = yes
+
+set spoolfile = &quot;+inbox&quot;
+set record = &quot;+sent&quot;
+set postponed = &quot;+drafts&quot;</code></pre>
+<p>Now we get virtual mailboxes from <code>notmuch</code></p>
+<pre><code># get our virtual mailboxes from notmuch
+mailboxes &quot;+drafts&quot; &quot;+inbox&quot; &quot;+sent&quot;
+set nm_default_uri = &quot;notmuch:///home/yourusername/mail/&quot;
+set virtual_spoolfile = yes
+virtual-mailboxes \
+    &quot;inbox&quot; &quot;notmuch://?query=tag:inbox and NOT tag:archive&quot;\
+    &quot;sent&quot; &quot;notmuch://?query=tag:sent&quot; \
+    &quot;work&quot; &quot;notmuch://?query=tag:work&quot; \
+    &quot;openbsd&quot; &quot;notmuch://?query=tag:openbsd&quot; \
+    &quot;opensmtpd&quot; &quot;notmuch://?query=tag:opensmtpd&quot;</code></pre>
+<p>Other accounts get their own tags, of course (don't forget to make the fetch script tag incoming mail accordingly). To set up account switching from the sender side, I use this:</p>
+<pre><code># work account
+source ~/.mutt/work
+folder-hook work &quot;source ~/.mutt/work&quot;</code></pre>
+<p>And in <code>~/.mutt/work</code>:</p>
+<pre><code>set realname = &quot;My Name Here&quot;
+set from = &quot;me@workplace.tld&quot;</code></pre>
+<p>Now, we use such a snippet for every account we use. Also make sure you add a folder hook to every virtual mailbox you use, so that switching from any mailbox to any mailbox works correctly.</p>
+<p>This is the basics I use to send mail from mutt (modulo GPG, which is easy to factor in here).</p>
+<p>To fetch mail, I have a simple binding:</p>
+<pre><code>macro index o &quot;&lt;shell-escape&gt;/path/to/fetch.sh&lt;enter&gt;&quot; &quot;run rsync to fetch all mail&quot;</code></pre>
+<p>This is the basic situation. My complete <code>.muttrc</code> can be found below, it includes some other configuration as well. However, I don't recommend copying it verbatim. Instead, write your own while tinkering with the components involved. That way you'll gain a proper understanding of what is being done and why you want it. In this case, the focus was to build a setup that gets me my mail when I ask for it and integrates said process with <code>pass</code>. This is especially important to me, since I kill <code>gpg-agent</code> on every suspend or screen locking to reduce the risk of my secrets getting leaked. Have fun experimenting with this.</p>
+<p><code>~/.muttrc</code>:</p>
+<pre><code># where to find stuff
+set alias_file = ~/.mutt/alias
+set certificate_file = ~/.mutt/certs
+set mailcap_path = ~/.mutt/mailcap
+set tmpdir = ~/.mutt/tmp
+set header_cache = ~/.cache/mutt
+set folder = $HOME/mail
+set mbox_type = Maildir
+set sendmail = &quot;/usr/bin/msmtp&quot;
+
+set spoolfile = &quot;+inbox&quot;
+set record = &quot;+sent&quot;
+set postponed = &quot;+drafts&quot;
+
+# get our virtual mailboxes from notmuch
+mailboxes &quot;+drafts&quot; &quot;+inbox&quot; &quot;+sent&quot;
+set nm_default_uri = &quot;notmuch:///home/yourusername/mail/&quot;
+set virtual_spoolfile = yes
+virtual-mailboxes \
+    &quot;inbox&quot; &quot;notmuch://?query=tag:inbox and NOT tag:archive&quot;\
+    &quot;sent&quot; &quot;notmuch://?query=tag:sent&quot; \
+    &quot;work&quot; &quot;notmuch://?query=tag:work&quot; \
+    &quot;openbsd&quot; &quot;notmuch://?query=tag:openbsd&quot; \
+    &quot;opensmtpd&quot; &quot;notmuch://?query=tag:opensmtpd&quot;
+
+# work account
+source ~/.mutt/work
+folder-hook work &quot;source ~/.mutt/work&quot;
+
+# personal account
+source ~/.mutt/personal
+folder-hook inbox &quot;source ~/.mutt/personal&quot;
+folder-hook openbsd &quot;source ~/.mutt/personal&quot;
+folder-hook opensmtpd &quot;source ~/.mutt/personal&quot;
+
+# basic stuff
+set wait_key = no
+set delete
+set quit
+unset confirmappend
+unset mark_old
+set pipe_decode
+set thorough_search
+
+# status bar
+set status_chars = &quot; *%A&quot;
+set status_format = &quot;───[ %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%&gt;─%?p?( %p postponed )?───&quot;
+
+# index options
+set date_format = &quot;%Y-%m-%d&quot;
+set index_format = &quot;[%Z]  %D %-40.40F  %s&quot;
+set sort = threads
+set sort_aux = reverse-last-date-received
+set uncollapse_jump
+set sort_re
+set reply_regexp = &quot;^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*&quot;
+
+# index keybindings
+bind index gg first-entry
+bind index G last-entry
+bind index R group-reply
+bind index &lt;space&gt; collapse-thread
+bind index &lt;tab&gt; sync-mailbox
+macro index o &quot;&lt;shell-escape&gt;/path/to/fetch.sh&lt;enter&gt;&quot; &quot;run rsync to fetch all mail&quot;
+
+# sidebar options
+set sidebar_visible = yes
+set sidebar_width = 20
+
+# sidebar keybindings
+bind index,pager \Cj sidebar-next
+bind index,pager \Ck sidebar-prev
+bind index,pager \Cl sidebar-open
+bind index,pager C change-vfolder
+
+# pager options
+set pager_index_lines = 10
+set pager_context = 3
+set pager_stop
+set menu_scroll
+set tilde
+unset markers
+set quote_regexp = &quot;^( {0,4}[&gt;|:#%]| {0,4}[a-z0-9]+[&gt;|]+)+&quot;
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+
+# pager keybindings
+bind pager j next-line
+bind pager k previous-line
+bind pager gg top
+bind pager G bottom
+bind pager R group-reply
+
+# search integration
+set nm_query_type = threads
+set nm_record = yes
+set nm_record_tags = sent
+bind index,pager N search-opposite
+macro index,pager S &quot;&lt;vfolder-from-query&gt;&quot;
+bind index,pager t entire-thread
+bind index,pager x sidebar-toggle-virtual
+
+# handle attachments
+bind attach &lt;return&gt; view-mailcap
+bind attach l view-mailcap
+
+# writing mail
+set editor = vim
+set edit_headers = yes
+set envelope_from = yes
+set fast_reply
+set askcc
+set fcc_attach
+unset mime_forward
+set forward_format = &quot;Fwd: %s&quot;
+set forward_decode
+set attribution = &quot;On %d, %n wrote:&quot;
+set reply_to
+set reverse_name
+set include
+set forward_quote
+bind compose p postpone-message
+bind index p recall-message
+bind compose P pgp-menu
+
+# crypto
+set crypt_autosign
+set crypt_replyencrypt
+set crypt_replysignencrypted
+set crypt_use_gpgme
+set crypt_opportunistic_encrypt
+
+# colors
+# source ~/.mutt/colors</code></pre>
+<a href="index">back home</a>
+</body>
+</html>
