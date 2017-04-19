@@ -534,7 +534,7 @@
         }),
         <span class="comment">// spawn a terminal</span>
         <span class="macro">bind</span><span class="macro">!</span>(<span class="number">31</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="op">|</span>_, _<span class="op">|</span> {
-            <span class="kw">let</span> _ <span class="op">=</span> <span class="ident">Command</span>::<span class="ident">new</span>(<span class="string">&quot;termite&quot;</span>).<span class="ident">spawn</span>();
+            <span class="kw">let</span> _ <span class="op">=</span> <span class="ident">Command</span>::<span class="ident">new</span>(<span class="string">&quot;st&quot;</span>).<span class="ident">spawn</span>();
             <span class="ident">WmCommand</span>::<span class="ident">NoCommand</span>
         }),
         <span class="comment">// kill current client</span>

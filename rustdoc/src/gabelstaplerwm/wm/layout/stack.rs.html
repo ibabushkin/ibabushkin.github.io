@@ -522,18 +522,6 @@
 <span id="477">477</span>
 <span id="478">478</span>
 <span id="479">479</span>
-<span id="480">480</span>
-<span id="481">481</span>
-<span id="482">482</span>
-<span id="483">483</span>
-<span id="484">484</span>
-<span id="485">485</span>
-<span id="486">486</span>
-<span id="487">487</span>
-<span id="488">488</span>
-<span id="489">489</span>
-<span id="490">490</span>
-<span id="491">491</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">wm</span>::<span class="ident">layout</span>::<span class="kw-2">*</span>;
 
@@ -553,9 +541,9 @@
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">DStack</span> {
     <span class="doccomment">/// percentage of screen width taken by the master window area,</span>
     <span class="doccomment">/// saturating semantics</span>
-    <span class="kw">pub</span> <span class="ident">master_factor</span>: <span class="ident">u8</span>,
+    <span class="ident">master_factor</span>: <span class="ident">u8</span>,
     <span class="doccomment">/// keep the width(s) of the areas even if they are empty?</span>
-    <span class="kw">pub</span> <span class="ident">fixed</span>: <span class="ident">bool</span>,
+    <span class="ident">fixed</span>: <span class="ident">bool</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">DStack</span> {
@@ -571,11 +559,7 @@
     <span class="kw">fn</span> <span class="ident">arrange</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">num_windows</span>: <span class="ident">usize</span>, <span class="ident">screen</span>: <span class="kw-2">&amp;</span><span class="ident">TilingArea</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Geometry</span><span class="op">&gt;&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="ident">num_windows</span>);
         <span class="comment">// set master window width, capping factor</span>
-        <span class="kw">let</span> <span class="ident">master_width</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">master_factor</span> <span class="op">&gt;=</span> <span class="number">100</span> {
-            <span class="ident">screen</span>.<span class="ident">width</span>
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">master_factor</span> <span class="kw">as</span> <span class="ident">u32</span> <span class="op">*</span> <span class="ident">screen</span>.<span class="ident">width</span> <span class="op">/</span> <span class="number">100</span>
-        };
+        <span class="kw">let</span> <span class="ident">master_width</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">master_factor</span> <span class="kw">as</span> <span class="ident">u32</span> <span class="op">*</span> <span class="ident">screen</span>.<span class="ident">width</span> <span class="op">/</span> <span class="number">100</span>;
         <span class="kw">if</span> <span class="ident">num_windows</span> <span class="op">==</span> <span class="number">1</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">fixed</span> {
             <span class="comment">// one window only - fullscreen</span>
             <span class="ident">res</span>.<span class="ident">push</span>(<span class="prelude-val">Some</span>(<span class="ident">Geometry</span> {
@@ -701,13 +685,13 @@
     <span class="kw">fn</span> <span class="ident">edit_layout</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">msg</span>: <span class="ident">LayoutMessage</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="ident">msg</span> {
             <span class="ident">LayoutMessage</span>::<span class="ident">MasterFactorAbs</span>(<span class="ident">mf</span>) <span class="op">=&gt;</span>
-                <span class="self">self</span>.<span class="ident">master_factor</span> <span class="op">=</span> <span class="ident">mf</span> <span class="op">%</span> <span class="number">101</span>,
+                <span class="self">self</span>.<span class="ident">master_factor</span> <span class="op">=</span> <span class="ident">mf</span> <span class="op">%</span> <span class="number">96</span>,
             <span class="ident">LayoutMessage</span>::<span class="ident">MasterFactorRel</span>(<span class="ident">mf</span>) <span class="op">=&gt;</span>
                 <span class="self">self</span>.<span class="ident">master_factor</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">mf</span> <span class="op">&lt;</span> <span class="number">0</span> {
                     <span class="self">self</span>.<span class="ident">master_factor</span>.<span class="ident">saturating_sub</span>(<span class="ident">mf</span>.<span class="ident">abs</span>() <span class="kw">as</span> <span class="ident">u8</span>)
                 } <span class="kw">else</span> {
                     <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">master_factor</span>.<span class="ident">saturating_add</span>(<span class="ident">mf</span>.<span class="ident">abs</span>() <span class="kw">as</span> <span class="ident">u8</span>);
-                    <span class="kw">if</span> <span class="ident">m</span> <span class="op">&gt;</span> <span class="number">100</span> { <span class="number">100</span> } <span class="kw">else</span> { <span class="ident">m</span> }
+                    <span class="kw">if</span> <span class="ident">m</span> <span class="op">&gt;</span> <span class="number">95</span> { <span class="number">95</span> } <span class="kw">else</span> { <span class="ident">m</span> }
                 },
             <span class="ident">LayoutMessage</span>::<span class="ident">FixedAbs</span>(<span class="ident">f</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">fixed</span> <span class="op">=</span> <span class="ident">f</span>,
             <span class="ident">LayoutMessage</span>::<span class="ident">FixedRel</span> <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">fixed</span> <span class="op">=</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">fixed</span>,
@@ -731,11 +715,11 @@
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">HStack</span> {
     <span class="doccomment">/// percentage of screen height taken by the master window area,</span>
     <span class="doccomment">/// saturating semantics</span>
-    <span class="kw">pub</span> <span class="ident">master_factor</span>: <span class="ident">u8</span>,
+    <span class="ident">master_factor</span>: <span class="ident">u8</span>,
     <span class="doccomment">/// place the stack on top?</span>
-    <span class="kw">pub</span> <span class="ident">inverted</span>: <span class="ident">bool</span>,
+    <span class="ident">inverted</span>: <span class="ident">bool</span>,
     <span class="doccomment">/// keep the height(s) of the areas even if they are empty?</span>
-    <span class="kw">pub</span> <span class="ident">fixed</span>: <span class="ident">bool</span>,
+    <span class="ident">fixed</span>: <span class="ident">bool</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">HStack</span> {
@@ -752,11 +736,7 @@
     <span class="kw">fn</span> <span class="ident">arrange</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">num_windows</span>: <span class="ident">usize</span>, <span class="ident">screen</span>: <span class="kw-2">&amp;</span><span class="ident">TilingArea</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Geometry</span><span class="op">&gt;&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="ident">num_windows</span>);
         <span class="comment">// set master window height, capping factor</span>
-        <span class="kw">let</span> <span class="ident">master_height</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">master_factor</span> <span class="op">&gt;=</span> <span class="number">100</span> {
-            <span class="ident">screen</span>.<span class="ident">height</span>
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">master_factor</span> <span class="kw">as</span> <span class="ident">u32</span> <span class="op">*</span> <span class="ident">screen</span>.<span class="ident">height</span> <span class="op">/</span> <span class="number">100</span>
-        };
+        <span class="kw">let</span> <span class="ident">master_height</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">master_factor</span> <span class="kw">as</span> <span class="ident">u32</span> <span class="op">*</span> <span class="ident">screen</span>.<span class="ident">height</span> <span class="op">/</span> <span class="number">100</span>;
         <span class="kw">if</span> <span class="ident">num_windows</span> <span class="op">==</span> <span class="number">1</span> {
             <span class="comment">// one window only - fullscreen or fixed size</span>
             <span class="kw">let</span> <span class="ident">h</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">fixed</span> {
@@ -854,13 +834,13 @@
     <span class="kw">fn</span> <span class="ident">edit_layout</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">msg</span>: <span class="ident">LayoutMessage</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="ident">msg</span> {
             <span class="ident">LayoutMessage</span>::<span class="ident">MasterFactorAbs</span>(<span class="ident">mf</span>) <span class="op">=&gt;</span>
-                <span class="self">self</span>.<span class="ident">master_factor</span> <span class="op">=</span> <span class="ident">mf</span> <span class="op">%</span> <span class="number">101</span>,
+                <span class="self">self</span>.<span class="ident">master_factor</span> <span class="op">=</span> <span class="ident">mf</span> <span class="op">%</span> <span class="number">96</span>,
             <span class="ident">LayoutMessage</span>::<span class="ident">MasterFactorRel</span>(<span class="ident">mf</span>) <span class="op">=&gt;</span>
                 <span class="self">self</span>.<span class="ident">master_factor</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">mf</span> <span class="op">&lt;</span> <span class="number">0</span> {
                     <span class="self">self</span>.<span class="ident">master_factor</span>.<span class="ident">saturating_sub</span>(<span class="ident">mf</span>.<span class="ident">abs</span>() <span class="kw">as</span> <span class="ident">u8</span>)
                 } <span class="kw">else</span> {
                     <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">master_factor</span>.<span class="ident">saturating_add</span>(<span class="ident">mf</span>.<span class="ident">abs</span>() <span class="kw">as</span> <span class="ident">u8</span>);
-                    <span class="kw">if</span> <span class="ident">m</span> <span class="op">&gt;</span> <span class="number">100</span> { <span class="number">100</span> } <span class="kw">else</span> { <span class="ident">m</span> }
+                    <span class="kw">if</span> <span class="ident">m</span> <span class="op">&gt;</span> <span class="number">95</span> { <span class="number">95</span> } <span class="kw">else</span> { <span class="ident">m</span> }
                 },
             <span class="ident">LayoutMessage</span>::<span class="ident">FixedAbs</span>(<span class="ident">f</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">fixed</span> <span class="op">=</span> <span class="ident">f</span>,
             <span class="ident">LayoutMessage</span>::<span class="ident">FixedRel</span> <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">fixed</span> <span class="op">=</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">fixed</span>,
@@ -886,11 +866,11 @@
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">VStack</span> {
     <span class="doccomment">/// percentage of screen height taken by the master window area,</span>
     <span class="doccomment">/// saturating semantics</span>
-    <span class="kw">pub</span> <span class="ident">master_factor</span>: <span class="ident">u8</span>,
+    <span class="ident">master_factor</span>: <span class="ident">u8</span>,
     <span class="doccomment">/// place the stack on the left?</span>
-    <span class="kw">pub</span> <span class="ident">inverted</span>: <span class="ident">bool</span>,
+    <span class="ident">inverted</span>: <span class="ident">bool</span>,
     <span class="doccomment">/// keep the height(s) of the areas even if they are empty?</span>
-    <span class="kw">pub</span> <span class="ident">fixed</span>: <span class="ident">bool</span>,
+    <span class="ident">fixed</span>: <span class="ident">bool</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">VStack</span> {
@@ -907,11 +887,7 @@
     <span class="kw">fn</span> <span class="ident">arrange</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">num_windows</span>: <span class="ident">usize</span>, <span class="ident">screen</span>: <span class="kw-2">&amp;</span><span class="ident">TilingArea</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Geometry</span><span class="op">&gt;&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">with_capacity</span>(<span class="ident">num_windows</span>);
         <span class="comment">// set master window width, capping factor</span>
-        <span class="kw">let</span> <span class="ident">master_width</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">master_factor</span> <span class="op">&gt;=</span> <span class="number">100</span> {
-            <span class="ident">screen</span>.<span class="ident">width</span>
-        } <span class="kw">else</span> {
-            <span class="self">self</span>.<span class="ident">master_factor</span> <span class="kw">as</span> <span class="ident">u32</span> <span class="op">*</span> <span class="ident">screen</span>.<span class="ident">width</span> <span class="op">/</span> <span class="number">100</span>
-        };
+        <span class="kw">let</span> <span class="ident">master_width</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">master_factor</span> <span class="kw">as</span> <span class="ident">u32</span> <span class="op">*</span> <span class="ident">screen</span>.<span class="ident">width</span> <span class="op">/</span> <span class="number">100</span>;
         <span class="kw">if</span> <span class="ident">num_windows</span> <span class="op">==</span> <span class="number">1</span> {
             <span class="comment">// one window only - fullscreen or fixed size</span>
             <span class="kw">let</span> <span class="ident">w</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">fixed</span> {
@@ -1009,13 +985,13 @@
     <span class="kw">fn</span> <span class="ident">edit_layout</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">msg</span>: <span class="ident">LayoutMessage</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="ident">msg</span> {
             <span class="ident">LayoutMessage</span>::<span class="ident">MasterFactorAbs</span>(<span class="ident">mf</span>) <span class="op">=&gt;</span>
-                <span class="self">self</span>.<span class="ident">master_factor</span> <span class="op">=</span> <span class="ident">mf</span> <span class="op">%</span> <span class="number">101</span>,
+                <span class="self">self</span>.<span class="ident">master_factor</span> <span class="op">=</span> <span class="ident">mf</span> <span class="op">%</span> <span class="number">96</span>,
             <span class="ident">LayoutMessage</span>::<span class="ident">MasterFactorRel</span>(<span class="ident">mf</span>) <span class="op">=&gt;</span>
                 <span class="self">self</span>.<span class="ident">master_factor</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">mf</span> <span class="op">&lt;</span> <span class="number">0</span> {
                     <span class="self">self</span>.<span class="ident">master_factor</span>.<span class="ident">saturating_sub</span>(<span class="ident">mf</span>.<span class="ident">abs</span>() <span class="kw">as</span> <span class="ident">u8</span>)
                 } <span class="kw">else</span> {
                     <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">master_factor</span>.<span class="ident">saturating_add</span>(<span class="ident">mf</span>.<span class="ident">abs</span>() <span class="kw">as</span> <span class="ident">u8</span>);
-                    <span class="kw">if</span> <span class="ident">m</span> <span class="op">&gt;</span> <span class="number">100</span> { <span class="number">100</span> } <span class="kw">else</span> { <span class="ident">m</span> }
+                    <span class="kw">if</span> <span class="ident">m</span> <span class="op">&gt;</span> <span class="number">95</span> { <span class="number">95</span> } <span class="kw">else</span> { <span class="ident">m</span> }
                 },
             <span class="ident">LayoutMessage</span>::<span class="ident">FixedAbs</span>(<span class="ident">f</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">fixed</span> <span class="op">=</span> <span class="ident">f</span>,
             <span class="ident">LayoutMessage</span>::<span class="ident">FixedRel</span> <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">fixed</span> <span class="op">=</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">fixed</span>,
