@@ -17,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc struct">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>client</a></p><script>window.sidebarCurrent = {name: 'TagSet', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct TagSet</p><div class="block items"><ul><li><a href="#fields">Fields</a></li><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>client</a></p><script>window.sidebarCurrent = {name: 'TagSet', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -43,12 +43,12 @@
         </form>
     </nav>
 
-    <section id='main' class="content struct">
+    <section id='main' class="content">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>client</a>::<wbr><a class="struct" href=''>TagSet</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../../src/gabelstaplerwm/wm/client.rs.html#502-507' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../../src/gabelstaplerwm/wm/client.rs.html#506-511' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct TagSet {
     pub layout: <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html" title="struct alloc::boxed::Box">Box</a>&lt;<a class="trait" href="../../../gabelstaplerwm/wm/layout/trait.Layout.html" title="trait gabelstaplerwm::wm::layout::Layout">Layout</a>&gt;,
     // some fields omitted
@@ -60,11 +60,11 @@ to the user when that tagset is displayed by the window manager. In that
 sense, tagsets are views into the space of open clients, with additional
 parameters attached. Note that layouts are dynamically determined and
 specified by a trait object, allowing for easy extending of the defaults.</p>
-</div><h2 class='fields'>Fields</h2><span id='structfield.layout' class="structfield">
+</div><h2 id='fields' class='fields'>Fields</h2><span id='structfield.layout' class="structfield">
                            <span id='layout.v' class='invisible'>
                            <code>layout: <a class="struct" href="https://doc.rust-lang.org/nightly/alloc/boxed/struct.Box.html" title="struct alloc::boxed::Box">Box</a>&lt;<a class="trait" href="../../../gabelstaplerwm/wm/layout/trait.Layout.html" title="trait gabelstaplerwm::wm::layout::Layout">Layout</a>&gt;</code>
                            </span></span><div class='docblock'><p>the layout used to display clients on the tagset</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../../gabelstaplerwm/wm/client/struct.TagSet.html" title="struct gabelstaplerwm::wm::client::TagSet">TagSet</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/gabelstaplerwm/wm/client.rs.html#509-541' title='goto source code'>[src]</a></span></h3>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../../gabelstaplerwm/wm/client/struct.TagSet.html" title="struct gabelstaplerwm::wm::client::TagSet">TagSet</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/gabelstaplerwm/wm/client.rs.html#513-545' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>&lt;L:&nbsp;<a class="trait" href="../../../gabelstaplerwm/wm/layout/trait.Layout.html" title="trait gabelstaplerwm::wm::layout::Layout">Layout</a> + 'static&gt;(tags: <a class="struct" href="https://doc.rust-lang.org/nightly/collections/btree/set/struct.BTreeSet.html" title="struct collections::btree::set::BTreeSet">BTreeSet</a>&lt;<a class="enum" href="../../../gabelstaplerwm/wm/config/enum.Tag.html" title="enum gabelstaplerwm::wm::config::Tag">Tag</a>&gt;, layout: L) -&gt; <a class="struct" href="../../../gabelstaplerwm/wm/client/struct.TagSet.html" title="struct gabelstaplerwm::wm::client::TagSet">TagSet</a></code></span></h4>
 <div class='docblock'><p>Initialize a new tag set with a layout and a set of tags.</p>
 </div><h4 id='method.toggle_tag' class="method"><span id='toggle_tag.v' class='invisible'><code>fn <a href='#method.toggle_tag' class='fnname'>toggle_tag</a>(&amp;mut self, tag: <a class="enum" href="../../../gabelstaplerwm/wm/config/enum.Tag.html" title="enum gabelstaplerwm::wm::config::Tag">Tag</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h4>
@@ -73,7 +73,7 @@ specified by a trait object, allowing for easy extending of the defaults.</p>
 <div class='docblock'><p>Replace a tag in the tagset, if it is present.</p>
 </div><h4 id='method.get_tags' class="method"><span id='get_tags.v' class='invisible'><code>fn <a href='#method.get_tags' class='fnname'>get_tags</a>(&amp;self) -&gt; &amp;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/btree/set/struct.BTreeSet.html" title="struct collections::btree::set::BTreeSet">BTreeSet</a>&lt;<a class="enum" href="../../../gabelstaplerwm/wm/config/enum.Tag.html" title="enum gabelstaplerwm::wm::config::Tag">Tag</a>&gt;</code></span></h4>
 <div class='docblock'><p>Get the tag set from the tag set. Funny.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html" title="trait core::fmt::Display">Display</a> for <a class="struct" href="../../../gabelstaplerwm/wm/client/struct.TagSet.html" title="struct gabelstaplerwm::wm::client::TagSet">TagSet</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/gabelstaplerwm/wm/client.rs.html#543-554' title='goto source code'>[src]</a></span></h3>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html" title="trait core::fmt::Display">Display</a> for <a class="struct" href="../../../gabelstaplerwm/wm/client/struct.TagSet.html" title="struct gabelstaplerwm::wm::client::TagSet">TagSet</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/gabelstaplerwm/wm/client.rs.html#547-558' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.fmt' class="method"><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, f: &amp;mut <a class="struct" href="https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html" title="struct core::fmt::Formatter">Formatter</a>) -&gt; <a class="type" href="https://doc.rust-lang.org/nightly/core/fmt/type.Result.html" title="type core::fmt::Result">Result</a></code></span></h4>
 <div class='docblock'><p>Formats the value using the given formatter. <a href="https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html#tymethod.fmt">Read more</a></p>
 </div></div></section>
@@ -133,7 +133,6 @@ specified by a trait object, allowing for easy extending of the defaults.</p>
         window.rootPath = "../../../";
         window.currentCrate = "gabelstaplerwm";
     </script>
-    <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     <script defer src="../../../search-index.js"></script>
 </body>

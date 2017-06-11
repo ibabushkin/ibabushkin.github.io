@@ -17,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc source">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -43,7 +43,7 @@
         </form>
     </nav>
 
-    <section id='main' class="content source"><pre class="line-numbers"><span id="1"> 1</span>
+    <section id='main' class="content"><pre class="line-numbers"><span id="1"> 1</span>
 <span id="2"> 2</span>
 <span id="3"> 3</span>
 <span id="4"> 4</span>
@@ -112,6 +112,10 @@
 <span id="67">67</span>
 <span id="68">68</span>
 <span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! # gabelstaplergrab - a key grabbing tool</span>
 <span class="doccomment">//! Just run it while no window manager is connected to the X server and</span>
@@ -125,8 +129,8 @@
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">process</span>::<span class="ident">exit</span>;
 
 <span class="kw">use</span> <span class="ident">xcb</span>::<span class="ident">base</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">xcb</span>::<span class="ident">xkb</span> <span class="kw">as</span> <span class="ident">xkb</span>;
-<span class="kw">use</span> <span class="ident">xcb</span>::<span class="ident">xproto</span> <span class="kw">as</span> <span class="ident">xproto</span>;
+<span class="kw">use</span> <span class="ident">xcb</span>::<span class="ident">xkb</span>;
+<span class="kw">use</span> <span class="ident">xcb</span>::<span class="ident">xproto</span>;
 
 <span class="doccomment">/// Main function.</span>
 <span class="doccomment">///</span>
@@ -144,18 +148,20 @@
         <span class="prelude-val">Err</span>(_) <span class="op">=&gt;</span> {
             <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;could not connect&quot;</span>);
             <span class="ident">exit</span>(<span class="number">1</span>);
-        },
+        }
     };
     <span class="kw">let</span> <span class="ident">root</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">con</span>.<span class="ident">get_setup</span>().<span class="ident">roots</span>().<span class="ident">nth</span>(<span class="ident">screen_num</span> <span class="kw">as</span> <span class="ident">usize</span>) {
         <span class="prelude-val">Some</span>(<span class="ident">screen</span>) <span class="op">=&gt;</span> <span class="ident">screen</span>.<span class="ident">root</span>(),
         <span class="prelude-val">None</span> <span class="op">=&gt;</span> {
             <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;could not get root window&quot;</span>);
             <span class="ident">exit</span>(<span class="number">2</span>);
-        },
+        }
     };
-    <span class="kw">if</span> <span class="ident">xproto</span>::<span class="ident">change_window_attributes</span>(
-            <span class="kw-2">&amp;</span><span class="ident">con</span>, <span class="ident">root</span>, <span class="kw-2">&amp;</span>[(<span class="ident">xproto</span>::<span class="ident">CW_EVENT_MASK</span>, <span class="ident">xproto</span>::<span class="ident">EVENT_MASK_KEY_PRESS</span>)])
-            .<span class="ident">request_check</span>().<span class="ident">is_err</span>() {
+    <span class="kw">if</span> <span class="ident">xproto</span>::<span class="ident">change_window_attributes</span>(<span class="kw-2">&amp;</span><span class="ident">con</span>,
+                                        <span class="ident">root</span>,
+                                        <span class="kw-2">&amp;</span>[(<span class="ident">xproto</span>::<span class="ident">CW_EVENT_MASK</span>, <span class="ident">xproto</span>::<span class="ident">EVENT_MASK_KEY_PRESS</span>)])
+               .<span class="ident">request_check</span>()
+               .<span class="ident">is_err</span>() {
         <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;other window manager running&quot;</span>);
         <span class="ident">exit</span>(<span class="number">3</span>);
     }
@@ -170,7 +176,7 @@
             <span class="prelude-val">None</span> <span class="op">=&gt;</span> {
                 <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;i/o error occured&quot;</span>);
                 <span class="ident">exit</span>(<span class="number">5</span>);
-            },
+            }
         }
     }
 }
@@ -179,7 +185,9 @@
 <span class="kw">fn</span> <span class="ident">print_event</span>(<span class="ident">event</span>: <span class="kw-2">&amp;</span><span class="ident">GenericEvent</span>) {
     <span class="kw">if</span> <span class="ident">event</span>.<span class="ident">response_type</span>() <span class="op">==</span> <span class="ident">xkb</span>::<span class="ident">STATE_NOTIFY</span> {
         <span class="kw">let</span> <span class="ident">ev</span>: <span class="kw-2">&amp;</span><span class="ident">xkb</span>::<span class="ident">StateNotifyEvent</span> <span class="op">=</span> <span class="ident">cast_event</span>(<span class="ident">event</span>);
-        <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;key pressed: code: {}, mods: {}&quot;</span>, <span class="ident">ev</span>.<span class="ident">xkb_type</span>(), <span class="ident">ev</span>.<span class="ident">keycode</span>());
+        <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;key pressed: code: {}, mods: {}&quot;</span>,
+                 <span class="ident">ev</span>.<span class="ident">xkb_type</span>(),
+                 <span class="ident">ev</span>.<span class="ident">keycode</span>());
     }
 }
 </pre>
@@ -240,7 +248,6 @@
         window.rootPath = "../../";
         window.currentCrate = "gabelstaplergrab";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

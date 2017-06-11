@@ -17,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc fn">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -43,13 +43,13 @@
         </form>
     </nav>
 
-    <section id='main' class="content fn">
+    <section id='main' class="content">
 <h1 class='fqn'><span class='in-band'>Function <a href='../index.html'>xcb</a>::<wbr><a href='index.html'>xproto</a>::<wbr><a class="fn" href=''>set_selection_owner_checked</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a class='srclink' href='../../src/xcb/xproto.rs.html#5473-5489' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub fn set_selection_owner_checked&lt;'a&gt;(c: &amp;'a <a class="struct" href="../../xcb/base/struct.Connection.html" title="struct xcb::base::Connection">Connection</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; owner: <a class="type" href="../../xcb/xproto/type.Window.html" title="type xcb::xproto::Window">Window</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; selection: <a class="type" href="../../xcb/xproto/type.Atom.html" title="type xcb::xproto::Atom">Atom</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; time: <a class="type" href="../../xcb/xproto/type.Timestamp.html" title="type xcb::xproto::Timestamp">Timestamp</a>)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class="type" href="../../xcb/base/type.VoidCookie.html" title="type xcb::base::VoidCookie">VoidCookie</a>&lt;'a&gt;</pre><div class='docblock'><p>Sets the owner of a selection</p>
+<pre class='rust fn'>pub fn set_selection_owner_checked&lt;'a&gt;(<br>&nbsp;&nbsp;&nbsp;&nbsp;c: &amp;'a <a class="struct" href="../../xcb/base/struct.Connection.html" title="struct xcb::base::Connection">Connection</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;owner: <a class="type" href="../../xcb/xproto/type.Window.html" title="type xcb::xproto::Window">Window</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;selection: <a class="type" href="../../xcb/xproto/type.Atom.html" title="type xcb::xproto::Atom">Atom</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;time: <a class="type" href="../../xcb/xproto/type.Timestamp.html" title="type xcb::xproto::Timestamp">Timestamp</a><br>) -&gt; <a class="type" href="../../xcb/base/type.VoidCookie.html" title="type xcb::base::VoidCookie">VoidCookie</a>&lt;'a&gt;</pre><div class='docblock'><p>Sets the owner of a selection</p>
 
 <p>Makes <code>window</code> the owner of the selection <code>selection</code> and updates the
 last-change time of the specified selection.</p>
@@ -134,7 +134,6 @@ last-change time of the specified selection.</p>
         window.rootPath = "../../";
         window.currentCrate = "xcb";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

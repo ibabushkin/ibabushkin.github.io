@@ -17,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc struct">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>client</a></p><script>window.sidebarCurrent = {name: 'ScreenSet', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct ScreenSet</p><div class="block items"><ul><li><a href="#methods">Methods</a></li></ul></div><p class='location'><a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>client</a></p><script>window.sidebarCurrent = {name: 'ScreenSet', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -43,18 +43,18 @@
         </form>
     </nav>
 
-    <section id='main' class="content struct">
+    <section id='main' class="content">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>client</a>::<wbr><a class="struct" href=''>ScreenSet</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../../src/gabelstaplerwm/wm/client.rs.html#715-720' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../../src/gabelstaplerwm/wm/client.rs.html#716-721' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct ScreenSet { /* fields omitted */ }</pre><div class='docblock'><p>An ordered set of known screens.</p>
 
 <p>A screen is a rectangular area on the X server screen&#39;s root window,
 that is used to show a distinct set of tags associated with a
 <code>TagStack</code>. There is an active screen at all times.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../../gabelstaplerwm/wm/client/struct.ScreenSet.html" title="struct gabelstaplerwm::wm::client::ScreenSet">ScreenSet</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/gabelstaplerwm/wm/client.rs.html#722-851' title='goto source code'>[src]</a></span></h3>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../../gabelstaplerwm/wm/client/struct.ScreenSet.html" title="struct gabelstaplerwm::wm::client::ScreenSet">ScreenSet</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/gabelstaplerwm/wm/client.rs.html#723-859' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>(screens: <a class="struct" href="https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html" title="struct collections::vec::Vec">Vec</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">(</a><a class="type" href="../../../xcb/randr/type.Crtc.html" title="type xcb::randr::Crtc">Crtc</a>, <a class="struct" href="../../../gabelstaplerwm/wm/client/struct.Screen.html" title="struct gabelstaplerwm::wm::client::Screen">Screen</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">)</a>&gt;) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../../../gabelstaplerwm/wm/client/struct.ScreenSet.html" title="struct gabelstaplerwm::wm::client::ScreenSet">ScreenSet</a>&gt;</code></span></h4>
 <div class='docblock'><p>Setup a new screen set.</p>
 </div><h4 id='method.screens' class="method"><span id='screens.v' class='invisible'><code>fn <a href='#method.screens' class='fnname'>screens</a>(&amp;self) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">&amp;[</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">(</a><a class="type" href="../../../xcb/randr/type.Crtc.html" title="type xcb::randr::Crtc">Crtc</a>, <a class="struct" href="../../../gabelstaplerwm/wm/client/struct.Screen.html" title="struct gabelstaplerwm::wm::client::Screen">Screen</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">)</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.slice.html">]</a></code></span></h4>
@@ -65,7 +65,7 @@ that is used to show a distinct set of tags associated with a
 <div class='docblock'><p>Get a mutable reference to current screen&#39;s geometry and tag stack.</p>
 </div><h4 id='method.current' class="method"><span id='current.v' class='invisible'><code>fn <a href='#method.current' class='fnname'>current</a>(&amp;self) -&gt; &amp;<a class="struct" href="../../../gabelstaplerwm/wm/client/struct.Screen.html" title="struct gabelstaplerwm::wm::client::Screen">Screen</a></code></span></h4>
 <div class='docblock'><p>Get an immutable reference to current screen&#39;s geometry and tag stack.</p>
-</div><h4 id='method.screen' class="method"><span id='screen.v' class='invisible'><code>fn <a href='#method.screen' class='fnname'>screen</a>(&amp;self) -&gt; &amp;<a class="struct" href="../../../gabelstaplerwm/wm/layout/struct.TilingArea.html" title="struct gabelstaplerwm::wm::layout::TilingArea">TilingArea</a></code></span></h4>
+</div><h4 id='method.current_tiling_area' class="method"><span id='current_tiling_area.v' class='invisible'><code>fn <a href='#method.current_tiling_area' class='fnname'>current_tiling_area</a>(&amp;self) -&gt; &amp;<a class="struct" href="../../../gabelstaplerwm/wm/layout/struct.TilingArea.html" title="struct gabelstaplerwm::wm::layout::TilingArea">TilingArea</a></code></span></h4>
 <div class='docblock'><p>Get an immutable reference to current screen&#39;s geometry.</p>
 </div><h4 id='method.tag_stack_mut' class="method"><span id='tag_stack_mut.v' class='invisible'><code>fn <a href='#method.tag_stack_mut' class='fnname'>tag_stack_mut</a>(&amp;mut self) -&gt; &amp;mut <a class="struct" href="../../../gabelstaplerwm/wm/client/struct.TagStack.html" title="struct gabelstaplerwm::wm::client::TagStack">TagStack</a></code></span></h4>
 <div class='docblock'><p>Get a mutable reference to the current screen&#39;s tag stack.</p>
@@ -73,7 +73,7 @@ that is used to show a distinct set of tags associated with a
 <div class='docblock'><p>Get an immutable reference to the current screen&#39;s tag stack.</p>
 </div><h4 id='method.rotate' class="method"><span id='rotate.v' class='invisible'><code>fn <a href='#method.rotate' class='fnname'>rotate</a>(&amp;mut self)</code></span></h4>
 <div class='docblock'><p>Swap horizontal and vertical axes of all screens.</p>
-</div><h4 id='method.change_screen' class="method"><span id='change_screen.v' class='invisible'><code>fn <a href='#method.change_screen' class='fnname'>change_screen</a>&lt;T&gt;(&amp;mut self, f: T) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a> <span class="where fmt-newline">where T: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html" title="trait core::ops::Fn">Fn</a>(<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a></span></code></span></h4>
+</div><h4 id='method.change_screen' class="method"><span id='change_screen.v' class='invisible'><code>fn <a href='#method.change_screen' class='fnname'>change_screen</a>&lt;T&gt;(&amp;mut self, f: T) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a> <span class="where fmt-newline">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.Fn.html" title="trait core::ops::Fn">Fn</a>(<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.usize.html">usize</a>,&nbsp;</span></code></span></h4>
 <div class='docblock'><p>Select a screen by altering the current screen&#39;s index</p>
 </div><h4 id='method.remove' class="method"><span id='remove.v' class='invisible'><code>fn <a href='#method.remove' class='fnname'>remove</a>(&amp;mut self, old_crtc: <a class="type" href="../../../xcb/randr/type.Crtc.html" title="type xcb::randr::Crtc">Crtc</a>) -&gt; <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.bool.html">bool</a></code></span></h4>
 <div class='docblock'><p>Remove a CRTC from our list of screens and return whether a redraw is necessary.</p>
@@ -138,7 +138,6 @@ that is used to show a distinct set of tags associated with a
         window.rootPath = "../../../";
         window.currentCrate = "gabelstaplerwm";
     </script>
-    <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     <script defer src="../../../search-index.js"></script>
 </body>

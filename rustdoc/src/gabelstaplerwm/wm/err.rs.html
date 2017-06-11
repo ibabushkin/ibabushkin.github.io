@@ -17,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc source">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -43,7 +43,7 @@
         </form>
     </nav>
 
-    <section id='main' class="content source"><pre class="line-numbers"><span id="1"> 1</span>
+    <section id='main' class="content"><pre class="line-numbers"><span id="1"> 1</span>
 <span id="2"> 2</span>
 <span id="3"> 3</span>
 <span id="4"> 4</span>
@@ -103,18 +103,6 @@
 <span id="58">58</span>
 <span id="59">59</span>
 <span id="60">60</span>
-<span id="61">61</span>
-<span id="62">62</span>
-<span id="63">63</span>
-<span id="64">64</span>
-<span id="65">65</span>
-<span id="66">66</span>
-<span id="67">67</span>
-<span id="68">68</span>
-<span id="69">69</span>
-<span id="70">70</span>
-<span id="71">71</span>
-<span id="72">72</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">process</span>::<span class="ident">exit</span>;
 
@@ -153,30 +141,18 @@
     <span class="doccomment">/// &quot;Handle&quot; an error, ie. print error message and exit.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">handle</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="op">!</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">WmError</span>::<span class="ident">CouldNotEstablishHandlers</span> <span class="op">=&gt;</span>
-                <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;could not establish signal handlers&quot;</span>),
-            <span class="ident">WmError</span>::<span class="ident">CouldNotConnect</span>(<span class="ident">e</span>) <span class="op">=&gt;</span>
-                <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;could not connect: {:?}&quot;</span>, <span class="ident">e</span>),
-            <span class="ident">WmError</span>::<span class="ident">CouldNotAcquireScreen</span> <span class="op">=&gt;</span>
-                <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;could not acquire screen&quot;</span>),
-            <span class="ident">WmError</span>::<span class="ident">CouldNotRegisterAtom</span>(<span class="ident">s</span>) <span class="op">=&gt;</span>
-                <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;could not register atom {}&quot;</span>, <span class="ident">s</span>),
-            <span class="ident">WmError</span>::<span class="ident">CouldNotAllocateColors</span> <span class="op">=&gt;</span>
-                <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;could not allocate border colors&quot;</span>),
-            <span class="ident">WmError</span>::<span class="ident">OtherWmRunning</span> <span class="op">=&gt;</span>
-                <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;another wm is running&quot;</span>),
-            <span class="ident">WmError</span>::<span class="ident">RandRVersionMismatch</span> <span class="op">=&gt;</span>
-                <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;randr 1.2 not supported&quot;</span>),
-            <span class="ident">WmError</span>::<span class="ident">RandRSetupFailed</span> <span class="op">=&gt;</span>
-                <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;randr setup failed&quot;</span>),
-            <span class="ident">WmError</span>::<span class="ident">CouldNotGetScreenResources</span> <span class="op">=&gt;</span>
-                <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;could not get screen resources&quot;</span>),
-            <span class="ident">WmError</span>::<span class="ident">BadCrtc</span> <span class="op">=&gt;</span>
-                <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;the set of CRTCs obtained was empty&quot;</span>),
-            <span class="ident">WmError</span>::<span class="ident">ConnectionInterrupted</span> <span class="op">=&gt;</span>
-                <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;connection interrupted&quot;</span>),
-            <span class="ident">WmError</span>::<span class="ident">IOError</span> <span class="op">=&gt;</span>
-                <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;i/o error occured&quot;</span>),
+            <span class="ident">WmError</span>::<span class="ident">CouldNotEstablishHandlers</span> <span class="op">=&gt;</span> <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;could not establish signal handlers&quot;</span>),
+            <span class="ident">WmError</span>::<span class="ident">CouldNotConnect</span>(<span class="ident">e</span>) <span class="op">=&gt;</span> <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;could not connect: {:?}&quot;</span>, <span class="ident">e</span>),
+            <span class="ident">WmError</span>::<span class="ident">CouldNotAcquireScreen</span> <span class="op">=&gt;</span> <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;could not acquire screen&quot;</span>),
+            <span class="ident">WmError</span>::<span class="ident">CouldNotRegisterAtom</span>(<span class="ident">s</span>) <span class="op">=&gt;</span> <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;could not register atom {}&quot;</span>, <span class="ident">s</span>),
+            <span class="ident">WmError</span>::<span class="ident">CouldNotAllocateColors</span> <span class="op">=&gt;</span> <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;could not allocate border colors&quot;</span>),
+            <span class="ident">WmError</span>::<span class="ident">OtherWmRunning</span> <span class="op">=&gt;</span> <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;another wm is running&quot;</span>),
+            <span class="ident">WmError</span>::<span class="ident">RandRVersionMismatch</span> <span class="op">=&gt;</span> <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;randr 1.2 not supported&quot;</span>),
+            <span class="ident">WmError</span>::<span class="ident">RandRSetupFailed</span> <span class="op">=&gt;</span> <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;randr setup failed&quot;</span>),
+            <span class="ident">WmError</span>::<span class="ident">CouldNotGetScreenResources</span> <span class="op">=&gt;</span> <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;could not get screen resources&quot;</span>),
+            <span class="ident">WmError</span>::<span class="ident">BadCrtc</span> <span class="op">=&gt;</span> <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;the set of CRTCs obtained was empty&quot;</span>),
+            <span class="ident">WmError</span>::<span class="ident">ConnectionInterrupted</span> <span class="op">=&gt;</span> <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;connection interrupted&quot;</span>),
+            <span class="ident">WmError</span>::<span class="ident">IOError</span> <span class="op">=&gt;</span> <span class="macro">error</span><span class="macro">!</span>(<span class="string">&quot;i/o error occured&quot;</span>),
         };
         <span class="ident">exit</span>(<span class="number">1</span>);
     }
@@ -246,7 +222,6 @@
         window.rootPath = "../../../";
         window.currentCrate = "gabelstaplerwm";
     </script>
-    <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     <script defer src="../../../search-index.js"></script>
 </body>

@@ -17,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc source">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -43,7 +43,7 @@
         </form>
     </nav>
 
-    <section id='main' class="content source"><pre class="line-numbers"><span id="1">  1</span>
+    <section id='main' class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -325,6 +325,75 @@
 <span id="280">280</span>
 <span id="281">281</span>
 <span id="282">282</span>
+<span id="283">283</span>
+<span id="284">284</span>
+<span id="285">285</span>
+<span id="286">286</span>
+<span id="287">287</span>
+<span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
+<span id="320">320</span>
+<span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
+<span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
+<span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
 </pre><pre class="rust ">
 <span class="doccomment">//! # Configuration module for gabelstaplerwm</span>
 <span class="doccomment">//! This module is intended to be edited by the user in order to customize</span>
@@ -332,7 +401,7 @@
 <span class="doccomment">//! freely, but you need to keep the functions already declared, as well as</span>
 <span class="doccomment">//! trait instances which are derived or implemented, though you can change</span>
 <span class="doccomment">//! the implementations of the `Default` trait. All other edits are welcome</span>
-<span class="doccomment">//! as well, but chances are you </span>
+<span class="doccomment">//! as well, but chances are you</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! * don&#39;t need them to customize your wm.</span>
 <span class="doccomment">//! * should consider contributing your changes back instead, as it seems to be</span>
@@ -456,130 +525,201 @@
 <span class="doccomment">/// This includes keybindings, default tag stack and matching.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">setup_wm</span>(<span class="ident">wm</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Wm</span>) {
     <span class="comment">// keybindings</span>
-    <span class="kw">let</span> <span class="ident">modkey</span> <span class="op">=</span> <span class="kw">if</span> <span class="macro">cfg</span><span class="macro">!</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;no-xephyr&quot;</span>) { <span class="ident">MOD4</span> } <span class="kw">else</span> { <span class="ident">ALTGR</span> };
-    <span class="ident">wm</span>.<span class="ident">setup_bindings</span>(<span class="macro">vec</span><span class="macro">!</span>[
-        <span class="comment">// focus single-digit-tagset</span>
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">10</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">push_tagset</span><span class="macro">!</span>(<span class="number">0</span>;; <span class="ident">current_tagset</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">11</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">push_tagset</span><span class="macro">!</span>(<span class="number">1</span>;; <span class="ident">current_tagset</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">12</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">push_tagset</span><span class="macro">!</span>(<span class="number">2</span>;; <span class="ident">current_tagset</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">13</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">push_tagset</span><span class="macro">!</span>(<span class="number">3</span>;; <span class="ident">current_tagset</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">14</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">push_tagset</span><span class="macro">!</span>(<span class="number">4</span>;; <span class="ident">current_tagset</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">15</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">push_tagset</span><span class="macro">!</span>(<span class="number">5</span>;; <span class="ident">current_tagset</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">16</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">push_tagset</span><span class="macro">!</span>(<span class="number">6</span>;; <span class="ident">current_tagset</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">17</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">push_tagset</span><span class="macro">!</span>(<span class="number">7</span>;; <span class="ident">current_tagset</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">18</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">push_tagset</span><span class="macro">!</span>(<span class="number">8</span>;; <span class="ident">current_tagset</span>)),
-        <span class="comment">// toggle tags on current client</span>
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">10</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">CTRL</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">toggle_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Web</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">11</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">CTRL</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">toggle_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work2</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">12</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">CTRL</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">toggle_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work3</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">13</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">CTRL</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">toggle_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work4</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">14</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">CTRL</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">toggle_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work5</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">15</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">CTRL</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">toggle_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Media</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">16</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">CTRL</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">toggle_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Chat</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">17</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">CTRL</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">toggle_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Logs</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">18</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">CTRL</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">toggle_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Mon</span>)),
-        <span class="comment">// move client to tags</span>
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">10</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">move_to_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Web</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">11</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">move_to_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work2</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">12</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">move_to_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work3</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">13</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">move_to_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work4</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">14</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">move_to_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work5</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">15</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">move_to_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Media</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">16</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">move_to_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Chat</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">17</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">move_to_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Logs</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">18</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">move_to_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Mon</span>)),
-        <span class="comment">// focus windows</span>
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">43</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">focus</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">focus_left</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">44</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">focus</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">focus_bottom</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">45</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">focus</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">focus_top</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">46</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">focus</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">focus_right</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">35</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">focus</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">focus_next</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">61</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">focus</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">focus_prev</span>)),
-        <span class="comment">// swap windows</span>
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">43</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">swap</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">swap_left</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">44</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">swap</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">swap_bottom</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">45</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">swap</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">swap_top</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">46</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">swap</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">swap_right</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">35</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">swap</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">swap_next</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">61</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">swap</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">swap_prev</span>)),
-        <span class="comment">// change layout attributes</span>
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">44</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">CTRL</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">edit_layout</span><span class="macro">!</span>(
-                <span class="ident">LayoutMessage</span>::<span class="ident">MasterFactorRel</span>(<span class="op">-</span><span class="number">5</span>),
-                <span class="ident">LayoutMessage</span>::<span class="ident">ColumnRel</span>(<span class="op">-</span><span class="number">1</span>))),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">45</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">CTRL</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">edit_layout</span><span class="macro">!</span>(
-                <span class="ident">LayoutMessage</span>::<span class="ident">MasterFactorRel</span>(<span class="number">5</span>),
-                <span class="ident">LayoutMessage</span>::<span class="ident">ColumnRel</span>(<span class="number">1</span>))),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">55</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">change_layout</span><span class="macro">!</span>(<span class="ident">VStack</span>::<span class="ident">default</span>())),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">56</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">change_layout</span><span class="macro">!</span>(<span class="ident">HStack</span>::<span class="ident">default</span>())),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">57</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">change_layout</span><span class="macro">!</span>(<span class="ident">DStack</span>::<span class="ident">default</span>())),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">58</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">change_layout</span><span class="macro">!</span>(<span class="ident">Grid</span>::<span class="ident">default</span>())),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">59</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">change_layout</span><span class="macro">!</span>(<span class="ident">Spiral</span>::<span class="ident">default</span>())),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">60</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">change_layout</span><span class="macro">!</span>(<span class="ident">Monocle</span>::<span class="ident">default</span>())),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">65</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="op">|</span>_, <span class="ident">s</span><span class="op">|</span>
-            <span class="kw">if</span> <span class="ident">s</span>.<span class="ident">change_screen</span>(<span class="op">|</span><span class="ident">cur</span>, <span class="ident">len</span><span class="op">|</span> (<span class="ident">cur</span> <span class="op">+</span> <span class="number">1</span>) <span class="op">%</span> <span class="ident">len</span>) {
-                <span class="ident">WmCommand</span>::<span class="ident">Focus</span>
-            } <span class="kw">else</span> {
-                <span class="ident">WmCommand</span>::<span class="ident">NoCommand</span>
-            }),
-        <span class="comment">// quit the window manager</span>
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">24</span>, <span class="ident">modkey</span><span class="op">+</span><span class="ident">CTRL</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="op">|</span>_, _<span class="op">|</span> <span class="ident">WmCommand</span>::<span class="ident">Quit</span>),
-        <span class="comment">// go back in tagset history</span>
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">42</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="op">|</span><span class="ident">c</span>, <span class="ident">s</span><span class="op">|</span> {
-            <span class="kw">if</span> <span class="ident">s</span>.<span class="ident">tag_stack_mut</span>().<span class="ident">view_prev</span>() {
-                <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">current_tagset</span>(<span class="ident">c</span>, <span class="ident">s</span>));
-                <span class="ident">WmCommand</span>::<span class="ident">Redraw</span>
-            } <span class="kw">else</span> {
-                <span class="ident">WmCommand</span>::<span class="ident">NoCommand</span>
-            }
-        }),
-        <span class="comment">// spawn a terminal</span>
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">31</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="op">|</span>_, _<span class="op">|</span> {
-            <span class="kw">let</span> _ <span class="op">=</span> <span class="ident">Command</span>::<span class="ident">new</span>(<span class="string">&quot;st&quot;</span>).<span class="ident">spawn</span>();
-            <span class="ident">WmCommand</span>::<span class="ident">NoCommand</span>
-        }),
-        <span class="comment">// kill current client</span>
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">54</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="op">|</span><span class="ident">c</span>, <span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>
-            .<span class="ident">tag_stack</span>()
+    <span class="kw">let</span> <span class="ident">modkey</span> <span class="op">=</span> <span class="kw">if</span> <span class="macro">cfg</span><span class="macro">!</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;no-xephyr&quot;</span>) {
+        <span class="ident">MOD4</span>
+    } <span class="kw">else</span> {
+        <span class="ident">ALTGR</span>
+    };
+    <span class="ident">wm</span>.<span class="ident">setup_bindings</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="comment">// focus single-digit-tagset</span>
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">10</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">push_tagset</span><span class="macro">!</span>(<span class="number">0</span>;; <span class="ident">current_tagset</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">11</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">push_tagset</span><span class="macro">!</span>(<span class="number">1</span>;; <span class="ident">current_tagset</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">12</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">push_tagset</span><span class="macro">!</span>(<span class="number">2</span>;; <span class="ident">current_tagset</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">13</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">push_tagset</span><span class="macro">!</span>(<span class="number">3</span>;; <span class="ident">current_tagset</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">14</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">push_tagset</span><span class="macro">!</span>(<span class="number">4</span>;; <span class="ident">current_tagset</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">15</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">push_tagset</span><span class="macro">!</span>(<span class="number">5</span>;; <span class="ident">current_tagset</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">16</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">push_tagset</span><span class="macro">!</span>(<span class="number">6</span>;; <span class="ident">current_tagset</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">17</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">push_tagset</span><span class="macro">!</span>(<span class="number">7</span>;; <span class="ident">current_tagset</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">18</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">push_tagset</span><span class="macro">!</span>(<span class="number">8</span>;; <span class="ident">current_tagset</span>)),
+                           <span class="comment">// toggle tags on current client</span>
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">10</span>,
+                                 <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">CTRL</span> <span class="op">+</span> <span class="ident">SHIFT</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Normal</span>,
+                                 <span class="macro">toggle_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Web</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">11</span>,
+                                 <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">CTRL</span> <span class="op">+</span> <span class="ident">SHIFT</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Normal</span>,
+                                 <span class="macro">toggle_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work2</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">12</span>,
+                                 <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">CTRL</span> <span class="op">+</span> <span class="ident">SHIFT</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Normal</span>,
+                                 <span class="macro">toggle_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work3</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">13</span>,
+                                 <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">CTRL</span> <span class="op">+</span> <span class="ident">SHIFT</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Normal</span>,
+                                 <span class="macro">toggle_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work4</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">14</span>,
+                                 <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">CTRL</span> <span class="op">+</span> <span class="ident">SHIFT</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Normal</span>,
+                                 <span class="macro">toggle_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work5</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">15</span>,
+                                 <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">CTRL</span> <span class="op">+</span> <span class="ident">SHIFT</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Normal</span>,
+                                 <span class="macro">toggle_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Media</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">16</span>,
+                                 <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">CTRL</span> <span class="op">+</span> <span class="ident">SHIFT</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Normal</span>,
+                                 <span class="macro">toggle_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Chat</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">17</span>,
+                                 <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">CTRL</span> <span class="op">+</span> <span class="ident">SHIFT</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Normal</span>,
+                                 <span class="macro">toggle_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Logs</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">18</span>,
+                                 <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">CTRL</span> <span class="op">+</span> <span class="ident">SHIFT</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Normal</span>,
+                                 <span class="macro">toggle_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Mon</span>)),
+                           <span class="comment">// move client to tags</span>
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">10</span>, <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">move_to_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Web</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">11</span>, <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">move_to_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work2</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">12</span>, <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">move_to_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work3</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">13</span>, <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">move_to_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work4</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">14</span>, <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">move_to_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work5</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">15</span>, <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">move_to_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Media</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">16</span>, <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">move_to_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Chat</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">17</span>, <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">move_to_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Logs</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">18</span>, <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">move_to_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Mon</span>)),
+                           <span class="comment">// focus windows</span>
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">43</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">focus</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">focus_left</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">44</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">focus</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">focus_bottom</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">45</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">focus</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">focus_top</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">46</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">focus</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">focus_right</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">35</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">focus</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">focus_next</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">61</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">focus</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">focus_prev</span>)),
+                           <span class="comment">// swap windows</span>
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">43</span>,
+                                 <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">SHIFT</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Normal</span>,
+                                 <span class="macro">swap</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">swap_left</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">44</span>,
+                                 <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">SHIFT</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Normal</span>,
+                                 <span class="macro">swap</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">swap_bottom</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">45</span>, <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">SHIFT</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">swap</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">swap_top</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">46</span>,
+                                 <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">SHIFT</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Normal</span>,
+                                 <span class="macro">swap</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">swap_right</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">35</span>,
+                                 <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">SHIFT</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Normal</span>,
+                                 <span class="macro">swap</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">swap_next</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">61</span>,
+                                 <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">SHIFT</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Normal</span>,
+                                 <span class="macro">swap</span><span class="macro">!</span>(<span class="ident">ClientSet</span>::<span class="ident">swap_prev</span>)),
+                           <span class="comment">// change layout attributes</span>
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">44</span>,
+                                 <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">CTRL</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Normal</span>,
+                                 <span class="macro">edit_layout</span><span class="macro">!</span>(<span class="ident">LayoutMessage</span>::<span class="ident">MasterFactorRel</span>(<span class="op">-</span><span class="number">5</span>),
+                                              <span class="ident">LayoutMessage</span>::<span class="ident">ColumnRel</span>(<span class="op">-</span><span class="number">1</span>))),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">45</span>,
+                                 <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">CTRL</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Normal</span>,
+                                 <span class="macro">edit_layout</span><span class="macro">!</span>(<span class="ident">LayoutMessage</span>::<span class="ident">MasterFactorRel</span>(<span class="number">5</span>),
+                                              <span class="ident">LayoutMessage</span>::<span class="ident">ColumnRel</span>(<span class="number">1</span>))),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">55</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">change_layout</span><span class="macro">!</span>(<span class="ident">VStack</span>::<span class="ident">default</span>())),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">56</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">change_layout</span><span class="macro">!</span>(<span class="ident">HStack</span>::<span class="ident">default</span>())),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">57</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">change_layout</span><span class="macro">!</span>(<span class="ident">DStack</span>::<span class="ident">default</span>())),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">58</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">change_layout</span><span class="macro">!</span>(<span class="ident">Grid</span>::<span class="ident">default</span>())),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">59</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">change_layout</span><span class="macro">!</span>(<span class="ident">Spiral</span>::<span class="ident">default</span>())),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">60</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="macro">change_layout</span><span class="macro">!</span>(<span class="ident">Monocle</span>::<span class="ident">default</span>())),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">65</span>,
+                                 <span class="ident">modkey</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Normal</span>,
+                                 <span class="op">|</span>_, <span class="ident">s</span><span class="op">|</span> <span class="kw">if</span> <span class="ident">s</span>.<span class="ident">change_screen</span>(<span class="op">|</span><span class="ident">cur</span>, <span class="ident">len</span><span class="op">|</span> (<span class="ident">cur</span> <span class="op">+</span> <span class="number">1</span>) <span class="op">%</span> <span class="ident">len</span>) {
+                                     <span class="ident">WmCommand</span>::<span class="ident">Focus</span>
+                                 } <span class="kw">else</span> {
+                                     <span class="ident">WmCommand</span>::<span class="ident">NoCommand</span>
+                                 }),
+                           <span class="comment">// quit the window manager</span>
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">24</span>, <span class="ident">modkey</span> <span class="op">+</span> <span class="ident">CTRL</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="op">|</span>_, _<span class="op">|</span> <span class="ident">WmCommand</span>::<span class="ident">Quit</span>),
+                           <span class="comment">// go back in tagset history</span>
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">42</span>,
+                                 <span class="ident">modkey</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Normal</span>,
+                                 <span class="op">|</span><span class="ident">c</span>, <span class="ident">s</span><span class="op">|</span> <span class="kw">if</span> <span class="ident">s</span>.<span class="ident">tag_stack_mut</span>().<span class="ident">view_prev</span>() {
+                                     <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">current_tagset</span>(<span class="ident">c</span>, <span class="ident">s</span>));
+                                     <span class="ident">WmCommand</span>::<span class="ident">Redraw</span>
+                                 } <span class="kw">else</span> {
+                                     <span class="ident">WmCommand</span>::<span class="ident">NoCommand</span>
+                                 }),
+                           <span class="comment">// spawn a terminal</span>
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">31</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="op">|</span>_, _<span class="op">|</span> {
+        <span class="kw">let</span> _ <span class="op">=</span> <span class="ident">Command</span>::<span class="ident">new</span>(<span class="string">&quot;st&quot;</span>).<span class="ident">spawn</span>();
+        <span class="ident">WmCommand</span>::<span class="ident">NoCommand</span>
+    }),
+                           <span class="comment">// kill current client</span>
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">54</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="op">|</span><span class="ident">c</span>, <span class="ident">s</span><span class="op">|</span> {
+        <span class="ident">s</span>.<span class="ident">tag_stack</span>()
             .<span class="ident">current</span>()
             .<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="ident">c</span>.<span class="ident">get_focused_window</span>(<span class="ident">t</span>.<span class="ident">get_tags</span>()))
             .<span class="ident">map</span>(<span class="ident">WmCommand</span>::<span class="ident">Kill</span>)
             .<span class="ident">unwrap_or</span>(<span class="ident">WmCommand</span>::<span class="ident">NoCommand</span>)
-        ),
-        <span class="comment">// switch to setup mode</span>
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">36</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Normal</span>, <span class="op">|</span>_, _<span class="op">|</span>
-              <span class="ident">WmCommand</span>::<span class="ident">ModeSwitch</span>(<span class="ident">Mode</span>::<span class="ident">Setup</span>)),
-        <span class="comment">// switch back to normal mode</span>
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">36</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Setup</span>, <span class="op">|</span>_, _<span class="op">|</span>
-              <span class="ident">WmCommand</span>::<span class="ident">ModeSwitch</span>(<span class="ident">Mode</span>::<span class="ident">Normal</span>)),
-        <span class="comment">// toggle tags on current tagset</span>
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">10</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Setup</span>,
-              <span class="macro">toggle_show_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Web</span>;; <span class="ident">current_tagset</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">11</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Setup</span>,
-              <span class="macro">toggle_show_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work2</span>;; <span class="ident">current_tagset</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">12</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Setup</span>,
-              <span class="macro">toggle_show_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work3</span>;; <span class="ident">current_tagset</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">13</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Setup</span>,
-              <span class="macro">toggle_show_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work4</span>;; <span class="ident">current_tagset</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">14</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Setup</span>,
-              <span class="macro">toggle_show_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work5</span>;; <span class="ident">current_tagset</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">15</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Setup</span>,
-              <span class="macro">toggle_show_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Media</span>;; <span class="ident">current_tagset</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">16</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Setup</span>,
-              <span class="macro">toggle_show_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Chat</span>;; <span class="ident">current_tagset</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">17</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Setup</span>,
-              <span class="macro">toggle_show_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Logs</span>;; <span class="ident">current_tagset</span>)),
-        <span class="macro">bind</span><span class="macro">!</span>(<span class="number">18</span>, <span class="ident">modkey</span>, <span class="ident">Mode</span>::<span class="ident">Setup</span>,
-              <span class="macro">toggle_show_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Mon</span>;; <span class="ident">current_tagset</span>)),
-    ]);
+    }),
+                           <span class="comment">// switch to setup mode</span>
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">36</span>,
+                                 <span class="ident">modkey</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Normal</span>,
+                                 <span class="op">|</span>_, _<span class="op">|</span> <span class="ident">WmCommand</span>::<span class="ident">ModeSwitch</span>(<span class="ident">Mode</span>::<span class="ident">Setup</span>)),
+                           <span class="comment">// switch back to normal mode</span>
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">36</span>,
+                                 <span class="ident">modkey</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Setup</span>,
+                                 <span class="op">|</span>_, _<span class="op">|</span> <span class="ident">WmCommand</span>::<span class="ident">ModeSwitch</span>(<span class="ident">Mode</span>::<span class="ident">Normal</span>)),
+                           <span class="comment">// toggle tags on current tagset</span>
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">10</span>,
+                                 <span class="ident">modkey</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Setup</span>,
+                                 <span class="macro">toggle_show_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Web</span>;; <span class="ident">current_tagset</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">11</span>,
+                                 <span class="ident">modkey</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Setup</span>,
+                                 <span class="macro">toggle_show_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work2</span>;; <span class="ident">current_tagset</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">12</span>,
+                                 <span class="ident">modkey</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Setup</span>,
+                                 <span class="macro">toggle_show_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work3</span>;; <span class="ident">current_tagset</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">13</span>,
+                                 <span class="ident">modkey</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Setup</span>,
+                                 <span class="macro">toggle_show_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work4</span>;; <span class="ident">current_tagset</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">14</span>,
+                                 <span class="ident">modkey</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Setup</span>,
+                                 <span class="macro">toggle_show_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Work5</span>;; <span class="ident">current_tagset</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">15</span>,
+                                 <span class="ident">modkey</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Setup</span>,
+                                 <span class="macro">toggle_show_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Media</span>;; <span class="ident">current_tagset</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">16</span>,
+                                 <span class="ident">modkey</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Setup</span>,
+                                 <span class="macro">toggle_show_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Chat</span>;; <span class="ident">current_tagset</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">17</span>,
+                                 <span class="ident">modkey</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Setup</span>,
+                                 <span class="macro">toggle_show_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Logs</span>;; <span class="ident">current_tagset</span>)),
+                           <span class="macro">bind</span><span class="macro">!</span>(<span class="number">18</span>,
+                                 <span class="ident">modkey</span>,
+                                 <span class="ident">Mode</span>::<span class="ident">Setup</span>,
+                                 <span class="macro">toggle_show_tag</span><span class="macro">!</span>(<span class="ident">Tag</span>::<span class="ident">Mon</span>;; <span class="ident">current_tagset</span>))]);
 
     <span class="comment">// matching function deciding upon client placement</span>
-    <span class="ident">wm</span>.<span class="ident">setup_matching</span>(<span class="ident">Box</span>::<span class="ident">new</span>(
-        <span class="op">|</span><span class="ident">props</span>, _<span class="op">|</span> <span class="kw">if</span> <span class="ident">props</span>.<span class="ident">name</span> <span class="op">==</span> <span class="string">&quot;Mozilla Firefox&quot;</span> {
-            <span class="prelude-val">Some</span>((<span class="macro">set</span><span class="macro">!</span>[<span class="ident">Tag</span>::<span class="ident">Web</span>], <span class="bool-val">true</span>))
-        } <span class="kw">else</span> {
-            <span class="prelude-val">None</span>
-        }
-    ));
+    <span class="ident">wm</span>.<span class="ident">setup_matching</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="op">|</span><span class="ident">props</span>, _<span class="op">|</span> <span class="kw">if</span> <span class="ident">props</span>.<span class="ident">name</span> <span class="op">==</span> <span class="string">&quot;Mozilla Firefox&quot;</span> {
+                                   <span class="prelude-val">Some</span>((<span class="macro">set</span><span class="macro">!</span>[<span class="ident">Tag</span>::<span class="ident">Web</span>], <span class="bool-val">true</span>))
+                               } <span class="kw">else</span> {
+                                   <span class="prelude-val">None</span>
+                               }));
 
     <span class="comment">// matching function deciding upon screen handling</span>
     <span class="ident">wm</span>.<span class="ident">setup_screen_matching</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="op">|</span><span class="ident">screen</span>, _, <span class="ident">index</span><span class="op">|</span> {
@@ -589,24 +729,22 @@
         }
 
         <span class="kw">if</span> <span class="ident">screen</span>.<span class="ident">tag_stack</span>.<span class="ident">is_clean</span>() {
-            <span class="kw">let</span> <span class="ident">tagsets</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[
-                <span class="ident">TagSet</span>::<span class="ident">new</span>(<span class="macro">set</span><span class="macro">!</span>[<span class="ident">Tag</span>::<span class="ident">Web</span>], <span class="ident">DStack</span>::<span class="ident">default</span>()),
-                <span class="ident">TagSet</span>::<span class="ident">new</span>(<span class="macro">set</span><span class="macro">!</span>[<span class="ident">Tag</span>::<span class="ident">Work2</span>], <span class="ident">VStack</span>::<span class="ident">default</span>()),
-                <span class="ident">TagSet</span>::<span class="ident">new</span>(<span class="macro">set</span><span class="macro">!</span>[<span class="ident">Tag</span>::<span class="ident">Work3</span>], <span class="ident">VStack</span>::<span class="ident">default</span>()),
-                <span class="ident">TagSet</span>::<span class="ident">new</span>(<span class="macro">set</span><span class="macro">!</span>[<span class="ident">Tag</span>::<span class="ident">Work4</span>], <span class="ident">Spiral</span>::<span class="ident">default</span>()),
-                <span class="ident">TagSet</span>::<span class="ident">new</span>(<span class="macro">set</span><span class="macro">!</span>[<span class="ident">Tag</span>::<span class="ident">Work5</span>], <span class="ident">Grid</span>::<span class="ident">default</span>()),
-                <span class="ident">TagSet</span>::<span class="ident">new</span>(<span class="macro">set</span><span class="macro">!</span>[<span class="ident">Tag</span>::<span class="ident">Media</span>], <span class="ident">Monocle</span>::<span class="ident">default</span>()),
-                <span class="ident">TagSet</span>::<span class="ident">new</span>(<span class="macro">set</span><span class="macro">!</span>[<span class="ident">Tag</span>::<span class="ident">Chat</span>], <span class="ident">HStack</span>::<span class="ident">default</span>()),
-                <span class="ident">TagSet</span>::<span class="ident">new</span>(<span class="macro">set</span><span class="macro">!</span>[<span class="ident">Tag</span>::<span class="ident">Logs</span>], <span class="ident">HStack</span>::<span class="ident">default</span>()),
-                <span class="ident">TagSet</span>::<span class="ident">new</span>(<span class="macro">set</span><span class="macro">!</span>[<span class="ident">Tag</span>::<span class="ident">Mon</span>], <span class="ident">HStack</span>::<span class="ident">default</span>())
-            ];
+            <span class="kw">let</span> <span class="ident">tagsets</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="ident">TagSet</span>::<span class="ident">new</span>(<span class="macro">set</span><span class="macro">!</span>[<span class="ident">Tag</span>::<span class="ident">Web</span>], <span class="ident">DStack</span>::<span class="ident">default</span>()),
+                               <span class="ident">TagSet</span>::<span class="ident">new</span>(<span class="macro">set</span><span class="macro">!</span>[<span class="ident">Tag</span>::<span class="ident">Work2</span>], <span class="ident">VStack</span>::<span class="ident">default</span>()),
+                               <span class="ident">TagSet</span>::<span class="ident">new</span>(<span class="macro">set</span><span class="macro">!</span>[<span class="ident">Tag</span>::<span class="ident">Work3</span>], <span class="ident">VStack</span>::<span class="ident">default</span>()),
+                               <span class="ident">TagSet</span>::<span class="ident">new</span>(<span class="macro">set</span><span class="macro">!</span>[<span class="ident">Tag</span>::<span class="ident">Work4</span>], <span class="ident">Spiral</span>::<span class="ident">default</span>()),
+                               <span class="ident">TagSet</span>::<span class="ident">new</span>(<span class="macro">set</span><span class="macro">!</span>[<span class="ident">Tag</span>::<span class="ident">Work5</span>], <span class="ident">Grid</span>::<span class="ident">default</span>()),
+                               <span class="ident">TagSet</span>::<span class="ident">new</span>(<span class="macro">set</span><span class="macro">!</span>[<span class="ident">Tag</span>::<span class="ident">Media</span>], <span class="ident">Monocle</span>::<span class="ident">default</span>()),
+                               <span class="ident">TagSet</span>::<span class="ident">new</span>(<span class="macro">set</span><span class="macro">!</span>[<span class="ident">Tag</span>::<span class="ident">Chat</span>], <span class="ident">HStack</span>::<span class="ident">default</span>()),
+                               <span class="ident">TagSet</span>::<span class="ident">new</span>(<span class="macro">set</span><span class="macro">!</span>[<span class="ident">Tag</span>::<span class="ident">Logs</span>], <span class="ident">HStack</span>::<span class="ident">default</span>()),
+                               <span class="ident">TagSet</span>::<span class="ident">new</span>(<span class="macro">set</span><span class="macro">!</span>[<span class="ident">Tag</span>::<span class="ident">Mon</span>], <span class="ident">HStack</span>::<span class="ident">default</span>())];
             <span class="ident">screen</span>.<span class="ident">tag_stack</span>.<span class="ident">setup</span>(<span class="ident">tagsets</span>, <span class="number">1</span>);
         }
     }));
 
     <span class="ident">wm</span>.<span class="ident">setup_urgency_callback</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="op">|</span>_<span class="op">|</span> {
-        <span class="macro">info</span><span class="macro">!</span>(<span class="string">&quot;this the default urgency callback.&quot;</span>);
-    }));
+                                           <span class="macro">info</span><span class="macro">!</span>(<span class="string">&quot;this the default urgency callback.&quot;</span>);
+                                       }));
 }
 </pre>
 </section>
@@ -666,7 +804,6 @@
         window.rootPath = "../../../";
         window.currentCrate = "gabelstaplerwm";
     </script>
-    <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     <script defer src="../../../search-index.js"></script>
 </body>

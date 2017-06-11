@@ -17,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc struct">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../index.html'>xcb</a>::<wbr><a href='index.html'>base</a></p><script>window.sidebarCurrent = {name: 'Connection', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct Connection</p><div class="block items"><ul><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='../index.html'>xcb</a>::<wbr><a href='index.html'>base</a></p><script>window.sidebarCurrent = {name: 'Connection', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -43,7 +43,7 @@
         </form>
     </nav>
 
-    <section id='main' class="content struct">
+    <section id='main' class="content">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>xcb</a>::<wbr><a href='index.html'>base</a>::<wbr><a class="struct" href=''>Connection</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
@@ -146,7 +146,7 @@ extension cache. Invoking the function may cause a call to
 xcb_query_extension, but will not block waiting for the
 reply. xcb_get_extension_data will return the prefetched data after
 possibly blocking while it is retrieved.</p>
-</div><h4 id='method.get_extension_data' class="method"><span id='get_extension_data.v' class='invisible'><code>fn <a href='#method.get_extension_data' class='fnname'>get_extension_data</a>&lt;'a&gt;(&amp;'a self,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ext: &amp;mut <a class="type" href="../../xcb/base/type.Extension.html" title="type xcb::base::Extension">Extension</a>)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../../xcb/base/struct.QueryExtensionData.html" title="struct xcb::base::QueryExtensionData">QueryExtensionData</a>&lt;'a&gt;&gt;</code></span></h4>
+</div><h4 id='method.get_extension_data' class="method"><span id='get_extension_data.v' class='invisible'><code>fn <a href='#method.get_extension_data' class='fnname'>get_extension_data</a>&lt;'a&gt;(<br>&nbsp;&nbsp;&nbsp;&nbsp;&amp;'a self, <br>&nbsp;&nbsp;&nbsp;&nbsp;ext: &amp;mut <a class="type" href="../../xcb/base/type.Extension.html" title="type xcb::base::Extension">Extension</a><br>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="../../xcb/base/struct.QueryExtensionData.html" title="struct xcb::base::QueryExtensionData">QueryExtensionData</a>&lt;'a&gt;&gt;</code></span></h4>
 <div class='docblock'><p>Caches reply information from QueryExtension requests.</p>
 
 <p>This function is the primary interface to the &quot;extension cache&quot;,
@@ -166,7 +166,7 @@ variable.</p>
 <p>Returns Ok(connection object, preferred screen) in case of success, or
 Err(ConnError) in case of error. If no screen is preferred, the second
 member of the tuple is set to 0.</p>
-</div><h4 id='method.connect_with_auth_info' class="method"><span id='connect_with_auth_info.v' class='invisible'><code>fn <a href='#method.connect_with_auth_info' class='fnname'>connect_with_auth_info</a>(display: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;&amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; auth_info: &amp;<a class="type" href="../../xcb/base/type.AuthInfo.html" title="type xcb::base::AuthInfo">AuthInfo</a>)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class="type" href="../../xcb/base/type.ConnResult.html" title="type xcb::base::ConnResult">ConnResult</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">(</a><a class="struct" href="../../xcb/base/struct.Connection.html" title="struct xcb::base::Connection">Connection</a>, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i32.html">i32</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">)</a>&gt;</code></span></h4>
+</div><h4 id='method.connect_with_auth_info' class="method"><span id='connect_with_auth_info.v' class='invisible'><code>fn <a href='#method.connect_with_auth_info' class='fnname'>connect_with_auth_info</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;display: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;&amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>&gt;, <br>&nbsp;&nbsp;&nbsp;&nbsp;auth_info: &amp;<a class="type" href="../../xcb/base/type.AuthInfo.html" title="type xcb::base::AuthInfo">AuthInfo</a><br>) -&gt; <a class="type" href="../../xcb/base/type.ConnResult.html" title="type xcb::base::ConnResult">ConnResult</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">(</a><a class="struct" href="../../xcb/base/struct.Connection.html" title="struct xcb::base::Connection">Connection</a>, <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i32.html">i32</a><a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">)</a>&gt;</code></span></h4>
 <div class='docblock'><p>Connects to the X server, using an authorization information.
 display: The name of the display.
 auth_info: The authorization information.
@@ -238,7 +238,6 @@ The second member of the returned tuple is the preferred screen, or 0</p>
         window.rootPath = "../../";
         window.currentCrate = "xcb";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

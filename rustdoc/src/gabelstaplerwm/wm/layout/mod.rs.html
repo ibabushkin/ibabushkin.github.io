@@ -17,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc source">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -43,7 +43,7 @@
         </form>
     </nav>
 
-    <section id='main' class="content source"><pre class="line-numbers"><span id="1">  1</span>
+    <section id='main' class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -187,8 +187,6 @@
 <span id="142">142</span>
 <span id="143">143</span>
 <span id="144">144</span>
-<span id="145">145</span>
-<span id="146">146</span>
 </pre><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span>;
 
@@ -254,8 +252,7 @@
 <span class="kw">impl</span> <span class="ident">Geometry</span> {
     <span class="doccomment">/// Check whether a geometry contains a point.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">match_coords</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">x</span> <span class="op">&lt;=</span> <span class="ident">x</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">x</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">width</span> <span class="op">&gt;</span> <span class="ident">x</span> <span class="op">&amp;&amp;</span>
-            <span class="self">self</span>.<span class="ident">y</span> <span class="op">&lt;=</span> <span class="ident">y</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">y</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">height</span> <span class="op">&gt;</span> <span class="ident">y</span>
+        <span class="self">self</span>.<span class="ident">x</span> <span class="op">&lt;=</span> <span class="ident">x</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">x</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">width</span> <span class="op">&gt;</span> <span class="ident">x</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">y</span> <span class="op">&lt;=</span> <span class="ident">y</span> <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">y</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">height</span> <span class="op">&gt;</span> <span class="ident">y</span>
     }
 
     <span class="doccomment">/// Check whether two `Geometry`s overlap.</span>
@@ -270,8 +267,8 @@
 <span class="doccomment">/// The trait inherits from `Debug` for purely practical reasons: some types</span>
 <span class="doccomment">/// we want to output (`WmCommand` in particular) rely on derived `Debug`</span>
 <span class="doccomment">/// instances and all types implementing `Layout` implement `Debug` anyway.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Layout</span> : <span class="ident">Debug</span> {
-    <span class="doccomment">/// Compute window geometries. </span>
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Layout</span>: <span class="ident">Debug</span> {
+    <span class="doccomment">/// Compute window geometries.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If a `None` is returned at a particular position, that window is not</span>
     <span class="doccomment">/// to be made visible.</span>
@@ -301,7 +298,6 @@
     <span class="kw">fn</span> <span class="ident">edit_layout_retry</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">msgs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">LayoutMessage</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
         <span class="ident">msgs</span>.<span class="ident">drain</span>(..).<span class="ident">any</span>(<span class="op">|</span><span class="ident">m</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">edit_layout</span>(<span class="ident">m</span>))
     }
-
 }
 
 <span class="doccomment">/// A message type being sent to layout objects.</span>
@@ -394,7 +390,6 @@
         window.rootPath = "../../../../";
         window.currentCrate = "gabelstaplerwm";
     </script>
-    <script src="../../../../jquery.js"></script>
     <script src="../../../../main.js"></script>
     <script defer src="../../../../search-index.js"></script>
 </body>

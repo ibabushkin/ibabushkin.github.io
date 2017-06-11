@@ -17,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc struct">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../index.html'>xcb</a>::<wbr><a href='index.html'>render</a></p><script>window.sidebarCurrent = {name: 'Transform', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct Transform</p><div class="block items"><ul><li><a href="#fields">Fields</a></li><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='../index.html'>xcb</a>::<wbr><a href='index.html'>render</a></p><script>window.sidebarCurrent = {name: 'Transform', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -43,7 +43,7 @@
         </form>
     </nav>
 
-    <section id='main' class="content struct">
+    <section id='main' class="content">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>xcb</a>::<wbr><a href='index.html'>render</a>::<wbr><a class="struct" href=''>Transform</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
@@ -51,11 +51,11 @@
                </span><a class='srclink' href='../../src/xcb/render.rs.html#2063-2065' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Transform {
     pub base: <a class="struct" href="../../xcb/ffi/render/struct.xcb_render_transform_t.html" title="struct xcb::ffi::render::xcb_render_transform_t">xcb_render_transform_t</a>,
-}</pre><h2 class='fields'>Fields</h2><span id='structfield.base' class="structfield">
+}</pre><h2 id='fields' class='fields'>Fields</h2><span id='structfield.base' class="structfield">
                            <span id='base.v' class='invisible'>
                            <code>base: <a class="struct" href="../../xcb/ffi/render/struct.xcb_render_transform_t.html" title="struct xcb::ffi::render::xcb_render_transform_t">xcb_render_transform_t</a></code>
                            </span></span><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../xcb/render/struct.Transform.html" title="struct xcb::render::Transform">Transform</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/xcb/render.rs.html#2067-2140' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>(matrix11: <a class="type" href="../../xcb/render/type.Fixed.html" title="type xcb::render::Fixed">Fixed</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; matrix12: <a class="type" href="../../xcb/render/type.Fixed.html" title="type xcb::render::Fixed">Fixed</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; matrix13: <a class="type" href="../../xcb/render/type.Fixed.html" title="type xcb::render::Fixed">Fixed</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; matrix21: <a class="type" href="../../xcb/render/type.Fixed.html" title="type xcb::render::Fixed">Fixed</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; matrix22: <a class="type" href="../../xcb/render/type.Fixed.html" title="type xcb::render::Fixed">Fixed</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; matrix23: <a class="type" href="../../xcb/render/type.Fixed.html" title="type xcb::render::Fixed">Fixed</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; matrix31: <a class="type" href="../../xcb/render/type.Fixed.html" title="type xcb::render::Fixed">Fixed</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; matrix32: <a class="type" href="../../xcb/render/type.Fixed.html" title="type xcb::render::Fixed">Fixed</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; matrix33: <a class="type" href="../../xcb/render/type.Fixed.html" title="type xcb::render::Fixed">Fixed</a>)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class="struct" href="../../xcb/render/struct.Transform.html" title="struct xcb::render::Transform">Transform</a></code></span></h4>
+<div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;matrix11: <a class="type" href="../../xcb/render/type.Fixed.html" title="type xcb::render::Fixed">Fixed</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;matrix12: <a class="type" href="../../xcb/render/type.Fixed.html" title="type xcb::render::Fixed">Fixed</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;matrix13: <a class="type" href="../../xcb/render/type.Fixed.html" title="type xcb::render::Fixed">Fixed</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;matrix21: <a class="type" href="../../xcb/render/type.Fixed.html" title="type xcb::render::Fixed">Fixed</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;matrix22: <a class="type" href="../../xcb/render/type.Fixed.html" title="type xcb::render::Fixed">Fixed</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;matrix23: <a class="type" href="../../xcb/render/type.Fixed.html" title="type xcb::render::Fixed">Fixed</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;matrix31: <a class="type" href="../../xcb/render/type.Fixed.html" title="type xcb::render::Fixed">Fixed</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;matrix32: <a class="type" href="../../xcb/render/type.Fixed.html" title="type xcb::render::Fixed">Fixed</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;matrix33: <a class="type" href="../../xcb/render/type.Fixed.html" title="type xcb::render::Fixed">Fixed</a><br>) -&gt; <a class="struct" href="../../xcb/render/struct.Transform.html" title="struct xcb::render::Transform">Transform</a></code></span></h4>
 <h4 id='method.matrix11' class="method"><span id='matrix11.v' class='invisible'><code>fn <a href='#method.matrix11' class='fnname'>matrix11</a>(&amp;self) -&gt; <a class="type" href="../../xcb/render/type.Fixed.html" title="type xcb::render::Fixed">Fixed</a></code></span></h4>
 <h4 id='method.matrix12' class="method"><span id='matrix12.v' class='invisible'><code>fn <a href='#method.matrix12' class='fnname'>matrix12</a>(&amp;self) -&gt; <a class="type" href="../../xcb/render/type.Fixed.html" title="type xcb::render::Fixed">Fixed</a></code></span></h4>
 <h4 id='method.matrix13' class="method"><span id='matrix13.v' class='invisible'><code>fn <a href='#method.matrix13' class='fnname'>matrix13</a>(&amp;self) -&gt; <a class="type" href="../../xcb/render/type.Fixed.html" title="type xcb::render::Fixed">Fixed</a></code></span></h4>
@@ -128,7 +128,6 @@
         window.rootPath = "../../";
         window.currentCrate = "xcb";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

@@ -17,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc struct">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>window_system</a></p><script>window.sidebarCurrent = {name: 'Wm', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct Wm</p><div class="block items"><ul><li><a href="#methods">Methods</a></li></ul></div><p class='location'><a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>window_system</a></p><script>window.sidebarCurrent = {name: 'Wm', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -43,20 +43,20 @@
         </form>
     </nav>
 
-    <section id='main' class="content struct">
+    <section id='main' class="content">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>window_system</a>::<wbr><a class="struct" href=''>Wm</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../../src/gabelstaplerwm/wm/window_system.rs.html#87-122' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../../src/gabelstaplerwm/wm/window_system.rs.html#92-127' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Wm&lt;'a&gt; { /* fields omitted */ }</pre><div class='docblock'><p>A window manager master-structure.</p>
 
 <p>This is the central instance coordinating the communication
 with the X server, as well as containing structures to manage tags
 and clients. It also contains callback mechanisms upon key press and
 client creation.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;'a&gt; <a class="struct" href="../../../gabelstaplerwm/wm/window_system/struct.Wm.html" title="struct gabelstaplerwm::wm::window_system::Wm">Wm</a>&lt;'a&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/gabelstaplerwm/wm/window_system.rs.html#124-993' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>(con: &amp;'a <a class="struct" href="../../../xcb/base/struct.Connection.html" title="struct xcb::base::Connection">Connection</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; screen_num: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i32.html">i32</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; config: <a class="struct" href="../../../gabelstaplerwm/wm/window_system/struct.WmConfig.html" title="struct gabelstaplerwm::wm::window_system::WmConfig">WmConfig</a>)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../../../gabelstaplerwm/wm/window_system/struct.Wm.html" title="struct gabelstaplerwm::wm::window_system::Wm">Wm</a>&lt;'a&gt;, <a class="enum" href="../../../gabelstaplerwm/wm/err/enum.WmError.html" title="enum gabelstaplerwm::wm::err::WmError">WmError</a>&gt;</code></span></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;'a&gt; <a class="struct" href="../../../gabelstaplerwm/wm/window_system/struct.Wm.html" title="struct gabelstaplerwm::wm::window_system::Wm">Wm</a>&lt;'a&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/gabelstaplerwm/wm/window_system.rs.html#129-1074' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;con: &amp;'a <a class="struct" href="../../../xcb/base/struct.Connection.html" title="struct xcb::base::Connection">Connection</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;screen_num: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i32.html">i32</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;config: <a class="struct" href="../../../gabelstaplerwm/wm/window_system/struct.WmConfig.html" title="struct gabelstaplerwm::wm::window_system::WmConfig">WmConfig</a><br>) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="struct" href="../../../gabelstaplerwm/wm/window_system/struct.Wm.html" title="struct gabelstaplerwm::wm::window_system::Wm">Wm</a>&lt;'a&gt;, <a class="enum" href="../../../gabelstaplerwm/wm/err/enum.WmError.html" title="enum gabelstaplerwm::wm::err::WmError">WmError</a>&gt;</code></span></h4>
 <div class='docblock'><p>Wrap a connection to initialize a window manager.</p>
 </div><h4 id='method.init_randr' class="method"><span id='init_randr.v' class='invisible'><code>fn <a href='#method.init_randr' class='fnname'>init_randr</a>(&amp;mut self) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.tuple.html">()</a>, <a class="enum" href="../../../gabelstaplerwm/wm/err/enum.WmError.html" title="enum gabelstaplerwm::wm::err::WmError">WmError</a>&gt;</code></span></h4>
 <div class='docblock'><p>Initialize the RandR extension for multimonitor support.</p>
@@ -134,7 +134,6 @@ all events we are interested in.</p>
         window.rootPath = "../../../";
         window.currentCrate = "gabelstaplerwm";
     </script>
-    <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     <script defer src="../../../search-index.js"></script>
 </body>

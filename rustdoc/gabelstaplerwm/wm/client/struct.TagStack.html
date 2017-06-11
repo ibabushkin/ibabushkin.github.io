@@ -17,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc struct">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>client</a></p><script>window.sidebarCurrent = {name: 'TagStack', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct TagStack</p><div class="block items"><ul><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>client</a></p><script>window.sidebarCurrent = {name: 'TagStack', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -43,12 +43,12 @@
         </form>
     </nav>
 
-    <section id='main' class="content struct">
+    <section id='main' class="content">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>client</a>::<wbr><a class="struct" href=''>TagStack</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../../src/gabelstaplerwm/wm/client.rs.html#564-571' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../../src/gabelstaplerwm/wm/client.rs.html#568-575' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct TagStack { /* fields omitted */ }</pre><div class='docblock'><p>An organized set of known tagsets.</p>
 
 <p>Allows for simple addressing of tagstes (and their layouts)
@@ -56,7 +56,7 @@ Tagsets are added and removed using API calls and are adressed using 8-bit
 unsigned integers. Thus, 256 different tagsets can be managed at any point
 in time. A small history of capped size is kept, determining the tagset
 currently displayed by the window manager.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../../gabelstaplerwm/wm/client/struct.TagStack.html" title="struct gabelstaplerwm::wm::client::TagStack">TagStack</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/gabelstaplerwm/wm/client.rs.html#573-681' title='goto source code'>[src]</a></span></h3>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../../gabelstaplerwm/wm/client/struct.TagStack.html" title="struct gabelstaplerwm::wm::client::TagStack">TagStack</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/gabelstaplerwm/wm/client.rs.html#577-682' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.setup' class="method"><span id='setup.v' class='invisible'><code>fn <a href='#method.setup' class='fnname'>setup</a>(&amp;mut self, vec: <a class="struct" href="https://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html" title="struct collections::vec::Vec">Vec</a>&lt;<a class="struct" href="../../../gabelstaplerwm/wm/client/struct.TagSet.html" title="struct gabelstaplerwm::wm::client::TagSet">TagSet</a>&gt;, viewed: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u8.html">u8</a>)</code></span></h4>
 <div class='docblock'><p>Setup a tag stack from a vector of tag sets and the index of the
 initially viewed tagset in the vector.</p>
@@ -88,7 +88,7 @@ initially viewed tagset in the vector.</p>
 <p>If there is no current tagset, ensure the set of hidden tags to be empty.</p>
 </div><h4 id='method.get_hidden' class="method"><span id='get_hidden.v' class='invisible'><code>fn <a href='#method.get_hidden' class='fnname'>get_hidden</a>(&amp;self) -&gt; &amp;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/btree/set/struct.BTreeSet.html" title="struct collections::btree::set::BTreeSet">BTreeSet</a>&lt;<a class="enum" href="../../../gabelstaplerwm/wm/config/enum.Tag.html" title="enum gabelstaplerwm::wm::config::Tag">Tag</a>&gt;</code></span></h4>
 <div class='docblock'><p>Get an immutable reference to the set of currently hidden tags on this tag stack.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/default/trait.Default.html" title="trait core::default::Default">Default</a> for <a class="struct" href="../../../gabelstaplerwm/wm/client/struct.TagStack.html" title="struct gabelstaplerwm::wm::client::TagStack">TagStack</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/gabelstaplerwm/wm/client.rs.html#563' title='goto source code'>[src]</a></span></h3>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class="trait" href="https://doc.rust-lang.org/nightly/core/default/trait.Default.html" title="trait core::default::Default">Default</a> for <a class="struct" href="../../../gabelstaplerwm/wm/client/struct.TagStack.html" title="struct gabelstaplerwm::wm::client::TagStack">TagStack</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/gabelstaplerwm/wm/client.rs.html#567' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.default' class="method"><span id='default.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/default/trait.Default.html#tymethod.default' class='fnname'>default</a>() -&gt; <a class="struct" href="../../../gabelstaplerwm/wm/client/struct.TagStack.html" title="struct gabelstaplerwm::wm::client::TagStack">TagStack</a></code></span></h4>
 <div class='docblock'><p>Returns the &quot;default value&quot; for a type. <a href="https://doc.rust-lang.org/nightly/core/default/trait.Default.html#tymethod.default">Read more</a></p>
 </div></div></section>
@@ -148,7 +148,6 @@ initially viewed tagset in the vector.</p>
         window.rootPath = "../../../";
         window.currentCrate = "gabelstaplerwm";
     </script>
-    <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     <script defer src="../../../search-index.js"></script>
 </body>

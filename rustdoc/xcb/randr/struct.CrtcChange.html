@@ -17,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc struct">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../index.html'>xcb</a>::<wbr><a href='index.html'>randr</a></p><script>window.sidebarCurrent = {name: 'CrtcChange', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Struct CrtcChange</p><div class="block items"><ul><li><a href="#fields">Fields</a></li><li><a href="#methods">Methods</a></li><li><a href="#implementations">Trait Implementations</a></li></ul></div><p class='location'><a href='../index.html'>xcb</a>::<wbr><a href='index.html'>randr</a></p><script>window.sidebarCurrent = {name: 'CrtcChange', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -43,7 +43,7 @@
         </form>
     </nav>
 
-    <section id='main' class="content struct">
+    <section id='main' class="content">
 <h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>xcb</a>::<wbr><a href='index.html'>randr</a>::<wbr><a class="struct" href=''>CrtcChange</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
@@ -51,11 +51,11 @@
                </span><a class='srclink' href='../../src/xcb/randr.rs.html#3505-3507' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct CrtcChange {
     pub base: <a class="struct" href="../../xcb/ffi/randr/struct.xcb_randr_crtc_change_t.html" title="struct xcb::ffi::randr::xcb_randr_crtc_change_t">xcb_randr_crtc_change_t</a>,
-}</pre><h2 class='fields'>Fields</h2><span id='structfield.base' class="structfield">
+}</pre><h2 id='fields' class='fields'>Fields</h2><span id='structfield.base' class="structfield">
                            <span id='base.v' class='invisible'>
                            <code>base: <a class="struct" href="../../xcb/ffi/randr/struct.xcb_randr_crtc_change_t.html" title="struct xcb::ffi::randr::xcb_randr_crtc_change_t">xcb_randr_crtc_change_t</a></code>
                            </span></span><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="struct" href="../../xcb/randr/struct.CrtcChange.html" title="struct xcb::randr::CrtcChange">CrtcChange</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../src/xcb/randr.rs.html#3509-3583' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>(timestamp: <a class="type" href="../../xcb/xproto/type.Timestamp.html" title="type xcb::xproto::Timestamp">Timestamp</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; window: <a class="type" href="../../xcb/xproto/type.Window.html" title="type xcb::xproto::Window">Window</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; crtc: <a class="type" href="../../xcb/randr/type.Crtc.html" title="type xcb::randr::Crtc">Crtc</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mode: <a class="type" href="../../xcb/randr/type.Mode.html" title="type xcb::randr::Mode">Mode</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; rotation: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u16.html">u16</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i16.html">i16</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; y: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i16.html">i16</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; width: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u16.html">u16</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; height: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u16.html">u16</a>)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class="struct" href="../../xcb/randr/struct.CrtcChange.html" title="struct xcb::randr::CrtcChange">CrtcChange</a></code></span></h4>
+<div class='impl-items'><h4 id='method.new' class="method"><span id='new.v' class='invisible'><code>fn <a href='#method.new' class='fnname'>new</a>(<br>&nbsp;&nbsp;&nbsp;&nbsp;timestamp: <a class="type" href="../../xcb/xproto/type.Timestamp.html" title="type xcb::xproto::Timestamp">Timestamp</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;window: <a class="type" href="../../xcb/xproto/type.Window.html" title="type xcb::xproto::Window">Window</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;crtc: <a class="type" href="../../xcb/randr/type.Crtc.html" title="type xcb::randr::Crtc">Crtc</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;mode: <a class="type" href="../../xcb/randr/type.Mode.html" title="type xcb::randr::Mode">Mode</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;rotation: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u16.html">u16</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;x: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i16.html">i16</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;y: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.i16.html">i16</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;width: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u16.html">u16</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;height: <a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.u16.html">u16</a><br>) -&gt; <a class="struct" href="../../xcb/randr/struct.CrtcChange.html" title="struct xcb::randr::CrtcChange">CrtcChange</a></code></span></h4>
 <h4 id='method.timestamp' class="method"><span id='timestamp.v' class='invisible'><code>fn <a href='#method.timestamp' class='fnname'>timestamp</a>(&amp;self) -&gt; <a class="type" href="../../xcb/xproto/type.Timestamp.html" title="type xcb::xproto::Timestamp">Timestamp</a></code></span></h4>
 <h4 id='method.window' class="method"><span id='window.v' class='invisible'><code>fn <a href='#method.window' class='fnname'>window</a>(&amp;self) -&gt; <a class="type" href="../../xcb/xproto/type.Window.html" title="type xcb::xproto::Window">Window</a></code></span></h4>
 <h4 id='method.crtc' class="method"><span id='crtc.v' class='invisible'><code>fn <a href='#method.crtc' class='fnname'>crtc</a>(&amp;self) -&gt; <a class="type" href="../../xcb/randr/type.Crtc.html" title="type xcb::randr::Crtc">Crtc</a></code></span></h4>
@@ -128,7 +128,6 @@
         window.rootPath = "../../";
         window.currentCrate = "xcb";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

@@ -17,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc fn">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -43,13 +43,13 @@
         </form>
     </nav>
 
-    <section id='main' class="content fn">
+    <section id='main' class="content">
 <h1 class='fqn'><span class='in-band'>Function <a href='../index.html'>xcb</a>::<wbr><a href='index.html'>xproto</a>::<wbr><a class="fn" href=''>open_font_checked</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a class='srclink' href='../../src/xcb/xproto.rs.html#7626-7644' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub fn open_font_checked&lt;'a&gt;(c: &amp;'a <a class="struct" href="../../xcb/base/struct.Connection.html" title="struct xcb::base::Connection">Connection</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fid: <a class="type" href="../../xcb/xproto/type.Font.html" title="type xcb::xproto::Font">Font</a>,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; name: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -&gt; <a class="type" href="../../xcb/base/type.VoidCookie.html" title="type xcb::base::VoidCookie">VoidCookie</a>&lt;'a&gt;</pre><div class='docblock'><p>opens a font</p>
+<pre class='rust fn'>pub fn open_font_checked&lt;'a&gt;(<br>&nbsp;&nbsp;&nbsp;&nbsp;c: &amp;'a <a class="struct" href="../../xcb/base/struct.Connection.html" title="struct xcb::base::Connection">Connection</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;fid: <a class="type" href="../../xcb/xproto/type.Font.html" title="type xcb::xproto::Font">Font</a>, <br>&nbsp;&nbsp;&nbsp;&nbsp;name: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a><br>) -&gt; <a class="type" href="../../xcb/base/type.VoidCookie.html" title="type xcb::base::VoidCookie">VoidCookie</a>&lt;'a&gt;</pre><div class='docblock'><p>opens a font</p>
 
 <p>Opens any X core font matching the given <code>name</code> (for example &quot;-misc-fixed-*&quot;).</p>
 
@@ -123,7 +123,6 @@ client-side rendering using Xft.</p>
         window.rootPath = "../../";
         window.currentCrate = "xcb";
     </script>
-    <script src="../../jquery.js"></script>
     <script src="../../main.js"></script>
     <script defer src="../../search-index.js"></script>
 </body>

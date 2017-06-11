@@ -17,7 +17,7 @@
     
     
 </head>
-<body class="rustdoc">
+<body class="rustdoc enum">
     <!--[if lte IE 8]>
     <div class="warning">
         This old browser is unsupported and will most likely display funky
@@ -29,7 +29,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>err</a></p><script>window.sidebarCurrent = {name: 'WmError', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+        <p class='location'>Enum WmError</p><div class="block items"><ul><li><a href="#variants">Variants</a></li><li><a href="#methods">Methods</a></li></ul></div><p class='location'><a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>err</a></p><script>window.sidebarCurrent = {name: 'WmError', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -43,7 +43,7 @@
         </form>
     </nav>
 
-    <section id='main' class="content enum">
+    <section id='main' class="content">
 <h1 class='fqn'><span class='in-band'>Enum <a href='../../index.html'>gabelstaplerwm</a>::<wbr><a href='../index.html'>wm</a>::<wbr><a href='index.html'>err</a>::<wbr><a class="enum" href=''>WmError</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
@@ -63,7 +63,7 @@
     ConnectionInterrupted,
     IOError,
 }</pre><div class='docblock'><p>An error encountered by the WM.</p>
-</div><h2 class='variants'>Variants</h2>
+</div><h2 id='variants' class='variants'>Variants</h2>
 <span id='variant.CouldNotEstablishHandlers' class='variant'><span id='CouldNotEstablishHandlers.v' class='invisible'><code>CouldNotEstablishHandlers</code></span></span><div class='docblock'><p>Signal handlers handling SIGCHLD&#39;s can&#39;t be established.</p>
 </div><span id='variant.CouldNotConnect' class='variant'><span id='CouldNotConnect.v' class='invisible'><code>CouldNotConnect(<a class="enum" href="../../../xcb/base/enum.ConnError.html" title="enum xcb::base::ConnError">ConnError</a>)</code></span></span><div class='docblock'><p>Could not connect to X server.</p>
 </div><span id='variant.CouldNotAcquireScreen' class='variant'><span id='CouldNotAcquireScreen.v' class='invisible'><code>CouldNotAcquireScreen</code></span></span><div class='docblock'><p>Could not acquire a screen reference from the X server.</p>
@@ -77,7 +77,7 @@ necessary event mask registered with the X server.</p>
 </div><span id='variant.BadCrtc' class='variant'><span id='BadCrtc.v' class='invisible'><code>BadCrtc</code></span></span><div class='docblock'><p>The set of CRTCs was empty.</p>
 </div><span id='variant.ConnectionInterrupted' class='variant'><span id='ConnectionInterrupted.v' class='invisible'><code>ConnectionInterrupted</code></span></span><div class='docblock'><p>The connection to the X server has been interrupted.</p>
 </div><span id='variant.IOError' class='variant'><span id='IOError.v' class='invisible'><code>IOError</code></span></span><div class='docblock'><p>Input/Output with the X server has issues.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="enum" href="../../../gabelstaplerwm/wm/err/enum.WmError.html" title="enum gabelstaplerwm::wm::err::WmError">WmError</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/gabelstaplerwm/wm/err.rs.html#34-65' title='goto source code'>[src]</a></span></h3>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class="enum" href="../../../gabelstaplerwm/wm/err/enum.WmError.html" title="enum gabelstaplerwm::wm::err::WmError">WmError</a></code></span><span class='out-of-band'><div class='ghost'></div><a class='srclink' href='../../../src/gabelstaplerwm/wm/err.rs.html#34-53' title='goto source code'>[src]</a></span></h3>
 <div class='impl-items'><h4 id='method.handle' class="method"><span id='handle.v' class='invisible'><code>fn <a href='#method.handle' class='fnname'>handle</a>(self) -&gt; !</code></span></h4>
 <div class='docblock'><p>&quot;Handle&quot; an error, ie. print error message and exit.</p>
 </div></div></section>
@@ -137,7 +137,6 @@ necessary event mask registered with the X server.</p>
         window.rootPath = "../../../";
         window.currentCrate = "gabelstaplerwm";
     </script>
-    <script src="../../../jquery.js"></script>
     <script src="../../../main.js"></script>
     <script defer src="../../../search-index.js"></script>
 </body>
